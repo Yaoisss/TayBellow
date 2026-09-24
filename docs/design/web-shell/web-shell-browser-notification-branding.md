@@ -4,7 +4,7 @@
 
 ## Problem and scope
 
-Before this PR, #11398 used the fixed `Qwen Code` title and passed no icon to Notification. This PR introduces the bundled PNG and the requested QwenCode spelling, alongside configurable branding.
+Before this PR, #11398 used the fixed `Tay Bellow` title and passed no icon to Notification. This PR introduces the bundled PNG and the requested QwenCode spelling, alongside configurable branding.
 
 The [content and navigation design](web-shell-browser-notification-details.md) defaults to the QwenCode name and bundled icon. QwenCode is the requested notification brand spelling; it is independent of sidebar branding. Hosts embedding Web Shell need to supply their own application name and image URL, including an HTTPS CDN URL. This changes notification branding only, not sidebar branding or browser-controlled site attribution.
 

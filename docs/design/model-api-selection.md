@@ -5,13 +5,13 @@
 ## Problem and scope
 
 OpenAI Chat Completions and Responses share credential configuration, but today
-Qwen Code exposes them as separate authentication choices and provider buckets.
+Tay Bellow exposes them as separate authentication choices and provider buckets.
 Users must change `openai` to `openai-responses` to select the request format.
 
 Add `wireApi: "chat-completions" | "responses"` to each OpenAI-compatible model,
 beside `id`, `baseUrl`, and `envKey`. Present one OpenAI-compatible provider
 choice followed by API selection. Keep internal protocol identities and recorded
-session routes distinct. This is a Qwen Code feature, not a port from
+session routes distinct. This is a Tay Bellow feature, not a port from
 another codebase. Native computer-use behavior, reasoning defaults, transport
 implementations, automatic protocol detection, and automatic credential
 migration are out of scope.

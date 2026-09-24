@@ -42,7 +42,7 @@ export async function createBrowserBackend(): Promise<BrowserBackend> {
           'manifest at ' +
           installed.skippedForeignPaths.join(', ') +
           '. It was left unchanged; if that browser is the one you use, ' +
-          'Chrome will launch that host instead of Qwen Code. ' +
+          'Chrome will launch that host instead of Tay Bellow. ' +
           'Remove or move the file, then retry Browser Use.\n',
       );
     }

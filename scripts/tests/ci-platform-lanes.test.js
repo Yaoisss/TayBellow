@@ -593,7 +593,7 @@ describe('post-merge push lane', () => {
   it('scopes the concurrency group and keeps main uncancellable', () => {
     // All three components, the way e2e-workflow.test.js pins its own.
     //
-    // Event: unscoped, the group collapses onto `Qwen Code CI-refs/heads/main`
+    // Event: unscoped, the group collapses onto `Tay Bellow CI-refs/heads/main`
     // and the post-merge run shares it with the nightly (60-minute lanes, no
     // cancellation on main) and with any PR from a fork branch named literally
     // `refs/heads/main` — a legal ref name.
@@ -732,11 +732,11 @@ describe('platform lanes — a failing nightly is visible', () => {
     // produced: the run goes red on a branch nobody watches and the lane is
     // effectively off again.
     const wr = (failureIssue[true] ?? failureIssue['on']).workflow_run;
-    expect(wr.workflows).toContain('Qwen Code CI');
+    expect(wr.workflows).toContain('Tay Bellow CI');
     // Both sides of the binding: `workflow_run.workflows` matches the watched
     // workflow's `name:`, so renaming ci.yml silently unhooks the watcher and
     // the nightly goes back to failing where nobody is told.
-    expect(ci.name).toBe('Qwen Code CI');
+    expect(ci.name).toBe('Tay Bellow CI');
     // `workflow_run.workflows` matches the watched workflow's `name:` key:
     // pin the coupling itself, so renaming ci.yml's name fails here instead
     // of silently stopping the nightly's workflow_run events.

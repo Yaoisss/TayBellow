@@ -230,7 +230,7 @@ export function formatRelease(release) {
 
 const HEADER = `# Changelog
 
-All notable changes to [Qwen Code](https://github.com/QwenLM/qwen-code) are
+All notable changes to [Tay Bellow](https://github.com/QwenLM/qwen-code) are
 documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),

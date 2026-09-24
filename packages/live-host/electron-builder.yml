@@ -37,7 +37,7 @@ mac:
   extendInfo:
     LSUIElement: true
     QwenLiveProtocolVersion: 9
-    NSMicrophoneUsageDescription: 'Qwen Live Host uses the microphone for live voice conversations with Qwen Code.'
+    NSMicrophoneUsageDescription: 'Qwen Live Host uses the microphone for live voice conversations with Tay Bellow.'
     NSCameraUsageDescription: 'Qwen Live Host uses the camera to share visual context with Qwen Live when you turn it on.'
   hardenedRuntime: true
   gatekeeperAssess: false

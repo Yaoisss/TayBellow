@@ -6,11 +6,11 @@
   ReadRegStr $R1 HKCU "${ELECTRON_UNINSTALL_KEY}" "DisplayName"
   StrCpy $R1 $R1 17
   ${If} $R0 != ""
-  ${AndIf} $R1 == "Qwen Code Desktop"
-  ${AndIf} ${FileExists} "$R0\Uninstall Qwen Code Desktop.exe"
-    ExecWait '"$R0\Uninstall Qwen Code Desktop.exe" /currentuser /S --updated _?=$R0' $R2
+  ${AndIf} $R1 == "Tay Bellow Desktop"
+  ${AndIf} ${FileExists} "$R0\Uninstall Tay Bellow Desktop.exe"
+    ExecWait '"$R0\Uninstall Tay Bellow Desktop.exe" /currentuser /S --updated _?=$R0' $R2
     ${If} $R2 != 0
-      Abort "Could not remove the previous Qwen Code Desktop installation."
+      Abort "Could not remove the previous Tay Bellow Desktop installation."
     ${EndIf}
   ${EndIf}
 !macroend

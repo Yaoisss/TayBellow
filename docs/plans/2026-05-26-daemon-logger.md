@@ -1479,7 +1479,7 @@ Closes #4548.
 - [x] `packages/cli/src/serve/runQwenServe.test.ts` covers boot banner + flush on shutdown.
 - [x] Manual smoke: log file created at boot, contains shutdown line on SIGTERM.
 
-🤖 Generated with [Qwen Code](https://github.com/QwenLM/qwen-code)
+🤖 Generated with [Tay Bellow](https://github.com/QwenLM/qwen-code)
 EOF
 )"
 ```

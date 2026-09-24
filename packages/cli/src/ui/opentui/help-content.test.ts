@@ -174,7 +174,7 @@ describe('overlay row budget (80x24 bounded rows, footer kept visible)', () => {
 describe('formatHelpText (full /help output)', () => {
   it('renders tabs, shortcuts, commands and the docs footer', () => {
     const text = formatHelpText(commands);
-    expect(text).toContain('Qwen Code');
+    expect(text).toContain('Tay Bellow');
     expect(text).toContain('Built-in Commands (3)');
     expect(text).toContain('/alpha <arg>');
     expect(text).toContain('/zeta');

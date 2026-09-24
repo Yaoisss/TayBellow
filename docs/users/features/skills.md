@@ -1,13 +1,13 @@
 # Agent Skills
 
-> Create, manage, and share Skills to extend Qwen Code's capabilities.
+> Create, manage, and share Skills to extend Tay Bellow's capabilities.
 
-This guide shows you how to create, use, and manage Agent Skills in **Qwen Code**. Skills are modular capabilities that extend the model's effectiveness through organized folders containing instructions (and optionally scripts/resources).
+This guide shows you how to create, use, and manage Agent Skills in **Tay Bellow**. Skills are modular capabilities that extend the model's effectiveness through organized folders containing instructions (and optionally scripts/resources).
 
 ## Prerequisites
 
-- Qwen Code (recent version)
-- Basic familiarity with Qwen Code ([Quickstart](../quickstart.md))
+- Tay Bellow (recent version)
+- Basic familiarity with Tay Bellow ([Quickstart](../quickstart.md))
 
 ## What are Agent Skills?
 
@@ -31,7 +31,7 @@ Start typing `/` to autocomplete and browse available Skills alongside their des
 
 ### Benefits
 
-- Extend Qwen Code for your workflows
+- Extend Tay Bellow for your workflows
 - Share expertise across your team via git
 - Reduce repetitive prompting
 - Compose multiple Skills for complex tasks
@@ -99,7 +99,7 @@ Project Skills can be checked into git and automatically become available to tea
 
 ### Maintain auto-generated project Skills
 
-Qwen Code tracks successful uses of generated project Skills locally, including while new Auto Skill generation is disabled, so re-enabling maintenance cannot mistake a recently used skill for an inactive one. When **Auto Skill** is enabled, it periodically moves inactive generated Skills out of the active library. Only directories named `.qwen/skills/auto-skill-*` whose `SKILL.md` frontmatter contains `source: auto-skill` are managed; personal, extension, bundled, and hand-authored Skills are never selected.
+Tay Bellow tracks successful uses of generated project Skills locally, including while new Auto Skill generation is disabled, so re-enabling maintenance cannot mistake a recently used skill for an inactive one. When **Auto Skill** is enabled, it periodically moves inactive generated Skills out of the active library. Only directories named `.qwen/skills/auto-skill-*` whose `SKILL.md` frontmatter contains `source: auto-skill` are managed; personal, extension, bundled, and hand-authored Skills are never selected.
 
 - After 30 days without a successful use or `SKILL.md` edit, an auto-skill is marked stale.
 - After 90 days, its complete directory is moved to `.qwen/archived-skills/`. Nothing is permanently deleted.
@@ -125,7 +125,7 @@ priority: 10
 # Your Skill Name
 
 ## Instructions
-Provide clear, step-by-step guidance for Qwen Code.
+Provide clear, step-by-step guidance for Tay Bellow.
 
 ## Examples
 Show concrete examples of using this Skill.
@@ -133,7 +133,7 @@ Show concrete examples of using this Skill.
 
 ### Field requirements
 
-Qwen Code currently validates that:
+Tay Bellow currently validates that:
 
 - `name` is a non-empty string matching `/^[\p{L}\p{N}_:.-]+$/u` — Unicode letters and digits (CJK / Cyrillic / accented Latin all OK), plus `_`, `:`, `.`, `-`. Whitespace, slashes, brackets and other structurally unsafe characters are rejected at parse time. The admitted `:` is what lets a Skill registered by an extension (`rust:pdf`) and an author who chooses a colon themselves (`rust:chat`, written inside the `rust` extension) share one pattern, so a colon in a registered name is not proof of an owner — see [How extension Skills are named](#how-extension-skills-are-named).
 - `description` is a non-empty string
@@ -262,12 +262,12 @@ python scripts/helper.py input.txt
 
 ## View available Skills
 
-Qwen Code discovers Skills from:
+Tay Bellow discovers Skills from:
 
 - Personal Skills: `~/.qwen/skills/`
 - Project Skills: `.qwen/skills/`
 - Extension Skills: Skills provided by installed extensions
-- Bundled Skills: Skills shipped with Qwen Code
+- Bundled Skills: Skills shipped with Tay Bellow
 
 ### Extension Skills
 
@@ -279,9 +279,9 @@ To see which extensions provide skills, check the extension's `qwen-extension.js
 
 #### How extension Skills are named
 
-Qwen Code registers a Skill from an installed extension as `<extensionName>:<name>`, where `<extensionName>` is the `name` field of that extension's `qwen-extension.json` and `<name>` is the Skill's own frontmatter `name`. A Skill named `pdf` in the `rust` extension is registered as `rust:pdf`.
+Tay Bellow registers a Skill from an installed extension as `<extensionName>:<name>`, where `<extensionName>` is the `name` field of that extension's `qwen-extension.json` and `<name>` is the Skill's own frontmatter `name`. A Skill named `pdf` in the `rust` extension is registered as `rust:pdf`.
 
-The prefix is added while the Skill is loaded, not written into the file: your `SKILL.md` keeps the name you authored, and Qwen Code never recovers the authored name by splitting the registered one apart (an author may legitimately write `rust:chat` inside `rust`). Only extension Skills are prefixed — personal, project, and bundled Skills keep the single spelling you authored.
+The prefix is added while the Skill is loaded, not written into the file: your `SKILL.md` keeps the name you authored, and Tay Bellow never recovers the authored name by splitting the registered one apart (an author may legitimately write `rust:chat` inside `rust`). Only extension Skills are prefixed — personal, project, and bundled Skills keep the single spelling you authored.
 
 Use the registered name everywhere you refer to the Skill:
 
@@ -304,7 +304,7 @@ Two limits worth knowing:
 - Cross-level precedence is unchanged and still compares registered names exactly (`project` > `user` > `extension` > `bundled`), so a personal or project Skill you author as `rust:pdf` outranks the extension's `pdf`. Bare-name collisions between a personal or project Skill and a bundled Skill are likewise still settled by that precedence, not by the prefix. A Skill that collides with a custom command is not — on the slash surface the last loader wins, and custom commands load after Skills, so `/pdf` runs the custom command while the Skill stays available to the model.
 - Skill names are also used as filenames: the file a Skill reads its invocation arguments from replaces every character outside `[A-Za-z0-9._-]` with `_`, so an extension Skill registered as `rust:pdf` and a personal or project Skill authored `rust_pdf` both resolve to `qwen-skill-args-rust_pdf.txt` and share one arguments file. (The prefix rarely collides with itself — `rust:rust_pdf` becomes `rust_rust_pdf` — but extension names may contain `_`, so `rust_pdf:x` and `rust:pdf_x` fold to the same filename.) Non-ASCII letters fold the same way, so an authored `café` and an authored `caf_` land on `caf_` too — a limitation that predates the prefix, which only makes it easier to hit. Avoid a Skill name that is another name with `:` turned into `_`.
 
-To view available Skills, ask Qwen Code directly:
+To view available Skills, ask Tay Bellow directly:
 
 ```text
 What Skills are available?
@@ -345,7 +345,7 @@ The model autonomously decides to use your Skill if it matches the request — y
 
 ## Debug a Skill
 
-If Qwen Code doesn't use your Skill, check these common issues:
+If Tay Bellow doesn't use your Skill, check these common issues:
 
 ### Make the description specific
 
@@ -390,7 +390,7 @@ Ensure:
 
 ### View errors
 
-Run Qwen Code with debug mode to see Skill loading errors:
+Run Tay Bellow with debug mode to see Skill loading errors:
 
 ```bash
 qwen --debug
@@ -422,10 +422,10 @@ code ~/.qwen/skills/my-skill/SKILL.md
 code .qwen/skills/my-skill/SKILL.md
 ```
 
-During a normal session, Qwen Code watches personal and project Skill
+During a normal session, Tay Bellow watches personal and project Skill
 directories. Adding, editing, or removing a Skill refreshes the Skill list and
 invocation state automatically after a short delay. Bare mode does not start
-these watchers, so restart Qwen Code to load Skill changes in that mode.
+these watchers, so restart Tay Bellow to load Skill changes in that mode.
 
 ## Remove a Skill
 

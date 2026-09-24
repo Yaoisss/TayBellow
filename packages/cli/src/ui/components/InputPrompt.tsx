@@ -765,7 +765,7 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
       {
         type: 'error',
         text: t(
-          'Clipboard image paste is unavailable because the native clipboard module could not be loaded. Reinstall Qwen Code or use the npm installation method.',
+          'Clipboard image paste is unavailable because the native clipboard module could not be loaded. Reinstall Tay Bellow or use the npm installation method.',
         ),
       },
       Date.now(),

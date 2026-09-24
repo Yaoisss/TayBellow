@@ -35,7 +35,7 @@ it is still running.
 
 ## Install or update
 
-From a Qwen Code checkout, run:
+From a Tay Bellow checkout, run:
 
 ```bash
 sudo .github/scripts/ecs-runner/install-qwen-docker-cleanup.sh

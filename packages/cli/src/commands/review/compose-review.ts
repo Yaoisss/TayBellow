@@ -2011,7 +2011,7 @@ function asListLine(text: string, pr: PrIdentity | null): string {
  *
  * Comment grammar goes inert BEFORE the attribution strips run. Those
  * strips match on the DISPLAYED projection, which drops an HTML comment
- * whole, so a forged footer wrapped as `<!-- _— … via Qwen Code /review
+ * whole, so a forged footer wrapped as `<!-- _— … via Tay Bellow /review
  * … -->` is invisible to every one of them — and neutralizing the grammar
  * AFTER the chain materialized exactly that footer as visible text in the
  * attribution-off post that exists to carry none (pre-neutralization the
@@ -2036,7 +2036,7 @@ function asListLine(text: string, pr: PrIdentity | null): string {
  * posts a live `<!-- qwen-review-deferred -->` (or a forged ledger opener)
  * the grammar strip never saw, because no delimiter existed when it ran.
  * And neutralization JOINS: `via Qwen<!-‹span›-Code /review` strips to
- * `Qwen<!--Code`, which neutralizes to the footer phrase `via Qwen Code
+ * `Qwen<!--Code`, which neutralizes to the footer phrase `via Tay Bellow
  * /review` the chain has already finished looking for — so a trailing
  * grammar strip alone (the obvious patch) trades the forged marker for a
  * forged footer. Every strip in the chain deletes or leaves its input

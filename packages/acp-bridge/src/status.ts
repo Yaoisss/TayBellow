@@ -1462,7 +1462,7 @@ export const IDLE_HOOK_EVENTS: Record<HookEventName, ServeHookEventMeta> = {
   MessageDisplay: {
     description: 'Repeatedly, as the assistant reply streams',
   },
-  Stop: { description: 'Right before Qwen Code concludes its response' },
+  Stop: { description: 'Right before Tay Bellow concludes its response' },
   SubagentStart: {
     description: 'When a subagent is started',
     matcherKind: 'agentType',

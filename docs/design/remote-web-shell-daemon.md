@@ -51,7 +51,7 @@ Disconnecting or closing the browser only disposes the client connection. It doe
 - Authentication, Origin, Host, and network failures stay explicit in the existing connection gate; there is no fallback from a valid selected remote daemon to a local runtime.
 - A URL selecting an attacker-controlled daemon cannot cause a token for another daemon to be sent to it.
 - A loopback URL selected through `?daemon=` may be an SSH tunnel and is not treated as proof that the daemon host is the browser host.
-- HTTP and HTTPS targets are accepted. HTTPS is recommended outside trusted networks. SSH transport, if desired, is supplied by the user as a loopback tunnel outside Qwen Code.
+- HTTP and HTTPS targets are accepted. HTTPS is recommended outside trusted networks. SSH transport, if desired, is supplied by the user as a loopback tunnel outside Tay Bellow.
 
 ## Validation
 

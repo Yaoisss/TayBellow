@@ -8,7 +8,7 @@ configuration.
 ## Goal
 
 Users should be able to update skills, extension state, MCP/LSP configuration,
-and supported settings without restarting the current Qwen Code session. The
+and supported settings without restarting the current Tay Bellow session. The
 system should preserve conversation context while making runtime state changes
 predictable and visible.
 

@@ -44,7 +44,7 @@ async function chooseWorkspace() {
   setStatus(
     'starting',
     'Opening workspace',
-    'Starting the bundled Qwen Code runtime…',
+    'Starting the bundled Tay Bellow runtime…',
   );
   try {
     const path = await invoke('choose_workspace');
@@ -66,7 +66,7 @@ async function retryRuntime() {
   snapshotOverrideStatus = 'starting';
   setStatus(
     'starting',
-    'Restarting Qwen Code',
+    'Restarting Tay Bellow',
     'Checking the bundled runtime and workspace…',
   );
   try {
@@ -74,7 +74,7 @@ async function retryRuntime() {
   } catch (failure) {
     setStatus(
       'error',
-      'Qwen Code could not restart',
+      'Tay Bellow could not restart',
       'Review the details or choose another workspace.',
       String(failure),
     );
@@ -91,7 +91,7 @@ async function installUpdate() {
     setStatus(
       'error',
       'Update failed',
-      'Qwen Code remains usable. Try again or update manually.',
+      'Tay Bellow remains usable. Try again or update manually.',
       String(failure),
     );
   } finally {
@@ -125,7 +125,7 @@ async function initialize() {
       'error',
       'Desktop bridge unavailable',
       'The packaged desktop bridge did not initialize.',
-      'Restart Qwen Code.',
+      'Restart Tay Bellow.',
     );
     return;
   }
@@ -136,7 +136,7 @@ async function initialize() {
       currentWorkspace = String(payload || '');
       setStatus(
         'starting',
-        'Starting Qwen Code',
+        'Starting Tay Bellow',
         'Launching the bundled runtime and checking its health…',
       );
     }),
@@ -144,7 +144,7 @@ async function initialize() {
       snapshotOverrideStatus = 'failed';
       setStatus(
         'error',
-        'Qwen Code could not start',
+        'Tay Bellow could not start',
         'Review the details, open the log, or choose another workspace.',
         String(payload),
       );
@@ -166,19 +166,19 @@ async function initialize() {
   if (state.status === 'starting') {
     setStatus(
       'starting',
-      'Starting Qwen Code',
+      'Starting Tay Bellow',
       'Launching the bundled runtime and checking its health…',
     );
   } else if (state.status === 'ready') {
     setStatus(
       'starting',
-      'Loading Qwen Code',
+      'Loading Tay Bellow',
       'Connecting to the local Web Shell…',
     );
   } else if (state.error) {
     setStatus(
       'error',
-      'Qwen Code could not start',
+      'Tay Bellow could not start',
       'Review the details, open the log, or choose another workspace.',
       state.error,
     );
@@ -195,7 +195,7 @@ initialize().catch((failure) => {
   setStatus(
     'error',
     'Desktop initialization failed',
-    'Restart Qwen Code or inspect the desktop log.',
+    'Restart Tay Bellow or inspect the desktop log.',
     String(failure),
   );
 });

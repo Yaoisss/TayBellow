@@ -83,8 +83,8 @@ self.addEventListener('fetch', function (event) {
         return new Response(
           '<!doctype html><html lang="en"><meta charset="utf-8">' +
             '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-            '<title>Qwen Code unavailable</title><body>' +
-            '<h1>Cannot reach Qwen Code / <span lang="zh-CN">无法连接 Qwen Code</span></h1>' +
+            '<title>Tay Bellow unavailable</title><body>' +
+            '<h1>Cannot reach Tay Bellow / <span lang="zh-CN">无法连接 Tay Bellow</span></h1>' +
             '<p>Reconnect to the daemon, then reload this page. / ' +
             '<span lang="zh-CN">请重新连接守护进程，然后重新加载此页面。</span></p>' +
             '<a href="">Try again / <span lang="zh-CN">重试</span></a></body></html>',

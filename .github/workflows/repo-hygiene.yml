@@ -131,10 +131,10 @@ jobs:
           npm run build
           npm run bundle
 
-      - name: 'Prepare Qwen Code CLI'
+      - name: 'Prepare Tay Bellow CLI'
         run: |-
           qwen_version="$(node -p "require('./package.json').version")"
-          echo "Using checked-out Qwen Code bundle ${qwen_version}"
+          echo "Using checked-out Tay Bellow bundle ${qwen_version}"
           qwen_bin="${RUNNER_TEMP}/qwen-bin"
           mkdir -p "${qwen_bin}"
           cat > "${qwen_bin}/qwen" <<'EOF'
@@ -332,7 +332,7 @@ jobs:
           npm run build
           npm run bundle
 
-      - name: 'Prepare Qwen Code CLI'
+      - name: 'Prepare Tay Bellow CLI'
         if: "${{ steps.dedup.outputs.open_prs_present == 'false' }}"
         run: |-
           qwen_bin="${RUNNER_TEMP}/qwen-bin"
@@ -840,7 +840,7 @@ jobs:
             {
               echo
               echo "---"
-              echo "🧠 Scanned and fixed by **Qwen Code** · model/模型 \`${MODEL_DISPLAY}\`"
+              echo "🧠 Scanned and fixed by **Tay Bellow** · model/模型 \`${MODEL_DISPLAY}\`"
             } >> "${WORKDIR}/pr-body.md"
           fi
 
@@ -872,7 +872,7 @@ jobs:
             {
               echo
               echo "---"
-              echo "🧠 Handled by **Qwen Code** · model/模型 \`${MODEL_DISPLAY}\`"
+              echo "🧠 Handled by **Tay Bellow** · model/模型 \`${MODEL_DISPLAY}\`"
             } >> "${WORKDIR}/report-only.md"
             gh pr comment "${PR_URL}" --body-file "${WORKDIR}/report-only.md"
           fi

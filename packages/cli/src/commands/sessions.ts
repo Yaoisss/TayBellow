@@ -11,7 +11,7 @@ import { psCommand } from './sessions/ps.js';
 
 export const sessionsCommand: CommandModule = {
   command: 'sessions',
-  describe: 'Manage Qwen Code sessions',
+  describe: 'Manage Tay Bellow sessions',
   builder: (yargs: Argv) =>
     yargs
       .command(listCommand)

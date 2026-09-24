@@ -1,6 +1,6 @@
 # .github/workflows/ci.yml
 
-name: 'Qwen Code CI'
+name: 'Tay Bellow CI'
 
 on:
   # This trigger was removed on the premise that the merge queue validates the
@@ -53,7 +53,7 @@ on:
 
 concurrency:
   # Event + source repo + ref, not ref alone. Without the event the group
-  # collapses onto `Qwen Code CI-refs/heads/main`, shared with the nightly
+  # collapses onto `Tay Bellow CI-refs/heads/main`, shared with the nightly
   # (60-minute lanes, neither cancelling on `main`). Without the source repo,
   # same-named branches across forks collide — they evaluate in the base
   # repo's namespace and PR runs DO cancel in progress, so a fork whose

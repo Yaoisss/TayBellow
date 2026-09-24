@@ -1,6 +1,6 @@
-# Qwen Code Architecture Overview
+# Tay Bellow Architecture Overview
 
-Qwen Code is a monorepo that supports an interactive terminal, headless and
+Tay Bellow is a monorepo that supports an interactive terminal, headless and
 programmatic execution, the Agent Client Protocol (ACP), a long-running HTTP
 daemon, web and IDE clients, and messaging-channel adapters. This document maps
 those surfaces to the packages that implement them and explains the main
@@ -12,7 +12,7 @@ shapes, see the [`qwen serve` protocol reference](./qwen-serve-protocol.md).
 
 ## System at a glance
 
-Qwen Code has two agent execution models:
+Tay Bellow has two agent execution models:
 
 - **Direct execution:** the interactive TUI and headless CLI construct and run
   the agent runtime directly.
@@ -87,7 +87,7 @@ an HTTP daemon. See the
 | `packages/web-templates`                                                                                         | Web templates packaged as embeddable JavaScript and CSS strings.                                                                                                                                 |
 | `packages/audio-capture`                                                                                         | Native microphone capture for voice input.                                                                                                                                                       |
 | `packages/channels`                                                                                              | The shared channel runtime and platform adapters for messaging services.                                                                                                                         |
-| `packages/desktop-shell`, `packages/vscode-ide-companion`, `packages/chrome-extension`, `packages/zed-extension` | Product and editor surfaces that adapt Qwen Code to their host environments.                                                                                                                     |
+| `packages/desktop-shell`, `packages/vscode-ide-companion`, `packages/chrome-extension`, `packages/zed-extension` | Product and editor surfaces that adapt Tay Bellow to their host environments.                                                                                                                    |
 | `packages/sdk-java`, `packages/sdk-python`                                                                       | Language-specific programmatic clients.                                                                                                                                                          |
 | `packages/cua-driver`, `packages/mobile-mcp`                                                                     | Computer-use and mobile-device integrations exposed through MCP-compatible boundaries.                                                                                                           |
 | `integration-tests`                                                                                              | End-to-end coverage for CLI, interactive, SDK, sandbox, hook, and terminal behavior.                                                                                                             |
@@ -149,7 +149,7 @@ public entry points.
 
 The TypeScript SDK exposes two client styles:
 
-- `query()` starts and controls a Qwen Code process for programmatic local use;
+- `query()` starts and controls a Tay Bellow process for programmatic local use;
 - daemon clients communicate with `qwen serve` over HTTP and SSE.
 
 `packages/web-shell` builds a React state layer and browser UI on the daemon
@@ -190,7 +190,7 @@ topology, trust boundaries, event replay, and lifecycle in detail.
 
 ## Extension points
 
-Qwen Code can be extended at several layers:
+Tay Bellow can be extended at several layers:
 
 - **MCP servers** add tools, prompts, and resources to the core runtime.
 - **Extensions and skills** package reusable commands, configuration, and agent

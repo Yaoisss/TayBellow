@@ -42,8 +42,8 @@ export const TOP_LEVEL_COMMANDS = [
   ['auth', 'Configure authentication (removed)'],
   ['board <command>', 'Share work with other agents through a board'],
   ['channel <command>', 'Manage messaging channels (Telegram, Discord, etc.)'],
-  ['extensions <command>', 'Manage Qwen Code extensions.'],
-  ['hooks', 'Manage Qwen Code hooks (use /hooks in interactive mode).'],
+  ['extensions <command>', 'Manage Tay Bellow extensions.'],
+  ['hooks', 'Manage Tay Bellow hooks (use /hooks in interactive mode).'],
   ['mcp', 'Manage MCP servers'],
   [
     'review <command>',
@@ -55,10 +55,10 @@ export const TOP_LEVEL_COMMANDS = [
   ],
   [
     'serve',
-    'Run Qwen Code as a local HTTP daemon (Stage 1 experimental: --http-bridge)',
+    'Run Tay Bellow as a local HTTP daemon (Stage 1 experimental: --http-bridge)',
   ],
-  ['sessions <command>', 'Manage Qwen Code sessions'],
-  ['update', 'Check for Qwen Code updates and install if available'],
+  ['sessions <command>', 'Manage Tay Bellow sessions'],
+  ['update', 'Check for Tay Bellow updates and install if available'],
 ] as const;
 
 export const MCP_COMMANDS = [

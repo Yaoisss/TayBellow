@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Network security configuration for the Qwen Code Android shell.
+  Network security configuration for the Tay Bellow Android shell.
 
   The daemon can be reached over three topologies:
     1. loopback (localhost / 127.0.0.1) — explicitly allowed below.

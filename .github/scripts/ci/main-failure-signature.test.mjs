@@ -557,7 +557,7 @@ function captureStdout(argv) {
 
 test('the per-commit body names the failing job and step', () => {
   const analysis = analyzeLogs(
-    'Qwen Code CI',
+    'Tay Bellow CI',
     ['npm error code ERESOLVE'],
     [WINDOWS_JOB],
   );
@@ -577,13 +577,13 @@ test('the per-commit body names the failing job and step', () => {
   assert.ok(!body.includes(OCCURRENCE_MARKER));
   assert.equal(
     renderIssueTitle({ analysis, occurrence: OCCURRENCE }),
-    'Main CI failed: Qwen Code CI on af7a9ec12722',
+    'Main CI failed: Tay Bellow CI on af7a9ec12722',
   );
 });
 
 test('a job with several failed steps lists every one of them', () => {
   const analysis = analyzeLogs(
-    'Qwen Code CI',
+    'Tay Bellow CI',
     [],
     [
       {
@@ -602,7 +602,7 @@ test('a job with several failed steps lists every one of them', () => {
 
 test('a job whose failed step is unknown is still named', () => {
   const analysis = analyzeLogs(
-    'Qwen Code CI',
+    'Tay Bellow CI',
     [],
     [{ name: 'Test (macos-latest, Node 22.x)', steps: [] }],
   );
@@ -613,7 +613,7 @@ test('a job whose failed step is unknown is still named', () => {
 
 test('every failed job of a multi-lane run is named', () => {
   const analysis = analyzeLogs(
-    'Qwen Code CI',
+    'Tay Bellow CI',
     [],
     [
       WINDOWS_JOB,
@@ -656,7 +656,7 @@ test('runCli analyze parses the failed-jobs TSV the workflow writes', () => {
     captureStdout([
       'analyze',
       '--workflow',
-      'Qwen Code CI',
+      'Tay Bellow CI',
       '--jobs',
       jobsPath,
     ]),
@@ -681,7 +681,7 @@ test('runCli analyze still plans when the jobs file is missing', () => {
     captureStdout([
       'analyze',
       '--workflow',
-      'Qwen Code CI',
+      'Tay Bellow CI',
       '--jobs',
       join(tmpdir(), 'sig-jobs-no-such-file.tsv'),
     ]),
@@ -695,7 +695,7 @@ test('runCli plan renders the named job into the filed body', () => {
   writeFileSync(
     analysisPath,
     JSON.stringify(
-      analyzeLogs('Qwen Code CI', ['npm error code ERESOLVE'], [WINDOWS_JOB]),
+      analyzeLogs('Tay Bellow CI', ['npm error code ERESOLVE'], [WINDOWS_JOB]),
     ),
   );
 

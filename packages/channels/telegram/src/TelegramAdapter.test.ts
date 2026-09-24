@@ -772,7 +772,7 @@ describe('TelegramChannel', () => {
 
     expect(bot.api.sendMessage).toHaveBeenCalledWith(
       'chat-1',
-      expect.stringContaining('Qwen Code Telegram bot'),
+      expect.stringContaining('Tay Bellow Telegram bot'),
       { parse_mode: 'HTML' },
     );
   });
@@ -804,7 +804,7 @@ describe('TelegramChannel', () => {
       { parse_mode: 'HTML' },
     );
     expect(String(bot.api.sendMessage.mock.calls[0]?.[1])).toContain(
-      'Send any message to chat with Qwen Code.',
+      'Send any message to chat with Tay Bellow.',
     );
   });
 
@@ -826,7 +826,7 @@ describe('TelegramChannel', () => {
 
     expect(bot.api.sendMessage).toHaveBeenCalledWith(
       '2',
-      expect.stringContaining('Qwen Code Telegram bot'),
+      expect.stringContaining('Tay Bellow Telegram bot'),
       { parse_mode: 'HTML', message_thread_id: 42 },
     );
   });

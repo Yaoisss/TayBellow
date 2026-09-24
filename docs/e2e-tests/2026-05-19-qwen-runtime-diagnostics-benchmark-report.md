@@ -1,11 +1,11 @@
-# Qwen Code Runtime Diagnostics Benchmark Report
+# Tay Bellow Runtime Diagnostics Benchmark Report
 
 Date: 2026-05-19
 
 ## Scope
 
-This run repeats the previous Qwen Code benchmark shapes with the new opt-in
-runtime diagnostics enabled. It only tests Qwen Code, not Claude Code.
+This run repeats the previous Tay Bellow benchmark shapes with the new opt-in
+runtime diagnostics enabled. It only tests Tay Bellow, not Claude Code.
 
 Initial model matrix:
 
@@ -38,7 +38,7 @@ CLI RSS comparison.
 
 A follow-up sanity check used the same minimal prompt, model, and non-interactive
 mode across the installed CLI and the local diagnostics bundle. The only
-intentional variable was whether Qwen Code loaded a stripped temporary CLI home
+intentional variable was whether Tay Bellow loaded a stripped temporary CLI home
 or the normal user config.
 
 | CLI                 | Config mode     | Total tokens | Tree RSS peak | Root RSS peak | Process count peak | Runtime diagnostics |
@@ -485,7 +485,7 @@ reproduction.
 
 Setup:
 
-- Installed Qwen Code `0.15.11`, model `qwen-latest-series-invite-beta-v28`.
+- Installed Tay Bellow `0.15.11`, model `qwen-latest-series-invite-beta-v28`.
 - Temporary CLI home derived from the normal settings, with MCP and hook config
   removed. No global config was modified.
 - Interactive TUI mode with dual JSON event output and remote JSONL input.
@@ -652,7 +652,7 @@ Important attribution from this deterministic run:
 
 ## DeepSeek PR-Size Follow-Up
 
-After the initial model matrix, an additional Qwen Code-only run tested
+After the initial model matrix, an additional Tay Bellow-only run tested
 `DeepSeek/deepseek-v4-pro` across three real PR sizes. This model is configured
 through the Anthropic-compatible protocol; OpenAI-compatible execution returned
 404 in a smoke check, so the successful benchmark uses `--auth-type anthropic`.
@@ -704,7 +704,7 @@ DeepSeek observations:
    tool-result handling and request assembly, even when RSS does not spike.
 5. The DeepSeek run reinforces the model-choice conclusion: provider/model
    choice strongly changes turns, latency, token volume, and wire payload shape,
-   but the local bundle RSS peak remains dominated by Qwen Code runtime shape
+   but the local bundle RSS peak remains dominated by Tay Bellow runtime shape
    rather than scaling linearly with PR size.
 
 ## Long-Review JSONL Replay: History Clone Pressure
@@ -716,7 +716,7 @@ prompt and tool output text. The aggregate shape is:
 | Signal                  | Value                         |
 | ----------------------- | ----------------------------- |
 | Duration                | 87.0 min                      |
-| Qwen Code version       | 0.15.10                       |
+| Tay Bellow version      | 0.15.10                       |
 | Model                   | qwen-latest-series beta model |
 | API responses           | 380                           |
 | Tool-call telemetry     | 507 events                    |

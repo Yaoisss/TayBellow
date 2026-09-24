@@ -1,6 +1,6 @@
 # Starter Extension Example
 
-A complete, end-to-end Qwen Code extension that demonstrates **every** building
+A complete, end-to-end Tay Bellow extension that demonstrates **every** building
 block in a single package, themed around a small "writing companion". Use it as
 a starting point when you want a relatively complete scaffold instead of an
 empty extension.
@@ -51,7 +51,7 @@ build step.
 qwen extensions link /path/to/starter   # link this directory for local testing
 ```
 
-Then restart Qwen Code. The context loads automatically, `/writing:polish` and
+Then restart Tay Bellow. The context loads automatically, `/writing:polish` and
 `/skills` become available, the `diary-writer` subagent appears under
 `/agents manage`, and (once built) the MCP `count_words` tool is callable.
 

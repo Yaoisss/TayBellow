@@ -1745,7 +1745,7 @@ describe.skipIf(isWindows)('inbox auth wiring', () => {
     expect(submitted[0].modelText).toContain(
       '<cross_session_message from="own process" origin="own-process">',
     );
-    expect(submitted[0].modelText).not.toContain('another Qwen Code session');
+    expect(submitted[0].modelText).not.toContain('another Tay Bellow session');
     expect(submitted[0].displayText).toBe(
       'Message from a process this session started (own process): build finished',
     );

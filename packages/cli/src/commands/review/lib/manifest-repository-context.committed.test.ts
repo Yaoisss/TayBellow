@@ -26,7 +26,7 @@ const MANIFEST_RELATIVE_PATH = '.qwen/review-context.json';
 
 const expectedManifest = {
   version: 1,
-  label: 'Qwen Code',
+  label: 'Tay Bellow',
   rules: [
     {
       paths: ['packages/cli/src/commands/review/**'],

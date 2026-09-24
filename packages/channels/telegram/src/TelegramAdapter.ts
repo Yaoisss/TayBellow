@@ -295,9 +295,9 @@ export class TelegramChannel extends ChannelBase {
 
   private startMessage(): string {
     return [
-      'Qwen Code Telegram bot',
+      'Tay Bellow Telegram bot',
       '',
-      'Send any message to chat with Qwen Code.',
+      'Send any message to chat with Tay Bellow.',
       'Use /new to start a fresh conversation.',
       'Use /cancel to stop a running request.',
       'Use /help to see available commands.',

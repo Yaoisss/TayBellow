@@ -1,6 +1,6 @@
 # REST API integration guide
 
-For teams putting Qwen Code inside their own product over HTTP: run `qwen serve`
+For teams putting Tay Bellow inside their own product over HTTP: run `qwen serve`
 as a backend and drive it from your own front end.
 
 This page is the entry point. The curated
@@ -75,7 +75,7 @@ lists every tool and the programmatic API.
 ### Embed the Web Shell
 
 Use `@qwen-code/web-shell` when your React application should own the page and
-server while Qwen Code supplies the chat UI. The package is workspace-internal
+server while Tay Bellow supplies the chat UI. The package is workspace-internal
 for now — no release step publishes it to npm yet — so build it from the
 [monorepo](https://github.com/QwenLM/qwen-code) and depend on it by path, the
 same way `packages/web-templates` consumes it:

@@ -19197,7 +19197,7 @@ describe('App session callbacks', () => {
         },
         {
           id: 'live',
-          cwd: '/Users/test/Documents/Qwen Code/Conversations',
+          cwd: '/Users/test/Documents/Tay Bellow/Conversations',
           displayName: 'Conversations',
           primary: false,
           trusted: true,
@@ -22693,7 +22693,7 @@ describe('App session callbacks', () => {
         { id: 'primary', cwd: '/workspace', primary: true, trusted: true },
         {
           id: 'live',
-          cwd: '/Users/test/Documents/Qwen Code/Conversations',
+          cwd: '/Users/test/Documents/Tay Bellow/Conversations',
           primary: false,
           trusted: true,
           kind: 'live',
@@ -22708,7 +22708,7 @@ describe('App session callbacks', () => {
         new CustomEvent('qwen:open-session', {
           detail: {
             sessionId: 'live-coordinator',
-            workspaceCwd: '/Users/test/Documents/Qwen Code/Conversations',
+            workspaceCwd: '/Users/test/Documents/Tay Bellow/Conversations',
           },
         }),
       );

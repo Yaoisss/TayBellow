@@ -2,7 +2,7 @@
 
 ## Decision
 
-Qwen Code bundles only one Computer Use artifact: the `computer-use` skill.
+Tay Bellow bundles only one Computer Use artifact: the `computer-use` skill.
 
 ```text
 user task
@@ -21,13 +21,13 @@ bundled SDK, native payload staging, or fallback path.
 
 When `node_repl` is unavailable, the skill runs the exact, versioned
 `qwen mcp add` and workspace-local SDK installation commands itself. Adding the
-server changes user configuration and requires a Qwen Code restart, so the
+server changes user configuration and requires a Tay Bellow restart, so the
 skill tells the user to restart and resumes the desktop task in the next
 session.
 
 The SDK is resolved from the workspace used by Node REPL. If the dynamic import
 fails while `node_repl` is already available, the skill runs the SDK
-installation command and retries the import. Qwen Code itself has no dependency
+installation command and retries the import. Tay Bellow itself has no dependency
 on either package.
 
 This boundary keeps installation, trust, disk use, native downloads, and
@@ -72,7 +72,7 @@ either npm package or creating/replacing a GitHub Release.
 
 This change does not:
 
-- register an MCP server inside Qwen Code;
+- register an MCP server inside Tay Bellow;
 - add `@qwen-code/node-repl-mcp` or `@qwen-code/cua-sdk` as a Qwen runtime
   dependency;
 - stage CUA native assets into npm, standalone, Desktop, or VSIX artifacts;
@@ -86,7 +86,7 @@ The change is complete when:
 1. the bundled skill validates and is discoverable;
 2. no old Computer Use tool, setting, schema, downloader, or direct runtime
    remains;
-3. Qwen Code bundles no Node REPL server or CUA SDK payload;
+3. Tay Bellow bundles no Node REPL server or CUA SDK payload;
 4. a natural desktop task causes the skill to bootstrap missing external
    packages and then complete a real observe, action, verification, and cleanup
    flow without the prompt naming implementation details; and

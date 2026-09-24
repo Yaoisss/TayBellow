@@ -30,7 +30,7 @@ describe('package.json command metadata', () => {
       (item) => item.command === 'qwen-code.focusChat',
     );
 
-    expect(command?.title).toBe('Qwen Code: Focus Chat View');
+    expect(command?.title).toBe('Tay Bellow: Focus Chat View');
   });
 
   it('keeps the Activity Bar chat entry visible without runtime context', () => {

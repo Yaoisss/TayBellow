@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// Русский перевод для Qwen Code CLI
+// Русский перевод для Tay Bellow CLI
 // Ключ служит одновременно ключом перевода и текстом по умолчанию
 
 export default {
@@ -72,7 +72,7 @@ export default {
   'For a full list of shortcuts, see {{docPath}}':
     'Полный список горячих клавиш см. в {{docPath}}',
   'docs/keyboard-shortcuts.md': 'docs/keyboard-shortcuts.md',
-  'for help on Qwen Code': 'Справка по Qwen Code',
+  'for help on Tay Bellow': 'Справка по Tay Bellow',
   'show version info': 'Просмотр информации о версии',
   'submit a bug report': 'Отправка отчёта об ошибке',
   Status: 'Статус',
@@ -94,7 +94,7 @@ export default {
   // ============================================================================
   // Поля системной информации
   // ============================================================================
-  'Qwen Code': 'Qwen Code',
+  'Tay Bellow': 'Tay Bellow',
   Runtime: 'Среда выполнения',
   OS: 'ОС',
   Auth: 'Аутентификация',
@@ -112,8 +112,8 @@ export default {
   // ============================================================================
   'Analyzes the project and creates a tailored QWEN.md file.':
     'Анализ проекта и создание адаптированного файла QWEN.md',
-  'List available Qwen Code tools. Usage: /tools [desc]':
-    'Просмотр доступных инструментов Qwen Code. Использование: /tools [desc]',
+  'List available Tay Bellow tools. Usage: /tools [desc]':
+    'Просмотр доступных инструментов Tay Bellow. Использование: /tools [desc]',
   'Open the skills panel (browse, search, toggle, pick).':
     'Открыть панель навыков (обзор, поиск, вкл/выкл, выбор).',
   'Manage Skills': 'Управление навыками',
@@ -148,7 +148,7 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ навигация · Backspace редактирует поиск',
   Bundled: 'Встроенный',
-  'Available Qwen Code CLI tools:': 'Доступные инструменты Qwen Code CLI:',
+  'Available Tay Bellow CLI tools:': 'Доступные инструменты Tay Bellow CLI:',
   'No tools available': 'Нет доступных инструментов',
   'View or change the approval mode for tool usage':
     'Просмотр или изменение режима подтверждения для использования инструментов',
@@ -226,8 +226,8 @@ export default {
     'Очистить историю диалога и освободить контекст',
   'Compresses the context by replacing it with a summary.':
     'Сжатие контекста заменой на краткую сводку',
-  'open full Qwen Code documentation in your browser':
-    'Открытие полной документации Qwen Code в браузере',
+  'open full Tay Bellow documentation in your browser':
+    'Открытие полной документации Tay Bellow в браузере',
   'Configuration not available.': 'Конфигурация недоступна.',
   'Connect an LLM provider': 'Подключить провайдера LLM',
   'Copy the last AI response to clipboard (/copy N for Nth-latest)':
@@ -347,8 +347,8 @@ export default {
   // Агенты - Шаги мастера создания
   'Step {{n}}: Choose Location': 'Шаг {{n}}: Выберите расположение',
   'Step {{n}}: Choose Generation Method': 'Шаг {{n}}: Выберите метод генерации',
-  'Generate with Qwen Code (Recommended)':
-    'Сгенерировать с помощью Qwen Code (Рекомендуется)',
+  'Generate with Tay Bellow (Recommended)':
+    'Сгенерировать с помощью Tay Bellow (Рекомендуется)',
   'Manual Creation': 'Ручное создание',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     'Опишите, что должен делать этот подагент и когда его следует использовать. (Будьте подробны для лучших результатов)',
@@ -408,10 +408,11 @@ export default {
   // ============================================================================
   // Команды - Общие (продолжение)
   // ============================================================================
-  'View and edit Qwen Code settings': 'Просмотр и изменение настроек Qwen Code',
+  'View and edit Tay Bellow settings':
+    'Просмотр и изменение настроек Tay Bellow',
   Settings: 'Настройки',
-  'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.':
-    'Для применения изменений необходимо перезапустить Qwen Code. Нажмите r для выхода и применения изменений.',
+  'To see changes, Tay Bellow must be restarted. Press r to exit and apply changes now.':
+    'Для применения изменений необходимо перезапустить Tay Bellow. Нажмите r для выхода и применения изменений.',
   // ============================================================================
   // Метки настроек
   // ============================================================================
@@ -583,8 +584,8 @@ export default {
   'These workflow scripts changed since the installed version: {{names}}.':
     'Эти скрипты рабочих процессов изменились по сравнению с установленной версией: {{names}}.',
   'Installation cancelled for "{{name}}".': 'Установка "{{name}}" отменена.',
-  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Qwen Code.':
-    'Вы устанавливаете расширение от {{originSource}}. Некоторые функции могут работать не идеально с Qwen Code.',
+  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Tay Bellow.':
+    'Вы устанавливаете расширение от {{originSource}}. Некоторые функции могут работать не идеально с Tay Bellow.',
   '--ref and --auto-update are not applicable for marketplace extensions.':
     '--ref и --auto-update неприменимы для расширений из маркетплейса.',
   'Extension "{{name}}" installed successfully and enabled.':
@@ -692,8 +693,8 @@ export default {
     'Установить необходимый компаньон IDE для {{ideName}}',
   'enable IDE integration': 'Включение интеграции с IDE',
   'disable IDE integration': 'Отключение интеграции с IDE',
-  'IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks.':
-    'Интеграция с IDE не поддерживается в вашем окружении. Для использования этой функции запустите Qwen Code в одной из поддерживаемых IDE: VS Code или форках VS Code.',
+  'IDE integration is not supported in your current environment. To use this feature, run Tay Bellow in one of these supported IDEs: VS Code or VS Code forks.':
+    'Интеграция с IDE не поддерживается в вашем окружении. Для использования этой функции запустите Tay Bellow в одной из поддерживаемых IDE: VS Code или форках VS Code.',
   'Set up GitHub Actions': 'Настройка GitHub Actions',
   'Configure terminal keybindings for multiline input (VS Code, Cursor, Windsurf, Trae)':
     'Настройка привязки клавиш терминала для многострочного ввода (VS Code, Cursor, Windsurf, Trae)',
@@ -727,7 +728,7 @@ export default {
   // ============================================================================
   // Commands - Hooks
   // ============================================================================
-  'Manage Qwen Code hooks': 'Управлять хуками Qwen Code',
+  'Manage Tay Bellow hooks': 'Управлять хуками Tay Bellow',
   'List all configured hooks': 'Показать все настроенные хуки',
   // Hooks - Dialog
   Hooks: 'Хуки',
@@ -743,8 +744,8 @@ export default {
   'No hook events found.': 'События хуков не найдены.',
   '{{count}} hook configured': '{{count}} хук настроен',
   '{{count}} hooks configured': '{{count}} хуков настроено',
-  'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Qwen Code.':
-    'Это меню только для чтения. Чтобы добавить или изменить хуки, отредактируйте settings.json напрямую или спросите Qwen Code.',
+  'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Tay Bellow.':
+    'Это меню только для чтения. Чтобы добавить или изменить хуки, отредактируйте settings.json напрямую или спросите Tay Bellow.',
   'Reopen this menu to reload hook definitions.':
     'Откройте это меню повторно, чтобы перезагрузить определения хуков.',
   'Hook controls and HTTP security settings require a restart.':
@@ -779,8 +780,8 @@ export default {
   'StatusLine will not be displayed': 'StatusLine не будет отображаться',
   'Tool operations will proceed without hook validation':
     'Операции инструментов будут выполняться без проверки хуков',
-  'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Qwen Code.':
-    'Чтобы снова включить хуки, удалите "disableAllHooks" из settings.json или спросите Qwen Code.',
+  'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Tay Bellow.':
+    'Чтобы снова включить хуки, удалите "disableAllHooks" из settings.json или спросите Tay Bellow.',
   // Hooks - Source
   Project: 'Проект',
   User: 'Пользователь',
@@ -801,8 +802,8 @@ export default {
   'When a slash command expands into a prompt':
     'Когда slash-команда разворачивается в промпт',
   'When a new session is started': 'При запуске новой сессии',
-  'Right before Qwen Code concludes its response':
-    'Непосредственно перед завершением ответа Qwen Code',
+  'Right before Tay Bellow concludes its response':
+    'Непосредственно перед завершением ответа Tay Bellow',
   'When a subagent (Agent tool call) is started':
     'При запуске субагента (вызов инструмента Agent)',
   'Right before a subagent concludes its response':
@@ -1284,12 +1285,12 @@ export default {
   Ask: 'Спросить',
   Deny: 'Запретить',
   Workspace: 'Рабочая область',
-  "Qwen Code won't ask before using allowed tools.":
-    'Qwen Code не будет спрашивать перед использованием разрешённых инструментов.',
-  'Qwen Code will ask before using these tools.':
-    'Qwen Code спросит перед использованием этих инструментов.',
-  'Qwen Code is not allowed to use denied tools.':
-    'Qwen Code не может использовать запрещённые инструменты.',
+  "Tay Bellow won't ask before using allowed tools.":
+    'Tay Bellow не будет спрашивать перед использованием разрешённых инструментов.',
+  'Tay Bellow will ask before using these tools.':
+    'Tay Bellow спросит перед использованием этих инструментов.',
+  'Tay Bellow is not allowed to use denied tools.':
+    'Tay Bellow не может использовать запрещённые инструменты.',
   'Manage trusted directories for this workspace.':
     'Управление доверенными каталогами для этой рабочей области.',
   'Any use of the {{tool}} tool': 'Любое использование инструмента {{tool}}',
@@ -1324,10 +1325,10 @@ export default {
   // Workspace directory management
   'Add directory…': 'Добавить каталог…',
   'Add directory to workspace': 'Добавить каталог в рабочую область',
-  'Qwen Code can read files in the workspace, and make edits when auto-accept edits is on.':
-    'Qwen Code может читать файлы в рабочей области и вносить правки, когда автоприём правок включён.',
-  'Qwen Code will be able to read files in this directory and make edits when auto-accept edits is on.':
-    'Qwen Code сможет читать файлы в этом каталоге и вносить правки, когда автоприём правок включён.',
+  'Tay Bellow can read files in the workspace, and make edits when auto-accept edits is on.':
+    'Tay Bellow может читать файлы в рабочей области и вносить правки, когда автоприём правок включён.',
+  'Tay Bellow will be able to read files in this directory and make edits when auto-accept edits is on.':
+    'Tay Bellow сможет читать файлы в этом каталоге и вносить правки, когда автоприём правок включён.',
   'Enter the path to the directory:': 'Введите путь к каталогу:',
   'Enter directory path…': 'Введите путь к каталогу…',
   'Tab to complete · Enter to add · Esc to cancel':
@@ -1736,8 +1737,8 @@ export default {
     'Используйте /bug, чтобы сообщить о проблемах разработчикам.',
   'Switch auth type quickly with /auth.':
     'Быстро переключите тип аутентификации с помощью /auth.',
-  'You can run any shell commands from Qwen Code using ! (e.g. !ls).':
-    'Вы можете выполнять любые shell-команды в Qwen Code с помощью ! (например, !ls).',
+  'You can run any shell commands from Tay Bellow using ! (e.g. !ls).':
+    'Вы можете выполнять любые shell-команды в Tay Bellow с помощью ! (например, !ls).',
   'Type / to open the command popup; Tab autocompletes slash commands and saved prompts.':
     'Введите /, чтобы открыть меню команд; Tab автодополняет слэш-команды и сохранённые промпты.',
   'You can resume a previous conversation by running qwen --continue or qwen --resume.':
@@ -1748,8 +1749,8 @@ export default {
     'Вы можете быстро переключать режим разрешений с помощью Tab или /approval-mode.',
   'Try /insight to generate personalized insights from your chat history.':
     'Попробуйте /insight, чтобы получить персонализированные выводы из истории чатов.',
-  'Add a QWEN.md file to give Qwen Code persistent project context.':
-    'Добавьте файл QWEN.md, чтобы предоставить Qwen Code постоянный контекст проекта.',
+  'Add a QWEN.md file to give Tay Bellow persistent project context.':
+    'Добавьте файл QWEN.md, чтобы предоставить Tay Bellow постоянный контекст проекта.',
   'Use /btw to ask a quick side question without disrupting the conversation.':
     'Используйте /btw, чтобы задать короткий побочный вопрос, не прерывая основной разговор.',
   'Context is almost full! Run /compress now or start /new to continue.':
@@ -1973,8 +1974,8 @@ export default {
     'Уже в режиме плана. Используйте "/plan exit" для выхода из режима плана.',
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     'Не в режиме плана. Сначала используйте "/plan" для входа в режим плана.',
-  "Set up Qwen Code's status line UI":
-    'Настроить интерфейс строки состояния Qwen Code',
+  "Set up Tay Bellow's status line UI":
+    'Настроить интерфейс строки состояния Tay Bellow',
 
   // === Core: added from PR #3328 ===
   'Open the memory manager.': 'Открыть менеджер памяти.',
@@ -2178,13 +2179,13 @@ export default {
   out: 'вых.',
   'In/Out': 'Вх/Вых',
   // Update command
-  'Check for Qwen Code updates and install if available':
-    'Проверить обновления Qwen Code и установить при наличии',
-  'Qwen Code update available! {{current}} → {{latest}}':
-    'Доступно обновление Qwen Code! {{current}} → {{latest}}',
-  'A new version of Qwen Code is available! {{current}} → {{latest}}':
-    'Доступна новая версия Qwen Code! {{current}} → {{latest}}',
-  'Qwen Code {{version}} is up to date!': 'Qwen Code {{version}} актуален!',
+  'Check for Tay Bellow updates and install if available':
+    'Проверить обновления Tay Bellow и установить при наличии',
+  'Tay Bellow update available! {{current}} → {{latest}}':
+    'Доступно обновление Tay Bellow! {{current}} → {{latest}}',
+  'A new version of Tay Bellow is available! {{current}} → {{latest}}':
+    'Доступна новая версия Tay Bellow! {{current}} → {{latest}}',
+  'Tay Bellow {{version}} is up to date!': 'Tay Bellow {{version}} актуален!',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     'Не удалось проверить обновления ({{reason}}). Проверьте сеть или настройки registry.',
   'Update check skipped ({{reason}}) — run /update to retry.':
@@ -2201,8 +2202,8 @@ export default {
     'Обновление загружено. Оно будет применено после выхода из этого сеанса.',
   'Update failed: {{error}}': 'Ошибка обновления: {{error}}',
   'Downloading update...': 'Загрузка обновления...',
-  'Update successful! Please restart Qwen Code to use the new version. Switching model providers before restarting may not work correctly.':
-    'Обновление успешно! Перезапустите Qwen Code, чтобы использовать новую версию. Переключение поставщиков моделей до перезапуска может работать некорректно.',
+  'Update successful! Please restart Tay Bellow to use the new version. Switching model providers before restarting may not work correctly.':
+    'Обновление успешно! Перезапустите Tay Bellow, чтобы использовать новую версию. Переключение поставщиков моделей до перезапуска может работать некорректно.',
   'Automatic update failed. Please try updating manually.':
     'Автоматическое обновление не удалось. Попробуйте обновить вручную.',
   'Automatic update failed: {{error}}. Re-run the installer to update manually.':
@@ -2228,12 +2229,12 @@ export default {
   'Run the following to update:': 'Выполните следующую команду для обновления:',
   'Unable to auto-update this standalone installation. Please reinstall from:':
     'Невозможно автоматически обновить эту автономную установку. Переустановите с:',
-  'Manual update required. Please reinstall Qwen Code.':
-    'Требуется ручное обновление. Переустановите Qwen Code.',
-  'This session uses the custom sandbox image {{image}}. Update that image and restart Qwen Code.':
-    'В этом сеансе используется пользовательский образ песочницы {{image}}. Обновите образ и перезапустите Qwen Code.',
-  'Update Qwen Code on the host, then restart the sandbox.':
-    'Обновите Qwen Code на хосте, затем перезапустите песочницу.',
+  'Manual update required. Please reinstall Tay Bellow.':
+    'Требуется ручное обновление. Переустановите Tay Bellow.',
+  'This session uses the custom sandbox image {{image}}. Update that image and restart Tay Bellow.':
+    'В этом сеансе используется пользовательский образ песочницы {{image}}. Обновите образ и перезапустите Tay Bellow.',
+  'Update Tay Bellow on the host, then restart the sandbox.':
+    'Обновите Tay Bellow на хосте, затем перезапустите песочницу.',
   'The update will be installed after you exit this session.':
     'Обновление будет установлено после выхода из этого сеанса.',
   'Run /update to install the update on the host.':

@@ -28,7 +28,7 @@ export interface WebShellBrand {
   logoDataUri?: string;
 }
 
-export const DEFAULT_BRAND_NAME = 'Qwen Code';
+export const DEFAULT_BRAND_NAME = 'Tay Bellow';
 
 /**
  * The payload of `onBrandResolved` — the subset of `WebShellBrand` a host

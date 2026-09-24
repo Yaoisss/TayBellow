@@ -125,11 +125,11 @@ describe('activate', () => {
     } as vscode.Extension<unknown>);
     await activate(context);
     expect(showInformationMessageMock).toHaveBeenCalledWith(
-      'Qwen Code Companion extension successfully installed.',
+      'Tay Bellow Companion extension successfully installed.',
     );
   });
 
-  it('writes production logs to the Qwen Code Companion output channel', async () => {
+  it('writes production logs to the Tay Bellow Companion output channel', async () => {
     const appendLine = vi.fn();
     vi.mocked(vscode.window.createOutputChannel).mockReturnValue({
       appendLine,
@@ -138,12 +138,12 @@ describe('activate', () => {
     await activate(context);
 
     expect(vscode.window.createOutputChannel).toHaveBeenCalledWith(
-      'Qwen Code Companion',
+      'Tay Bellow Companion',
     );
     expect(appendLine).toHaveBeenCalledWith('[INFO] Extension activated');
   });
 
-  it('launches Qwen Code with the full multi-root workspace env', async () => {
+  it('launches Tay Bellow with the full multi-root workspace env', async () => {
     vi.mocked(context.globalState.get).mockReturnValue(true);
     const first = {
       name: 'first',
@@ -214,17 +214,17 @@ describe('activate', () => {
     expect(viewIds).toContain('qwen-code.chatView.sidebar');
   });
 
-  it('should launch the Qwen Code when the user clicks the button', async () => {
+  it('should launch the Tay Bellow when the user clicks the button', async () => {
     const showInformationMessageMock = vi
       .mocked(vscode.window.showInformationMessage)
-      .mockResolvedValue('Run Qwen Code' as never);
+      .mockResolvedValue('Run Tay Bellow' as never);
     vi.mocked(context.globalState.get).mockReturnValue(undefined);
     vi.mocked(vscode.extensions.getExtension).mockReturnValue({
       packageJSON: { version: '1.1.0' },
     } as vscode.Extension<unknown>);
     await activate(context);
     expect(showInformationMessageMock).toHaveBeenCalledWith(
-      'Qwen Code Companion extension successfully installed.',
+      'Tay Bellow Companion extension successfully installed.',
     );
   });
 
@@ -257,7 +257,7 @@ describe('activate', () => {
       await activate(context);
 
       expect(showInformationMessageMock).toHaveBeenCalledWith(
-        'A new version (1.2.0) of the Qwen Code Companion extension is available.',
+        'A new version (1.2.0) of the Tay Bellow Companion extension is available.',
         'Update to latest version',
       );
     });

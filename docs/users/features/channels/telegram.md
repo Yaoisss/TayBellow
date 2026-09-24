@@ -1,6 +1,6 @@
 # Telegram
 
-This guide covers setting up a Qwen Code channel on Telegram.
+This guide covers setting up a Tay Bellow channel on Telegram.
 
 ## Prerequisites
 

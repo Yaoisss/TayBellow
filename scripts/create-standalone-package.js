@@ -319,7 +319,7 @@ function readOptionValue(argv, index, optionName) {
 }
 
 function printUsage() {
-  console.log(`Qwen Code standalone package builder
+  console.log(`Tay Bellow standalone package builder
 
 Usage:
   npm run package:standalone -- --target TARGET --node-archive PATH [OPTIONS]
@@ -343,7 +343,7 @@ Options:
                           platform packages. Used with --runtime bun; missing
                           packages are fatal when this is supplied.
   --out-dir DIR           Output directory. Defaults to dist/standalone.
-  --version VERSION       Qwen Code version. Defaults to package.json version.
+  --version VERSION       Tay Bellow version. Defaults to package.json version.
   --skip-checksums        Do not update SHA256SUMS. Used by release packaging.
   -h, --help              Show this help message.`);
 }

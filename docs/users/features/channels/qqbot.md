@@ -1,6 +1,6 @@
 # QQ Bot (QQ机器人)
 
-This guide covers setting up a Qwen Code channel on QQ via the official QQ Bot Open Platform API.
+This guide covers setting up a Tay Bellow channel on QQ via the official QQ Bot Open Platform API.
 
 ## Prerequisites
 

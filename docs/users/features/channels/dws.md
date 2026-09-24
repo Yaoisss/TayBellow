@@ -2,11 +2,11 @@
 
 The DWS channel uses an account already authenticated by the DingTalk Workspace CLI. It receives direct and group messages, recognizes DingTalk document-mention notification cards, and publishes the agent's response back to the originating message or document comment.
 
-This is separate from the [DingTalk bot channel](./dingtalk). Keep using `type: "dingtalk"` for a dedicated application bot; use `type: "dws"` when Qwen Code should act through an existing DWS login.
+This is separate from the [DingTalk bot channel](./dingtalk). Keep using `type: "dingtalk"` for a dedicated application bot; use `type: "dws"` when Tay Bellow should act through an existing DWS login.
 
 ## Prerequisites
 
-Install DWS CLI 1.0.57 or newer on the host that runs Qwen Code, and ensure `dws` resolves from that process's `PATH`:
+Install DWS CLI 1.0.57 or newer on the host that runs Tay Bellow, and ensure `dws` resolves from that process's `PATH`:
 
 ```bash
 dws version --format json

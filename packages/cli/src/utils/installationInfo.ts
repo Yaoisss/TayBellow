@@ -112,7 +112,7 @@ export function formatUpdateInstructions(
     );
     lines.push('Run the following to update:', `  ${updateCmd}`);
   } else if (!installationInfo.updateMessage) {
-    lines.push('Manual update required. Please reinstall Qwen Code.');
+    lines.push('Manual update required. Please reinstall Tay Bellow.');
   }
 
   return lines;

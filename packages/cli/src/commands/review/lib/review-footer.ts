@@ -21,7 +21,7 @@ import { indentColumns, stripSeverityPrefix } from './inline-counts.js';
 // this directory already shares between the same two commands.
 
 /** The attribution marker the strip regex anchors on. */
-export const FOOTER_MARKER = 'via Qwen Code /review';
+export const FOOTER_MARKER = 'via Tay Bellow /review';
 
 /**
  * The invisible marker every attribution-OFF inline comment carries instead
@@ -46,12 +46,12 @@ const POSTED_MARKER_RE = /<!-- qwen-review (?:critical|suggestion) -->$/;
 /**
  * The canonical attribution footer as it trails a one-line note — the
  * exact tail `normalizeInlineComments` appends, not "any italic line":
- * `_— <model> via Qwen Code /review (vX)_`. A permissive `_—[^\n]*_`
+ * `_— <model> via Tay Bellow /review (vX)_`. A permissive `_—[^\n]*_`
  * read a comment whose own second paragraph is italic prose as a ruling
  * note (#9940 review, round 31 reverse audit).
  */
 const CANONICAL_FOOTER_TAIL =
-  '\\r?\\n[ \\t\\r\\n]*_— (?:(?! via Qwen Code /review)[^\\r\\n\\u2028\\u2029])* via Qwen Code /review(?: \\(v[A-Za-z0-9._+-]{0,200}…?\\)?)?_';
+  '\\r?\\n[ \\t\\r\\n]*_— (?:(?! via Tay Bellow /review)[^\\r\\n\\u2028\\u2029])* via Tay Bellow /review(?: \\(v[A-Za-z0-9._+-]{0,200}…?\\)?)?_';
 
 /**
  * The trailing marker the thread lifecycle's `R<id> fixed by <what>` reply
@@ -194,7 +194,7 @@ export function stripCommentMarkerLines(body: string): string {
  * after it. In both, the middle cannot cross another span's `_— ` opener.
  */
 const FOOTER_SPAN_RE =
-  /_— (?:(?:(?!_— )[^\n]){0,400}? via Qwen Code \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_|(?:(?! via Qwen Code \/review)[^\n]){0,400}? via Qwen Code \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_?)[ \t]*/g;
+  /_— (?:(?:(?!_— )[^\n]){0,400}? via Tay Bellow \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_|(?:(?! via Tay Bellow \/review)[^\n]){0,400}? via Tay Bellow \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_?)[ \t]*/g;
 
 /**
  * The named HTML5 entities decoding to characters the footer's literal
@@ -522,7 +522,7 @@ export function reviewFooter(modelId: string, cliVersion: string): string {
  * admitted — the canonical capped footer must strip like any forged one.
  */
 export const REVIEW_FOOTER_RE =
-  /\s*(?:_— (?:(?! via Qwen Code \/review)[^\n])* via Qwen Code \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_?\s*)+$/;
+  /\s*(?:_— (?:(?! via Tay Bellow \/review)[^\n])* via Tay Bellow \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_?\s*)+$/;
 
 /** The widest slice `stripReviewFooter` runs the strip regex over. */
 const STRIP_TAIL_LIMIT = 8192;
@@ -1167,7 +1167,7 @@ export function rendersAsNothing(text: string): boolean {
  * footer-shaped line is returned byte-identical — no whitespace rewriting.
  */
 const FORGED_FOOTER_LINE_RE =
-  /^[ \t]{0,3}(?:>[ \t]*)?_— [^\n]{0,400} via Qwen Code \/review(?: \(v[^\n)]{0,200}\)?)?_?[ \t]*\r?$/;
+  /^[ \t]{0,3}(?:>[ \t]*)?_— [^\n]{0,400} via Tay Bellow \/review(?: \(v[^\n)]{0,200}\)?)?_?[ \t]*\r?$/;
 
 export function stripForgedFooterLines(body: string): string {
   if (!body.includes('/review') && !body.includes('&')) return body;

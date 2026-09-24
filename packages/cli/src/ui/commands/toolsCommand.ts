@@ -16,7 +16,7 @@ import { t } from '../../i18n/index.js';
 export const toolsCommand: SlashCommand = {
   name: 'tools',
   get description() {
-    return t('List available Qwen Code tools. Usage: /tools [desc]');
+    return t('List available Tay Bellow tools. Usage: /tools [desc]');
   },
   kind: CommandKind.BUILT_IN,
   canRunDuringStreaming: true,

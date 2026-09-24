@@ -6042,7 +6042,7 @@ describe('WebShellSidebar Live group', () => {
     enableChannelOrganization();
     const liveWorkspace: DaemonWorkspaceCapability = {
       id: 'live',
-      cwd: '/Users/test/Documents/Qwen Code/Conversations',
+      cwd: '/Users/test/Documents/Tay Bellow/Conversations',
       displayName: 'Conversations',
       primary: false,
       trusted: true,

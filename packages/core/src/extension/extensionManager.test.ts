@@ -1387,7 +1387,7 @@ describe('extension tests', () => {
         }),
       );
       const storage = new FileTokenStorage(
-        'Qwen Code Extension Git Credentials',
+        'Tay Bellow Extension Git Credentials',
       );
       await expect(
         storage.getSecret(resolved.selector.secretKey),

@@ -164,8 +164,8 @@ it a Host fix would never reach a user who already installed one. A usable Host
 of the same protocol and at least the bundled revision is reused; the SDK only
 adds missing browser registrations and never repoints the launcher at its own
 bundled copy, so CLIs from different checkouts do not take turns replacing it.
-A Host installed by a newer Qwen Code is never downgraded; the
-older CLI reports that Qwen Code must be updated.
+A Host installed by a newer Tay Bellow is never downgraded; the
+older CLI reports that Tay Bellow must be updated.
 
 Protocol 3 registers as `com.qwen.browser_use` with the launcher
 `~/.qwen/browser-use/host.sh`. Released protocol 2 CLIs re-register
@@ -232,7 +232,7 @@ a live process keeps its files.
 Protocol 2 CLIs listen on `bridge.sock` in that socket base and wait for their
 own Native Host, which a protocol 3 extension never launches. Once per new
 listener, a protocol 3 Host connects to such a user-owned socket and sends its
-`hello`. The older CLI then reports that Qwen Code must be updated instead of
+`hello`. The older CLI then reports that Tay Bellow must be updated instead of
 a generic connection timeout. A Host serving an older extension does not send
 it.
 

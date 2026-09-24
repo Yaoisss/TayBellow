@@ -1,10 +1,10 @@
 ---
 name: qwen-code-claw
-description: Use Qwen Code as a Code Agent for code understanding, project
+description: Use Tay Bellow as a Code Agent for code understanding, project
   generation, features, bug fixes, refactoring, and various programming tasks
 ---
 
-# Qwen Code Claw
+# Tay Bellow Claw
 
 ## When to Use This Skill
 
@@ -54,11 +54,11 @@ authenticate via `qwen-oauth` or `coding-plan`:
 qwen auth
 ```
 
-Or configure custom API after launching Qwen Code via `/auth`.
+Or configure custom API after launching Tay Bellow via `/auth`.
 
 ## ACPX Integration
 
-You should always use `acpx` to run Qwen Code over the Agent Client Protocol
+You should always use `acpx` to run Tay Bellow over the Agent Client Protocol
 (ACP) instead of scraping PTY sessions.
 
 To use acpx:
@@ -87,7 +87,7 @@ npx acpx@latest --skill install acpx
 4.  **For complete CLI reference with all options and examples**:
     https://raw.githubusercontent.com/openclaw/acpx/main/docs/CLI.md
 
-From now on, when you need to delegate work to Qwen Code, use `acpx` instead of
+From now on, when you need to delegate work to Tay Bellow, use `acpx` instead of
 spawning raw terminal sessions. For example:
 
 ```bash
@@ -169,7 +169,7 @@ exits with permission denied.
 | `/compress` | Compress history to save tokens |
 | `/stats`    | Show session info               |
 | `/auth`     | Configure authentication        |
-| `/exit`     | Exit Qwen Code                  |
+| `/exit`     | Exit Tay Bellow                 |
 
 Full reference: `docs/users/features/commands.md`.
 

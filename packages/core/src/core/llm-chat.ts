@@ -3449,7 +3449,7 @@ export class LlmChat {
       let pendingTransportPrefix: Part[] = [];
       const sleepInhibitorHandle = acquireSleepInhibitor(
         self.config,
-        'Qwen Code is streaming a model response',
+        'Tay Bellow is streaming a model response',
       );
       try {
         // Surface a successful auto-compression to the caller as the first

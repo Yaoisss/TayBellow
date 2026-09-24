@@ -1,6 +1,6 @@
 # GitLab
 
-This guide covers setting up a Qwen Code channel that monitors GitLab todos and responds to mentions on issues and merge requests.
+This guide covers setting up a Tay Bellow channel that monitors GitLab todos and responds to mentions on issues and merge requests.
 
 ## Prerequisites
 

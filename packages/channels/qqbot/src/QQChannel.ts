@@ -1,5 +1,5 @@
 /**
- * QQ Bot channel adapter for Qwen Code.
+ * QQ Bot channel adapter for Tay Bellow.
  *
  * Connects QQ Bot via official QQ Bot WebSocket API.
  * Extends ChannelBase for streaming, access control, and session routing.

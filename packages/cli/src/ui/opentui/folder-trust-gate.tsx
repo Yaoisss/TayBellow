@@ -171,7 +171,7 @@ export function OpenTuiFolderTrustGate({
             {'Do you trust this folder?'}
           </text>
           <text fg={C.text}>
-            {'Trusting a folder allows Qwen Code to execute commands it'}
+            {'Trusting a folder allows Tay Bellow to execute commands it'}
           </text>
           <text fg={C.text}>
             {'suggests. This is a security feature to prevent accidental'}
@@ -194,7 +194,7 @@ export function OpenTuiFolderTrustGate({
       {isRestarting && (
         <box marginTop={1}>
           <text fg={C.yellow}>
-            {'Qwen Code is restarting to apply the trust changes...'}
+            {'Tay Bellow is restarting to apply the trust changes...'}
           </text>
         </box>
       )}

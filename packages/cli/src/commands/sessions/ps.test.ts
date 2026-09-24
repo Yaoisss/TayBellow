@@ -155,7 +155,9 @@ describe('qwen sessions ps', () => {
   it('says so plainly when nothing is registered', async () => {
     listLiveSessions.mockResolvedValue([]);
     await run({ json: false });
-    expect(stdout).toEqual(['No Qwen Code sessions are registered right now.']);
+    expect(stdout).toEqual([
+      'No Tay Bellow sessions are registered right now.',
+    ]);
   });
 
   it('emits one JSON object per line with no header', async () => {

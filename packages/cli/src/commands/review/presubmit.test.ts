@@ -785,7 +785,7 @@ describe('presubmitCommand', () => {
         [
           {
             id: 1,
-            body: '**[Critical]** x _— model via Qwen Code /review (v0.21.2)_',
+            body: '**[Critical]** x _— model via Tay Bellow /review (v0.21.2)_',
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
@@ -804,7 +804,7 @@ describe('presubmitCommand', () => {
         [
           {
             id: 1,
-            body: 'looks good overall _— model via Qwen Code /review (v0.21.2)_',
+            body: 'looks good overall _— model via Tay Bellow /review (v0.21.2)_',
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
@@ -972,7 +972,7 @@ describe('presubmitCommand', () => {
         [
           {
             id: 5,
-            body: 'R3-2 fixed by the guard rewrite\n\n_— qwen3-max via Qwen Code /review (v0.21.3)_',
+            body: 'R3-2 fixed by the guard rewrite\n\n_— qwen3-max via Tay Bellow /review (v0.21.3)_',
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
@@ -1087,7 +1087,7 @@ describe('presubmitCommand', () => {
 
     const CARRIED_COMMENT = {
       id: 7,
-      body: '**[Critical]** R3-2: eq-form rescue asymmetry _— model via Qwen Code /review (v0.21.3)_',
+      body: '**[Critical]** R3-2: eq-form rescue asymmetry _— model via Tay Bellow /review (v0.21.3)_',
       path: 'src/parse-args.ts',
       line: 44,
       commit_id: 'abc123',
@@ -1102,7 +1102,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Critical]** [fails-closed] [new-surface] R3-2: eq-form rescue asymmetry _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** [fails-closed] [new-surface] R3-2: eq-form rescue asymmetry _— model via Tay Bellow /review (v0.21.3)_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1119,7 +1119,7 @@ describe('presubmitCommand', () => {
       // overlap bucket and was dedup-dropped every round — the re-post
       // loop meanwhile counting it re-posted. Both posted shapes.
       for (const body of [
-        '**[Critical]** [probe] R3-2: eq-form rescue asymmetry _— model via Qwen Code /review (v0.21.3)_',
+        '**[Critical]** [probe] R3-2: eq-form rescue asymmetry _— model via Tay Bellow /review (v0.21.3)_',
         '[probe] R3-2: eq-form rescue asymmetry\n\n<!-- qwen-review critical -->',
       ]) {
         const result = await presubmitWithComments(
@@ -1142,7 +1142,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Critical]** _— model via Qwen Code /review (v0.21.3)_ R3-2: eq-form rescue asymmetry',
+            body: '**[Critical]** _— model via Tay Bellow /review (v0.21.3)_ R3-2: eq-form rescue asymmetry',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1159,7 +1159,7 @@ describe('presubmitCommand', () => {
       // outright, R1-2 had no carrier and the drop rule discarded its
       // still-standing re-post as C_B's duplicate. Both posted shapes.
       for (const replyBody of [
-        '**[Critical]** R1-2: still stands at HEAD _— model via Qwen Code /review (v0.21.3)_',
+        '**[Critical]** R1-2: still stands at HEAD _— model via Tay Bellow /review (v0.21.3)_',
         'R1-2: still stands at HEAD\n\n<!-- qwen-review critical -->',
       ]) {
         const result = await presubmitWithComments(
@@ -1167,13 +1167,13 @@ describe('presubmitCommand', () => {
             {
               ...CARRIED_COMMENT,
               id: 1,
-              body: '**[Critical]** R1-2: the guard drops a valid case _— model via Qwen Code /review (v0.21.3)_',
+              body: '**[Critical]** R1-2: the guard drops a valid case _— model via Tay Bellow /review (v0.21.3)_',
             },
             { ...CARRIED_COMMENT, id: 2, body: replyBody, in_reply_to_id: 1 },
             {
               ...CARRIED_COMMENT,
               id: 3,
-              body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Qwen Code /review (v0.21.3)_',
+              body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Tay Bellow /review (v0.21.3)_',
             },
           ],
           [
@@ -1211,7 +1211,7 @@ describe('presubmitCommand', () => {
             ...unmapped,
             id: 1,
             commit_id: 'old-sha',
-            body: '**[Critical]** R1-2: the guard drops a valid case _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-2: the guard drops a valid case _— model via Tay Bellow /review (v0.21.3)_',
           },
           {
             ...CARRIED_COMMENT,
@@ -1219,12 +1219,12 @@ describe('presubmitCommand', () => {
             id: 2,
             commit_id: 'old-sha',
             in_reply_to_id: 1,
-            body: '**[Critical]** R1-2: still stands at HEAD _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-2: still stands at HEAD _— model via Tay Bellow /review (v0.21.3)_',
           },
           {
             ...CARRIED_COMMENT,
             id: 3,
-            body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Tay Bellow /review (v0.21.3)_',
           },
         ],
         [
@@ -1255,7 +1255,7 @@ describe('presubmitCommand', () => {
             ...unmapped,
             id: 1,
             commit_id: 'old-sha',
-            body: '**[Critical]** R1-2: the guard drops a valid case _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-2: the guard drops a valid case _— model via Tay Bellow /review (v0.21.3)_',
           },
           {
             ...CARRIED_COMMENT,
@@ -1263,13 +1263,13 @@ describe('presubmitCommand', () => {
             id: 2,
             commit_id: 'old-sha',
             in_reply_to_id: 1,
-            body: '**[Critical]** R1-2: still stands at HEAD _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-2: still stands at HEAD _— model via Tay Bellow /review (v0.21.3)_',
           },
           {
             ...CARRIED_COMMENT,
             id: 3,
             line: 51,
-            body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Tay Bellow /review (v0.21.3)_',
           },
         ],
         [
@@ -1307,19 +1307,19 @@ describe('presubmitCommand', () => {
             ...CARRIED_COMMENT,
             id: 1,
             commit_id: 'old-sha',
-            body: '**[Critical]** R1-2: the guard drops a valid case _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-2: the guard drops a valid case _— model via Tay Bellow /review (v0.21.3)_',
           },
           {
             ...CARRIED_COMMENT,
             id: 2,
             commit_id: 'old-sha',
             in_reply_to_id: 1,
-            body: '**[Critical]** R1-2: still stands at HEAD _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-2: still stands at HEAD _— model via Tay Bellow /review (v0.21.3)_',
           },
           {
             ...CARRIED_COMMENT,
             id: 3,
-            body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Tay Bellow /review (v0.21.3)_',
           },
         ],
         [
@@ -1348,19 +1348,19 @@ describe('presubmitCommand', () => {
       const root = {
         ...CARRIED_COMMENT,
         id: 1,
-        body: '**[Critical]** R1-2: the guard drops a valid case _— model via Qwen Code /review (v0.21.3)_',
+        body: '**[Critical]** R1-2: the guard drops a valid case _— model via Tay Bellow /review (v0.21.3)_',
       };
       const sibling = {
         ...CARRIED_COMMENT,
         id: 3,
-        body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Qwen Code /review (v0.21.3)_',
+        body: '**[Critical]** R1-3: the parser trusts unbounded input _— model via Tay Bellow /review (v0.21.3)_',
       };
       const findings = [
         { path: 'src/parse-args.ts', line: 44, id: 'R1-2' },
         { path: 'src/parse-args.ts', line: 44, id: 'R1-3' },
       ];
       const carry =
-        '**[Critical]** R1-2: still stands at HEAD _— model via Qwen Code /review (v0.21.3)_';
+        '**[Critical]** R1-2: still stands at HEAD _— model via Tay Bellow /review (v0.21.3)_';
       for (const reply of [
         // Another account's reply: ledger ids are per-account.
         {
@@ -1374,14 +1374,14 @@ describe('presubmitCommand', () => {
         {
           ...CARRIED_COMMENT,
           id: 2,
-          body: 'R1-2 fixed by the guard rewrite\n\n_— model via Qwen Code /review (v0.21.3)_',
+          body: 'R1-2 fixed by the guard rewrite\n\n_— model via Tay Bellow /review (v0.21.3)_',
           in_reply_to_id: 1,
         },
         // A reply carrying an id no finding wants.
         {
           ...CARRIED_COMMENT,
           id: 2,
-          body: '**[Critical]** R1-9: unrelated _— model via Qwen Code /review (v0.21.3)_',
+          body: '**[Critical]** R1-9: unrelated _— model via Tay Bellow /review (v0.21.3)_',
           in_reply_to_id: 1,
         },
       ]) {
@@ -1404,7 +1404,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Critical]** R03-2: eq-form rescue asymmetry _— model via Qwen Code /review (v0.21.3)_',
+            body: '**[Critical]** R03-2: eq-form rescue asymmetry _— model via Tay Bellow /review (v0.21.3)_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1490,7 +1490,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: `**[Critical]** R3-2: ${longClaim} _— model via Qwen Code /review_`,
+            body: `**[Critical]** R3-2: ${longClaim} _— model via Tay Bellow /review_`,
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1509,7 +1509,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: `**[Critical]** ${longClaim} (see R3-2 for context) _— model via Qwen Code /review_`,
+            body: `**[Critical]** ${longClaim} (see R3-2 for context) _— model via Tay Bellow /review_`,
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1526,7 +1526,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Suggestion]** R3-2: eq-form rescue asymmetry _— model via Qwen Code /review_',
+            body: '**[Suggestion]** R3-2: eq-form rescue asymmetry _— model via Tay Bellow /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1546,7 +1546,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Critical]**: R3-2: eq-form rescue asymmetry _— model via Qwen Code /review_',
+            body: '**[Critical]**: R3-2: eq-form rescue asymmetry _— model via Tay Bellow /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1630,7 +1630,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: 'R3-2: discussed offline, keeping this thread _— model via Qwen Code /review_',
+            body: 'R3-2: discussed offline, keeping this thread _— model via Tay Bellow /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1648,7 +1648,7 @@ describe('presubmitCommand', () => {
       // fire if it keyed on the prefix extractor's [] alone.
       const referenced = {
         ...CARRIED_COMMENT,
-        body: '**[Critical]** unrelated claim (see R3-2 for context) _— model via Qwen Code /review_',
+        body: '**[Critical]** unrelated claim (see R3-2 for context) _— model via Tay Bellow /review_',
       };
       const result = await presubmitWithComments(
         [referenced],
@@ -1664,7 +1664,7 @@ describe('presubmitCommand', () => {
       // hyphen-run token keeps the id-less fallback off too.
       const extended = {
         ...CARRIED_COMMENT,
-        body: '**[Critical]** R3-2-1: extended claim _— model via Qwen Code /review_',
+        body: '**[Critical]** R3-2-1: extended claim _— model via Tay Bellow /review_',
       };
       const result = await presubmitWithComments(
         [extended],
@@ -1680,7 +1680,7 @@ describe('presubmitCommand', () => {
       // mention still marks the comment as belonging to a specific finding.
       const emphasised = {
         ...CARRIED_COMMENT,
-        body: '**[Critical]** unrelated claim (see _R3-2_ for context) _— model via Qwen Code /review_',
+        body: '**[Critical]** unrelated claim (see _R3-2_ for context) _— model via Tay Bellow /review_',
       };
       const result = await presubmitWithComments(
         [emphasised],
@@ -1764,13 +1764,13 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Critical]** some claim without an id _— model via Qwen Code /review_',
+            body: '**[Critical]** some claim without an id _— model via Tay Bellow /review_',
           },
           {
             ...CARRIED_COMMENT,
             id: 8,
             user: undefined,
-            body: '**[Critical]** author-less claim without an id _— model via Qwen Code /review_',
+            body: '**[Critical]** author-less claim without an id _— model via Tay Bellow /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1794,7 +1794,7 @@ describe('presubmitCommand', () => {
           {
             ...CARRIED_COMMENT,
             user: undefined,
-            body: '**[Critical]** R3-2: eq-form rescue asymmetry _— model via Qwen Code /review_',
+            body: '**[Critical]** R3-2: eq-form rescue asymmetry _— model via Tay Bellow /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1815,7 +1815,7 @@ describe('presubmitCommand', () => {
           {
             ...CARRIED_COMMENT,
             user: undefined,
-            body: '**[Critical]** author-less claim without an id _— model via Qwen Code /review_',
+            body: '**[Critical]** author-less claim without an id _— model via Tay Bellow /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1867,7 +1867,7 @@ describe('presubmitCommand', () => {
             ...CARRIED_COMMENT,
             id: 11,
             user: { login: 'qwen-other-bot' },
-            body: '**[Critical]** other-account claim without an id _— model via Qwen Code /review_',
+            body: '**[Critical]** other-account claim without an id _— model via Tay Bellow /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1911,7 +1911,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: `**[Critical]**${padding}R3-2: eq-form rescue asymmetry _— model via Qwen Code /review_`,
+            body: `**[Critical]**${padding}R3-2: eq-form rescue asymmetry _— model via Tay Bellow /review_`,
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1956,7 +1956,7 @@ describe('presubmitCommand', () => {
       const priorRepost = {
         ...CARRIED_COMMENT,
         id: 11,
-        body: '**[Critical]** R1-2: the same claim, re-reported _— model via Qwen Code /review_',
+        body: '**[Critical]** R1-2: the same claim, re-reported _— model via Tay Bellow /review_',
       };
       const result = await presubmitWithComments(
         [original, priorRepost],

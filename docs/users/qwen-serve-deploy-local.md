@@ -57,7 +57,7 @@ independent.
 
 ```ini
 [Unit]
-Description=Qwen Code daemon (loopback HTTP + SSE)
+Description=Tay Bellow daemon (loopback HTTP + SSE)
 After=network.target
 
 [Service]

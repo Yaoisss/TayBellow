@@ -76,7 +76,7 @@ A built-in preset is an **endorsement**, not just a convenience. Users route API
 - **Operational Maturity** — publicly operational with demonstrated uptime; public SLA or status page preferred.
 - **Organic User Demand** — evidence of community demand (issues, discussions), not just a self-listing.
 - **Data and Security Transparency** — provider's data handling practices must be publicly documented.
-- **Maintenance Commitment** — provider team commits to tracking Qwen Code protocol changes.
+- **Maintenance Commitment** — provider team commits to tracking Tay Bellow protocol changes.
 
 **Default Path — Custom Provider**: for providers that don't meet Tier 1, users connect via the built-in custom-provider flow (`/auth` or `/model` → Custom Provider). No code change or project endorsement needed.
 
@@ -132,7 +132,7 @@ To skip building the sandbox container, you can use `npm run build` instead.
 
 ### Running
 
-To start the Qwen Code application from the source code (after building), run the following command from the root directory:
+To start the Tay Bellow application from the source code (after building), run the following command from the root directory:
 
 ```bash
 npm start
@@ -156,7 +156,7 @@ This will run tests located in the `packages/core` and `packages/cli` directorie
 
 #### Integration Tests
 
-The integration tests are designed to validate the end-to-end functionality of Qwen Code. They are not run as part of the default `npm run test` command.
+The integration tests are designed to validate the end-to-end functionality of Tay Bellow. They are not run as part of the default `npm run test` command.
 
 To run the integration tests, use the following command:
 
@@ -217,7 +217,7 @@ npm run lint
 
 - `packages/`: Contains the individual sub-packages of the project.
   - `cli/`: The command-line interface.
-  - `core/`: The core backend logic for Qwen Code.
+  - `core/`: The core backend logic for Tay Bellow.
 - `docs/`: Contains all project documentation.
 - `scripts/`: Utility scripts for building, testing, and development tasks.
 
@@ -292,7 +292,7 @@ DEBUG=1 qwen-code
 
 To debug the CLI's React-based UI, you can use React DevTools. Ink, the library used for the CLI's interface, is compatible with React DevTools version 4.x.
 
-1.  **Start the Qwen Code application in development mode:**
+1.  **Start the Tay Bellow application in development mode:**
 
     ```bash
     DEV=true npm start

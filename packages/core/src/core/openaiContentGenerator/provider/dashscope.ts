@@ -723,7 +723,7 @@ export class DashScopeOpenAICompatibleProvider extends DefaultOpenAICompatiblePr
    * reached through the same endpoint has its request forwarded to that vendor's
    * own backend, `metadata` object included. Those backends type `metadata` as a
    * string, so the object fails to deserialize and the request is rejected with a
-   * flat 400, making the model unusable through Qwen Code. `metadata` is a
+   * flat 400, making the model unusable through Tay Bellow. `metadata` is a
    * platform-private tracing field (sessionId / promptId / channel) that only
    * means anything to DashScope's own inference path, so gate it on the wire model
    * the same way `buildQwenEffortConfig` gates the qwen-only thinking knobs, for

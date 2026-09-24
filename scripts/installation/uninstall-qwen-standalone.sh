@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Qwen Code standalone uninstaller.
+# Tay Bellow standalone uninstaller.
 # Removes files owned by install-qwen-standalone.sh and preserves user config.
 
 if [ -z "${BASH_VERSION}" ] && [ -z "${__QWEN_UNINSTALL_REEXEC:-}" ]; then
@@ -44,13 +44,13 @@ log_error() {
 
 print_usage() {
     cat <<EOF
-Qwen Code Standalone Uninstaller
+Tay Bellow Standalone Uninstaller
 
 Usage: $0 [OPTIONS]
 
 Options:
   --purge       Also remove the installer source marker at ~/.qwen/source.json.
-                Other Qwen Code config and auth files are preserved.
+                Other Tay Bellow config and auth files are preserved.
   -h, --help    Show this help message.
 
 Environment:
@@ -179,8 +179,8 @@ remove_install_wrapper() {
 }
 
 remove_shell_path_entry() {
-    local begin_marker="# Qwen Code PATH block begin"
-    local end_marker="# Qwen Code PATH block end"
+    local begin_marker="# Tay Bellow PATH block begin"
+    local end_marker="# Tay Bellow PATH block end"
     local legacy_marker="# Added by qwen-code installer (multi-qwen shadow fix)"
     local rc_files=()
     local rc_file
@@ -253,11 +253,11 @@ remove_shell_path_entry() {
             }
         ' "${rc_file}" > "${temp_file}" && mv "${temp_file}" "${rc_file}" || {
             rm -f "${temp_file}"
-            log_warning "Could not remove Qwen Code PATH entry from ${rc_file}."
+            log_warning "Could not remove Tay Bellow PATH entry from ${rc_file}."
             continue
         }
 
-        log_success "Removed Qwen Code PATH entry from ${rc_file}"
+        log_success "Removed Tay Bellow PATH entry from ${rc_file}"
     done
 }
 
@@ -286,7 +286,7 @@ remove_source_marker() {
 
 validate_options
 
-echo "Qwen Code Standalone Uninstaller"
+echo "Tay Bellow Standalone Uninstaller"
 echo ""
 
 install_was_managed=0
@@ -295,7 +295,7 @@ if is_qwen_standalone_install_dir "${INSTALL_LIB_DIR}"; then
     rm -rf "${INSTALL_LIB_DIR}"
     log_success "Removed ${INSTALL_LIB_DIR}"
 elif [[ -e "${INSTALL_LIB_DIR}" ]]; then
-    log_warning "${INSTALL_LIB_DIR} exists but is not a Qwen Code standalone install; skipping."
+    log_warning "${INSTALL_LIB_DIR} exists but is not a Tay Bellow standalone install; skipping."
 else
     log_info "No standalone runtime found at ${INSTALL_LIB_DIR}."
 fi
@@ -309,4 +309,4 @@ fi
 remove_shell_path_entry
 remove_source_marker
 
-log_success "Qwen Code standalone install removed."
+log_success "Tay Bellow standalone install removed."

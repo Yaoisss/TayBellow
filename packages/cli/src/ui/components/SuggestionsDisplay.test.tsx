@@ -184,7 +184,7 @@ describe('SuggestionsDisplay', () => {
             value: 'doctor',
             argumentHint:
               '[memory|cpu-profile|rollback] [--sample] [--snapshot] [--duration]',
-            description: 'Diagnose Qwen Code environment.',
+            description: 'Diagnose Tay Bellow environment.',
           },
         ]}
         activeIndex={0}

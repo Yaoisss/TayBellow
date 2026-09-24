@@ -506,7 +506,7 @@ describe('SettingsDialog', () => {
 
       expect(saveModifiedSettings).not.toHaveBeenCalled();
       expect(lastFrame()).not.toContain(
-        'To see changes, Qwen Code must be restarted',
+        'To see changes, Tay Bellow must be restarted',
       );
       unmount();
     });
@@ -1112,7 +1112,7 @@ describe('SettingsDialog', () => {
 
       // Should not show restart prompt initially
       expect(lastFrame()).not.toContain(
-        'To see changes, Qwen Code must be restarted',
+        'To see changes, Tay Bellow must be restarted',
       );
 
       unmount();

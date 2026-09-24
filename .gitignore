@@ -28,7 +28,7 @@ bower_components
 .worktrees/
 .atlarix/
 
-# Qwen Code Configs
+# Tay Bellow Configs
 .qwen/*
 !.qwen/commands/
 !.qwen/commands/**

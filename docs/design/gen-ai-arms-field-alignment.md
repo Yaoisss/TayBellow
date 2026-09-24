@@ -2,7 +2,7 @@
 
 ## Scope and standards baseline
 
-This design aligns the first set of Qwen Code span attributes whose names,
+This design aligns the first set of Tay Bellow span attributes whose names,
 types, and meanings agree between OpenTelemetry GenAI semantic conventions and
 Alibaba Cloud ARMS LLM Trace. It retains framework span names and kinds. The
 main-agent extension makes the existing interaction span the parent of the
@@ -124,7 +124,7 @@ Gemini and Vertex AI requests use `generate_content`.
 Request attributes are collected after provider adapters have applied defaults,
 overrides, unsupported-field removal, and output-window clamps, immediately
 before calling the provider SDK. This is the final SDK request object visible
-to Qwen Code, not the original logical configuration or the serialized HTTP
+to Tay Bellow, not the original logical configuration or the serialized HTTP
 body. A logical LLM span records only its first such request snapshot.
 
 | Standard attribute                 | OpenAI-compatible and Qwen OAuth                           | Anthropic          | Gemini and Vertex AI      |
@@ -152,7 +152,7 @@ a common precedence rule.
 ## Content and tool payloads
 
 Sensitive GenAI content is collected only when
-`telemetry.includeSensitiveSpanAttributes` is enabled. Qwen Code does not read
+`telemetry.includeSensitiveSpanAttributes` is enabled. Tay Bellow does not read
 `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT`, so there is a single
 content-capture switch. OpenAI-compatible, Anthropic, Gemini, and Vertex
 adapters convert their provider-final SDK request and raw response structures
@@ -224,14 +224,14 @@ ARMS automatic GenAI application recognition requires this resource attribute:
 }
 ```
 
-Qwen Code does not inject that vendor-specific resource attribute or
+Tay Bellow does not inject that vendor-specific resource attribute or
 `gen_ai.span.kind`. ARMS can infer LLM, Tool, and Agent roles from
 `gen_ai.operation.name`.
 
 ### ARMS end-user identity extension
 
 `gen_ai.user.id` is an ARMS Span common attribute, not part of the pinned
-OpenTelemetry GenAI baseline above. Qwen Code emits it only when the operator
+OpenTelemetry GenAI baseline above. Tay Bellow emits it only when the operator
 explicitly configures `telemetry.userId` or `QWEN_TELEMETRY_USER_ID`. The value
 is placed on the interaction Span at creation and propagated through the
 existing in-process context to LLM, Tool, and Agent spans, including linked-root
@@ -240,7 +240,7 @@ interaction by exact prompt ID and remain its children. The active registry and
 retained identity entry expire with the existing 30-minute Span safety-net TTL.
 
 The value is never inferred, generated, written to Resource/logs/metrics, or
-placed in outbound Baggage. Qwen Code does not dual-write `enduser.id` or
+placed in outbound Baggage. Tay Bellow does not dual-write `enduser.id` or
 `user.id`. A previous `telemetry.resourceAttributes.user.id` remains a generic
 Resource dimension and must be removed explicitly when migrating. Because the
 setting is process-wide, it is supported only when one process represents one
@@ -252,7 +252,7 @@ deferred until their trusted caller identity can be wired end to end.
 - `seed` and `top_k` have incompatible ARMS and GenAI types in the baselines.
 - Embedding needs a correct requested-model lifecycle before tracing.
 - ARMS time-to-first-token and OpenTelemetry time-to-first-chunk differ in name,
-  unit, and meaning. Qwen Code emits the standard
+  unit, and meaning. Tay Bellow emits the standard
   `gen_ai.response.time_to_first_chunk` alongside the private `ttft_ms` and
   does not promise automatic population of an ARMS first-token dashboard.
 - Full GenAI span naming, CLIENT span kind, and logical retry topology are a

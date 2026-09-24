@@ -62,7 +62,7 @@ describe('requestyProvider', () => {
   it('declares customHeaders for attribution', () => {
     expect(requestyProvider.customHeaders).toEqual({
       'HTTP-Referer': 'https://github.com/QwenLM/qwen-code.git',
-      'X-Title': 'Qwen Code',
+      'X-Title': 'Tay Bellow',
     });
   });
 });

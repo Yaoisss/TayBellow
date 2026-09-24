@@ -41,18 +41,18 @@ flowchart LR
 | --------------- | ------------------------------------------------------------------ |
 | bootstrap 页面  | 启动状态、工作区选择、失败恢复、版本与日志入口                     |
 | Rust 桌面状态   | 设置持久化、窗口状态、runtime 生命周期、单实例、更新状态           |
-| bundled runtime | 当前平台 Node.js、Qwen Code bundle、Web Shell 静态资源             |
+| bundled runtime | 当前平台 Node.js、Tay Bellow bundle、Web Shell 静态资源            |
 | 发布 CI         | 三平台构建、签名、公证、smoke、校验和、latest.json、GitHub Release |
 
 ## 启动状态机
 
-| 状态              | 用户看到的内容                   | 可用操作                        |
-| ----------------- | -------------------------------- | ------------------------------- |
-| `starting`        | Qwen Code 品牌启动页和当前工作区 | 等待                            |
-| `needs_workspace` | 首次启动工作区选择               | 选择目录                        |
-| `ready`           | daemon-served Web Shell          | 正常使用                        |
-| `failed`          | 精简错误摘要                     | 重试、选择其他目录、打开日志    |
-| `stopped`         | daemon 意外退出提示              | 重启 daemon、选择目录、打开日志 |
+| 状态              | 用户看到的内容                    | 可用操作                        |
+| ----------------- | --------------------------------- | ------------------------------- |
+| `starting`        | Tay Bellow 品牌启动页和当前工作区 | 等待                            |
+| `needs_workspace` | 首次启动工作区选择                | 选择目录                        |
+| `ready`           | daemon-served Web Shell           | 正常使用                        |
+| `failed`          | 精简错误摘要                      | 重试、选择其他目录、打开日志    |
+| `stopped`         | daemon 意外退出提示               | 重启 daemon、选择目录、打开日志 |
 
 应用先创建 bootstrap 窗口，再异步启动 daemon。daemon 深度健康检查（`/health?deep=true`）通过后，同一个窗口导航到 `http://127.0.0.1:<port>/#token=<token>`。token 只存在于 URL fragment 中，永远不会随请求发往服务端，因此不需要 cookie 握手，也不会进入 access log 或 Referer。这样慢启动和失败路径都有可见 UI。
 
@@ -113,7 +113,7 @@ flowchart LR
 
 `prepare-runtime.js` 生成：
 
-- `manifest.json`：桌面版本、Qwen Code 版本、Qwen Code commit、Node 版本、target、构建时间。
+- `manifest.json`：桌面版本、Tay Bellow 版本、Tay Bellow commit、Node 版本、target、构建时间。
 - `checksums.json`：所有 bundled runtime 文件的 SHA-256。
 - 根 `LICENSE` 和桌面 `NOTICE`。
 - Node.js `LICENSE`。
@@ -142,7 +142,7 @@ Windows WebView2 使用 download bootstrapper；系统离线且缺失 WebView2 �
 
 ## 发布流程
 
-1. 输入 desktop 版本和需要 vendor 的 Qwen Code ref。
+1. 输入 desktop 版本和需要 vendor 的 Tay Bellow ref。
 2. 校验 ref 可追溯到允许发布的提交。
 3. 同步 desktop-shell package、Cargo 和 Tauri 版本。版本仅在每次构建时由 CI 瞬时设置，不会提交回仓库；`main` 分支有意保持开发占位版本（`0.0.1`），已发布版本以 git tag 为准。
 4. 每个平台准备 runtime，运行 checksum/runtime smoke 和 Rust 测试。

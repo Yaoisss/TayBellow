@@ -6,7 +6,7 @@
 
 // Pre-submission checks for /review Step 7. Runs three deterministic
 // gh-API queries and emits a single JSON report describing self-PR status,
-// CI / build status, existing Qwen Code comment classification, and the
+// CI / build status, existing Tay Bellow comment classification, and the
 // downgrade decisions the LLM should apply when constructing the review
 // event. On an Aone target the command routes at the `a1` CLI instead and
 // emits the SAME report shape through the same shared writer: self-PR
@@ -103,7 +103,7 @@ interface CommentSummary {
  * render-nothing residue stripped; the head-slot tokeniser for the id), so
  * this end can never call a posted comment id-less while the ledger
  * builder, the contradiction gate and the thread matcher carry it. It did:
- * a re-report drafted `**[Critical]** _— via Qwen Code /review_ R1-2: …`
+ * a re-report drafted `**[Critical]** _— via Tay Bellow /review_ R1-2: …`
  * posts with the span intact under attribution on, and the plain claim
  * line read here stopped at the `_` — the standing re-post landed in the
  * overlap bucket and was dedup-dropped every round while the ledger kept
@@ -908,7 +908,7 @@ function ownSignalReplies(comments: RawComment[], me: string): RawComment[] {
     (c) =>
       !!c.in_reply_to_id &&
       (c.user?.login ?? '').toLowerCase() === me.toLowerCase() &&
-      (/via Qwen Code \/review/.test(c.body ?? '') ||
+      (/via Tay Bellow \/review/.test(c.body ?? '') ||
         carriesCommentMarker(c.body ?? '') ||
         severityOf(c) !== null),
   );
@@ -1047,7 +1047,7 @@ async function runPresubmit(args: PresubmitArgs): Promise<void> {
   ) as CommitStatus[];
   const ciStatus = classifyCi(checkRuns, statuses);
 
-  // --- Existing Qwen Code comments --------------------------------------
+  // --- Existing Tay Bellow comments --------------------------------------
   // Paginate: PRs can have >30 inline comments and the latest pages carry
   // the most recent (and most likely to overlap with new findings).
   const allComments = ghApiAll(
@@ -1082,7 +1082,7 @@ async function runPresubmit(args: PresubmitArgs): Promise<void> {
   // authorship signal — and the setting's description says so.
   const qwenComments = allComments.filter(
     (c) =>
-      (!c.in_reply_to_id && /via Qwen Code \/review/.test(c.body ?? '')) ||
+      (!c.in_reply_to_id && /via Tay Bellow \/review/.test(c.body ?? '')) ||
       (!c.in_reply_to_id &&
         me !== '' &&
         (c.user?.login ?? '').toLowerCase() === me.toLowerCase() &&
@@ -1353,7 +1353,7 @@ async function runPresubmitAone(args: PresubmitArgs): Promise<void> {
         }
       : classifyAoneChecks(checks);
 
-  // --- Existing Qwen Code comments --------------------------------------
+  // --- Existing Tay Bellow comments --------------------------------------
   // One flat a1 list carries inline findings, replies, AND global summary
   // comments; the mapping and recognition signals are the GitHub ones (the
   // footer is qwen's own provenance string and matches regardless of
@@ -1368,7 +1368,7 @@ async function runPresubmitAone(args: PresubmitArgs): Promise<void> {
   );
   const qwenComments = allComments.filter(
     (c) =>
-      (!c.in_reply_to_id && /via Qwen Code \/review/.test(c.body ?? '')) ||
+      (!c.in_reply_to_id && /via Tay Bellow \/review/.test(c.body ?? '')) ||
       (!c.in_reply_to_id &&
         me !== '' &&
         (c.user?.login ?? '').toLowerCase() === me.toLowerCase() &&

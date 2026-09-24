@@ -24,7 +24,7 @@ import type {
 const debugLogger = createDebugLogger('HTTP_HOOK_RUNNER');
 
 /**
- * Maximum output length (10,000 characters as per Qwen Code spec)
+ * Maximum output length (10,000 characters as per Tay Bellow spec)
  */
 const MAX_OUTPUT_LENGTH = 10000;
 
@@ -238,7 +238,7 @@ export class HttpHookRunner {
 
         const duration = Date.now() - startTime;
 
-        // Per Qwen Code spec: Non-2xx status is a non-blocking error
+        // Per Tay Bellow spec: Non-2xx status is a non-blocking error
         // Execution continues, but we log a warning
         if (!response.ok) {
           debugLogger.warn(
@@ -285,7 +285,7 @@ export class HttpHookRunner {
           fetchError instanceof Error &&
           (fetchError.name === 'AbortError' || combinedSignal.aborted)
         ) {
-          // Timeout or abort is a non-blocking error per Qwen Code spec.
+          // Timeout or abort is a non-blocking error per Tay Bellow spec.
           // The combined signal fires for both, so the caller's own signal
           // tells them apart.
           const cancelled = signal?.aborted === true;
@@ -305,7 +305,7 @@ export class HttpHookRunner {
           };
         }
 
-        // Connection failure is a non-blocking error per Qwen Code spec
+        // Connection failure is a non-blocking error per Tay Bellow spec
         debugLogger.warn(
           `HTTP hook ${hookId} connection failed (non-blocking): ${fetchError instanceof Error ? fetchError.message : String(fetchError)}`,
         );
@@ -375,7 +375,7 @@ export class HttpHookRunner {
 
   /**
    * Truncate output to MAX_OUTPUT_LENGTH characters
-   * Per Qwen Code spec: output is capped at 10,000 characters
+   * Per Tay Bellow spec: output is capped at 10,000 characters
    */
   private truncateOutput(output: string): string {
     if (output.length <= MAX_OUTPUT_LENGTH) {
@@ -411,7 +411,7 @@ export class HttpHookRunner {
       output.suppressOutput = json['suppressOutput'];
     }
     if ('systemMessage' in json && typeof json['systemMessage'] === 'string') {
-      // Apply output length limit per Qwen Code spec
+      // Apply output length limit per Tay Bellow spec
       output.systemMessage = this.truncateOutput(json['systemMessage']);
     }
     if ('decision' in json && typeof json['decision'] === 'string') {

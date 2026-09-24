@@ -50,7 +50,7 @@ const AGENT_SPECS: ReadonlyArray<{
     native: true,
   },
   {
-    label: 'Qwen Code',
+    label: 'Tay Bellow',
     name: 'qwen',
     binary: 'qwen',
     acpArgs: ['--acp'],

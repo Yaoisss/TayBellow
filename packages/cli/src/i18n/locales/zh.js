@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// Chinese translations for Qwen Code CLI
+// Chinese translations for Tay Bellow CLI
 
 export default {
   'Cannot disable an extension-provided MCP server here.':
@@ -19,8 +19,8 @@ export default {
 
   'User level': '用户级',
   'Project level': '项目级',
-  'Clipboard image paste is unavailable because the native clipboard module could not be loaded. Reinstall Qwen Code or use the npm installation method.':
-    '剪贴板图片粘贴不可用，因为原生剪贴板模块加载失败。请重新安装 Qwen Code，或改用 npm 安装方式。',
+  'Clipboard image paste is unavailable because the native clipboard module could not be loaded. Reinstall Tay Bellow or use the npm installation method.':
+    '剪贴板图片粘贴不可用，因为原生剪贴板模块加载失败。请重新安装 Tay Bellow，或改用 npm 安装方式。',
 
   // ==========================================================================
   // Extensions manager dialog (Installed / Discover / Sources tabs)
@@ -316,7 +316,7 @@ export default {
   'For a full list of shortcuts, see {{docPath}}':
     '完整快捷键列表，请参阅 {{docPath}}',
   'docs/keyboard-shortcuts.md': 'docs/keyboard-shortcuts.md',
-  'for help on Qwen Code': '获取 Qwen Code 帮助',
+  'for help on Tay Bellow': '获取 Tay Bellow 帮助',
   'show version info': '显示版本信息',
   'show paths for current session files and logs': '显示当前会话文件和日志路径',
   'submit a bug report': '提交错误报告',
@@ -325,7 +325,7 @@ export default {
   // ============================================================================
   // System Information Fields
   // ============================================================================
-  'Qwen Code': 'Qwen Code',
+  'Tay Bellow': 'Tay Bellow',
   Runtime: '运行环境',
   OS: '操作系统',
   Auth: '认证',
@@ -343,8 +343,8 @@ export default {
   // ============================================================================
   'Analyzes the project and creates a tailored QWEN.md file.':
     '分析项目并创建定制的 QWEN.md 文件',
-  'List available Qwen Code tools. Usage: /tools [desc]':
-    '列出可用的 Qwen Code 工具。用法：/tools [desc]',
+  'List available Tay Bellow tools. Usage: /tools [desc]':
+    '列出可用的 Tay Bellow 工具。用法：/tools [desc]',
   'Open the skills panel (browse, search, toggle, pick).':
     '打开技能面板（浏览、搜索、启停、选择）。',
   'Move this session to a new working directory': '将此会话移动到新的工作目录',
@@ -382,7 +382,7 @@ export default {
   // this file. `Bundled` is new — only the SkillsManagerDialog uses it
   // as a level label so far.
   Bundled: '内置',
-  'Available Qwen Code CLI tools:': '可用的 Qwen Code CLI 工具：',
+  'Available Tay Bellow CLI tools:': '可用的 Tay Bellow CLI 工具：',
   'No tools available': '没有可用工具',
   'View or change the approval mode for tool usage':
     '查看或更改工具使用的审批模式',
@@ -455,8 +455,8 @@ export default {
     '通过摘要替换来压缩上下文',
   'Fast context compression without AI. Strips old tool outputs and thinking parts.':
     '无需 AI 的快速上下文压缩。清理旧工具输出并剥离思考过程。',
-  'open full Qwen Code documentation in your browser':
-    '在浏览器中打开完整的 Qwen Code 文档',
+  'open full Tay Bellow documentation in your browser':
+    '在浏览器中打开完整的 Tay Bellow 文档',
   'Configuration not available.': '配置不可用',
   'Connect an LLM provider': '连接 LLM 提供商',
   'Copy to clipboard: reply, code (by lang), LaTeX, or Mermaid. N = Nth-latest message, index = block number':
@@ -603,7 +603,7 @@ export default {
   // Agents - Creation Wizard Steps
   'Step {{n}}: Choose Location': '步骤 {{n}}: 选择位置',
   'Step {{n}}: Choose Generation Method': '步骤 {{n}}: 选择生成方式',
-  'Generate with Qwen Code (Recommended)': '使用 Qwen Code 生成（推荐）',
+  'Generate with Tay Bellow (Recommended)': '使用 Tay Bellow 生成（推荐）',
   'Manual Creation': '手动创建',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     '描述此子智能体应该做什么以及何时使用它。（为了获得最佳效果，请全面描述）',
@@ -736,10 +736,10 @@ export default {
   'Setting tools.approvalMode to "yolo" is blocked via /config for security reasons. Edit settings.json directly if you understand the risks.':
     '出于安全原因，禁止通过 /config 将 tools.approvalMode 设置为 "yolo"。如果您了解相关风险，请直接编辑 settings.json。',
   '(empty)': '（空）',
-  'View and edit Qwen Code settings': '查看和编辑 Qwen Code 设置',
+  'View and edit Tay Bellow settings': '查看和编辑 Tay Bellow 设置',
   Settings: '设置',
-  'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.':
-    '要查看更改，必须重启 Qwen Code。按 r 退出并立即应用更改。',
+  'To see changes, Tay Bellow must be restarted. Press r to exit and apply changes now.':
+    '要查看更改，必须重启 Tay Bellow。按 r 退出并立即应用更改。',
   // ============================================================================
   // Settings Labels
   // ============================================================================
@@ -919,8 +919,8 @@ export default {
   'These workflow scripts changed since the installed version: {{names}}.':
     '以下工作流脚本与已安装版本相比有改动：{{names}}。',
   'Installation cancelled for "{{name}}".': '已取消安装 "{{name}}"。',
-  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Qwen Code.':
-    '您正在安装来自 {{originSource}} 的扩展。某些功能可能无法完美兼容 Qwen Code。',
+  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Tay Bellow.':
+    '您正在安装来自 {{originSource}} 的扩展。某些功能可能无法完美兼容 Tay Bellow。',
   '--ref and --auto-update are not applicable for marketplace extensions.':
     '--ref 和 --auto-update 不适用于市场扩展。',
   'Extension "{{name}}" installed successfully and enabled.':
@@ -1033,8 +1033,8 @@ export default {
     '安装 {{ideName}} 所需的 IDE 配套工具',
   'enable IDE integration': '启用 IDE 集成',
   'disable IDE integration': '禁用 IDE 集成',
-  'IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks.':
-    '您当前环境不支持 IDE 集成。要使用此功能，请在以下支持的 IDE 之一中运行 Qwen Code：VS Code 或 VS Code 分支版本。',
+  'IDE integration is not supported in your current environment. To use this feature, run Tay Bellow in one of these supported IDEs: VS Code or VS Code forks.':
+    '您当前环境不支持 IDE 集成。要使用此功能，请在以下支持的 IDE 之一中运行 Tay Bellow：VS Code 或 VS Code 分支版本。',
   'Set up GitHub Actions': '设置 GitHub Actions',
   'Configure terminal keybindings for multiline input (VS Code, Cursor, Windsurf, Trae)':
     '配置终端按键绑定以支持多行输入（VS Code、Cursor、Windsurf、Trae）',
@@ -1066,7 +1066,7 @@ export default {
   // ============================================================================
   // Commands - Hooks
   // ============================================================================
-  'Manage Qwen Code hooks': '管理 Qwen Code Hook',
+  'Manage Tay Bellow hooks': '管理 Tay Bellow Hook',
   'List all configured hooks': '列出所有已配置的 Hook',
   // Hooks - Dialog
   Hooks: 'Hook',
@@ -1082,8 +1082,8 @@ export default {
   'No hook events found.': '未找到 Hook 事件。',
   '{{count}} hook configured': '{{count}} 个 Hook 已配置',
   '{{count}} hooks configured': '{{count}} 个 Hook 已配置',
-  'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Qwen Code.':
-    '此菜单为只读。要添加或修改 Hook，请直接编辑 settings.json 或询问 Qwen Code。',
+  'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Tay Bellow.':
+    '此菜单为只读。要添加或修改 Hook，请直接编辑 settings.json 或询问 Tay Bellow。',
   'Reopen this menu to reload hook definitions.':
     '重新打开此菜单可重新加载 Hook 定义。',
   'Hook controls and HTTP security settings require a restart.':
@@ -1131,8 +1131,8 @@ export default {
   'StatusLine will not be displayed': '不会显示状态栏',
   'Tool operations will proceed without hook validation':
     '工具操作将在没有 Hook 验证的情况下继续',
-  'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Qwen Code.':
-    '要重新启用 Hook，请从 settings.json 中删除 "disableAllHooks" 或询问 Qwen Code。',
+  'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Tay Bellow.':
+    '要重新启用 Hook，请从 settings.json 中删除 "disableAllHooks" 或询问 Tay Bellow。',
   // Hooks - Source
   Project: '项目',
   User: '用户',
@@ -1151,7 +1151,7 @@ export default {
   'When the user submits a prompt': '用户提交提示时',
   'When a slash command expands into a prompt': '斜杠命令展开为提示时',
   'When a new session is started': '新会话开始时',
-  'Right before Qwen Code concludes its response': 'Qwen Code 结束响应之前',
+  'Right before Tay Bellow concludes its response': 'Tay Bellow 结束响应之前',
   'When a subagent (Agent tool call) is started':
     '子智能体（Agent 工具调用）启动时',
   'Right before a subagent concludes its response': '子智能体结束响应之前',
@@ -1560,8 +1560,8 @@ export default {
     '麦克风访问被拒绝。请在系统设置 → 隐私与安全性 → 麦克风中允许当前终端访问，然后重新启动语音听写。',
   'Voice dictation is not supported on {{platform}}.':
     '语音听写不支持 {{platform}}。',
-  'Voice dictation needs microphone access, which is unavailable in this WSL session. Use WSLg/PulseAudio, or run Qwen Code on a host with a microphone.':
-    '语音听写需要麦克风访问，但当前 WSL 会话不可用。请使用 WSLg/PulseAudio，或在带麦克风的宿主机上运行 Qwen Code。',
+  'Voice dictation needs microphone access, which is unavailable in this WSL session. Use WSLg/PulseAudio, or run Tay Bellow on a host with a microphone.':
+    '语音听写需要麦克风访问，但当前 WSL 会话不可用。请使用 WSLg/PulseAudio，或在带麦克风的宿主机上运行 Tay Bellow。',
   'Voice dictation needs microphone access. macOS will ask the first time you record — approve it, then start again. Your first recording may be empty while the dialog is open.':
     '语音听写需要麦克风访问。macOS 会在你首次录音时弹出授权请求——请同意后重新开始。弹窗打开期间的首次录音可能为空。',
   'Voice: recording': '语音：录音中',
@@ -1794,12 +1794,12 @@ export default {
   Ask: '询问',
   Deny: '拒绝',
   Workspace: '工作区',
-  "Qwen Code won't ask before using allowed tools.":
-    'Qwen Code 使用已允许的工具前不会询问。',
-  'Qwen Code will ask before using these tools.':
-    'Qwen Code 使用这些工具前会先询问。',
-  'Qwen Code is not allowed to use denied tools.':
-    'Qwen Code 不允许使用被拒绝的工具。',
+  "Tay Bellow won't ask before using allowed tools.":
+    'Tay Bellow 使用已允许的工具前不会询问。',
+  'Tay Bellow will ask before using these tools.':
+    'Tay Bellow 使用这些工具前会先询问。',
+  'Tay Bellow is not allowed to use denied tools.':
+    'Tay Bellow 不允许使用被拒绝的工具。',
   'Manage trusted directories for this workspace.':
     '管理此工作区的受信任目录。',
   'Any use of the {{tool}} tool': '{{tool}} 工具的任何使用',
@@ -1833,10 +1833,10 @@ export default {
   // Workspace directory management
   'Add directory…': '添加目录…',
   'Add directory to workspace': '添加工作区目录',
-  'Qwen Code can read files in the workspace, and make edits when auto-accept edits is on.':
-    'Qwen Code 可以读取工作区中的文件，并在自动接受编辑模式开启时进行编辑。',
-  'Qwen Code will be able to read files in this directory and make edits when auto-accept edits is on.':
-    'Qwen Code 将能够读取此目录中的文件，并在自动接受编辑模式开启时进行编辑。',
+  'Tay Bellow can read files in the workspace, and make edits when auto-accept edits is on.':
+    'Tay Bellow 可以读取工作区中的文件，并在自动接受编辑模式开启时进行编辑。',
+  'Tay Bellow will be able to read files in this directory and make edits when auto-accept edits is on.':
+    'Tay Bellow 将能够读取此目录中的文件，并在自动接受编辑模式开启时进行编辑。',
   'Enter the path to the directory:': '输入目录路径：',
   'Enter directory path…': '输入目录路径…',
   'Tab to complete · Enter to add · Esc to cancel':
@@ -1925,8 +1925,8 @@ export default {
   'Use /bug to submit issues to the maintainers when something goes off.':
     '遇到问题时，用 /bug 将问题提交给维护者。',
   'Switch auth type quickly with /auth.': '用 /auth 快速切换认证方式。',
-  'You can run any shell commands from Qwen Code using ! (e.g. !ls).':
-    '在 Qwen Code 中使用 ! 可运行任意 shell 命令（例如 !ls）。',
+  'You can run any shell commands from Tay Bellow using ! (e.g. !ls).':
+    '在 Tay Bellow 中使用 ! 可运行任意 shell 命令（例如 !ls）。',
   'Type / to open the command popup; Tab autocompletes slash commands and saved prompts.':
     '输入 / 打开命令弹窗；按 Tab 自动补全斜杠命令和保存的提示词。',
   'You can resume a previous conversation by running qwen --continue or qwen --resume.':
@@ -1937,8 +1937,8 @@ export default {
     '按 Tab 或输入 /approval-mode 可快速切换权限模式。',
   'Try /insight to generate personalized insights from your chat history.':
     '试试 /insight，从聊天记录中生成个性化洞察。',
-  'Add a QWEN.md file to give Qwen Code persistent project context.':
-    '添加 QWEN.md 文件，为 Qwen Code 提供持久的项目上下文。',
+  'Add a QWEN.md file to give Tay Bellow persistent project context.':
+    '添加 QWEN.md 文件，为 Tay Bellow 提供持久的项目上下文。',
   'Use /btw to ask a quick side question without disrupting the conversation.':
     '用 /btw 快速问一个小问题，不会打断当前对话。',
   'Context is almost full! Run /compress now or start /new to continue.':
@@ -1953,7 +1953,7 @@ export default {
   // ============================================================================
   // Exit Screen / Stats
   // ============================================================================
-  'Agent powering down. Goodbye!': 'Qwen Code 正在关闭，再见！',
+  'Agent powering down. Goodbye!': 'Tay Bellow 正在关闭，再见！',
   'To continue this session, run': '要继续此会话，请运行',
   'Interaction Summary': '交互摘要',
   'Session ID:': '会话 ID：',
@@ -2301,7 +2301,7 @@ export default {
     '已处于计划模式。使用 "/plan exit" 退出计划模式。',
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     '未处于计划模式。请先使用 "/plan" 进入计划模式。',
-  "Set up Qwen Code's status line UI": '配置 Qwen Code 的状态栏',
+  "Set up Tay Bellow's status line UI": '配置 Tay Bellow 的状态栏',
 
   // === Core: added from PR #3328 ===
   'Ask a quick side question without affecting the main conversation':
@@ -2534,13 +2534,13 @@ export default {
   '阿里云百炼 (aliyun.com)': '阿里云百炼（aliyun.com）',
   'No compression needed.': '无需压缩。',
   // Update command
-  'Check for Qwen Code updates and install if available':
-    '检查 Qwen Code 更新并安装（如果可用）',
-  'Qwen Code update available! {{current}} → {{latest}}':
-    'Qwen Code 有可用更新！{{current}} → {{latest}}',
-  'A new version of Qwen Code is available! {{current}} → {{latest}}':
-    'Qwen Code 有新版本可用！{{current}} → {{latest}}',
-  'Qwen Code {{version}} is up to date!': 'Qwen Code {{version}} 已是最新！',
+  'Check for Tay Bellow updates and install if available':
+    '检查 Tay Bellow 更新并安装（如果可用）',
+  'Tay Bellow update available! {{current}} → {{latest}}':
+    'Tay Bellow 有可用更新！{{current}} → {{latest}}',
+  'A new version of Tay Bellow is available! {{current}} → {{latest}}':
+    'Tay Bellow 有新版本可用！{{current}} → {{latest}}',
+  'Tay Bellow {{version}} is up to date!': 'Tay Bellow {{version}} 已是最新！',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     '检查更新失败（{{reason}}）。请检查网络或 registry 配置。',
   'Update check skipped ({{reason}}) — run /update to retry.':
@@ -2556,8 +2556,8 @@ export default {
     '更新已下载。将在退出当前会话后应用。',
   'Update failed: {{error}}': '更新失败：{{error}}',
   'Downloading update...': '正在下载更新...',
-  'Update successful! Please restart Qwen Code to use the new version. Switching model providers before restarting may not work correctly.':
-    '更新成功！请重启 Qwen Code 以使用新版本。重启前切换模型提供商可能无法正常工作。',
+  'Update successful! Please restart Tay Bellow to use the new version. Switching model providers before restarting may not work correctly.':
+    '更新成功！请重启 Tay Bellow 以使用新版本。重启前切换模型提供商可能无法正常工作。',
   'Automatic update failed. Please try updating manually.':
     '自动更新失败。请尝试手动更新。',
   'Automatic update failed: {{error}}. Re-run the installer to update manually.':
@@ -2581,12 +2581,12 @@ export default {
   'Run the following to update:': '运行以下命令进行更新：',
   'Unable to auto-update this standalone installation. Please reinstall from:':
     '无法自动更新此独立安装。请从以下地址重新安装：',
-  'Manual update required. Please reinstall Qwen Code.':
-    '需要手动更新。请重新安装 Qwen Code。',
-  'This session uses the custom sandbox image {{image}}. Update that image and restart Qwen Code.':
-    '此会话使用自定义沙箱镜像 {{image}}。请更新该镜像并重启 Qwen Code。',
-  'Update Qwen Code on the host, then restart the sandbox.':
-    '请在宿主机上更新 Qwen Code，然后重启沙箱。',
+  'Manual update required. Please reinstall Tay Bellow.':
+    '需要手动更新。请重新安装 Tay Bellow。',
+  'This session uses the custom sandbox image {{image}}. Update that image and restart Tay Bellow.':
+    '此会话使用自定义沙箱镜像 {{image}}。请更新该镜像并重启 Tay Bellow。',
+  'Update Tay Bellow on the host, then restart the sandbox.':
+    '请在宿主机上更新 Tay Bellow，然后重启沙箱。',
   'The update will be installed after you exit this session.':
     '退出当前会话后将自动安装更新。',
   'Run /update to install the update on the host.':
@@ -2695,6 +2695,6 @@ export default {
   'Auto-skill curator changes are only available in trusted workspaces. Trust this folder via `/trust` and try again.':
     '仅受信任的工作区可以更改自动技能管理器。请通过 `/trust` 信任此文件夹后重试。',
   'Kept model as {{model}}': '模型保持为 {{model}}',
-  'Review messages held from other Qwen Code sessions (accept | deny), and manage trusted controllers (controllers | revoke)':
-    '查看其他 Qwen Code 会话发来的待处理消息（accept | deny），并管理受信任控制器（controllers | revoke）',
+  'Review messages held from other Tay Bellow sessions (accept | deny), and manage trusted controllers (controllers | revoke)':
+    '查看其他 Tay Bellow 会话发来的待处理消息（accept | deny），并管理受信任控制器（controllers | revoke）',
 };

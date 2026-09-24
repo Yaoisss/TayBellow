@@ -677,7 +677,7 @@ if [[ "${OUTCOME}" == "fixed" ]]; then
     echo "Re-review when you have a moment. After round ${MAX_ROUNDS} this bot stops and leaves the PR for a human. · 有空请复审；第 ${MAX_ROUNDS} 轮后本 bot 停止并将 PR 交给人工。"
     echo
     echo "---"
-    echo "🧠 Handled by **Qwen Code** · model/模型 \`${MODEL_DISPLAY}\`${CLI_DISPLAY}"
+    echo "🧠 Handled by **Tay Bellow** · model/模型 \`${MODEL_DISPLAY}\`${CLI_DISPLAY}"
     echo
     echo "<!-- autofix-eval ts=${NEWEST} acted=true round=${NEXT_ROUND} win=${WINDOW:-none} -->"
     echo "<!-- autofix-redcheck head=${REPORT_HEAD} -->"
@@ -740,7 +740,7 @@ else
     fi
     echo
     echo "---"
-    echo "🧠 Handled by **Qwen Code** · model/模型 \`${MODEL_DISPLAY}\`${CLI_DISPLAY}"
+    echo "🧠 Handled by **Tay Bellow** · model/模型 \`${MODEL_DISPLAY}\`${CLI_DISPLAY}"
     echo
     echo "<!-- autofix-eval ts=${NEWEST} acted=false round=${ROUND} win=${WINDOW:-none} -->"
     echo "<!-- autofix-redcheck head=${REPORT_HEAD} -->"

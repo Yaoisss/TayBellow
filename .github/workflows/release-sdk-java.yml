@@ -153,10 +153,10 @@ jobs:
       - name: 'Install Node.js dependencies'
         run: 'corepack pnpm install --frozen-lockfile --prefer-offline --reporter=append-only'
 
-      - name: 'Build Qwen Code'
+      - name: 'Build Tay Bellow'
         run: 'npm run build'
 
-      - name: 'Bundle Qwen Code'
+      - name: 'Bundle Tay Bellow'
         run: 'npm run bundle'
 
       - name: 'Run Java daemon E2E'

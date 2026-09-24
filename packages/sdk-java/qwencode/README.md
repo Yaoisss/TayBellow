@@ -1,6 +1,6 @@
-# Qwen Code Java SDK
+# Tay Bellow Java SDK
 
-The Qwen Code Java SDK provides a recommended daemon transport for `qwen serve` and retains the experimental legacy stdio API for compatibility. Both APIs ship in the same `com.alibaba:qwencode-sdk` artifact.
+The Tay Bellow Java SDK provides a recommended daemon transport for `qwen serve` and retains the experimental legacy stdio API for compatibility. Both APIs ship in the same `com.alibaba:qwencode-sdk` artifact.
 
 ## Requirements
 
@@ -308,9 +308,9 @@ For proper operation, the following timeout relationships should be maintained:
 
 ### Transport Options
 
-The `TransportOptions` class allows configuration of how the SDK communicates with the Qwen Code CLI:
+The `TransportOptions` class allows configuration of how the SDK communicates with the Tay Bellow CLI:
 
-- `pathToQwenExecutable`: Path to the Qwen Code CLI executable
+- `pathToQwenExecutable`: Path to the Tay Bellow CLI executable
 - `cwd`: Working directory for the CLI process
 - `model`: AI model to use for the session
 - `permissionMode`: Permission mode that controls tool execution

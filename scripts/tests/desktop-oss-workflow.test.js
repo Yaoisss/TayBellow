@@ -437,7 +437,7 @@ describe('Desktop OSS mirror workflow', () => {
   it('resolves the release tag parent before the main ancestry check', () => {
     const source = getWorkflowStep(
       getWorkflowJob(releaseWorkflow, 'prepare'),
-      'Resolve Qwen Code source',
+      'Resolve Tay Bellow source',
     );
     expect(source).toContain(
       'if [ "$GITHUB_REF_NAME" != \'main\' ] && [ "$GITHUB_EVENT_NAME" != \'release\' ]; then',
@@ -469,10 +469,10 @@ describe('Desktop OSS mirror workflow', () => {
 });
 
 describe('Desktop release event', () => {
-  it('installs historical Qwen Code refs with their available lockfile', () => {
+  it('installs historical Tay Bellow refs with their available lockfile', () => {
     const install = getWorkflowStep(
       getWorkflowJob(releaseWorkflow, 'build'),
-      'Install Qwen Code dependencies',
+      'Install Tay Bellow dependencies',
     );
     expect(install).toContain("shell: 'bash'");
     expect(install).toContain('if [ -f pnpm-lock.yaml ]');

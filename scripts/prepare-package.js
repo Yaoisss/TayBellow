@@ -328,7 +328,7 @@ function writeDistPackageJson(rootDir, distDir) {
     name: rootPackageJson.name,
     version: rootPackageJson.version,
     description:
-      rootPackageJson.description || 'Qwen Code - AI-powered coding assistant',
+      rootPackageJson.description || 'Tay Bellow - AI-powered coding assistant',
     repository: rootPackageJson.repository,
     type: 'module',
     main: 'cli.js',

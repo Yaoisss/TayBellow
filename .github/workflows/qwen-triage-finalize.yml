@@ -25,13 +25,13 @@ on:
     # Every workflow with a `pull_request` trigger must be listed: the deferred
     # approval can only land on a firing that happens AFTER the last PR CI run
     # completes, so whichever workflow finishes last has to be in this list.
-    # The long pole is 'Qwen Code CI' (its Test job is the ~30-minute suite),
+    # The long pole is 'Tay Bellow CI' (its Test job is the ~30-minute suite),
     # but path-filtered PRs can make any of the others the final finisher.
     # E2E Tests is deliberately absent — it has no pull_request trigger (push /
     # schedule / dispatch only), so listing it would only add dead firings.
     # Every firing re-reads current state, so multiple triggers are idempotent.
     workflows:
-      - 'Qwen Code CI'
+      - 'Tay Bellow CI'
       - 'Qwen Autofix'
       - 'SDK Java'
       - 'SDK Python'

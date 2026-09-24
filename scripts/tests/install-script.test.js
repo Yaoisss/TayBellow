@@ -84,7 +84,7 @@ describe('installation scripts', () => {
     expect(script).toContain('Node.js 22 or newer is required');
     expect(script).toContain('npm_package_spec()');
     expect(script).toContain('@qwen-code/qwen-code@latest');
-    expect(script).toContain('Installing Qwen Code version:');
+    expect(script).toContain('Installing Tay Bellow version:');
     expect(script).toContain('print_logo');
     expect(script).toContain('supports_truecolor()');
     expect(script).toContain('COLORTERM');
@@ -142,7 +142,7 @@ describe('installation scripts', () => {
     expect(script).toContain(
       'Archive contains symlinks or hardlinks; refusing to install',
     );
-    expect(script).toContain('not a Qwen Code standalone install');
+    expect(script).toContain('not a Tay Bellow standalone install');
     expect(script).toContain(
       'Return 2 only when a standalone archive is unavailable',
     );
@@ -192,8 +192,8 @@ describe('installation scripts', () => {
     expect(script).toContain('set -gx PATH ${quoted_install_bin_dir} \\$PATH');
     expect(script).toContain('export PATH=${quoted_install_bin_dir}:\\$PATH');
     expect(script).toContain('Unsupported shell for automatic PATH update');
-    expect(script).toContain('# Qwen Code PATH block begin');
-    expect(script).toContain('# Qwen Code PATH block end');
+    expect(script).toContain('# Tay Bellow PATH block begin');
+    expect(script).toContain('# Tay Bellow PATH block end');
     expect(script).toContain('probe_url_available()');
     expect(script).toContain('/latest/VERSION');
     expect(script).toContain('resolve_aliyun_version_path()');
@@ -245,10 +245,10 @@ describe('installation scripts', () => {
     expect(script).toContain('Please install Node.js');
     expect(script).toContain(':NpmPackageSpec');
     expect(script).toContain('@qwen-code/qwen-code@latest');
-    expect(script).toContain('Installing Qwen Code version:');
-    expect(script).toContain('QWEN CODE');
+    expect(script).toContain('Installing Tay Bellow version:');
+    expect(script).toContain('Tay Bellow');
     expect(script).toContain(
-      'Qwen Code !INSTALLED_VERSION! installed successfully, to start:',
+      'Tay Bellow !INSTALLED_VERSION! installed successfully, to start:',
     );
     expect(script).toContain('cd ^<project^>');
     expect(script).toContain('uninstall-qwen-standalone.ps1');
@@ -1315,7 +1315,9 @@ describe('standalone release packaging', () => {
     expect(installPowerShellSource).toContain('Save-CurrentCmdPathShim');
     expect(installPowerShellSource).toContain('current-cmd-shim.txt');
     expect(installPowerShellSource).toContain('Test-WritableDirectory');
-    expect(installPowerShellSource).toContain('Qwen Code current-session shim');
+    expect(installPowerShellSource).toContain(
+      'Tay Bellow current-session shim',
+    );
     expect(installPowerShellSource).toContain(
       'TEMP environment variable is not set',
     );
@@ -3108,7 +3110,7 @@ describe('standalone release packaging', () => {
     );
     expect(uninstallPowerShellSource).toContain('current-cmd-shim.txt');
     expect(uninstallPowerShellSource).toContain(
-      'Qwen Code current-session shim',
+      'Tay Bellow current-session shim',
     );
     expect(uninstallPowerShellSource).toContain('QWEN_UNINSTALL_PURGE');
     expect(uninstallPowerShellSource).toContain('Preserving');
@@ -3312,7 +3314,7 @@ describe('Linux/macOS installer end-to-end', () => {
           .toString()
           .trim();
         expect(version).toBe('0.0.0-smoke');
-        expect(output).toContain('Installing Qwen Code version: latest');
+        expect(output).toContain('Installing Tay Bellow version: latest');
         expect(output).toContain('installed successfully, to start:');
         expect(output).toContain('0.0.0-smoke');
         expect(output).toContain('cd <project>');
@@ -3571,9 +3573,9 @@ describe('Linux/macOS installer end-to-end', () => {
         rcFile,
         [
           'before',
-          '# Qwen Code PATH block begin',
+          '# Tay Bellow PATH block begin',
           `export PATH='${installRoot}/bin':$PATH`,
-          '# Qwen Code PATH block end',
+          '# Tay Bellow PATH block end',
           'after',
         ].join('\n') + '\n',
       );
@@ -3677,7 +3679,7 @@ describe('Linux/macOS installer end-to-end', () => {
         );
         expect(output).toContain(existingQwen);
         expect(output).toContain('source ~/.bashrc');
-        expect(bashrc).toContain('# Qwen Code PATH block begin');
+        expect(bashrc).toContain('# Tay Bellow PATH block begin');
         expect(bashrc).toContain(
           `export PATH='${path.join(installRoot, 'bin')}':$PATH`,
         );
@@ -3763,7 +3765,7 @@ describe('Linux/macOS installer end-to-end', () => {
         ).toString();
 
         expect(readFileSync(bashProfile, 'utf8')).toContain(
-          '# Qwen Code PATH block begin',
+          '# Tay Bellow PATH block begin',
         );
         // An ANSI reset sits between "in" and the rc name, so match the
         // success message and the reload hint on the rc name alone.
@@ -3810,13 +3812,13 @@ describe('Linux/macOS installer end-to-end', () => {
         });
 
         const bashrcContents = readScript(bashrc);
-        expect(bashrcContents).toContain('# Qwen Code PATH block begin');
+        expect(bashrcContents).toContain('# Tay Bellow PATH block begin');
         expect(
           bashrcContents.endsWith(
             [
-              '# Qwen Code PATH block begin',
+              '# Tay Bellow PATH block begin',
               `export PATH='${installBinDir}':$PATH`,
-              '# Qwen Code PATH block end',
+              '# Tay Bellow PATH block end',
               '',
             ].join('\n'),
           ),
@@ -3861,10 +3863,10 @@ describe('Linux/macOS installer end-to-end', () => {
           rcFile,
           [
             'before',
-            '# Qwen Code PATH block begin',
+            '# Tay Bellow PATH block begin',
             '# inserted by another tool',
             `export PATH='${installRoot}/bin':$PATH`,
-            '# Qwen Code PATH block end',
+            '# Tay Bellow PATH block end',
             'after',
           ].join('\n') + '\n',
         );
@@ -3896,7 +3898,7 @@ describe('Linux/macOS installer end-to-end', () => {
           rcFile,
           [
             'before',
-            '# Qwen Code PATH block begin',
+            '# Tay Bellow PATH block begin',
             `export PATH='${installRoot}/bin':$PATH`,
             'user content that must stay',
             'after',
@@ -3908,7 +3910,7 @@ describe('Linux/macOS installer end-to-end', () => {
         expect(readScript(rcFile)).toBe(
           [
             'before',
-            '# Qwen Code PATH block begin',
+            '# Tay Bellow PATH block begin',
             `export PATH='${installRoot}/bin':$PATH`,
             'user content that must stay',
             'after',
@@ -4308,7 +4310,7 @@ describe('Linux/macOS installer end-to-end', () => {
         path.join(tmpDir, 'home'),
       ).toString();
 
-      expect(output).toContain('not a Qwen Code standalone install');
+      expect(output).toContain('not a Tay Bellow standalone install');
       expect(output).toContain('Backing up to');
 
       // Original directory should be backed up, not destroyed

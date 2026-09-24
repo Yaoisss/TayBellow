@@ -179,7 +179,7 @@ export const doctorCommand: SlashCommand = {
           if (isHighHeapPressure(latestDiagnostics)) {
             throw new Error(
               t(
-                'Heap snapshot skipped: V8 heap pressure is already high, and writing a synchronous heap snapshot could make the process unresponsive or trigger OOM. Restart Qwen Code first if it is unstable, or retry before memory pressure reaches the warning threshold.',
+                'Heap snapshot skipped: V8 heap pressure is already high, and writing a synchronous heap snapshot could make the process unresponsive or trigger OOM. Restart Tay Bellow first if it is unstable, or retry before memory pressure reaches the warning threshold.',
               ),
             );
           }

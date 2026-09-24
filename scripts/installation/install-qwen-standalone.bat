@@ -1,6 +1,6 @@
 @echo off
-REM Qwen Code Installation Script
-REM Installs Qwen Code from a standalone archive when available, with npm fallback.
+REM Tay Bellow Installation Script
+REM Installs Tay Bellow from a standalone archive when available, with npm fallback.
 REM This script intentionally does not install Node.js or change npm config.
 
 setlocal enabledelayedexpansion
@@ -332,7 +332,7 @@ call :PrintUsage
 exit /b 1
 
 :PrintUsage
-echo Qwen Code Installer
+echo Tay Bellow Installer
 echo.
 echo Usage: install-qwen-standalone.bat [OPTIONS]
 echo.
@@ -356,12 +356,12 @@ if /i not "!DISPLAY_VERSION!"=="latest" (
     if /i "!DISPLAY_VERSION:~0,1!"=="v" set "DISPLAY_VERSION=!DISPLAY_VERSION:~1!"
 )
 echo.
-echo Installing Qwen Code version: !DISPLAY_VERSION!
+echo Installing Tay Bellow version: !DISPLAY_VERSION!
 echo.
 exit /b 0
 
 :PrintLogo
-rem QWEN CODE logo with color (Windows Terminal VT100 support)
+rem Tay Bellow logo with color (Windows Terminal VT100 support)
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$e=[char]27; Write-Host \"  $e[38;2;71;150;228mQ W E N  $e[38;2;132;122;206mC O D E$e[0m\""
 echo.
@@ -1076,9 +1076,9 @@ exit /b 0
 :RepairPath
 set "INSTALLED_BIN=!INSTALL_BIN_DIR!\qwen.cmd"
 if not exist "!INSTALLED_BIN!" (
-    echo ERROR: Qwen Code standalone wrapper was not found:
+    echo ERROR: Tay Bellow standalone wrapper was not found:
     echo   !INSTALLED_BIN!
-    echo ERROR: Set QWEN_INSTALL_ROOT or QWEN_INSTALL_BIN_DIR to the existing install, or install Qwen Code first.
+    echo ERROR: Set QWEN_INSTALL_ROOT or QWEN_INSTALL_BIN_DIR to the existing install, or install Tay Bellow first.
     exit /b 1
 )
 
@@ -1096,7 +1096,7 @@ set "INSTALLED_VERSION=unknown"
 for /f "delims=" %%i in ('"!INSTALLED_BIN!" --version 2^>nul') do set "INSTALLED_VERSION=%%i"
 
 echo.
-echo Qwen Code !INSTALLED_VERSION! is already installed.
+echo Tay Bellow !INSTALLED_VERSION! is already installed.
 echo PATH repaired for !PATH_SCOPE! scope:
 echo   !INSTALL_BIN_DIR!
 echo.
@@ -1226,7 +1226,7 @@ where node >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo ERROR: Node.js was not found.
     echo.
-    echo Node.js 22 or newer is required before installing Qwen Code with npm.
+    echo Node.js 22 or newer is required before installing Tay Bellow with npm.
     echo Please install Node.js from https://nodejs.org/ and rerun this installer.
     exit /b 1
 )
@@ -1234,7 +1234,7 @@ if %ERRORLEVEL% NEQ 0 (
 for /f "delims=" %%i in ('node -p "process.versions.node" 2^>nul') do set "NODE_VERSION=%%i"
 if "%NODE_VERSION%"=="" (
     echo ERROR: Unable to determine Node.js version.
-    echo Node.js 22 or newer is required before installing Qwen Code with npm.
+    echo Node.js 22 or newer is required before installing Tay Bellow with npm.
     exit /b 1
 )
 
@@ -1242,7 +1242,7 @@ for /f "tokens=1 delims=." %%a in ("%NODE_VERSION%") do set "MAJOR_VERSION=%%a"
 set /a NODE_MAJOR_NUM=%MAJOR_VERSION% >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo ERROR: Unable to determine Node.js version.
-    echo Node.js 22 or newer is required before installing Qwen Code with npm.
+    echo Node.js 22 or newer is required before installing Tay Bellow with npm.
     exit /b 1
 )
 
@@ -1339,7 +1339,7 @@ if not "!EXTRA_BIN!"=="" if /i not "!NO_MODIFY_PATH!"=="1" (
 )
 
 echo.
-echo Qwen Code !INSTALLED_VERSION! installed successfully, to start:
+echo Tay Bellow !INSTALLED_VERSION! installed successfully, to start:
 echo.
 echo   cd ^<project^>
 echo   qwen

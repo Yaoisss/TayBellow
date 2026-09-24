@@ -3723,7 +3723,7 @@ incremental reconciliation. When true, the daemon reconnects every eligible
 configured MCP server after the settings reconciliation. Alternatively, pass
 `forceReconnectWhich: ["server-a", "server-b"]` to reconnect only named
 servers. The options are mutually exclusive. A forced reconnect causes each
-transport to read credentials that another local Qwen Code process may have
+transport to read credentials that another local Tay Bellow process may have
 written to token storage; it does not start an OAuth authorization flow.
 
 The route returns `202 { "accepted": true }`; poll `GET /workspace/mcp` for

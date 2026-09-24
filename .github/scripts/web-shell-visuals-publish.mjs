@@ -319,7 +319,7 @@ export function buildComment(files, ctx = {}) {
     );
   }
   out.push('');
-  out.push('— _Qwen Code · web-shell visuals_');
+  out.push('— _Tay Bellow · web-shell visuals_');
   return out.join('\n') + '\n';
 }
 

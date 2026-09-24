@@ -5194,7 +5194,7 @@ describe('runNonInteractive', () => {
       label: 'a call denied for approval',
       approvalRequired: true as const,
       reason:
-        'Qwen Code requires permission to use "run_shell_command", but that permission was declined (non-interactive mode cannot prompt for confirmation).',
+        'Tay Bellow requires permission to use "run_shell_command", but that permission was declined (non-interactive mode cannot prompt for confirmation).',
       expected: 'use the -y flag (YOLO mode)',
       unexpected: 'was not run',
     },

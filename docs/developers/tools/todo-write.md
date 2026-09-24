@@ -1,6 +1,6 @@
 # Todo Write Tool (`todo_write`)
 
-This document describes the `todo_write` tool for Qwen Code.
+This document describes the `todo_write` tool for Tay Bellow.
 
 ## Description
 
@@ -28,7 +28,7 @@ Code:
   - `status` (string, required): The current status (`pending`, `in_progress`, or `completed`).
   - `id` (string, required): A unique identifier for the todo item.
 
-## How to use `todo_write` with Qwen Code
+## How to use `todo_write` with Tay Bellow
 
 When the tool is enabled, the AI assistant may use it for complex, multi-step tasks. You can also ask the assistant to create a todo list if you want to see the planned approach for your request.
 
@@ -71,7 +71,7 @@ todo_write(todos=[
 
 ## Important notes
 
-- **Opt-in:** Set `tools.todoWrite.enabled` to `true` and restart Qwen Code before using the tool.
+- **Opt-in:** Set `tools.todoWrite.enabled` to `true` and restart Tay Bellow before using the tool.
 - **Automatic usage when enabled:** The AI assistant manages todo lists during complex tasks.
 - **Progress visibility:** You'll see todo lists updated in real-time as work progresses.
 - **Session isolation:** Each coding session has its own todo list that doesn't interfere with others.

@@ -168,7 +168,7 @@ const showRunArtifactsStep =
   )?.[0] ?? '';
 const prepareQwenCliSteps =
   workflow.match(
-    /- name: 'Prepare Qwen Code CLI'[\s\S]*?(?=\n[ ]{6}- name: ')/g,
+    /- name: 'Prepare Tay Bellow CLI'[\s\S]*?(?=\n[ ]{6}- name: ')/g,
   ) ?? [];
 const assessCandidatesStep =
   workflow.match(
@@ -9793,7 +9793,7 @@ exit 1
           ...after,
           ...bot,
           in_reply_to_id: 1,
-          body: `R1-2 fixed by the guard rewrite ${marker}\n\n_— m via Qwen Code /review (v1)_`,
+          body: `R1-2 fixed by the guard rewrite ${marker}\n\n_— m via Tay Bellow /review (v1)_`,
         },
         { ...after, ...bot, in_reply_to_id: 1, body: `R1-3 fixed ${marker}` },
         // A `by` clause with an `n` in it — the double-backslash class let
@@ -9893,7 +9893,7 @@ exit 1
           {
             ...after,
             ...bot,
-            body: `R1-2 fixed by x ${marker}\n${tail}_— m via Qwen Code /review (v1)_`,
+            body: `R1-2 fixed by x ${marker}\n${tail}_— m via Tay Bellow /review (v1)_`,
           },
         ]),
       ).toBe('1');
@@ -10282,7 +10282,7 @@ exit 1
   it('surfaces the running model in every autofix report for diagnosis and attribution', () => {
     // The model is a repo variable (already the agent's OPENAI_MODEL), not a
     // secret, so it is safe to echo into a public comment. Each reporting
-    // step must plumb it in and render a footer that names Qwen Code and the
+    // step must plumb it in and render a footer that names Tay Bellow and the
     // model, with an empty-variable fallback so the footer never renders a
     // bare backtick pair. The footer prefers the model the session ACTUALLY
     // ran: run-agent.mjs writes the stream-json init event's resolved model
@@ -10296,7 +10296,7 @@ exit 1
     // executed replay below gates the ordering and the shell semantics;
     // these pins gate that all THREE copies carry them.
     const footer =
-      'echo "🧠 Handled by **Qwen Code** · model/模型 \\`${MODEL_DISPLAY}\\`${CLI_DISPLAY}"';
+      'echo "🧠 Handled by **Tay Bellow** · model/模型 \\`${MODEL_DISPLAY}\\`${CLI_DISPLAY}"';
     for (const step of [
       pushAndReportStep,
       reviewAddressReportStep,
@@ -10639,7 +10639,7 @@ exit 1
       expect(step).toContain('echo "${qwen_bin}" >> "${GITHUB_PATH}"');
       expect(step).toContain('qwen --version');
       expect(step).not.toContain('current_version="$(qwen --version');
-      expect(step).not.toContain('Using pre-installed Qwen Code');
+      expect(step).not.toContain('Using pre-installed Tay Bellow');
       expect(step).not.toContain('npm install -g');
     }
     expect(workflow).not.toContain('run_shell_command(node dist/cli.js)');
@@ -12007,7 +12007,7 @@ exit 1
       expect(step).not.toContain('qwen_status=$?');
       expect(step).not.toMatch(/PROMPT: \|-\n\s+\/autofix /);
       expect(step).not.toContain('for attempt in 1 2; do');
-      expect(step).not.toContain('Qwen Code failed on attempt');
+      expect(step).not.toContain('Tay Bellow failed on attempt');
     }
     // Full-line pins: the zh sibling must sit in the SAME rm -f. Substring
     // pins that stop at failure.md stay green when the zh argument is
@@ -23068,7 +23068,7 @@ describe('growth-audit hardening: park wake set and verdict pipeline (round 3)',
         checks: [
           {
             name: 'build',
-            workflowName: 'Qwen Code CI',
+            workflowName: 'Tay Bellow CI',
             conclusion: 'FAILURE',
             completedAt: '2026-01-02T00:00:00Z',
           },
@@ -23713,8 +23713,8 @@ describe('growth-audit hardening: park wake set and verdict pipeline (round 3)',
               `CONVERGENCE_BREAK_ROUNDS='3'\n` +
               `CONVERGENCE_SIGNAL_CODES='["root-cause-triage","successor-chain","batch-fixes","stem-surface"]'\n` +
               `CONFLICT_PARKED='false'\nMAIN_HEAD='mainsha'\nPR_HEAD_OID='prheadsha'\n` +
-              `CHECKS_JSON='[{"name":"Qwen Code CI","workflowName":"Qwen Code CI","conclusion":"FAILURE"}]'\n` +
-              `MAIN_GREEN_CHECKS='["Qwen Code CI"]'\n` +
+              `CHECKS_JSON='[{"name":"Tay Bellow CI","workflowName":"Tay Bellow CI","conclusion":"FAILURE"}]'\n` +
+              `MAIN_GREEN_CHECKS='["Tay Bellow CI"]'\n` +
               `BASE_UPDATE_CUTOFF='2025-12-31T00:00:00Z'\n` +
               `fleet_row() { :; }\n` +
               `gh() {\n` +
@@ -29813,7 +29813,7 @@ describe('review-address: regression accounting (af-157)', () => {
       name: 'Test',
       status: 'COMPLETED',
       conclusion: 'FAILURE',
-      workflowName: 'Qwen Code CI',
+      workflowName: 'Tay Bellow CI',
     },
   ];
   const GREEN = [
@@ -29821,7 +29821,7 @@ describe('review-address: regression accounting (af-157)', () => {
       name: 'Test',
       status: 'COMPLETED',
       conclusion: 'SUCCESS',
-      workflowName: 'Qwen Code CI',
+      workflowName: 'Tay Bellow CI',
     },
   ];
 

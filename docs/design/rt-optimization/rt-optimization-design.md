@@ -1,10 +1,10 @@
-# Qwen Code Agent Loop RT 优化技术方案
+# Tay Bellow Agent Loop RT 优化技术方案
 
 ## 1. 背景与问题定义
 
 ### 1.1 现状
 
-Qwen Code 的 Agent Loop 为严格串行模型：
+Tay Bellow 的 Agent Loop 为严格串行模型：
 
 ```
 User Prompt → [LLM 决策] → Tool Execution → [LLM 决策] → Tool Execution → ... → [LLM 回复] → Idle
@@ -754,7 +754,7 @@ abort 中断的 stream **大概率收不到 `finishReason` / `usageMetadata`**�
 
 #### 发布策略（适配本地 CLI）
 
-Qwen Code 是本地 CLI，**没有运行时下发能力**——传统"5% / 25% / 100% 灰度"不适用。采用**阶段性 release 推进**：
+Tay Bellow 是本地 CLI，**没有运行时下发能力**——传统"5% / 25% / 100% 灰度"不适用。采用**阶段性 release 推进**：
 
 | 阶段                  | Release 节点           | feature flag 默认值 | 触发条件                                                    |
 | --------------------- | ---------------------- | ------------------- | ----------------------------------------------------------- |

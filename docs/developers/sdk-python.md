@@ -2,7 +2,7 @@
 
 ## `qwen-code-sdk`
 
-`qwen-code-sdk` is an experimental Python SDK for Qwen Code. v1 targets the
+`qwen-code-sdk` is an experimental Python SDK for Tay Bellow. v1 targets the
 existing `stream-json` CLI protocol and keeps the transport surface small and
 testable.
 

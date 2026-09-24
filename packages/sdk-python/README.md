@@ -1,6 +1,6 @@
 # qwen-code-sdk
 
-Experimental Python SDK for programmatic access to Qwen Code through the
+Experimental Python SDK for programmatic access to Tay Bellow through the
 `stream-json` protocol.
 
 ## Installation

@@ -36,7 +36,7 @@ describe('IdeTrustChangeDialog', () => {
     expect(frameText).toContain(
       'Workspace trust has changed due to a change in the IDE trust.',
     );
-    expect(frameText).toContain("Press 'r' to restart Qwen Code");
+    expect(frameText).toContain("Press 'r' to restart Tay Bellow");
   });
 
   it('renders a generic message for NONE reason', () => {

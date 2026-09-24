@@ -126,9 +126,9 @@ export class NativeHostNewerError extends Error {
     super(
       'The installed Browser Use Native Host speaks protocol ' +
         installedProtocolVersion +
-        ', newer than this Qwen Code (protocol ' +
+        ', newer than this Tay Bellow (protocol ' +
         CHROME_BRIDGE_PROTOCOL_VERSION +
-        '). Update Qwen Code; the installed Host was left unchanged.',
+        '). Update Tay Bellow; the installed Host was left unchanged.',
     );
     this.name = 'NativeHostNewerError';
   }

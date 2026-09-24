@@ -3,7 +3,7 @@
 ## 状态
 
 - 状态：Draft
-- 范围：Qwen Code 实验分支中 Omni 多模态资源与中间产物的物理存储管理
+- 范围：Tay Bellow 实验分支中 Omni 多模态资源与中间产物的物理存储管理
 - 关联设计：
   [多模态文件识别与元数据提取架构设计](./2026-07-29-multimodal-file-recognition-and-metadata.md)、
   [Omni 多模态数据处理 Policy 编排架构设计](./2026-07-29-omni-multimodal-policy-orchestration.md)、
@@ -133,7 +133,7 @@
 | GC                  | 删除 `objects/`、`downloads/`、`staging/`、`quarantine/` | 见 §6                           |
 
 用户原始输入的本地文件**不复制进对象库**：它们留在原位置，Memory 以
-`localPath + sha256` 记录身份（识别设计 §6.5）。只有"Qwen Code 自己生成或
+`localPath + sha256` 记录身份（识别设计 §6.5）。只有"Tay Bellow 自己生成或
 下载的字节"才进入 `objects/`。这避免大视频在磁盘上双份存放；代价是用户文件
 被移动/删除后 Recall 返回 `artifact_unavailable` gap，这是 Memory 设计 §12 已
 定义的正常路径。
@@ -276,6 +276,6 @@ uploads: (sha256, model) → {
 
 - 抽样完整性校验的比例与频率；
 - `downloads/` 续传元数据（ETag/offset）的存放形式；
-- GC 与多进程并发（同一 project 开多个 Qwen Code 实例）的锁策略——初版可用
+- GC 与多进程并发（同一 project 开多个 Tay Bellow 实例）的锁策略——初版可用
   目录锁 + "GC 只在持锁进程执行"；
 - 对象库是否需要按媒体类型分区统计（实验报表用途）。

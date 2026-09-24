@@ -1410,7 +1410,7 @@ export function SettingsDialog({
         showRestartPrompt && (
           <Text color={theme.status.warning}>
             {t(
-              'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.',
+              'To see changes, Tay Bellow must be restarted. Press r to exit and apply changes now.',
             )}
           </Text>
         )}

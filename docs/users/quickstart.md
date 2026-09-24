@@ -1,8 +1,8 @@
 # Quickstart
 
-> 👏 Welcome to Qwen Code!
+> 👏 Welcome to Tay Bellow!
 
-This quickstart guide will have you using AI-powered coding assistance in just a few minutes. By the end, you'll understand how to use Qwen Code for common development tasks.
+This quickstart guide will have you using AI-powered coding assistance in just a few minutes. By the end, you'll understand how to use Tay Bellow for common development tasks.
 
 ## Before you begin
 
@@ -12,9 +12,9 @@ Make sure you have:
 - A code project to work with
 - An API key from Alibaba Cloud ModelStudio ([Beijing](https://bailian.console.aliyun.com/) / [intl](https://modelstudio.console.alibabacloud.com/)), or an Alibaba Cloud Token Plan ([Beijing](https://bailian.console.aliyun.com/cn-beijing?tab=doc#/doc/?type=model&url=3028856) / [intl](https://modelstudio.console.alibabacloud.com/ap-southeast-1?tab=doc#/doc/?type=model)) subscription
 
-## Step 1: Install Qwen Code
+## Step 1: Install Tay Bellow
 
-To install Qwen Code, use one of the following methods:
+To install Tay Bellow, use one of the following methods:
 
 ### Quick Install (Recommended)
 
@@ -78,15 +78,15 @@ The first-run menu lets you connect a model provider. Choose one of:
 
 > [!note]
 >
-> When you first authenticate Qwen Code with your Qwen account, a workspace called ".qwen" is automatically created for you. This workspace provides centralized cost tracking and management for all Qwen Code usage in your organization.
+> When you first authenticate Tay Bellow with your Qwen account, a workspace called ".qwen" is automatically created for you. This workspace provides centralized cost tracking and management for all Tay Bellow usage in your organization.
 
 > [!tip]
 >
-> To configure authentication, start Qwen Code and run `/auth`. Use `/doctor` to check your current configuration at any time. See the [Authentication](./configuration/auth) page for details.
+> To configure authentication, start Tay Bellow and run `/auth`. Use `/doctor` to check your current configuration at any time. See the [Authentication](./configuration/auth) page for details.
 
 ## Step 3: Start your first session
 
-Open your terminal in any project directory and start Qwen Code:
+Open your terminal in any project directory and start Tay Bellow:
 
 ```bash
 # optional
@@ -95,37 +95,37 @@ cd /path/to/your/project
 qwen
 ```
 
-You'll see the Qwen Code welcome screen with your session information, recent conversations, and latest updates. Type `/help` for available commands.
+You'll see the Tay Bellow welcome screen with your session information, recent conversations, and latest updates. Type `/help` for available commands.
 
-## Chat with Qwen Code
+## Chat with Tay Bellow
 
 ### Ask your first question
 
-Qwen Code will analyze your files and provide a summary. You can also ask more specific questions:
+Tay Bellow will analyze your files and provide a summary. You can also ask more specific questions:
 
 ```
 explain the folder structure
 ```
 
-You can also ask Qwen Code about its own capabilities:
+You can also ask Tay Bellow about its own capabilities:
 
 ```
-what can Qwen Code do?
+what can Tay Bellow do?
 ```
 
 > [!note]
 >
-> Qwen Code reads your files as needed - you don't have to manually add context. Qwen Code also has access to its own documentation and can answer questions about its features and capabilities.
+> Tay Bellow reads your files as needed - you don't have to manually add context. Tay Bellow also has access to its own documentation and can answer questions about its features and capabilities.
 
 ### Make your first code change
 
-Now let's make Qwen Code do some actual coding. Try a simple task:
+Now let's make Tay Bellow do some actual coding. Try a simple task:
 
 ```
 add a hello world function to the main file
 ```
 
-Qwen Code will:
+Tay Bellow will:
 
 1. Find the appropriate file
 2. Show you the proposed changes
@@ -134,11 +134,11 @@ Qwen Code will:
 
 > [!note]
 >
-> Qwen Code always asks for permission before modifying files. You can approve individual changes or enable "Accept all" mode for a session.
+> Tay Bellow always asks for permission before modifying files. You can approve individual changes or enable "Accept all" mode for a session.
 
-### Use Git with Qwen Code
+### Use Git with Tay Bellow
 
-Qwen Code makes Git operations conversational:
+Tay Bellow makes Git operations conversational:
 
 ```
 what files have I changed?
@@ -164,7 +164,7 @@ help me resolve merge conflicts
 
 ### Fix a bug or add a feature
 
-Qwen Code is proficient at debugging and feature implementation.
+Tay Bellow is proficient at debugging and feature implementation.
 
 Describe what you want in natural language:
 
@@ -178,7 +178,7 @@ Or fix existing issues:
 there's a bug where users can submit empty forms - fix it
 ```
 
-Qwen Code will:
+Tay Bellow will:
 
 - Locate the relevant code
 - Understand the context
@@ -187,7 +187,7 @@ Qwen Code will:
 
 ### Test out other common workflows
 
-There are a number of ways to work with Qwen Code:
+There are a number of ways to work with Tay Bellow:
 
 **Refactor code**
 
@@ -215,7 +215,7 @@ review my changes and suggest improvements
 
 > [!tip]
 >
-> **Remember**: Qwen Code is your AI pair programmer. Talk to it like you would a helpful colleague - describe what you want to achieve, and it will help you get there.
+> **Remember**: Tay Bellow is your AI pair programmer. Talk to it like you would a helpful colleague - describe what you want to achieve, and it will help you get there.
 
 ## Essential commands
 
@@ -223,17 +223,17 @@ Here are the most important commands for daily use:
 
 | Command               | What it does                                     | Example                       |
 | --------------------- | ------------------------------------------------ | ----------------------------- |
-| `qwen`                | start Qwen Code                                  | `qwen`                        |
+| `qwen`                | start Tay Bellow                                 | `qwen`                        |
 | `/auth`               | Change authentication method (in session)        | `/auth`                       |
 | `/doctor`             | Check current authentication and environment     | `/doctor`                     |
 | `/help`               | Display help information for available commands  | `/help` or `/?`               |
 | `/compress`           | Replace chat history with summary to save Tokens | `/compress`                   |
 | `/clear`              | Clear terminal screen content                    | `/clear` (shortcut: `Ctrl+L`) |
-| `/theme`              | Change Qwen Code visual theme                    | `/theme`                      |
+| `/theme`              | Change Tay Bellow visual theme                   | `/theme`                      |
 | `/language`           | View or change language settings                 | `/language`                   |
 | → `ui [language]`     | Set UI interface language                        | `/language ui zh-CN`          |
 | → `output [language]` | Set LLM output language                          | `/language output Chinese`    |
-| `/quit`               | Exit Qwen Code immediately                       | `/quit` or `/exit`            |
+| `/quit`               | Exit Tay Bellow immediately                      | `/quit` or `/exit`            |
 
 See the [CLI reference](./features/commands) for a complete list of commands.
 
@@ -254,9 +254,9 @@ See the [CLI reference](./features/commands) for a complete list of commands.
 3. build a webpage that allows users to see and edit their information
 ```
 
-**Let Qwen Code explore first**
+**Let Tay Bellow explore first**
 
-- Before making changes, let Qwen Code understand your code:
+- Before making changes, let Tay Bellow understand your code:
 
 ```
 analyze the database schema
@@ -275,6 +275,6 @@ build a dashboard showing products that are most frequently returned by our UK c
 
 ## Getting help
 
-- **In Qwen Code**: Type `/help` or ask "how do I..."
+- **In Tay Bellow**: Type `/help` or ask "how do I..."
 - **Documentation**: You're here! Browse other guides
 - **Community**: Join our [GitHub Discussion](https://github.com/QwenLM/qwen-code/discussions) for tips and support

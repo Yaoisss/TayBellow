@@ -8,7 +8,7 @@ WebShell 或 Session 窗口；对话由连接的 daemon 管理，编码任务由
 ## 用户要求
 
 - macOS 12 或更高版本。
-- 本机运行的独立 `qwen-live` daemon 或 Qwen Code WebShell。
+- 本机运行的独立 `qwen-live` daemon 或 Tay Bellow WebShell。
 - 可调用 `qwen3.5-omni-plus-realtime` 的 DashScope API key。
 
 WebShell 内置 Live Voice 默认关闭；独立 `qwen-live` 可直接从命令行启动并连接 Host。
@@ -51,7 +51,7 @@ npm run dist:mac
 ## 发布
 
 Live Host 使用独立的 **Qwen Live Host Release** workflow、版本号和发布节奏，
-不参与也不阻塞 Qwen Code Desktop Release。PR 会自动执行一次未签名 dry run，
+不参与也不阻塞 Tay Bellow Desktop Release。PR 会自动执行一次未签名 dry run，
 检查 arm64/x64 的 DMG、ZIP 和 manifest；正式发布只能从 `main` 手工触发，并执行
 Developer ID 签名、notarization、Gatekeeper 和 stapler 验证。
 

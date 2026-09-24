@@ -6,7 +6,7 @@
  */
 
 /**
- * Development entry point for Qwen Code CLI.
+ * Development entry point for Tay Bellow CLI.
  *
  * Runs the CLI from TypeScript source with prebuilt workspace dependencies.
  * Changes to packages/core or packages/cli are reflected immediately.

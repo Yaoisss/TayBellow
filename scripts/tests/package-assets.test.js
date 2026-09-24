@@ -53,7 +53,7 @@ describe('package asset scripts', () => {
     writeFile(
       rootDir,
       'packages/web-shell/dist/manifest.webmanifest',
-      '{"name":"Qwen Code"}',
+      '{"name":"Tay Bellow"}',
     );
     writeFile(
       rootDir,
@@ -85,7 +85,7 @@ describe('package asset scripts', () => {
     writeFile(
       rootDir,
       'packages/web-shell/dist/manifest.webmanifest',
-      '{"name":"Qwen Code"}',
+      '{"name":"Tay Bellow"}',
     );
 
     expect(() => copyBundleAssets({ root: rootDir })).not.toThrow();
@@ -95,7 +95,7 @@ describe('package asset scripts', () => {
         path.join(rootDir, 'dist/web-shell/manifest.webmanifest'),
         'utf8',
       ),
-    ).toBe('{"name":"Qwen Code"}');
+    ).toBe('{"name":"Tay Bellow"}');
     expect(existsSync(path.join(rootDir, 'dist/web-shell/sw.js'))).toBe(false);
     expect(
       console.warn.mock.calls
@@ -1426,7 +1426,7 @@ describe('package asset scripts', () => {
     const rootDir = mkdtempSync(path.join(tmpdir(), 'qwen-package-assets-'));
     tempDirs.push(rootDir);
 
-    writeFile(rootDir, 'README.md', '# Qwen Code\n');
+    writeFile(rootDir, 'README.md', '# Tay Bellow\n');
     writeFile(rootDir, 'LICENSE', 'Apache-2.0\n');
     writeFile(
       rootDir,
@@ -1435,7 +1435,7 @@ describe('package asset scripts', () => {
         {
           name: '@qwen-code/qwen-code',
           version: '0.17.0',
-          description: 'Qwen Code',
+          description: 'Tay Bellow',
           private: true,
           repository: {
             type: 'git',

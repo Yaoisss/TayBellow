@@ -1,6 +1,6 @@
 # Web Search
 
-Qwen Code provides web search two ways:
+Tay Bellow provides web search two ways:
 
 1. **Built-in `web_search` tool** — backed by the DashScope Responses API server-side search. On by default at startup for supported ModelStudio and OpenAI-compatible DashScope configurations; no extra provider or MCP setup.
 2. **MCP (Model Context Protocol) integrations** — connect any external search service (Tavily, GLM, and others). Use this when your provider cannot back the built-in tool.
@@ -204,7 +204,7 @@ qwen mcp add WebSearch \
 }
 ```
 
-Replace `${DASHSCOPE_API_KEY}` with your actual API key, or set it as an environment variable so Qwen Code picks it up automatically.
+Replace `${DASHSCOPE_API_KEY}` with your actual API key, or set it as an environment variable so Tay Bellow picks it up automatically.
 
 ---
 

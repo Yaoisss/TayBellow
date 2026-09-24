@@ -316,7 +316,7 @@ describe('standalone-update', () => {
 
       await expect(
         performStandaloneUpdate(standaloneDir, '1.0.0'),
-      ).rejects.toThrow('not a Qwen Code standalone install');
+      ).rejects.toThrow('not a Tay Bellow standalone install');
     });
 
     it('rejects unknown target in manifest', async () => {
@@ -710,14 +710,14 @@ describe('standalone-update', () => {
 
           expect(fs.existsSync(wrapperPath)).toBe(true);
           expect(fs.readFileSync(bashrc, 'utf-8')).toContain(
-            '# Qwen Code PATH block begin',
+            '# Tay Bellow PATH block begin',
           );
 
           cleanupFirstTimeMigrationArtifacts(artifacts);
 
           expect(fs.existsSync(wrapperPath)).toBe(false);
           expect(fs.readFileSync(bashrc, 'utf-8')).not.toContain(
-            '# Qwen Code PATH block begin',
+            '# Tay Bellow PATH block begin',
           );
         } finally {
           process.env['HOME'] = originalHome;
@@ -816,8 +816,8 @@ describe('standalone-update', () => {
       try {
         ensurePathInShellRc(binDir);
         const content = fs.readFileSync(zshrc, 'utf-8');
-        expect(content).toContain('# Qwen Code PATH block begin');
-        expect(content).toContain('# Qwen Code PATH block end');
+        expect(content).toContain('# Tay Bellow PATH block begin');
+        expect(content).toContain('# Tay Bellow PATH block end');
         // Uses single-quoted paths matching install-qwen-standalone.sh shell_quote
         expect(content).toContain(`export PATH='${binDir}':$PATH`);
       } finally {
@@ -831,7 +831,7 @@ describe('standalone-update', () => {
       const zshrc = path.join(tempDir, '.zshrc');
       fs.writeFileSync(
         zshrc,
-        `# Qwen Code PATH block begin\nexport PATH='${binDir}':$PATH\n# Qwen Code PATH block end\n`,
+        `# Tay Bellow PATH block begin\nexport PATH='${binDir}':$PATH\n# Tay Bellow PATH block end\n`,
       );
 
       const origShell = process.env['SHELL'];
@@ -842,7 +842,7 @@ describe('standalone-update', () => {
       try {
         ensurePathInShellRc(binDir);
         const content = fs.readFileSync(zshrc, 'utf-8');
-        const matches = content.match(/# Qwen Code PATH block begin/g);
+        const matches = content.match(/# Tay Bellow PATH block begin/g);
         expect(matches).toHaveLength(1);
       } finally {
         process.env['SHELL'] = origShell;
@@ -855,7 +855,7 @@ describe('standalone-update', () => {
       const zshrc = path.join(tempDir, '.zshrc');
       fs.writeFileSync(
         zshrc,
-        `# Added by Qwen Code standalone installer\nexport PATH="${binDir}:$PATH"\n`,
+        `# Added by Tay Bellow standalone installer\nexport PATH="${binDir}:$PATH"\n`,
       );
 
       const origShell = process.env['SHELL'];
@@ -868,7 +868,7 @@ describe('standalone-update', () => {
         const content = fs.readFileSync(zshrc, 'utf-8');
         const matches = content.match(/export PATH/g);
         expect(matches).toHaveLength(1);
-        expect(content).not.toContain('# Qwen Code PATH block begin');
+        expect(content).not.toContain('# Tay Bellow PATH block begin');
       } finally {
         process.env['SHELL'] = origShell;
         process.env['HOME'] = origHome;
@@ -890,7 +890,7 @@ describe('standalone-update', () => {
       try {
         ensurePathInShellRc(binDir);
         expect(fs.readFileSync(bashrc, 'utf-8')).toContain(
-          '# Qwen Code PATH block begin',
+          '# Tay Bellow PATH block begin',
         );
         expect(fs.readFileSync(profile, 'utf-8')).toBe('# profile\n');
       } finally {
@@ -912,7 +912,7 @@ describe('standalone-update', () => {
       try {
         ensurePathInShellRc(binDir);
         expect(fs.readFileSync(profile, 'utf-8')).toContain(
-          '# Qwen Code PATH block begin',
+          '# Tay Bellow PATH block begin',
         );
         expect(fs.existsSync(path.join(tempDir, '.bashrc'))).toBe(false);
       } finally {
@@ -936,8 +936,8 @@ describe('standalone-update', () => {
         const content = fs.readFileSync(fishConfig, 'utf-8');
         // Matches install-qwen-standalone.sh's maybe_update_shell_path fish branch
         expect(content).toContain('set -gx PATH');
-        expect(content).toContain('# Qwen Code PATH block begin');
-        expect(content).toContain('# Qwen Code PATH block end');
+        expect(content).toContain('# Tay Bellow PATH block begin');
+        expect(content).toContain('# Tay Bellow PATH block end');
         expect(content).toContain(binDir);
       } finally {
         process.env['SHELL'] = origShell;

@@ -4,14 +4,14 @@ Status: accepted
 
 ## Integration contract
 
-Qwen Code WebShell owns the rendering side of the contract:
+Tay Bellow WebShell owns the rendering side of the contract:
 
 - `@qwen-code/web-shell` includes the `markdown-chart` renderer and ECharts
   runtime.
 - Hosts install the canonical
   [`markdown-chart` skill](https://github.com/datafe/markdown-chart/tree/main/skills/markdown-chart)
   so the model emits renderable chart blocks.
-- Qwen Code core does not bundle or inject the skill. A project can install it
+- Tay Bellow core does not bundle or inject the skill. A project can install it
   at `.qwen/skills/markdown-chart/SKILL.md`; user-level skill installation is
   also supported.
 

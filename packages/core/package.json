@@ -2,7 +2,7 @@
   "name": "@qwen-code/qwen-code-core",
   "private": true,
   "version": "0.24.3",
-  "description": "Qwen Code Core",
+  "description": "Tay Bellow Core",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/QwenLM/qwen-code.git"

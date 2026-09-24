@@ -5,7 +5,7 @@ same machine. It does not start, join, monitor, or send input to agent processes
 
 It is a low-level interoperability surface, not the Qwen Agent Team scheduler or
 the cross-session messaging transport. A task owner is only a recorded label;
-it does not start or wake a Qwen Code, Codex, or other agent process.
+it does not start or wake a Tay Bellow, Codex, or other agent process.
 
 > Experimental. The on-disk format may change between releases.
 
@@ -52,8 +52,8 @@ expired, and `4` the local wait ended while the ask was still open. `--timeout`
 sets the local wait in seconds; `--ttl` sets the ask lifetime in seconds.
 
 Expiry is derived on read, never written back. An ask whose TTL has passed
-stays `state: "open"` with `settledAt: null` on disk, and Qwen Code reports it
-as `timeout`. A reader outside Qwen Code has to apply the same rule — `now >=
+stays `state: "open"` with `settledAt: null` on disk, and Tay Bellow reports it
+as `timeout`. A reader outside Tay Bellow has to apply the same rule — `now >=
 expiresAt` means timed out — or it will treat an expired ask as still waiting
 for an answer.
 

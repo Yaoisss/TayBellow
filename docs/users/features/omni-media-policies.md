@@ -61,7 +61,7 @@
 }
 ```
 
-`apiKeyEnv` 填环境变量名,不填明文 key;启动 Qwen Code 前需确保该变量已有值。三个字段必须同时设置,否则启动失败。上传 endpoint/key/model 只用于 `getPolicy`、文件上传和上传缓存;自部署推理的 endpoint/key 仍按原有模型配置使用,两套凭据不会交叉发送。
+`apiKeyEnv` 填环境变量名,不填明文 key;启动 Tay Bellow 前需确保该变量已有值。三个字段必须同时设置,否则启动失败。上传 endpoint/key/model 只用于 `getPolicy`、文件上传和上传缓存;自部署推理的 endpoint/key 仍按原有模型配置使用,两套凭据不会交叉发送。
 
 如果三个字段都不设置,则保留旧行为:当前推理配置本身必须是带静态 API key 的 DashScope 兼容配置,并同时作为上传配置。
 
@@ -299,7 +299,7 @@ extract-audio (origins:[user],  reprocessMedia:true, source:keep)
 
 ## 完整案例:81 分钟电影拉片
 
-目标:给 Qwen Code 一部 1080p 电影(《Breaking Surface》2020,81 分钟,986MB MKV)和一句"制作拉片网页"的 prompt,让模型在**从未看过全片**的情况下产出覆盖全片的交互式分析页面。
+目标:给 Tay Bellow 一部 1080p 电影(《Breaking Surface》2020,81 分钟,986MB MKV)和一句"制作拉片网页"的 prompt,让模型在**从未看过全片**的情况下产出覆盖全片的交互式分析页面。
 
 ### 策略设计
 

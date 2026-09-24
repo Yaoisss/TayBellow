@@ -43,7 +43,7 @@ Brand lives under the existing `ui` section as two string leaves:
 ```
 
 Both default to the empty string, which means "use the built-in brand". An
-absent or empty `name` keeps `Qwen Code`; an absent or empty `logoPath` keeps
+absent or empty `name` keeps `Tay Bellow`; an absent or empty `logoPath` keeps
 the current Qwen mark in both the sidebar and the favicon. The two leaves are
 independent — a deployment may rename without replacing the artwork, or the
 reverse.
@@ -309,7 +309,7 @@ prose — settings page descriptions, channel setup, live host installation,
 workflows, skill descriptions — are out of scope by decision. Covering them
 requires a message-override mechanism on the localization provider, which does
 not exist and is a materially larger change. The consequence is stated plainly
-so it is not discovered later: a renamed shell still says `Qwen Code` in body
+so it is not discovered later: a renamed shell still says `Tay Bellow` in body
 copy.
 
 One localized string is removed rather than left behind: the About panel's

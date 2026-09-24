@@ -770,7 +770,7 @@ describe('DashScopeOpenAICompatibleProvider', () => {
     // tracing object that only its own inference path understands; forwarded to a
     // third-party vendor backend that types `metadata` as a string it fails to
     // deserialize and the request comes back as a flat 400, which made those
-    // models unusable through Qwen Code entirely.
+    // models unusable through Tay Bellow entirely.
     it.each([['qwen-max'], ['qwen3.8-max'], ['coder-model']] as const)(
       'ships metadata for the qwen-family model %s',
       (model) => {

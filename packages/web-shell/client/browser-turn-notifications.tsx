@@ -36,7 +36,7 @@ export interface WebShellBrowserNotificationsOptions {
   defaultEnabled?: boolean;
   /** Application name prefixed to notification titles. Defaults to QwenCode. */
   appName?: string;
-  /** Image URL, including HTTPS CDN URLs. Defaults to the bundled Qwen Code icon. */
+  /** Image URL, including HTTPS CDN URLs. Defaults to the bundled Tay Bellow icon. */
   iconUrl?: string;
 }
 

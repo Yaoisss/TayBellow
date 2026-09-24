@@ -2482,7 +2482,7 @@ export async function loadCliConfig(
     usageStatisticsEnabled:
       parseBooleanEnvFlag(process.env['QWEN_USAGE_STATISTICS_ENABLED']) ??
       settings.privacy?.usageStatisticsEnabled ??
-      true,
+      false,
     clearContextOnIdle: settings.context?.clearContextOnIdle,
     fileFiltering: settings.context?.fileFiltering,
     plansDirectory: settings.plansDirectory,

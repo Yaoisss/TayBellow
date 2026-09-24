@@ -12,7 +12,7 @@ on:
         required: true
         type: 'string'
       qwen_code_ref:
-        description: 'Qwen Code branch or commit to bundle, reachable from main. A release tag whose own commit is off main is refused here: dispatch checks the ref itself, while only the release event peels to its parent.'
+        description: 'Tay Bellow branch or commit to bundle, reachable from main. A release tag whose own commit is off main is refused here: dispatch checks the ref itself, while only the release event peels to its parent.'
         required: true
         default: 'main'
         type: 'string'
@@ -190,7 +190,7 @@ jobs:
           echo "::notice::Desktop $RELEASE_VERSION is already published; skipping build, publish and sync-oss. Dispatch this workflow with clobber=true to force a rebuild."
           echo 'already_published=true' >> "$GITHUB_OUTPUT"
 
-      - name: 'Resolve Qwen Code source'
+      - name: 'Resolve Tay Bellow source'
         id: 'source'
         shell: 'bash'
         env:
@@ -264,7 +264,7 @@ jobs:
         shell: 'bash'
         run: 'echo "QWEN_CODE_ROOT=$RUNNER_TEMP/qwen-code-source" >> "$GITHUB_ENV"'
 
-      - name: 'Check out Qwen Code source'
+      - name: 'Check out Tay Bellow source'
         shell: 'bash'
         run: |
           set -euo pipefail
@@ -307,7 +307,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev libatk-bridge2.0-0 at-spi2-core dbus-x11 patchelf libfuse2 xdg-utils xvfb
 
-      - name: 'Install Qwen Code dependencies'
+      - name: 'Install Tay Bellow dependencies'
         shell: 'bash'
         working-directory: '${{ runner.temp }}/qwen-code-source'
         env:
@@ -577,7 +577,7 @@ jobs:
           LEGACY_ARCH: '${{ matrix.legacy_arch }}'
         run: |
           set -euo pipefail
-          app="$(find packages/desktop-shell/src-tauri/target/${{ matrix.rust_target }}/release/bundle/macos -maxdepth 1 -name 'Qwen Code Desktop.app' -print -quit)"
+          app="$(find packages/desktop-shell/src-tauri/target/${{ matrix.rust_target }}/release/bundle/macos -maxdepth 1 -name 'Tay Bellow Desktop.app' -print -quit)"
           if [ -z "$app" ]; then
             echo '::error::The legacy-named macOS app bundle was not produced.'
             exit 1
@@ -734,7 +734,7 @@ jobs:
           RELEASE_CLOBBER: '${{ inputs.clobber }}'
         run: |
           set -euo pipefail
-          args=("$RELEASE_TAG" release-assets/* --target "$GITHUB_SHA" --title "Qwen Code Desktop v$RELEASE_VERSION" --generate-notes --latest=false)
+          args=("$RELEASE_TAG" release-assets/* --target "$GITHUB_SHA" --title "Tay Bellow Desktop v$RELEASE_VERSION" --generate-notes --latest=false)
           if [ "$RELEASE_DRAFT" = 'true' ]; then args+=(--draft); fi
           if [ "$RELEASE_PRERELEASE" = 'true' ]; then args+=(--prerelease); fi
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
@@ -803,7 +803,7 @@ jobs:
             fi
             gh release upload "$FEED_TAG" "${feed_assets[@]}" --clobber
           else
-            gh release create "$FEED_TAG" "${feed_assets[@]}" --title 'Qwen Code Desktop latest' --notes 'Stable desktop updater feed.' --latest=false
+            gh release create "$FEED_TAG" "${feed_assets[@]}" --title 'Tay Bellow Desktop latest' --notes 'Stable desktop updater feed.' --latest=false
           fi
 
       - name: 'Publish release summary'

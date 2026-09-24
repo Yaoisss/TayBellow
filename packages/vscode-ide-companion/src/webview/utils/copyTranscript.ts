@@ -144,7 +144,7 @@ export function formatBlocksForCopyAll(
     } else if (block.kind === 'thought') {
       parts.push(`**Thinking:** ${content}`);
     } else {
-      parts.push(`**Qwen Code:** ${content}`);
+      parts.push(`**Tay Bellow:** ${content}`);
     }
   }
   return parts.join('\n\n---\n\n');

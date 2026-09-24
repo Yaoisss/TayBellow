@@ -121,7 +121,7 @@ async function buildCleanMemorySystemPrompt(
 
 function buildRememberSystemPrompt(memoryPrompt: string): string {
   return [
-    'You are saving one explicit durable memory for Qwen Code.',
+    'You are saving one explicit durable memory for Tay Bellow.',
     '',
     'Rules:',
     '- This is an explicit add request. You must use a write or edit tool to create or update a managed memory entry. If the content duplicates an existing entry, update that entry so the latest request wins.',

@@ -16,7 +16,7 @@ import { sendNotification } from '../../services/notificationService.js';
 
 export const LONG_TASK_NOTIFICATION_THRESHOLD_SECONDS = 20;
 
-const NOTIFICATION_TITLE = 'Qwen Code';
+const NOTIFICATION_TITLE = 'Tay Bellow';
 
 // The two accepted values for `general.notificationMode`:
 //   - 'all' (default, historical behavior) — fire on every WaitingForConfirmation
@@ -82,8 +82,8 @@ export const useAttentionNotifications = ({
       approvalNotificationsEnabled
     ) {
       const message = awaitingToolName
-        ? `Qwen Code needs your permission to use ${awaitingToolName}`
-        : 'Qwen Code is waiting for your input';
+        ? `Tay Bellow needs your permission to use ${awaitingToolName}`
+        : 'Tay Bellow is waiting for your input';
 
       sendNotification(
         { message, title: NOTIFICATION_TITLE },
@@ -119,7 +119,7 @@ export const useAttentionNotifications = ({
       if (wasLongTask && !isFocused && terminalBellEnabled) {
         sendNotification(
           {
-            message: 'Qwen Code is waiting for your input',
+            message: 'Tay Bellow is waiting for your input',
             title: NOTIFICATION_TITLE,
           },
           terminal,
@@ -135,7 +135,7 @@ export const useAttentionNotifications = ({
         if (hooksEnabled && messageBus) {
           fireNotificationHook(
             messageBus,
-            'Qwen Code is waiting for your input',
+            'Tay Bellow is waiting for your input',
             NotificationType.IdlePrompt,
             'Waiting for input',
           )

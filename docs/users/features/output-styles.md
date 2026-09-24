@@ -1,6 +1,6 @@
 # Output Styles
 
-Output styles change how Qwen Code writes its responses — the tone, the amount of narration, how much it explains — without changing what it can do. A style is a named block of instructions layered onto the built-in system prompt, and the model is reminded of the active style on every turn so it holds up over long sessions.
+Output styles change how Tay Bellow writes its responses — the tone, the amount of narration, how much it explains — without changing what it can do. A style is a named block of instructions layered onto the built-in system prompt, and the model is reminded of the active style on every turn so it holds up over long sessions.
 
 ## Built-in styles
 

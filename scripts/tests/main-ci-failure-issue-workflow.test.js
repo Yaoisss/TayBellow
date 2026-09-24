@@ -23,10 +23,10 @@ describe('main CI failure issue workflow', () => {
   it('opens an autofix-ready issue only for failed main CI runs', () => {
     expect(workflow).toContain('workflow_run:');
     expect(workflow).toContain(
-      "workflows: ['E2E Tests', 'SDK Python', 'Qwen Code CI']",
+      "workflows: ['E2E Tests', 'SDK Python', 'Tay Bellow CI']",
     );
     expect(workflow).toContain("types: ['completed']");
-    // 'Qwen Code CI' joined the list when the macOS and Windows lanes got a
+    // 'Tay Bellow CI' joined the list when the macOS and Windows lanes got a
     // nightly run on main: that run is their only trigger outside a
     // pull request, and a red lane nobody is told about is the same silence
     // the merge-queue-only gate produced. It completes on every pull request
@@ -40,11 +40,11 @@ describe('main CI failure issue workflow', () => {
     expect(workflow).toContain(
       "github.event.workflow_run.head_branch == 'main'",
     );
-    // Push covers the other two watched workflows AND 'Qwen Code CI''s own
+    // Push covers the other two watched workflows AND 'Tay Bellow CI''s own
     // post-merge lane on `main` — ci.yml restored that trigger, so main's
     // squash commits now carry Test check-runs and a red one files an issue
     // here. Schedule is scoped to
-    // 'Qwen Code CI' — that nightly is the platform lanes' only trigger
+    // 'Tay Bellow CI' — that nightly is the platform lanes' only trigger
     // outside a pull request, and the other watched workflows' own
     // nightlies must not dispatch the autofix agent through this watcher.
     // A pull-request run of any of them must never open an issue — that is
@@ -52,7 +52,7 @@ describe('main CI failure issue workflow', () => {
     // what keep it out. Pin the whole event clause so a connective or
     // scope mutation fails here.
     expect(workflow).toContain(
-      "(github.event.workflow_run.event == 'push' || (github.event.workflow_run.event == 'schedule' && github.event.workflow_run.name == 'Qwen Code CI'))",
+      "(github.event.workflow_run.event == 'push' || (github.event.workflow_run.event == 'schedule' && github.event.workflow_run.name == 'Tay Bellow CI'))",
     );
     expect(workflow).not.toContain(
       "github.event.workflow_run.event == 'pull_request'",

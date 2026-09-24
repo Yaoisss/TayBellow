@@ -114,7 +114,7 @@ export const LIVE_MESSAGES_EN: Record<string, LiveMessage> = {
   'settings.liveSetup.install.error': 'Setup needs attention',
   'settings.liveSetup.confirmTitle': 'Enable experimental Qwen Live?',
   'settings.liveSetup.confirmDescription':
-    'Qwen Code will download, verify, install, and open the signed Qwen Live Host app. macOS will then ask you to grant Microphone, Accessibility, and Screen Recording access.',
+    'Tay Bellow will download, verify, install, and open the signed Qwen Live Host app. macOS will then ask you to grant Microphone, Accessibility, and Screen Recording access.',
   'settings.liveSetup.cancel': 'Cancel',
   'settings.liveSetup.confirm': 'Enable and install',
   'live.refresh': 'Refresh status',
@@ -242,7 +242,7 @@ export const LIVE_MESSAGES_ZH: Record<string, LiveMessage> = {
   'settings.liveSetup.install.error': '安装需要处理',
   'settings.liveSetup.confirmTitle': '启用实验性 Qwen Live？',
   'settings.liveSetup.confirmDescription':
-    'Qwen Code 将自动下载、校验、安装并打开已签名的 Qwen Live Host。之后 macOS 会要求授予麦克风、辅助功能和屏幕录制权限。',
+    'Tay Bellow 将自动下载、校验、安装并打开已签名的 Qwen Live Host。之后 macOS 会要求授予麦克风、辅助功能和屏幕录制权限。',
   'settings.liveSetup.cancel': '取消',
   'settings.liveSetup.confirm': '启用并安装',
   'live.refresh': '刷新状态',

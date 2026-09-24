@@ -6,7 +6,7 @@
 
 ## 问题
 
-saved workflow 只能放在项目（`.qwen/workflows`）或用户目录（`~/.qwen/workflows`），没有办法把可复用的 workflow 分发给别人。Claude Code 插件已经通过 `workflows` 清单字段和默认的 `workflows/` 目录分发 workflow。扩展是 Qwen Code 的分发单元，但扩展文件是第三方代码，所以这个功能必须在扩大分发范围的同时，不扩大 workflow 运行时能读取的范围。
+saved workflow 只能放在项目（`.qwen/workflows`）或用户目录（`~/.qwen/workflows`），没有办法把可复用的 workflow 分发给别人。Claude Code 插件已经通过 `workflows` 清单字段和默认的 `workflows/` 目录分发 workflow。扩展是 Tay Bellow 的分发单元，但扩展文件是第三方代码，所以这个功能必须在扩大分发范围的同时，不扩大 workflow 运行时能读取的范围。
 
 ## 决策
 

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 Qwen Code
+ * Copyright 2026 Tay Bellow
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -359,7 +359,7 @@ describe('startupPrefetch', () => {
     expect(mockHandleAutoUpdate).not.toHaveBeenCalled();
     expect(mockUpdateEventEmit).toHaveBeenCalledWith('update-info', {
       message:
-        'Update available\nUpdate Qwen Code on the host, then restart the sandbox.',
+        'Update available\nUpdate Tay Bellow on the host, then restart the sandbox.',
     });
   });
 

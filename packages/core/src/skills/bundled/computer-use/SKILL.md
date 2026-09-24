@@ -50,7 +50,7 @@ qwen mcp add --scope user node-repl npx -y @qwen-code/node-repl-mcp@0.1.6
 npm install --no-save --package-lock=false @qwen-code/cua-sdk@0.20.9
 ```
 
-Tell the user to restart Qwen Code, then stop. If only the SDK import is missing,
+Tell the user to restart Tay Bellow, then stop. If only the SDK import is missing,
 run the second command and retry.
 
 Reuse an existing `computer` connected to the intended desktop. Otherwise import

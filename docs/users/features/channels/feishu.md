@@ -1,6 +1,6 @@
 # Feishu (Lark)
 
-This guide covers setting up a Qwen Code channel on Feishu (飞书) / Lark.
+This guide covers setting up a Tay Bellow channel on Feishu (飞书) / Lark.
 
 ## Prerequisites
 

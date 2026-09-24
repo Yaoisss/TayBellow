@@ -1,6 +1,6 @@
-# Installation Guide for Qwen Code with Source Tracking
+# Installation Guide for Tay Bellow with Source Tracking
 
-This guide describes the source-tracking installation scripts for Qwen Code.
+This guide describes the source-tracking installation scripts for Tay Bellow.
 The scripts prefer standalone release archives and can fall back to npm when a
 standalone archive is not available.
 
@@ -134,7 +134,7 @@ install-qwen-standalone.bat --method npm
 ```
 
 Repair PATH for an existing standalone Windows install without downloading or
-reinstalling Qwen Code:
+reinstalling Tay Bellow:
 
 ```bat
 install-qwen-standalone.bat --repair-path
@@ -143,7 +143,7 @@ install-qwen-standalone.bat --repair-path --path-scope machine
 
 ## Optional Native Modules
 
-The standalone archives bundle Qwen Code, a private Node.js runtime, and the
+The standalone archives bundle Tay Bellow, a private Node.js runtime, and the
 matching `@teddyzhu/clipboard` native package for clipboard image paste. They
 also ship `@lydell/node-pty` plus the matching platform prebuild for
 `darwin-arm64`, `darwin-x64`, `linux-x64` and `win-x64`, which is what the web
@@ -321,7 +321,7 @@ If source tracking is not needed and Node.js 22 or newer is already available:
 npm install -g @qwen-code/qwen-code@latest
 ```
 
-Homebrew users can also install Qwen Code with:
+Homebrew users can also install Tay Bellow with:
 
 ```bash
 brew install qwen-code

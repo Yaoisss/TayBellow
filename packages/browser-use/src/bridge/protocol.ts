@@ -8,7 +8,7 @@ import { statSync } from 'node:fs';
 import { posix } from 'node:path';
 
 export const CHROME_BRIDGE_PROTOCOL_VERSION = 3;
-// Protocol 3 registers under its own host name and launcher. Qwen Code
+// Protocol 3 registers under its own host name and launcher. Tay Bellow
 // releases speaking protocol 2 re-register `com.qwen.browser` (and its
 // `native-host.sh` launcher) on every first use, so sharing that name would
 // let any older CLI point Chrome back at a protocol 2 Host.

@@ -731,7 +731,7 @@ describe('first-use Native Host setup', () => {
       expect(result).toBeInstanceOf(NativeHostNewerError);
       expect(result).toMatchObject({
         installedProtocolVersion: CHROME_BRIDGE_PROTOCOL_VERSION + 1,
-        message: expect.stringContaining('Update Qwen Code'),
+        message: expect.stringContaining('Update Tay Bellow'),
       });
     } else {
       expect(result).toMatchObject({
@@ -745,7 +745,7 @@ describe('first-use Native Host setup', () => {
     );
   });
 
-  it('is unaffected by the protocol 2 registration older Qwen Code rewrites', async () => {
+  it('is unaffected by the protocol 2 registration older Tay Bellow rewrites', async () => {
     const fixture = createFixture();
     const browserRoot = createBrowserProfile(
       fixture.homeDir,

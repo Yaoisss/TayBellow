@@ -171,7 +171,7 @@ export function buildComment(sections, ctx = {}) {
       '⚠️ _The PR-base baseline could not be built this run, so the before/after diff was skipped. Re-run to compare._',
     );
     out.push('');
-    out.push('— _Qwen Code · serve A/B_');
+    out.push('— _Tay Bellow · serve A/B_');
     return out.join('\n') + '\n';
   }
   // Partial run: the base produced SOME captures and then stopped (a canary
@@ -202,7 +202,7 @@ export function buildComment(sections, ctx = {}) {
   } else {
     for (const s of changed) out.push(renderTable(s.scenario, s.changes));
   }
-  out.push('— _Qwen Code · serve A/B_');
+  out.push('— _Tay Bellow · serve A/B_');
   return out.join('\n') + '\n';
 }
 

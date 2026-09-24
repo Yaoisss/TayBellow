@@ -57,4 +57,4 @@ curl -fsSL https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/un
 irm https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.ps1 | iex
 ```
 
-The uninstaller removes the standalone runtime, generated `qwen` wrapper, and installer-managed PATH changes. Your Qwen Code configuration (`~/.qwen`) is preserved by default.
+The uninstaller removes the standalone runtime, generated `qwen` wrapper, and installer-managed PATH changes. Your Tay Bellow configuration (`~/.qwen`) is preserved by default.

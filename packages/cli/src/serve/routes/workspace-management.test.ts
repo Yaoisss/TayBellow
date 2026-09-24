@@ -167,7 +167,7 @@ describe('owned workspace runtime publication', () => {
       makeRuntime('/Users/test', { primary: true }),
     ]);
     const runtime = makeRuntime(
-      '/Users/test/Documents/Qwen Code/Conversations',
+      '/Users/test/Documents/Tay Bellow/Conversations',
       {
         provenance: 'live-conversation',
         removable: false,
@@ -216,12 +216,12 @@ describe('owned workspace runtime publication', () => {
 
   it('does not let the Live root contain an existing workspace', async () => {
     const registry = createMockRegistry([
-      makeRuntime('/Users/test/Documents/Qwen Code/Conversations/project', {
+      makeRuntime('/Users/test/Documents/Tay Bellow/Conversations/project', {
         primary: true,
       }),
     ]);
     const runtime = makeRuntime(
-      '/Users/test/Documents/Qwen Code/Conversations',
+      '/Users/test/Documents/Tay Bellow/Conversations',
       {
         provenance: 'live-conversation',
         removable: false,
@@ -1171,7 +1171,7 @@ describe('POST /workspaces', () => {
 
   it('does not expose the hidden Live runtime to workspace nesting checks', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'Qwen Code', 'Conversations');
+    const liveRoot = join(parent, 'Documents', 'Tay Bellow', 'Conversations');
     try {
       const { app } = createApp({
         workspaceRegistry: createMockRegistry([
@@ -1193,7 +1193,7 @@ describe('POST /workspaces', () => {
 
   it('still blocks a user workspace inside the hidden Live runtime', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'Qwen Code', 'Conversations');
+    const liveRoot = join(parent, 'Documents', 'Tay Bellow', 'Conversations');
     const child = join(liveRoot, 'conversation');
     try {
       await mkdir(child, { recursive: true });
@@ -1665,7 +1665,7 @@ describe('POST /workspaces', () => {
 
   it('promotes a workspace that contains the hidden Live runtime', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'Qwen Code', 'Conversations');
+    const liveRoot = join(parent, 'Documents', 'Tay Bellow', 'Conversations');
     const add = vi.fn().mockResolvedValue(true);
     try {
       const { app } = createApp({

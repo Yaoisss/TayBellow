@@ -12,7 +12,7 @@ timeout, result limit, or dialect in either profile.
 
 ## Installation
 
-Install the published Extension with Qwen Code:
+Install the published Extension with Tay Bellow:
 
 ```bash
 qwen extensions install @qwen-code/external-context-mem0
@@ -26,7 +26,7 @@ Use an explicit package version when the deployment must remain pinned:
 qwen extensions install @qwen-code/external-context-mem0@x.y.z
 ```
 
-The Extension version follows the Qwen Code release version. Installation does
+The Extension version follows the Tay Bellow release version. Installation does
 not configure a memory service or install provider data. An administrator must
 supply an instance file, a dialect file, and the credential environment
 variable described below.
@@ -180,12 +180,12 @@ launcher script, or a command-line argument. The configuration path is not an
 ordinary Qwen setting.
 
 Both files are limited to 64 KiB. The on-demand MCP process reads them once at
-startup. Restart Qwen Code after changing either file or environment value in
+startup. Restart Tay Bellow after changing either file or environment value in
 that profile.
 
 ### 5. Verify the deployment
 
-1. Start Qwen Code from the configured process environment.
+1. Start Tay Bellow from the configured process environment.
 2. Open `/mcp` and verify that `external-context-mem0` is connected.
 3. Verify that the server exposes only `context_search`.
 4. Search for a known, non-sensitive record in the fixed scope and confirm the
@@ -287,7 +287,7 @@ credential, and common secret shapes, then keeps at most 512 Unicode code
 points. This is best-effort reduction, not DLP. Each eligible invocation is a
 new process and reads the v3 instance and dialect once, so administrator file
 changes apply to the next eligible prompt. Environment and Hook registration
-changes require restarting Qwen Code.
+changes require restarting Tay Bellow.
 
 ## Runtime guarantees
 

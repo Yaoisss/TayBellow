@@ -8,7 +8,7 @@
  * What the `@qwen-code/sdk/peer` build must never ship.
  *
  * The subpath is a standalone implementation of the cross-session protocol:
- * a bundle carrying one of the SDK's runtime dependencies, or Qwen Code's
+ * a bundle carrying one of the SDK's runtime dependencies, or Tay Bellow's
  * own sources, would no longer be one, and a declaration that imports an
  * internal package would not resolve for anyone who installs the SDK. Kept
  * in its own module so the build and a test share one definition.

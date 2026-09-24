@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Qwen Code Daemon REST API",
+    "title": "Tay Bellow Daemon REST API",
     "version": "v1",
     "description": "The supported 25-operation REST/SSE integration surface for qwen serve. The daemon registers a wider route surface, including other public, capability-gated routes that are not part of this compatibility promise.",
     "license": {

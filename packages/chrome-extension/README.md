@@ -1,6 +1,6 @@
 # @qwen-code/chrome-bridge
 
-A Chrome extension that brings Qwen Code into the browser as a thin client of a
+A Chrome extension that brings Tay Bellow into the browser as a thin client of a
 local [`qwen serve`](../../docs/users/qwen-serve.md) daemon and provides the
 Chrome side of Browser Use.
 
@@ -50,7 +50,7 @@ welcome screen for the chat UI automatically.
 
 ## Browser Use
 
-Browser Use ships with Qwen Code as a built-in skill and SDK runtime, using
+Browser Use ships with Tay Bellow as a built-in skill and SDK runtime, using
 Qwen's standard Node REPL. No separate Qwen extension installation is needed.
 On macOS and Linux, the first browser task automatically registers the shared
 Native Messaging host in the user's installation directory. The SDK can finish
@@ -58,9 +58,9 @@ this local setup before the extension connects; it verifies the live connection
 and protocol instead of reading Chrome's extension preferences. If it cannot
 connect, open Chrome and install or enable the extension in the intended profile,
 then retry. Later sessions reuse an installed Host of the same protocol, and a
-Host installed by a newer Qwen Code is never downgraded. Run
+Host installed by a newer Tay Bellow is never downgraded. Run
 `node <skill-base>/runtime/scripts/native-host-setup.js status` to inspect the
-installation, `install` to switch it to this Qwen Code's Host from the next
+installation, `install` to switch it to this Tay Bellow's Host from the next
 Host start, or `uninstall` to remove files owned by Browser Use. `<skill-base>`
 is the base directory shown when loading the Browser Use skill. A later Browser
 Use initialization can register the Host again.
@@ -101,7 +101,7 @@ QWEN_CDP_MCP_COMMAND=chrome-devtools-mcp \
   qwen serve --allow-origin chrome-extension://idkijaaipeeinemigojbjkmfmabokbdk
 ```
 
-The separately installed adapter is not included in the Qwen Code npm package
+The separately installed adapter is not included in the Tay Bellow npm package
 or Chrome extension zip.
 Clients can distinguish the states through `/capabilities`:
 

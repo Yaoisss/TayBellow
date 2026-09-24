@@ -78,7 +78,7 @@ for the benchmark duration.
 - Dispatch / pool submit: one-shot run and task creator.
 - PostgreSQL: shared persistent state store, not the scheduler.
 - Coordinator: expired-lease recovery, run reconciliation, and completion gate.
-- Executors: task claim, Harbor/Qwen Code/grader execution, heartbeat, and
+- Executors: task claim, Harbor/Tay Bellow/grader execution, heartbeat, and
   outcome submission.
 - Publisher: terminal-run validation, public result and trajectory bundle
   generation, and active GitHub Release writeback.
@@ -97,7 +97,7 @@ The isolated prerelease validation completed on 2026-07-25:
 - Pool run: `pool-31a24bc8acca49d2`
 - Dataset: `swe-bench/swe-bench-verified@2`, 500 frozen instances
 - Execution: 10 persistent Executors, at most two attempts per instance
-- Qwen Code: `v0.20.0-nightly.20260722.b98306b7e`
+- Tay Bellow: `v0.20.0-nightly.20260722.b98306b7e`
 - Model: `qwen3.7-max`
 - Wall time: approximately 12 hours 27 minutes
 - Results: 332 `RESOLVED`, 107 `UNRESOLVED`, 56 `EXECUTION_ERROR`,

@@ -1,6 +1,6 @@
 # Qwen CUA Driver
 
-Qwen Code's vendored distribution of the cross-platform Cua Driver runtime.
+Tay Bellow's vendored distribution of the cross-platform Cua Driver runtime.
 It provides native desktop and browser automation over MCP, a one-shot CLI,
 and in-process Python and TypeScript SDKs.
 
@@ -50,7 +50,7 @@ Run the MCP server directly:
 qwen-cua-driver mcp
 ```
 
-Register it with Qwen Code:
+Register it with Tay Bellow:
 
 ```bash
 qwen mcp add cua-driver qwen-cua-driver mcp
