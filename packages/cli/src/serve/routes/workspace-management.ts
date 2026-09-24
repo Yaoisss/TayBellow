@@ -9,7 +9,7 @@ import {
   type WorkspaceRemovalActivity,
 } from '../workspace-activity.js';
 import { prepareSshWorkspace } from '../ssh-workspace-store.js';
-import { readdir, stat } from 'node:fs/promises';
+import { mkdir, readdir, stat } from 'node:fs/promises';
 import {
   translateAndCheckAbsoluteWorkspacePath,
   MAX_WORKSPACE_PATH_LENGTH,
@@ -843,6 +843,87 @@ export function registerWorkspaceManagementRoutes(
     },
   );
 
+  // Creates a single missing leaf directory for the "Add workspace" browse
+  // flow, so a user can start a task in a folder that does not exist on the
+  // host yet. The write surface is deliberately narrow — the parent must
+  // already exist and be a directory, and the leaf must not — so a typo
+  // cannot plant a multi-level tree on the host. That stays inside the trust
+  // surface of `POST /workspaces`, which already lets an authenticated
+  // client register any absolute directory; the browse dialog
+  // (`GET /workspace-path-suggestions`) is what makes the parent visible.
+  app.post(
+    '/workspace-directory-create',
+    mutate(),
+    async (req: Request, res: Response) => {
+      const body = safeBody(req);
+      const pathRaw = body['path'];
+      if (typeof pathRaw !== 'string' || pathRaw.trim().length === 0) {
+        res.status(400).json({
+          error: '`path` must be a non-empty string',
+          code: 'invalid_path',
+        });
+        return;
+      }
+      const candidate = pathRaw.trim();
+      if (candidate.length > MAX_WORKSPACE_PATH_LENGTH) {
+        res.status(400).json({
+          error: `\`path\` exceeds the ${MAX_WORKSPACE_PATH_LENGTH}-character limit`,
+          code: 'invalid_path',
+        });
+        return;
+      }
+      if (!isAbsolute(candidate)) {
+        res.status(400).json({
+          error: '`path` must be an absolute path',
+          code: 'invalid_path',
+        });
+        return;
+      }
+      // resolve() normalizes away a trailing separator and, on Windows,
+      // whichever separator the dialog typed.
+      const target = resolve(candidate);
+      const parent = dirname(target);
+      try {
+        const parentStat = await stat(parent);
+        if (!parentStat.isDirectory()) {
+          res.status(400).json({
+            error: 'Parent path is not a directory',
+            code: 'invalid_path',
+          });
+          return;
+        }
+      } catch {
+        res.status(400).json({
+          error: 'Parent path does not exist or is not accessible',
+          code: 'invalid_path',
+        });
+        return;
+      }
+      try {
+        await mkdir(target);
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code === 'EEXIST') {
+          res.status(409).json({
+            error: 'Path already exists',
+            code: 'path_exists',
+          });
+          return;
+        }
+        res.status(500).json({
+          error: `Failed to create directory: ${
+            error instanceof Error ? error.message : String(error)
+          }`,
+          code: 'directory_create_failed',
+        });
+        return;
+      }
+      res.status(201).json({
+        kind: 'workspace-directory-created',
+        path: target,
+      });
+    },
+  );
+
   // Proxies directory suggestions from a remote daemon, so the Web Shell can
   // browse a remote daemon's folders without navigating the page. The target
   // daemon must be reachable from this daemon's host.
@@ -980,6 +1061,84 @@ export function registerWorkspaceManagementRoutes(
         // A failure the target explained is not "unreachable": parsing its
         // body unconditionally turned a bodyless 401 and an HTML gateway 502
         // into `remote_unreachable` with a JSON parse message as the reason.
+        if (!upstream.ok) {
+          const envelope = await remoteErrorEnvelope(upstream);
+          res.status(envelope.status).json(envelope.body);
+          return;
+        }
+        const data = await readRemoteDaemonJson(upstream);
+        res.status(upstream.status).json(data);
+      } catch (error) {
+        // The caller hung up: the response is gone, so there is nothing to
+        // answer and writing a 502 to it would only throw.
+        if (clientAbort.signal.aborted) return;
+        res.status(502).json({
+          error: `Failed to reach remote daemon: ${error instanceof Error ? error.message : String(error)}`,
+          code: 'remote_unreachable',
+        });
+      }
+    },
+  );
+
+  // Proxies directory creation to a remote daemon, so the Web Shell can
+  // create the folder on the daemon whose folders it is currently browsing.
+  app.post(
+    '/remote-workspace-directory-create',
+    mutate(),
+    async (req: Request, res: Response) => {
+      const body = safeBody(req);
+      const daemonRaw = body['daemon'];
+      const pathRaw = body['path'];
+      if (typeof daemonRaw !== 'string' || daemonRaw.trim().length === 0) {
+        res.status(400).json({
+          error: '`daemon` must be a non-empty string',
+          code: 'invalid_daemon',
+        });
+        return;
+      }
+      if (typeof pathRaw !== 'string' || pathRaw.trim().length === 0) {
+        res.status(400).json({
+          error: '`path` must be a non-empty string',
+          code: 'invalid_path',
+        });
+        return;
+      }
+      let daemonOrigin: string;
+      try {
+        const parsed = new URL(daemonRaw);
+        if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+          throw new Error('unsupported protocol');
+        }
+        daemonOrigin = parsed.origin;
+      } catch {
+        res.status(400).json({
+          error: '`daemon` must be a valid HTTP(S) origin',
+          code: 'invalid_daemon',
+        });
+        return;
+      }
+      const token = req.headers['x-daemon-token'];
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+      if (typeof token === 'string' && token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      // One create per explicit click, so the socket-release pattern of the
+      // browse routes matters less here, but a caller that hung up must still
+      // not pin an outbound socket until the proxy timeout expires.
+      const clientAbort = new AbortController();
+      res.on('close', () => clientAbort.abort());
+      try {
+        const upstream = await fetchRemoteDaemon(
+          `${daemonOrigin}/workspace-directory-create`,
+          {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ path: pathRaw }),
+          },
+          clientAbort.signal,
+        );
         if (!upstream.ok) {
           const envelope = await remoteErrorEnvelope(upstream);
           res.status(envelope.status).json(envelope.body);

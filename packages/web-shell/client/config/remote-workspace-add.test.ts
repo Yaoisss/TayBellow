@@ -30,6 +30,7 @@ const {
   addWorkspaceToDaemon,
   clearRemoteWorkspaceAddStep,
   completeRemoteWorkspaceAdd,
+  createDirectoryOnDaemon,
   discardAbandonedRemoteWorkspaceAdd,
   fetchRemotePathSuggestions,
   isRemoteWorkspaceAddActive,
@@ -275,11 +276,67 @@ describe('remote daemon proxy calls', () => {
     expect(navigateToDaemon).not.toHaveBeenCalled();
   });
 
+  it('authenticates the directory-create proxy and returns the created path', async () => {
+    setLocation(`${testOrigin}/?daemon=${encodeURIComponent(REMOTE)}`);
+    stubTokens();
+    const fetchMock = vi.fn(async () => ({
+      ok: true,
+      status: 201,
+      json: async () => ({
+        kind: 'workspace-directory-created',
+        path: '/srv/new-folder',
+      }),
+      text: async () => '',
+    }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const created = await createDirectoryOnDaemon(REMOTE, '/srv/new-folder');
+
+    expect(created).toBe('/srv/new-folder');
+    const [url, init] = fetchMock.mock.calls[0] as [
+      string,
+      { method: string; headers: Record<string, string>; body: string },
+    ];
+    expect(url).toBe('/remote-workspace-directory-create');
+    expect(init.method).toBe('POST');
+    expect(init.headers).toEqual({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer serving-secret',
+      'X-Daemon-Token': 'target-secret',
+    });
+    expect(JSON.parse(init.body)).toEqual({
+      daemon: REMOTE,
+      path: '/srv/new-folder',
+    });
+  });
+
+  it('rejects a create answer that names no created path', async () => {
+    setLocation(`${testOrigin}/?daemon=${encodeURIComponent(REMOTE)}`);
+    stubTokens();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ kind: 'workspace-directory-created' }),
+        text: async () => '',
+      })),
+    );
+
+    await expect(createDirectoryOnDaemon(REMOTE, '/srv/x')).rejects.toThrow(
+      'returned no created path',
+    );
+  });
+
   it.each([
     ['directory browse', () => fetchRemotePathSuggestions(REMOTE, '/srv/')],
     [
       'workspace registration',
       () => addWorkspaceToDaemon(REMOTE, '/srv/shared-checkout/', false),
+    ],
+    [
+      'directory creation',
+      () => createDirectoryOnDaemon(REMOTE, '/srv/new-folder'),
     ],
   ])(
     'reopens target authentication after a rejected %s credential',

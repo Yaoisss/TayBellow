@@ -418,6 +418,12 @@ export type DaemonWorkspaceDirectoryPickerResult =
       selected: false;
     };
 
+export interface DaemonWorkspaceDirectoryCreateResult {
+  kind: 'workspace-directory-created';
+  /** Absolute path of the created directory on the daemon host. */
+  path: string;
+}
+
 export interface DaemonWorkspaceActions {
   // Sessions
   listSessions(
@@ -722,6 +728,7 @@ export interface DaemonWorkspaceActions {
     prefix: string,
   ): Promise<DaemonWorkspacePathSuggestions>;
   pickWorkspaceDirectory(): Promise<DaemonWorkspaceDirectoryPickerResult>;
+  createWorkspaceDirectory(path: string): Promise<DaemonWorkspaceDirectoryCreateResult>;
   updateWorkspace(
     workspaceSelector: string,
     update: DaemonWorkspaceUpdate,

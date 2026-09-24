@@ -2290,6 +2290,22 @@ export class DaemonClient {
     );
   }
 
+  /**
+   * Creates a single missing leaf directory on the daemon host, for flows
+   * that pick a path outside any registered workspace (e.g. "Add workspace").
+   */
+  async workspaceDirectoryCreate(path: string): Promise<unknown> {
+    return await this.jsonRequest<unknown>(
+      '/workspace-directory-create',
+      'POST /workspace-directory-create',
+      {
+        method: 'POST',
+        body: { path },
+        mode: 'rest',
+      },
+    );
+  }
+
   async glob(pattern: string): Promise<unknown> {
     const query = new URLSearchParams({ pattern });
     return await this.fetchWithTimeout(

@@ -18,6 +18,7 @@ import type {
   DaemonGoal,
   DaemonScheduledTask,
   DaemonWorkspaceActions,
+  DaemonWorkspaceDirectoryCreateResult,
   DaemonWorkspaceDirectoryPickerResult,
   DaemonWorkspacePathSuggestions,
 } from './types.js';
@@ -1166,6 +1167,15 @@ export function createDaemonWorkspaceActions({
         320_000,
       );
       return result as DaemonWorkspaceDirectoryPickerResult;
+    },
+
+    async createWorkspaceDirectory(path) {
+      const client = requireClient(getClient, 'Create directory failed');
+      const result = await withActionTimeout(
+        client.workspaceDirectoryCreate(path),
+        'Create directory timed out',
+      );
+      return result as DaemonWorkspaceDirectoryCreateResult;
     },
 
     async updateWorkspace(workspaceSelector, update) {

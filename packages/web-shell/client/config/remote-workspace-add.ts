@@ -115,6 +115,44 @@ export async function addWorkspaceToDaemon(
   }
 }
 
+/**
+ * Creates a single missing leaf directory on an arbitrary daemon origin
+ * without navigating the page. Used by the Add-workspace dialog's New-folder
+ * affordance while browsing a remote daemon's folders in place.
+ *
+ * Goes through the current daemon's proxy route to avoid CSP issues.
+ */
+export async function createDirectoryOnDaemon(
+  daemonOrigin: string,
+  path: string,
+): Promise<string> {
+  const res = await fetch('/remote-workspace-directory-create', {
+    method: 'POST',
+    headers: remoteProxyHeaders(daemonOrigin, {
+      'Content-Type': 'application/json',
+    }),
+    body: JSON.stringify({ daemon: daemonOrigin, path }),
+  });
+  if (!res.ok) {
+    const body = await res.text().catch(() => '');
+    if (res.status === 401) recoverRejectedTargetCredential(daemonOrigin);
+    throw new DaemonHttpError(
+      res.status,
+      body,
+      `Failed to create directory on ${daemonOrigin}: ${res.status} ${body}`,
+    );
+  }
+  const data = (await res.json()) as { path?: unknown };
+  if (typeof data.path !== 'string' || data.path.length === 0) {
+    throw new DaemonHttpError(
+      res.status,
+      data,
+      `Daemon ${daemonOrigin} returned no created path`,
+    );
+  }
+  return data.path;
+}
+
 export function isRemoteWorkspaceAddActive(): boolean {
   if (typeof window === 'undefined') return false;
   return (

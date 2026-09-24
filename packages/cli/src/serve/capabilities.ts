@@ -396,6 +396,13 @@ export const SERVE_CAPABILITY_REGISTRY = {
   // with a display). Headless hosts omit the tag so clients hide the
   // Browse affordance instead of surfacing a guaranteed picker failure.
   native_directory_picker: { since: 'v1' },
+  // A single missing leaf directory can be created on the daemon host
+  // (`POST /workspace-directory-create`), so the Add-workspace browse
+  // dialog can start a task in a folder that does not exist yet. The
+  // write is parent-must-exist and non-recursive; the tag lets clients
+  // hide the New-folder affordance on older daemons instead of failing
+  // on every click.
+  workspace_directory_create: { since: 'v1' },
   // Workspace-owned runtime lifecycle status and explicit on-demand startup.
   workspace_runtime: { since: 'v1' },
   workspace_runtime_stop: { since: 'v1' },

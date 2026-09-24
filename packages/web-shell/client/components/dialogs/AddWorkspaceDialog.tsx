@@ -23,6 +23,7 @@ import { Switch } from '../ui/switch';
 import {
   CornerLeftUpIcon,
   FolderOpenIcon,
+  FolderPlusIcon,
   LaptopIcon,
   ServerIcon,
 } from 'lucide-react';
@@ -60,6 +61,12 @@ interface AddWorkspaceDialogProps {
    */
   onSuggest?: (prefix: string) => Promise<WorkspacePathSuggestions>;
   onPick?: () => Promise<string | undefined>;
+  /**
+   * Creates a single missing leaf directory on the browsed host. Receives the
+   * full absolute target path and resolves to the created path.
+   */
+  onCreateFolder?: (path: string) => Promise<string>;
+  createFolderSupported?: boolean;
   persistenceSupported?: boolean;
 }
 
@@ -88,6 +95,8 @@ export function AddWorkspaceDialog({
   onLocationChange,
   onSuggest,
   onPick,
+  onCreateFolder,
+  createFolderSupported = false,
   persistenceSupported = true,
 }: AddWorkspaceDialogProps) {
   const { t } = useI18n();
@@ -103,6 +112,10 @@ export function AddWorkspaceDialog({
   const [highlight, setHighlight] = useState(-1);
   const [hostSep, setHostSep] = useState('/');
   const [browsing, setBrowsing] = useState(false);
+  const [creatingFolder, setCreatingFolder] = useState(false);
+  const [newFolderName, setNewFolderName] = useState('');
+  const [creatingFolderBusy, setCreatingFolderBusy] = useState(false);
+  const newFolderInputRef = useRef<HTMLInputElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listOpenRef = useRef(false);
   listOpenRef.current = listOpen && suggestions.length > 0;
@@ -131,6 +144,19 @@ export function AddWorkspaceDialog({
   const closeList = useCallback(() => {
     setListOpen(false);
     setHighlight(-1);
+  }, []);
+
+  const openCreateFolder = useCallback(() => {
+    setCreatingFolder(true);
+    setNewFolderName('');
+    setError(null);
+  }, []);
+
+  const closeCreateFolder = useCallback(() => {
+    setCreatingFolder(false);
+    setNewFolderName('');
+    setError(null);
+    inputRef.current?.focus();
   }, []);
 
   // Reset the path when the location changes, since each daemon has its own
@@ -200,14 +226,22 @@ export function AddWorkspaceDialog({
   }, [browseDirectories, path, onSuggest, closeList]);
 
   // Radix listens for Escape on document capture; intercept one step earlier
-  // (window capture) so an open suggestion list consumes the Escape instead
-  // of closing the whole dialog (DialogShell skips `defaultPrevented`).
+  // (window capture) so an open suggestion list or the new-folder row
+  // consumes the Escape instead of closing the whole dialog (DialogShell
+  // skips `defaultPrevented`).
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      if (creatingFolder) {
+        if (event.isComposing || event.keyCode === 229) return;
+        event.preventDefault();
+        closeCreateFolder();
+        return;
+      }
       // Browse mode keeps the list open by design, so there is nothing for
       // Escape to dismiss there — leave it to close the dialog instead.
       if (browseDirectories) return;
-      if (event.key !== 'Escape' || !listOpenRef.current) return;
+      if (!listOpenRef.current) return;
       if (event.isComposing || event.keyCode === 229) return;
       event.preventDefault();
       closeList();
@@ -215,7 +249,11 @@ export function AddWorkspaceDialog({
     window.addEventListener('keydown', handler, { capture: true });
     return () =>
       window.removeEventListener('keydown', handler, { capture: true });
-  }, [browseDirectories, closeList]);
+  }, [browseDirectories, closeList, creatingFolder, closeCreateFolder]);
+
+  useEffect(() => {
+    if (creatingFolder) newFolderInputRef.current?.focus();
+  }, [creatingFolder]);
 
   const acceptSuggestion = useCallback(
     (suggestion: WorkspacePathSuggestion) => {
@@ -263,6 +301,44 @@ export function AddWorkspaceDialog({
       setBrowsing(false);
     }
   }, [onPick, path, closeList, cancelBlurDismiss, t]);
+
+  const confirmCreateFolder = useCallback(async () => {
+    if (!onCreateFolder || creatingFolderBusy) return;
+    const name = newFolderName.trim();
+    if (!name || /[\\/]/.test(name) || name === '.' || name === '..') {
+      setError(t('workspaceHost.newFolderInvalid'));
+      return;
+    }
+    // The parent is the listed directory: a trailing separator means the
+    // typed path is the parent itself; otherwise the final segment is an
+    // in-progress filter to strip (mirrors GET /workspace-path-suggestions).
+    const endsWithSep = /[\\/]$/.test(path);
+    const lastSep = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
+    const parent = endsWithSep
+      ? path
+      : lastSep >= 0
+        ? path.slice(0, lastSep + 1)
+        : '';
+    if (!parent) {
+      setError(t('sidebar.addWorkspaceAbsError'));
+      return;
+    }
+    setCreatingFolderBusy(true);
+    setError(null);
+    try {
+      const created = await onCreateFolder(parent + name);
+      setCreatingFolder(false);
+      setNewFolderName('');
+      setPath(created + hostSep);
+      inputRef.current?.focus();
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : t('workspaceHost.newFolderError'),
+      );
+    } finally {
+      setCreatingFolderBusy(false);
+    }
+  }, [onCreateFolder, creatingFolderBusy, newFolderName, path, hostSep, t]);
 
   const handleInputKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -509,6 +585,23 @@ export function AddWorkspaceDialog({
                     <CornerLeftUpIcon aria-hidden="true" />
                   </Button>
                 )}
+                {browseDirectories &&
+                  createFolderSupported &&
+                  onCreateFolder &&
+                  !path.trim().startsWith('ssh://') && (
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="outline"
+                      title={t('workspaceHost.newFolder')}
+                      aria-label={t('workspaceHost.newFolder')}
+                      disabled={submitting || browsing || creatingFolderBusy}
+                      onMouseDown={(event) => event.preventDefault()}
+                      onClick={openCreateFolder}
+                    >
+                      <FolderPlusIcon aria-hidden="true" />
+                    </Button>
+                  )}
                 {onPick && (
                   <Button
                     type="button"
@@ -522,6 +615,50 @@ export function AddWorkspaceDialog({
                   </Button>
                 )}
               </div>
+              {creatingFolder && (
+                <div className="mt-2 flex gap-2">
+                  <Input
+                    ref={newFolderInputRef}
+                    id="add-workspace-new-folder"
+                    type="text"
+                    value={newFolderName}
+                    placeholder={t('workspaceHost.newFolderName')}
+                    aria-label={t('workspaceHost.newFolderName')}
+                    onChange={(event) => {
+                      setNewFolderName(event.target.value);
+                      if (error) setError(null);
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key !== 'Enter') return;
+                      event.preventDefault();
+                      if (event.nativeEvent.isComposing) return;
+                      void confirmCreateFolder();
+                    }}
+                    disabled={creatingFolderBusy}
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                    autoComplete="off"
+                    spellCheck={false}
+                  />
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => void confirmCreateFolder()}
+                    disabled={creatingFolderBusy || !newFolderName.trim()}
+                  >
+                    {t('workspaceHost.newFolderCreate')}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={closeCreateFolder}
+                    disabled={creatingFolderBusy}
+                  >
+                    {t('workspaceHost.newFolderCancel')}
+                  </Button>
+                </div>
+              )}
               {browseDirectories && (
                 // Above the list, because it points at it. A plain paragraph
                 // rather than FieldDescription, whose last-child margin rules

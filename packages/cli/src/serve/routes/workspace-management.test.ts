@@ -27,6 +27,7 @@ import {
   mkdtemp,
   readdir,
   rm,
+  stat,
   symlink,
   writeFile,
 } from 'node:fs/promises';
@@ -3474,6 +3475,149 @@ describe('POST /workspace-directory-picker', () => {
   });
 });
 
+describe('POST /workspace-directory-create', () => {
+  let root: string;
+
+  beforeEach(async () => {
+    root = await mkdtemp(join(REAL_DIR, 'workspace-create-'));
+  });
+
+  afterEach(async () => {
+    await rm(root, { recursive: true, force: true });
+  });
+
+  it('creates a missing leaf directory inside an existing parent', async () => {
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: join(root, 'fresh-workspace') });
+
+    expect(res.status).toBe(201);
+    expect(res.body).toEqual({
+      kind: 'workspace-directory-created',
+      path: join(root, 'fresh-workspace'),
+    });
+    const created = await stat(join(root, 'fresh-workspace'));
+    expect(created.isDirectory()).toBe(true);
+  });
+
+  it('normalizes a trailing separator in the requested path', async () => {
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: `${join(root, 'trailing')}/` });
+
+    expect(res.status).toBe(201);
+    expect(res.body.path).toBe(join(root, 'trailing'));
+    const created = await stat(join(root, 'trailing'));
+    expect(created.isDirectory()).toBe(true);
+  });
+
+  it('rejects a missing or empty path', async () => {
+    const { app } = createApp();
+
+    const missing = await request(app)
+      .post('/workspace-directory-create')
+      .send({});
+    expect(missing.status).toBe(400);
+    expect(missing.body.code).toBe('invalid_path');
+
+    const blank = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: '   ' });
+    expect(blank.status).toBe(400);
+    expect(blank.body.code).toBe('invalid_path');
+  });
+
+  it('rejects a relative path', async () => {
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: 'relative/leaf' });
+
+    expect(res.status).toBe(400);
+    expect(res.body.code).toBe('invalid_path');
+  });
+
+  it('rejects a leaf whose parent does not exist', async () => {
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: join(root, 'no-such-parent', 'leaf') });
+
+    expect(res.status).toBe(400);
+    expect(res.body.code).toBe('invalid_path');
+    await expect(stat(join(root, 'no-such-parent'))).rejects.toMatchObject({
+      code: 'ENOENT',
+    });
+  });
+
+  it('rejects a leaf whose parent is a regular file', async () => {
+    const filePath = join(root, 'regular-file');
+    await writeFile(filePath, 'not a directory');
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: join(filePath, 'leaf') });
+
+    expect(res.status).toBe(400);
+    expect(res.body.code).toBe('invalid_path');
+  });
+
+  it('returns 409 when the leaf already exists', async () => {
+    await mkdir(join(root, 'already-there'));
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: join(root, 'already-there') });
+
+    expect(res.status).toBe(409);
+    expect(res.body.code).toBe('path_exists');
+  });
+
+  it('maps an unexpected mkdir failure to directory_create_failed', async () => {
+    // A leaf name beyond the filesystem's per-component limit fails with
+    // ENAMETOOLONG — neither EEXIST nor a missing parent — exercising the
+    // generic failure branch without mocking the module.
+    const longName = 'x'.repeat(512);
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: join(root, longName) });
+
+    expect(res.status).toBe(500);
+    expect(res.body.code).toBe('directory_create_failed');
+  });
+
+  it('runs behind the non-strict mutate gate', async () => {
+    const mutate = vi.fn(
+      (options?: { strict?: boolean }) =>
+        (_req: Request, res: Response, next: () => void) => {
+          if (options?.strict) {
+            res.status(401).json({ code: 'token_required' });
+            return;
+          }
+          next();
+        },
+    );
+    const { app } = createApp({ mutate });
+
+    const res = await request(app)
+      .post('/workspace-directory-create')
+      .send({ path: join(root, 'gated') });
+
+    expect(res.status).toBe(201);
+    expect(mutate).toHaveBeenCalledWith();
+  });
+});
+
 describe('remote daemon proxy routes', () => {
   const REMOTE = 'http://127.0.0.1:5199';
   let fetchMock: ReturnType<typeof vi.fn>;
@@ -3544,6 +3688,50 @@ describe('remote daemon proxy routes', () => {
       cwd: '/srv/shared-checkout/',
       persist: true,
     });
+  });
+
+  it('proxies directory creation to the target daemon', async () => {
+    fetchMock.mockResolvedValue(
+      jsonResponse(
+        { kind: 'workspace-directory-created', path: '/srv/new-folder' },
+        201,
+      ),
+    );
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/remote-workspace-directory-create')
+      .set('X-Daemon-Token', 'target-secret')
+      .send({ daemon: REMOTE, path: '/srv/new-folder' });
+
+    expect(res.status).toBe(201);
+    expect(res.body).toEqual({
+      kind: 'workspace-directory-created',
+      path: '/srv/new-folder',
+    });
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe(`${REMOTE}/workspace-directory-create`);
+    expect(init.method).toBe('POST');
+    expect(init.redirect).toBe('error');
+    expect(init.signal).toBeInstanceOf(AbortSignal);
+    expect((init.headers as Record<string, string>)['Authorization']).toBe(
+      'Bearer target-secret',
+    );
+    expect(JSON.parse(String(init.body))).toEqual({ path: '/srv/new-folder' });
+  });
+
+  it('surfaces a create failure the target explained, not remote_unreachable', async () => {
+    fetchMock.mockResolvedValue(
+      jsonResponse({ error: 'Path already exists', code: 'path_exists' }, 409),
+    );
+    const { app } = createApp();
+
+    const res = await request(app)
+      .post('/remote-workspace-directory-create')
+      .send({ daemon: REMOTE, path: '/srv/exists' });
+
+    expect(res.status).toBe(409);
+    expect(res.body.code).toBe('path_exists');
   });
 
   it('refuses an upstream body over the byte cap instead of buffering it', async () => {

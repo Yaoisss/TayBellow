@@ -1680,6 +1680,13 @@ const EN: Messages = {
   'workspaceHost.browseHint':
     'Choose a folder below, or type an absolute path.',
   'workspaceHost.parent': 'Parent folder',
+  'workspaceHost.newFolder': 'New folder',
+  'workspaceHost.newFolderName': 'Folder name',
+  'workspaceHost.newFolderCreate': 'Create',
+  'workspaceHost.newFolderCancel': 'Cancel',
+  'workspaceHost.newFolderInvalid':
+    'Folder names cannot be empty, contain path separators, or be "." or "..".',
+  'workspaceHost.newFolderError': 'Failed to create the folder.',
   'workspaceHost.addFolder': 'Add this folder',
   'workspaceHost.noFolders': 'No subfolders in this directory.',
   'workspaceHost.folderListError':
@@ -5589,6 +5596,13 @@ const ZH: Messages = {
   'workspaceHost.folderOnThisComputer': '这台计算机上的目录',
   'workspaceHost.browseHint': '请从下方选择目录，或输入绝对路径。',
   'workspaceHost.parent': '上一级',
+  'workspaceHost.newFolder': '新建文件夹',
+  'workspaceHost.newFolderName': '文件夹名称',
+  'workspaceHost.newFolderCreate': '创建',
+  'workspaceHost.newFolderCancel': '取消',
+  'workspaceHost.newFolderInvalid':
+    '文件夹名称不能为空、包含路径分隔符，也不能是“.”或“..”。',
+  'workspaceHost.newFolderError': '创建文件夹失败。',
   'workspaceHost.addFolder': '添加此文件夹',
   'workspaceHost.noFolders': '此目录下没有子目录。',
   'workspaceHost.folderListError':

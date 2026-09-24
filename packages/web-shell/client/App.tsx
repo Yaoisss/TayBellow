@@ -269,6 +269,7 @@ import {
   addWorkspaceToDaemon,
   clearRemoteWorkspaceAddStep,
   completeRemoteWorkspaceAdd,
+  createDirectoryOnDaemon,
   discardAbandonedRemoteWorkspaceAdd,
   fetchRemotePathSuggestions,
   isRemoteWorkspaceAddActive,
@@ -3692,6 +3693,9 @@ export function App({
   // hidden instead of failing on every click.
   const nativeDirectoryPickerSupported =
     workspace.capabilities?.features?.includes('native_directory_picker') ===
+    true;
+  const workspaceDirectoryCreateSupported =
+    workspace.capabilities?.features?.includes('workspace_directory_create') ===
     true;
   const gitHubPrsSupported =
     workspace.capabilities?.features?.includes('workspace_github_prs') === true;
@@ -13419,6 +13423,26 @@ export function App({
     workspaceActions,
   ]);
 
+  // Mirrors suggestWorkspacePathsForLocation: the New-folder affordance must
+  // write to whichever host the user is currently browsing.
+  const createWorkspaceDirectoryForLocation = useCallback(
+    async (path: string) => {
+      const location = workspaceAddSelectedLocation;
+      const currentOrigin = workspace.baseUrl || window.location.origin;
+      if (!hasRemoteWorkspaceLocation || location === currentOrigin) {
+        const result = await workspaceActions.createWorkspaceDirectory(path);
+        return result.path;
+      }
+      return createDirectoryOnDaemon(location, path);
+    },
+    [
+      hasRemoteWorkspaceLocation,
+      workspaceAddSelectedLocation,
+      workspace.baseUrl,
+      workspaceActions,
+    ],
+  );
+
   const handleAddRemoteWorkspace = useCallback(
     async (cwd: string, persist: boolean, displayName?: string) => {
       const currentOrigin = workspace.baseUrl || window.location.origin;
@@ -18809,6 +18833,15 @@ export function App({
                     : handleAddWorkspace
                 }
                 onSuggest={suggestWorkspacePathsForLocation}
+                onCreateFolder={
+                  workspaceBrowseActiveRef.current
+                    ? createWorkspaceDirectoryForLocation
+                    : undefined
+                }
+                createFolderSupported={
+                  workspaceBrowseActiveRef.current &&
+                  workspaceDirectoryCreateSupported
+                }
                 onPick={
                   workspaceAddLocationIsConnected &&
                   nativeDirectoryPickerSupported &&

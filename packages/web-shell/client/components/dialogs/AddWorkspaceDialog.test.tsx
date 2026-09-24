@@ -1170,6 +1170,236 @@ describe('AddWorkspaceDialog', () => {
     });
   });
 
+  describe('new folder creation', () => {
+    const SUGGESTIONS = {
+      dir: '/home/me',
+      sep: '/',
+      suggestions: [{ name: 'code', path: '/home/me/code' }],
+      truncated: false,
+    };
+    const newFolderButton = () =>
+      document.querySelector<HTMLButtonElement>(
+        'button[aria-label="New folder"]',
+      );
+    const newFolderInput = () =>
+      document.querySelector<HTMLInputElement>('#add-workspace-new-folder');
+    const settle = async () => {
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(200);
+      });
+    };
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    function createRowHelpers() {
+      const rowInput = () => newFolderInput()!;
+      const typeName = (value: string) => typeInto(rowInput(), value);
+      const createButton = () =>
+        Array.from(document.querySelectorAll<HTMLButtonElement>('button')).find(
+          (button) => button.textContent === 'Create',
+        )!;
+      return { rowInput, typeName, createButton };
+    }
+
+    it('shows the New-folder affordance in browse mode when supported', () => {
+      mount(
+        <AddWorkspaceDialog
+          browseDirectories
+          initialPath="/home/me/"
+          onClose={vi.fn()}
+          onAdd={vi.fn()}
+          onSuggest={vi.fn().mockResolvedValue(SUGGESTIONS)}
+          onCreateFolder={vi.fn()}
+          createFolderSupported
+        />,
+      );
+      expect(newFolderButton()).not.toBeNull();
+    });
+
+    it('hides the affordance without daemon support', () => {
+      // The affordance stays hidden instead of surfacing a guaranteed 404
+      // on older daemons.
+      mount(
+        <AddWorkspaceDialog
+          browseDirectories
+          initialPath="/home/me/"
+          onClose={vi.fn()}
+          onAdd={vi.fn()}
+          onSuggest={vi.fn().mockResolvedValue(SUGGESTIONS)}
+          onCreateFolder={vi.fn()}
+        />,
+      );
+      expect(newFolderButton()).toBeNull();
+    });
+
+    it('hides the affordance for SSH workspaces', () => {
+      mount(
+        <AddWorkspaceDialog
+          browseDirectories
+          initialPath="ssh://alice@build-box/srv/"
+          onClose={vi.fn()}
+          onAdd={vi.fn()}
+          onSuggest={vi.fn().mockResolvedValue(SUGGESTIONS)}
+          onCreateFolder={vi.fn()}
+          createFolderSupported
+        />,
+      );
+      expect(newFolderButton()).toBeNull();
+    });
+
+    it('creates the folder in the listed directory and descends into it', async () => {
+      const onCreateFolder = vi.fn().mockResolvedValue('/home/me/new-project');
+      const onSuggest = vi.fn().mockResolvedValue({
+        ...SUGGESTIONS,
+        suggestions: [],
+      });
+      const { rowInput, typeName, createButton } = createRowHelpers();
+      mount(
+        <AddWorkspaceDialog
+          browseDirectories
+          initialPath="/home/me/"
+          onClose={vi.fn()}
+          onAdd={vi.fn()}
+          onSuggest={onSuggest}
+          onCreateFolder={onCreateFolder}
+          createFolderSupported
+        />,
+      );
+      await settle();
+
+      act(() => newFolderButton()!.click());
+      expect(rowInput()).not.toBeNull();
+      typeName('new-project');
+      act(() => createButton().click());
+      await act(async () => {
+        await Promise.resolve();
+      });
+
+      expect(onCreateFolder).toHaveBeenCalledWith('/home/me/new-project');
+      expect(input().value).toBe('/home/me/new-project/');
+      expect(newFolderInput()).toBeNull();
+      // Descending into the created directory refreshes the listing.
+      await settle();
+      expect(onSuggest).toHaveBeenCalledWith('/home/me/new-project/');
+    });
+
+    it('strips an in-progress filter segment before creating', async () => {
+      const onCreateFolder = vi.fn().mockResolvedValue('/home/me/brand-new');
+      const { typeName, createButton } = createRowHelpers();
+      mount(
+        <AddWorkspaceDialog
+          browseDirectories
+          initialPath="/home/me/bra"
+          onClose={vi.fn()}
+          onAdd={vi.fn()}
+          onSuggest={vi.fn().mockResolvedValue(SUGGESTIONS)}
+          onCreateFolder={onCreateFolder}
+          createFolderSupported
+        />,
+      );
+
+      act(() => newFolderButton()!.click());
+      typeName('brand-new');
+      act(() => createButton().click());
+      await act(async () => {
+        await Promise.resolve();
+      });
+
+      expect(onCreateFolder).toHaveBeenCalledWith('/home/me/brand-new');
+      expect(input().value).toBe('/home/me/brand-new/');
+    });
+
+    it('rejects an invalid folder name without calling onCreateFolder', async () => {
+      const onCreateFolder = vi.fn();
+      const { rowInput, typeName, createButton } = createRowHelpers();
+      mount(
+        <AddWorkspaceDialog
+          browseDirectories
+          initialPath="/home/me/"
+          onClose={vi.fn()}
+          onAdd={vi.fn()}
+          onSuggest={vi.fn().mockResolvedValue(SUGGESTIONS)}
+          onCreateFolder={onCreateFolder}
+          createFolderSupported
+        />,
+      );
+
+      act(() => newFolderButton()!.click());
+      typeName('bad/name');
+      act(() => createButton().click());
+      await act(async () => {
+        await Promise.resolve();
+      });
+
+      expect(onCreateFolder).not.toHaveBeenCalled();
+      expect(alert()?.textContent).toContain('Folder names cannot');
+      expect(rowInput()).not.toBeNull();
+    });
+
+    it('surfaces a create failure from the daemon', async () => {
+      const onCreateFolder = vi
+        .fn()
+        .mockRejectedValue(new Error('Path already exists'));
+      const { typeName, createButton } = createRowHelpers();
+      mount(
+        <AddWorkspaceDialog
+          browseDirectories
+          initialPath="/home/me/"
+          onClose={vi.fn()}
+          onAdd={vi.fn()}
+          onSuggest={vi.fn().mockResolvedValue(SUGGESTIONS)}
+          onCreateFolder={onCreateFolder}
+          createFolderSupported
+        />,
+      );
+
+      act(() => newFolderButton()!.click());
+      typeName('already-there');
+      act(() => createButton().click());
+      await act(async () => {
+        await Promise.resolve();
+      });
+
+      expect(alert()?.textContent).toContain('Path already exists');
+    });
+
+    it('closes the new-folder row on Escape instead of the dialog', async () => {
+      const onClose = vi.fn();
+      mount(
+        <AddWorkspaceDialog
+          browseDirectories
+          initialPath="/home/me/"
+          onClose={onClose}
+          onAdd={vi.fn()}
+          onSuggest={vi.fn().mockResolvedValue(SUGGESTIONS)}
+          onCreateFolder={vi.fn()}
+          createFolderSupported
+        />,
+      );
+
+      act(() => newFolderButton()!.click());
+      expect(newFolderInput()).not.toBeNull();
+
+      act(() => {
+        window.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: 'Escape',
+            bubbles: true,
+            cancelable: true,
+          }),
+        );
+      });
+
+      expect(newFolderInput()).toBeNull();
+      expect(onClose).not.toHaveBeenCalled();
+    });
+  });
+
   it('shows the adding state and disables controls while submitting', async () => {
     let resolveAdd!: () => void;
     const onAdd = vi.fn(
