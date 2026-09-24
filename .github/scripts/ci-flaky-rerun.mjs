@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 
 const execFile = promisify(execFileCallback);
-const TARGET_WORKFLOW = 'Qwen Code CI';
+const TARGET_WORKFLOW = 'Tay Bellow CI';
 const MARKER = 'qwen-ci-flaky-rerun';
 const DEFAULT_STALE_MINUTES = 30;
 const DEFAULT_ACTIVE_DAYS = 7;

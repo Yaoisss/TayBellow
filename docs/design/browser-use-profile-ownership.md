@@ -32,7 +32,7 @@ not authenticate other processes running as the same OS user.
 During discovery, an incompatible Qwen extension does not prevent a compatible
 profile from connecting within the normal connection timeout. If none connects,
 the request fails with `EXTENSION_VERSION_MISMATCH`, whose message identifies
-whether the extension or Qwen Code needs updating. Browser discovery surfaces
+whether the extension or Tay Bellow needs updating. Browser discovery surfaces
 this error instead of reporting an empty browser list, which it reports only
 for a plain `BROWSER_DISCONNECTED`. After a profile is selected, only that
 disconnected profile can supply this diagnostic; unrelated profiles cannot

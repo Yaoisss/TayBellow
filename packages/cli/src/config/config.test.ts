@@ -1538,7 +1538,7 @@ describe('loadCliConfig', () => {
 
   describe('usage statistics', () => {
     it.each<[string, string | undefined, boolean | undefined, boolean]>([
-      ['defaults to enabled', undefined, undefined, true],
+      ['defaults to disabled', undefined, undefined, false],
       ['uses a disabled setting', undefined, false, false],
       ['lets true override a disabled setting', 'true', false, true],
       ['lets 1 override a disabled setting', '1', false, true],

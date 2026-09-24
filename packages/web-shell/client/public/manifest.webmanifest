@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "Qwen Code",
-  "short_name": "Qwen Code",
-  "description": "Qwen Code — AI coding assistant web shell",
+  "name": "Tay Bellow",
+  "short_name": "Tay Bellow",
+  "description": "Tay Bellow — AI coding assistant web shell",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

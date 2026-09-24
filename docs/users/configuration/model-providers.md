@@ -1,6 +1,6 @@
 # Model Providers
 
-Qwen Code allows you to configure multiple model providers through the `modelProviders` setting in your `settings.json`. This enables you to switch between different AI models and providers using the `/model` command.
+Tay Bellow allows you to configure multiple model providers through the `modelProviders` setting in your `settings.json`. This enables you to switch between different AI models and providers using the `/model` command.
 
 ## Overview
 
@@ -454,7 +454,7 @@ Use `openai` with `wireApi: "responses"` to target OpenAI's `/v1/responses` endp
 }
 ```
 
-For a vision model that can also follow the normal Qwen Code agent policy and use tools, opt in to full-turn image routing with both capabilities:
+For a vision model that can also follow the normal Tay Bellow agent policy and use tools, opt in to full-turn image routing with both capabilities:
 
 ```json
 "capabilities": {
@@ -575,7 +575,7 @@ Alibaba Cloud Coding Plan provides a pre-configured set of Qwen models optimized
 
 ### Overview
 
-When you authenticate with an Alibaba Cloud Coding Plan API key using the `/auth` command, Qwen Code automatically configures the following models:
+When you authenticate with an Alibaba Cloud Coding Plan API key using the `/auth` command, Tay Bellow automatically configures the following models:
 
 | Model ID               | Name                 | Description                                               |
 | ---------------------- | -------------------- | --------------------------------------------------------- |
@@ -595,7 +595,7 @@ When you authenticate with an Alibaba Cloud Coding Plan API key using the `/auth
 1. Obtain an Alibaba Cloud Coding Plan API key:
    - **China**: <https://bailian.console.aliyun.com/?tab=model#/efm/coding_plan>
    - **International**: <https://modelstudio.console.alibabacloud.com/?tab=dashboard#/efm/coding_plan>
-2. Run the `/auth` command in Qwen Code
+2. Run the `/auth` command in Tay Bellow
 3. Select **Alibaba ModelStudio**, then choose **Coding Plan** from the sub-menu
 4. Select your region
 5. Enter your API key when prompted
@@ -630,7 +630,7 @@ When you configure Coding Plan through the `/auth` command, the API key is store
 
 ### Automatic Updates
 
-Coding Plan model configurations are versioned. When Qwen Code detects a newer version of the model template, you will be prompted to update. Accepting the update will:
+Coding Plan model configurations are versioned. When Tay Bellow detects a newer version of the model template, you will be prompted to update. Accepting the update will:
 
 - Replace the existing Coding Plan model configurations with the latest versions
 - Preserve any custom model configurations you've added manually
@@ -732,7 +732,7 @@ The configuration resolution follows a strict layering model with one crucial ru
 ### Dynamic values in `customHeaders`
 
 A `customHeaders` value may contain the placeholder `${session_id}`, which is
-expanded per request with the current Qwen Code session ID. Use it for gateways
+expanded per request with the current Tay Bellow session ID. Use it for gateways
 that require a stable per-conversation identifier — OpenCode Go, for example,
 rejects requests without `x-opencode-session`:
 
@@ -762,7 +762,7 @@ placeholder is inert until you also switch on
 ```
 
 Until you do, a value containing a placeholder is **dropped** rather than sent,
-and Qwen Code prints a warning at startup naming the header and this setting.
+and Tay Bellow prints a warning at startup naming the header and this setting.
 The header is never sent with a literal `${session_id}` in it.
 
 The switch is global because it is a consent decision, separate from _where_ the
@@ -901,7 +901,7 @@ For Anthropic this becomes `thinking.budget_tokens`. For OpenAI/DeepSeek the fie
 
 ## Provider Models vs Runtime Models
 
-Qwen Code distinguishes between two types of model configurations:
+Tay Bellow distinguishes between two types of model configurations:
 
 ### Provider Model
 
@@ -921,7 +921,7 @@ Qwen Code distinguishes between two types of model configurations:
 
 ### RuntimeModelSnapshot lifecycle
 
-When you configure a model without using `modelProviders`, Qwen Code automatically creates a RuntimeModelSnapshot to preserve your configuration:
+When you configure a model without using `modelProviders`, Tay Bellow automatically creates a RuntimeModelSnapshot to preserve your configuration:
 
 ```bash
 # This creates a RuntimeModelSnapshot with ID: $runtime|openai|my-custom-model

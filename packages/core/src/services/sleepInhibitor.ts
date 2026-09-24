@@ -81,7 +81,7 @@ export class SleepInhibitor {
     this.logger = config.logger ?? debugLogger;
   }
 
-  acquire(reason = 'Qwen Code is processing a request'): SleepInhibitorHandle {
+  acquire(reason = 'Tay Bellow is processing a request'): SleepInhibitorHandle {
     this.activeCount += 1;
 
     if (this.activeCount === 1) {
@@ -316,7 +316,7 @@ export class SleepInhibitor {
         }
         args.push(
           '--what=sleep',
-          '--who=Qwen Code',
+          '--who=Tay Bellow',
           `--why=${sanitizeInhibitorReason(reason)}`,
           '--mode=block',
           'sleep',

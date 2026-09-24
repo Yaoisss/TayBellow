@@ -1309,7 +1309,7 @@ export class LiveSessionCoordinator {
               context.realtime === source
             ) {
               source.sendBackendContext(
-                `The Qwen Code agent could not complete the request: ${errorMessage(error)}`,
+                `The Tay Bellow agent could not complete the request: ${errorMessage(error)}`,
               );
             }
           });
@@ -1363,7 +1363,7 @@ export class LiveSessionCoordinator {
       );
       persisted = true;
     } catch (error) {
-      const message = `The Qwen Code agent could not complete the request: ${errorMessage(error)}`;
+      const message = `The Tay Bellow agent could not complete the request: ${errorMessage(error)}`;
       if (
         this.isCurrentSocket(context, generation) &&
         context.realtime === source

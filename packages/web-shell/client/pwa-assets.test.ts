@@ -24,8 +24,8 @@ describe('committed PWA assets', () => {
     };
 
     expect(manifest).toMatchObject({
-      name: 'Qwen Code',
-      short_name: 'Qwen Code',
+      name: 'Tay Bellow',
+      short_name: 'Tay Bellow',
       start_url: '/',
       scope: '/',
       display: 'standalone',

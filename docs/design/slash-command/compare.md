@@ -1,4 +1,4 @@
-# Qwen Code Command 模块重构方案
+# Tay Bellow Command 模块重构方案
 
 ## 1. 目标定义
 

@@ -5,7 +5,7 @@
  */
 
 /**
- * An index of the Qwen Code sessions that are running right now.
+ * An index of the Tay Bellow sessions that are running right now.
  *
  * Each top-level session writes `<global dir>/sessions/<pid>.json` at
  * startup and unlinks it on exit. The directory is flat and keyed by PID
@@ -144,7 +144,7 @@ const TEMP_MAX_AGE_MS = 5 * 60 * 1000;
 /**
  * What kind of process registered: an interactive terminal, a
  * `qwen --acp` process running on its own, one the daemon spawned, or a
- * program that is not Qwen Code at all.
+ * program that is not Tay Bellow at all.
  *
  * A label for listings and for aggregators that want to tell a user's own
  * terminals apart from sessions something else is driving. Nothing that

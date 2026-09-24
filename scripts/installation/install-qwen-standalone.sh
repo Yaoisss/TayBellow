@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Qwen Code Installation Script
-# Installs Qwen Code from a standalone archive when available, with npm fallback.
+# Tay Bellow Installation Script
+# Installs Tay Bellow from a standalone archive when available, with npm fallback.
 # This script intentionally does not install Node.js or change npm config.
 #
 # Usage:
@@ -143,7 +143,7 @@ trap 'restore_cursor >&2; kill_active_download; cleanup_temp_dirs; exit 143' TER
 
 print_usage() {
     cat <<EOF
-Qwen Code Installer
+Tay Bellow Installer
 
 Usage: $0 [OPTIONS]
 
@@ -368,7 +368,7 @@ validate_options
 
 print_header() {
     echo ""
-    echo "Installing Qwen Code version: $(display_install_version)"
+    echo "Installing Tay Bellow version: $(display_install_version)"
     echo ""
 }
 
@@ -544,8 +544,8 @@ maybe_update_shell_path() {
 
     [[ -z "${rc_file}" ]] && return 0
 
-    local begin_marker="# Qwen Code PATH block begin"
-    local end_marker="# Qwen Code PATH block end"
+    local begin_marker="# Tay Bellow PATH block begin"
+    local end_marker="# Tay Bellow PATH block end"
     local quoted_install_bin_dir
     quoted_install_bin_dir=$(shell_quote "${install_bin_dir}")
     local export_line
@@ -1090,7 +1090,7 @@ ensure_managed_install_dir() {
     fi
 
     local backup="${install_dir}.backup.$(date +%Y%m%dT%H%M%S 2>/dev/null || date +%Y%m%d%H%M%S)"
-    log_warning "${install_dir} exists but is not a Qwen Code standalone install."
+    log_warning "${install_dir} exists but is not a Tay Bellow standalone install."
     log_warning "Backing up to: ${backup}"
     if mv "${install_dir}" "${backup}"; then
         return 0
@@ -1534,7 +1534,7 @@ print_final_instructions() {
     fi
 
     echo ""
-    echo -e "${MUTED}Qwen Code ${installed_version} installed successfully, to start:${NC}"
+    echo -e "${MUTED}Tay Bellow ${installed_version} installed successfully, to start:${NC}"
     echo ""
     if [[ -n "${reload_cmd}" ]]; then
         echo -e "${reload_cmd}  ${MUTED}# Load new PATH (or open a new terminal)${NC}"
@@ -1548,7 +1548,7 @@ print_final_instructions() {
 
 main() {
     if [[ -z "${HOME:-}" ]]; then
-        log_error "HOME is not set; cannot determine where to install Qwen Code."
+        log_error "HOME is not set; cannot determine where to install Tay Bellow."
         exit 1
     fi
 

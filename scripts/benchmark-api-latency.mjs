@@ -140,7 +140,7 @@ async function benchmarkEndpoint({ url, label }) {
 
 // ---------------------------------------------------------------------------
 
-console.log('=== Qwen Code API Preconnect Latency Benchmark ===');
+console.log('=== Tay Bellow API Preconnect Latency Benchmark ===');
 console.log(`Iterations per endpoint : ${ITERATIONS}`);
 console.log(`Request timeout         : ${REQUEST_TIMEOUT_MS}ms`);
 console.log('\nRunning...');

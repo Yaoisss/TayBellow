@@ -178,7 +178,7 @@ describe('sidebar brand', () => {
   it('renders the built-in name and inline mark when no brand is configured', () => {
     renderSidebar();
 
-    expect(container.textContent).toContain('Qwen Code');
+    expect(container.textContent).toContain('Tay Bellow');
     expect(brandLogoImage()).toBeNull();
     // The positive half of "default unchanged": the built-in mark is actually
     // there, not merely that no img is present (an empty 28px box passes that).
@@ -189,7 +189,7 @@ describe('sidebar brand', () => {
     renderSidebar({ name: 'QiuQiu Code' });
 
     expect(container.textContent).toContain('QiuQiu Code');
-    expect(container.textContent).not.toContain('Qwen Code');
+    expect(container.textContent).not.toContain('Tay Bellow');
   });
 
   it('treats an empty name as unset rather than blanking the brand row', () => {
@@ -200,9 +200,9 @@ describe('sidebar brand', () => {
     // a version tooltip reading " v1.2.3".
     renderSidebar({ name: '' });
 
-    expect(container.textContent).toContain('Qwen Code');
+    expect(container.textContent).toContain('Tay Bellow');
     expect(
-      container.querySelector('[title="Qwen Code v1.2.3"]'),
+      container.querySelector('[title="Tay Bellow v1.2.3"]'),
     ).not.toBeNull();
   });
 

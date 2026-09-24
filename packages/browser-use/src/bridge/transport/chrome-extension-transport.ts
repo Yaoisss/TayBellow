@@ -606,7 +606,7 @@ function isCompatible(profile: ChromeProfileEndpoint): boolean {
 function versionMismatch(): BrowserRuntimeError {
   return new BrowserRuntimeError(
     'EXTENSION_VERSION_MISMATCH',
-    'Browser Use CLI, Native Host and Chrome extension versions must match. Update Qwen Code, run native-host-setup.js install, and reload the extension at chrome://extensions.',
+    'Browser Use CLI, Native Host and Chrome extension versions must match. Update Tay Bellow, run native-host-setup.js install, and reload the extension at chrome://extensions.',
   );
 }
 

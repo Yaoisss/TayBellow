@@ -61,7 +61,7 @@ export function QwenOnboarding({
       >
         <img
           src={iconUrl}
-          alt="Qwen Code"
+          alt="Tay Bellow"
           width={48}
           height={48}
           style={{ objectFit: 'contain' }}

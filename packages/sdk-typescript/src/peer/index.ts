@@ -5,10 +5,10 @@
  */
 
 /**
- * `@qwen-code/sdk/peer`: join the Qwen Code sessions running as this user.
+ * `@qwen-code/sdk/peer`: join the Tay Bellow sessions running as this user.
  *
  * An implementation of the cross-session protocol for a program that is
- * not itself a Qwen Code session — a voice front-end, a relay, a build
+ * not itself a Tay Bellow session — a voice front-end, a relay, a build
  * watcher. Node only, and built from Node's own modules alone.
  *
  * ```ts

@@ -1,4 +1,4 @@
-# Peer session collaboration for Qwen Code
+# Peer session collaboration for Tay Bellow
 
 > Status: Board layer implemented by #9402; not a standalone collaboration milestone
 > Tracking: [#8724](https://github.com/QwenLM/qwen-code/issues/8724)
@@ -6,7 +6,7 @@
 ## Decision
 
 The product path and the portable board are separate layers. The original #8724 milestone is
-Qwen-to-Qwen collaboration: already-running Qwen Code sessions discover each other and use
+Qwen-to-Qwen collaboration: already-running Tay Bellow sessions discover each other and use
 `send_message` with a receiver-side consent gate. Agent Team already owns the simpler case
 where one session spawns and coordinates an in-process Qwen teammate.
 
@@ -24,7 +24,7 @@ The first release has three rules:
 3. **Pull is the contract.** Work becomes visible on the board. Nothing is delivered into a
    running agent process.
 
-This is the smallest storage model shared by Qwen Code, Codex, shell scripts, scheduled jobs,
+This is the smallest storage model shared by Tay Bellow, Codex, shell scripts, scheduled jobs,
 and other tools that can run a command. It is not by itself a scheduler, launcher, or inbox.
 
 ## Product sequence
@@ -50,7 +50,7 @@ An already-running process can receive unsolicited input only if it voluntarily 
 inbound channel. Foreign CLIs do not expose a common one. They can all run a command, so
 fetching shared state is the portable operation.
 
-Qwen Code already has the pieces needed for a filesystem-backed implementation:
+Tay Bellow already has the pieces needed for a filesystem-backed implementation:
 
 - atomic JSON writes;
 - `proper-lockfile` for cross-process locking;

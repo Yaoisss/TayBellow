@@ -514,7 +514,7 @@ export interface ServeAppDeps {
    */
   webShellDir?: string;
   /**
-   * Qwen Code version advertised to web/SDK clients. Production passes the
+   * Tay Bellow version advertised to web/SDK clients. Production passes the
    * resolved CLI package version; tests/direct embeds may omit it.
    */
   qwenCodeVersion?: string;

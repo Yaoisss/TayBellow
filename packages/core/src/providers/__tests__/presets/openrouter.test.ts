@@ -65,7 +65,7 @@ describe('openRouterProvider', () => {
   it('declares customHeaders for attribution', () => {
     expect(openRouterProvider.customHeaders).toEqual({
       'HTTP-Referer': 'https://github.com/QwenLM/qwen-code.git',
-      'X-OpenRouter-Title': 'Qwen Code',
+      'X-OpenRouter-Title': 'Tay Bellow',
     });
   });
 });

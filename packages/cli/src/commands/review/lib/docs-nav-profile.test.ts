@@ -44,22 +44,22 @@ describe('static documentation navigation profile', () => {
 
   it('accepts the quoted keys and separators from #11426', () => {
     const base = `export default {
-  'Contribute to Qwen Code': {
-    title: 'Contribute to Qwen Code',
+  'Contribute to Tay Bellow': {
+    title: 'Contribute to Tay Bellow',
     type: 'separator',
   },
   architecture: 'Architecture',
   roadmap: 'Roadmap',
   contributing: 'Contributing Guide',
-  'Qwen Code SDK': {
+  'Tay Bellow SDK': {
     title: 'Agent SDK',
     type: 'separator',
   },
   'sdk-typescript': 'TypeScript SDK',
   'sdk-python': 'Python SDK (alpha)',
   'sdk-java': 'Java SDK (alpha)',
-  'Dive Into Qwen Code': {
-    title: 'Dive Into Qwen Code',
+  'Dive Into Tay Bellow': {
+    title: 'Dive Into Tay Bellow',
     type: 'separator',
   },
 

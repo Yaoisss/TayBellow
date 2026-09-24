@@ -620,7 +620,7 @@ describe('qwen-issue-followup-bot.yml: agent settings', () => {
   });
 
   it('installs the pinned CLI job-locally so the pin binds BOTH lanes', () => {
-    // The action's 'Install Qwen Code' step skips when `qwen` is already on
+    // The action's 'Install Tay Bellow' step skips when `qwen` is already on
     // PATH (verified at the pinned action SHA) — always true on the ecs-qwen
     // pool this job routes to by default, whose fleet CLI
     // update-ecs-runner-qwen.yml maintains at `latest`. An input-only pin

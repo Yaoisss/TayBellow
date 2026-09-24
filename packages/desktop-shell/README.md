@@ -1,4 +1,4 @@
-# Qwen Code desktop shell
+# Tay Bellow desktop shell
 
 This package is an isolated Tauri 2 shell around the existing Web Shell. It does not contain a second UI.
 

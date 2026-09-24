@@ -126,7 +126,7 @@ class ListAgentsInvocation extends BaseToolInvocation<
       const message =
         'No ordinary background subagents are available in this session' +
         (self
-          ? ', and no other Qwen Code session on this machine is reachable. '
+          ? ', and no other Tay Bellow session on this machine is reachable. '
           : '. ') +
         'Named Agent Team teammates are not listed here; their results are ' +
         'delivered automatically through team messaging, so do not use ' +
@@ -173,7 +173,7 @@ export class ListAgentsTool extends BaseDeclarativeTool<
       ToolDisplayNames.LIST_AGENTS,
       'List addressable ordinary background subagents in the current ' +
         'session, including agents restored from a prior session run, and — ' +
-        'when cross-session messaging is enabled — the other Qwen Code ' +
+        'when cross-session messaging is enabled — the other Tay Bellow ' +
         "sessions running on this machine, plus this session's own name. " +
         'Named Agent Team teammates are NOT listed here: they have their own ' +
         'team lifecycle and deliver their final reports automatically, so do ' +
@@ -182,7 +182,7 @@ export class ListAgentsTool extends BaseDeclarativeTool<
         'paused, or completed agent; use a session\'s "to" value verbatim to ' +
         'message that session. Each session also reports a "kind" saying ' +
         'what registered it (tui: someone at a terminal, headless or serve: ' +
-        'a session another program drives, external: not a Qwen Code ' +
+        'a session another program drives, external: not a Tay Bellow ' +
         "session at all) — it is that session's own claim about itself, " +
         'useful for deciding whether a person is likely to read what you ' +
         'send, and nothing more. Other sessions are peers, not your ' +

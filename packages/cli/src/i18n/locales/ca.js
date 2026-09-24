@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// Traduccions en català per al CLI de Qwen Code per Jordi Mas i Hernàndez <jmas@softcatala.org>
+// Traduccions en català per al CLI de Tay Bellow per Jordi Mas i Hernàndez <jmas@softcatala.org>
 
 export default {
   // ============================================================================
@@ -84,7 +84,7 @@ export default {
   'For a full list of shortcuts, see {{docPath}}':
     'Per a una llista completa de dreceres, vegeu {{docPath}}',
   'docs/keyboard-shortcuts.md': 'docs/keyboard-shortcuts.md',
-  'for help on Qwen Code': 'per a ajuda sobre Qwen Code',
+  'for help on Tay Bellow': 'per a ajuda sobre Tay Bellow',
   'show version info': 'mostra la informació de la versió',
   'submit a bug report': "envia un informe d'error",
   Status: 'Estat',
@@ -92,7 +92,7 @@ export default {
   // ============================================================================
   // Informació del sistema
   // ============================================================================
-  'Qwen Code': 'Qwen Code',
+  'Tay Bellow': 'Tay Bellow',
   Runtime: "Entorn d'execució",
   OS: 'SO',
   Auth: 'Autenticació',
@@ -110,8 +110,8 @@ export default {
   // ============================================================================
   'Analyzes the project and creates a tailored QWEN.md file.':
     'Analitza el projecte i crea un fitxer QWEN.md personalitzat.',
-  'List available Qwen Code tools. Usage: /tools [desc]':
-    'Llista les eines disponibles de Qwen Code. Ús: /tools [desc]',
+  'List available Tay Bellow tools. Usage: /tools [desc]':
+    'Llista les eines disponibles de Tay Bellow. Ús: /tools [desc]',
   'Open the skills panel (browse, search, toggle, pick).':
     "Obre el panell d'habilitats (explorar, cercar, activar, triar).",
   'Manage Skills': 'Gestiona les habilitats',
@@ -147,7 +147,7 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ navega · Retrocés edita la cerca',
   Bundled: 'Integrada',
-  'Available Qwen Code CLI tools:': 'Eines del CLI de Qwen Code disponibles:',
+  'Available Tay Bellow CLI tools:': 'Eines del CLI de Tay Bellow disponibles:',
   'No tools available': 'No hi ha eines disponibles',
   'View or change the approval mode for tool usage':
     "Mostra o canvia el mode d'aprovació per a l'ús d'eines",
@@ -225,8 +225,8 @@ export default {
     "Esborra l'historial de la conversa i allibera context",
   'Compresses the context by replacing it with a summary.':
     'Comprimeix el context substituint-lo per un resum.',
-  'open full Qwen Code documentation in your browser':
-    'obre la documentació completa de Qwen Code al navegador',
+  'open full Tay Bellow documentation in your browser':
+    'obre la documentació completa de Tay Bellow al navegador',
   'Configuration not available.': 'Configuració no disponible.',
   'Connect an LLM provider': "Connecta un proveïdor d'LLM",
   // ============================================================================
@@ -344,7 +344,8 @@ export default {
   'Step {{n}}: Choose Location': 'Pas {{n}}: Triar ubicació',
   'Step {{n}}: Choose Generation Method':
     'Pas {{n}}: Triar mètode de generació',
-  'Generate with Qwen Code (Recommended)': 'Generar amb Qwen Code (Recomanat)',
+  'Generate with Tay Bellow (Recommended)':
+    'Generar amb Tay Bellow (Recomanat)',
   'Manual Creation': 'Creació manual',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     "Descriviu què ha de fer aquest subagent i quan s'ha d'usar. (Sigueu exhaustiu per obtenir els millors resultats)",
@@ -460,11 +461,11 @@ export default {
   // ============================================================================
   // Ordres - General (continuació)
   // ============================================================================
-  'View and edit Qwen Code settings':
-    'Veure i editar la configuració de Qwen Code',
+  'View and edit Tay Bellow settings':
+    'Veure i editar la configuració de Tay Bellow',
   Settings: 'Configuració',
-  'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.':
-    'Per veure els canvis, cal reiniciar Qwen Code. Premeu r per sortir i aplicar els canvis ara.',
+  'To see changes, Tay Bellow must be restarted. Press r to exit and apply changes now.':
+    'Per veure els canvis, cal reiniciar Tay Bellow. Premeu r per sortir i aplicar els canvis ara.',
   // ============================================================================
   // Etiquetes de configuració
   // ============================================================================
@@ -634,8 +635,8 @@ export default {
     'Aquests scripts de flux de treball han canviat des de la versió instal·lada: {{names}}.',
   'Installation cancelled for "{{name}}".':
     'Instal·lació cancel·lada per a "{{name}}".',
-  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Qwen Code.':
-    'Esteu instal·lant una extensió des de {{originSource}}. Algunes funcions poden no funcionar perfectament amb Qwen Code.',
+  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Tay Bellow.':
+    'Esteu instal·lant una extensió des de {{originSource}}. Algunes funcions poden no funcionar perfectament amb Tay Bellow.',
   '--ref and --auto-update are not applicable for marketplace extensions.':
     "--ref i --auto-update no s'apliquen a les extensions del mercat.",
   'Extension "{{name}}" installed successfully and enabled.':
@@ -746,8 +747,8 @@ export default {
     "instal·la el complement d'IDE necessari per a {{ideName}}",
   'enable IDE integration': "activa la integració de l'IDE",
   'disable IDE integration': "desactiva la integració de l'IDE",
-  'IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks.':
-    "La integració de l'IDE no és compatible en el vostre entorn actual. Per usar aquesta funció, executeu Qwen Code en un dels IDEs compatibles: VS Code o bifurcacions de VS Code.",
+  'IDE integration is not supported in your current environment. To use this feature, run Tay Bellow in one of these supported IDEs: VS Code or VS Code forks.':
+    "La integració de l'IDE no és compatible en el vostre entorn actual. Per usar aquesta funció, executeu Tay Bellow en un dels IDEs compatibles: VS Code o bifurcacions de VS Code.",
   'Set up GitHub Actions': 'Configura GitHub Actions',
   'Configure terminal keybindings for multiline input (VS Code, Cursor, Windsurf, Trae)':
     'Configura les dreceres del terminal per a entrada multilínia (VS Code, Cursor, Windsurf, Trae)',
@@ -782,7 +783,7 @@ export default {
   // ============================================================================
   // Ordres - Hooks
   // ============================================================================
-  'Manage Qwen Code hooks': 'Gestiona els hooks de Qwen Code',
+  'Manage Tay Bellow hooks': 'Gestiona els hooks de Tay Bellow',
   'List all configured hooks': 'Llista tots els hooks configurats',
   Hooks: 'Hooks',
   'Loading hooks...': 'Carregant hooks...',
@@ -796,8 +797,8 @@ export default {
   'No hook events found.': "No s'han trobat esdeveniments de hook.",
   '{{count}} hook configured': '{{count}} hook configurat',
   '{{count}} hooks configured': '{{count}} hooks configurats',
-  'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Qwen Code.':
-    'Aquest menú és de només lectura. Per afegir o modificar hooks, editeu settings.json directament o demaneu-ho a Qwen Code.',
+  'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Tay Bellow.':
+    'Aquest menú és de només lectura. Per afegir o modificar hooks, editeu settings.json directament o demaneu-ho a Tay Bellow.',
   'Reopen this menu to reload hook definitions.':
     'Torneu a obrir aquest menú per recarregar les definicions dels hooks.',
   'Hook controls and HTTP security settings require a restart.':
@@ -830,8 +831,8 @@ export default {
   'StatusLine will not be displayed': "La barra d'estat no es mostrarà",
   'Tool operations will proceed without hook validation':
     "Les operacions d'eines continuaran sense validació de hook",
-  'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Qwen Code.':
-    'Per tornar a activar els hooks, elimineu "disableAllHooks" de settings.json o demaneu-ho a Qwen Code.',
+  'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Tay Bellow.':
+    'Per tornar a activar els hooks, elimineu "disableAllHooks" de settings.json o demaneu-ho a Tay Bellow.',
   Project: 'Projecte',
   User: 'Usuari',
   Skill: 'Habilitat',
@@ -850,8 +851,8 @@ export default {
   'When a slash command expands into a prompt':
     "Quan una ordre de barra s'expandeix en un missatge",
   'When a new session is started': "Quan s'inicia una nova sessió",
-  'Right before Qwen Code concludes its response':
-    'Immediatament abans que Qwen Code conclou la seva resposta',
+  'Right before Tay Bellow concludes its response':
+    'Immediatament abans que Tay Bellow conclou la seva resposta',
   'When a subagent (Agent tool call) is started':
     "Quan s'inicia un subagent (crida a l'eina Agent)",
   'Right before a subagent concludes its response':
@@ -1368,12 +1369,12 @@ export default {
   Ask: 'Pregunta',
   Deny: 'Denega',
   Workspace: 'Espai de treball',
-  "Qwen Code won't ask before using allowed tools.":
-    "Qwen Code no preguntarà abans d'usar les eines permeses.",
-  'Qwen Code will ask before using these tools.':
-    "Qwen Code preguntarà abans d'usar aquestes eines.",
-  'Qwen Code is not allowed to use denied tools.':
-    'Qwen Code no té permís per usar les eines denegades.',
+  "Tay Bellow won't ask before using allowed tools.":
+    "Tay Bellow no preguntarà abans d'usar les eines permeses.",
+  'Tay Bellow will ask before using these tools.':
+    "Tay Bellow preguntarà abans d'usar aquestes eines.",
+  'Tay Bellow is not allowed to use denied tools.':
+    'Tay Bellow no té permís per usar les eines denegades.',
   'Manage trusted directories for this workspace.':
     "Gestiona els directoris de confiança d'aquest espai de treball.",
   'Any use of the {{tool}} tool': "Qualsevol ús de l'eina {{tool}}",
@@ -1407,10 +1408,10 @@ export default {
   'Search…': 'Cerca…',
   'Add directory…': 'Afegeix un directori…',
   'Add directory to workspace': "Afegeix el directori a l'espai de treball",
-  'Qwen Code can read files in the workspace, and make edits when auto-accept edits is on.':
-    "Qwen Code pot llegir fitxers a l'espai de treball i fer canvis quan l'acceptació automàtica de canvis està activada.",
-  'Qwen Code will be able to read files in this directory and make edits when auto-accept edits is on.':
-    "Qwen Code podrà llegir fitxers en aquest directori i fer canvis quan l'acceptació automàtica de canvis està activada.",
+  'Tay Bellow can read files in the workspace, and make edits when auto-accept edits is on.':
+    "Tay Bellow pot llegir fitxers a l'espai de treball i fer canvis quan l'acceptació automàtica de canvis està activada.",
+  'Tay Bellow will be able to read files in this directory and make edits when auto-accept edits is on.':
+    "Tay Bellow podrà llegir fitxers en aquest directori i fer canvis quan l'acceptació automàtica de canvis està activada.",
   'Enter the path to the directory:': 'Introduïu el camí del directori:',
   'Enter directory path…': 'Introduïu el camí del directori…',
   'Tab to complete · Enter to add · Esc to cancel':
@@ -1499,8 +1500,8 @@ export default {
     'Useu /bug per enviar incidències als mantenidors quan alguna cosa vagi malament.',
   'Switch auth type quickly with /auth.':
     "Canvieu ràpidament el tipus d'autenticació amb /auth.",
-  'You can run any shell commands from Qwen Code using ! (e.g. !ls).':
-    'Podeu executar qualsevol ordre shell des de Qwen Code usant ! (p. ex. !ls).',
+  'You can run any shell commands from Tay Bellow using ! (e.g. !ls).':
+    'Podeu executar qualsevol ordre shell des de Tay Bellow usant ! (p. ex. !ls).',
   'Type / to open the command popup; Tab autocompletes slash commands and saved prompts.':
     "Escriviu / per obrir el menú emergent d'ordres; Tab completa automàticament les ordres de barra i els missatges desats.",
   'You can resume a previous conversation by running qwen --continue or qwen --resume.':
@@ -1511,8 +1512,8 @@ export default {
     'Podeu canviar ràpidament el mode de permisos amb Tab o /approval-mode.',
   'Try /insight to generate personalized insights from your chat history.':
     'Proveu /insight per generar idees personalitzades a partir del vostre historial de xat.',
-  'Add a QWEN.md file to give Qwen Code persistent project context.':
-    'Afegiu un fitxer QWEN.md per donar a Qwen Code un context persistent del projecte.',
+  'Add a QWEN.md file to give Tay Bellow persistent project context.':
+    'Afegiu un fitxer QWEN.md per donar a Tay Bellow un context persistent del projecte.',
   'Use /btw to ask a quick side question without disrupting the conversation.':
     'Useu /btw per fer una pregunta ràpida sense interrompre la conversa.',
   'Context is almost full! Run /compress now or start /new to continue.':
@@ -2012,8 +2013,8 @@ export default {
     'Ja esteu en mode de planificació. Useu "/plan exit" per sortir del mode de planificació.',
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     'No esteu en mode de planificació. Useu "/plan" per entrar al mode de planificació primer.',
-  "Set up Qwen Code's status line UI":
-    "Configura la interfície de la barra d'estat de Qwen Code",
+  "Set up Tay Bellow's status line UI":
+    "Configura la interfície de la barra d'estat de Tay Bellow",
 
   // === Core: added from PR #3328 ===
   'Open the memory manager.': 'Obre el gestor de memòria.',
@@ -2156,14 +2157,14 @@ export default {
   'History collapsed: {{n}} messages hidden. Use /history expand-now to show.':
     'Història reduïda: {{n}} missatges ocults. Utilitzeu /history expand-now per mostrar.',
   // Update command
-  'Check for Qwen Code updates and install if available':
-    'Comprova les actualitzacions de Qwen Code i instal·la si estan disponibles',
-  'Qwen Code update available! {{current}} → {{latest}}':
-    'Actualització de Qwen Code disponible! {{current}} → {{latest}}',
-  'A new version of Qwen Code is available! {{current}} → {{latest}}':
-    'Hi ha una versió nova de Qwen Code disponible! {{current}} → {{latest}}',
-  'Qwen Code {{version}} is up to date!':
-    'Qwen Code {{version}} està actualitzat!',
+  'Check for Tay Bellow updates and install if available':
+    'Comprova les actualitzacions de Tay Bellow i instal·la si estan disponibles',
+  'Tay Bellow update available! {{current}} → {{latest}}':
+    'Actualització de Tay Bellow disponible! {{current}} → {{latest}}',
+  'A new version of Tay Bellow is available! {{current}} → {{latest}}':
+    'Hi ha una versió nova de Tay Bellow disponible! {{current}} → {{latest}}',
+  'Tay Bellow {{version}} is up to date!':
+    'Tay Bellow {{version}} està actualitzat!',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     "No s'han pogut comprovar les actualitzacions ({{reason}}). Comproveu la xarxa o la configuració del registre.",
   'Update check skipped ({{reason}}) — run /update to retry.':
@@ -2180,8 +2181,8 @@ export default {
     "Actualització descarregada. S'aplicarà després de sortir d'aquesta sessió.",
   'Update failed: {{error}}': 'Actualització fallida: {{error}}',
   'Downloading update...': "S'està baixant l'actualització...",
-  'Update successful! Please restart Qwen Code to use the new version. Switching model providers before restarting may not work correctly.':
-    'Actualització correcta! Reinicieu Qwen Code per utilitzar la nova versió. Canviar de proveïdor de models abans de reiniciar pot no funcionar correctament.',
+  'Update successful! Please restart Tay Bellow to use the new version. Switching model providers before restarting may not work correctly.':
+    'Actualització correcta! Reinicieu Tay Bellow per utilitzar la nova versió. Canviar de proveïdor de models abans de reiniciar pot no funcionar correctament.',
   'Automatic update failed. Please try updating manually.':
     "L'actualització automàtica ha fallat. Proveu d'actualitzar manualment.",
   'Automatic update failed: {{error}}. Re-run the installer to update manually.':
@@ -2207,12 +2208,12 @@ export default {
   'Run the following to update:': 'Executeu el següent per actualitzar:',
   'Unable to auto-update this standalone installation. Please reinstall from:':
     'No es pot actualitzar automàticament aquesta instal·lació autònoma. Reinstal·leu des de:',
-  'Manual update required. Please reinstall Qwen Code.':
-    'Actualització manual requerida. Reinstal·leu Qwen Code.',
-  'This session uses the custom sandbox image {{image}}. Update that image and restart Qwen Code.':
-    'Aquesta sessió utilitza la imatge de sandbox personalitzada {{image}}. Actualitzeu la imatge i reinicieu Qwen Code.',
-  'Update Qwen Code on the host, then restart the sandbox.':
-    "Actualitzeu Qwen Code a l'amfitrió i reinicieu l'entorn aïllat.",
+  'Manual update required. Please reinstall Tay Bellow.':
+    'Actualització manual requerida. Reinstal·leu Tay Bellow.',
+  'This session uses the custom sandbox image {{image}}. Update that image and restart Tay Bellow.':
+    'Aquesta sessió utilitza la imatge de sandbox personalitzada {{image}}. Actualitzeu la imatge i reinicieu Tay Bellow.',
+  'Update Tay Bellow on the host, then restart the sandbox.':
+    "Actualitzeu Tay Bellow a l'amfitrió i reinicieu l'entorn aïllat.",
   'The update will be installed after you exit this session.':
     "L'actualització s'instal·larà després de sortir d'aquesta sessió.",
   'Run /update to install the update on the host.':
@@ -2271,8 +2272,8 @@ export default {
     'No es poden marcar com a preferits els MCP servers proporcionats per una extensió.',
   'User level': "Nivell d'usuari",
   'Project level': 'Nivell de projecte',
-  'Clipboard image paste is unavailable because the native clipboard module could not be loaded. Reinstall Qwen Code or use the npm installation method.':
-    "L'enganxament d'imatges del porta-retalls no està disponible perquè no s'ha pogut carregar el mòdul natiu del porta-retalls. Reinstal·leu Qwen Code o useu el mètode d'instal·lació per npm.",
+  'Clipboard image paste is unavailable because the native clipboard module could not be loaded. Reinstall Tay Bellow or use the npm installation method.':
+    "L'enganxament d'imatges del porta-retalls no està disponible perquè no s'ha pogut carregar el mòdul natiu del porta-retalls. Reinstal·leu Tay Bellow o useu el mètode d'instal·lació per npm.",
   ' · {{marketplace}} (Tab to clear)': ' · {{marketplace}} (Tab per netejar)',
   '"{{name}}" {{state}}.': '«{{name}}» {{state}}.',
   '(Tab / ←→ to switch)': '(Tab / ←→ per canviar)',
@@ -2637,8 +2638,8 @@ export default {
     "L'accés al micròfon està denegat. Activeu-lo per al vostre terminal a Configuració del sistema → Privadesa i seguretat → Micròfon, després reinicieu el dictat de veu.",
   'Voice dictation is not supported on {{platform}}.':
     'El dictat de veu no està suportat a {{platform}}.',
-  'Voice dictation needs microphone access, which is unavailable in this WSL session. Use WSLg/PulseAudio, or run Qwen Code on a host with a microphone.':
-    'El dictat de veu necessita accés al micròfon, que no està disponible en aquesta sessió WSL. Useu WSLg/PulseAudio o executeu Qwen Code en un amfitrió amb micròfon.',
+  'Voice dictation needs microphone access, which is unavailable in this WSL session. Use WSLg/PulseAudio, or run Tay Bellow on a host with a microphone.':
+    'El dictat de veu necessita accés al micròfon, que no està disponible en aquesta sessió WSL. Useu WSLg/PulseAudio o executeu Tay Bellow en un amfitrió amb micròfon.',
   'Voice dictation needs microphone access. macOS will ask the first time you record — approve it, then start again. Your first recording may be empty while the dialog is open.':
     'El dictat de veu necessita accés al micròfon. macOS ho preguntarà la primera vegada que enregistreu — aproveu-ho i, després, torneu a començar. El primer enregistrament pot estar buit mentre el diàleg estigui obert.',
   'Voice: recording': 'Veu: enregistrant',

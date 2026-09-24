@@ -30,7 +30,7 @@ vi.mock('node:fs', async () => {
 vi.mock('./agent-detector.js', () => ({
   detectAgents: () => [
     {
-      label: 'Qwen Code',
+      label: 'Tay Bellow',
       name: 'qwen',
       command: '/usr/local/bin/qwen',
       args: ['--acp'],

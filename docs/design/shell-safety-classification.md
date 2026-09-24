@@ -40,7 +40,7 @@ The follow-up `fix(core): Route unknown Plan shell commands to one-off approval`
 
 ## Claude Code reference
 
-Claude Code's Bash analysis is useful as evidence for two design principles: parsing uncertainty must be represented explicitly, and permission decisions must fail closed when parsing is unavailable or too complex. Its larger Bash parser and policy engine are not copied because Qwen Code needs only a small classifier at the current boundary.
+Claude Code's Bash analysis is useful as evidence for two design principles: parsing uncertainty must be represented explicitly, and permission decisions must fail closed when parsing is unavailable or too complex. Its larger Bash parser and policy engine are not copied because Tay Bellow needs only a small classifier at the current boundary.
 
 ## Verification
 

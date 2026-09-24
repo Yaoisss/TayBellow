@@ -85,7 +85,7 @@ App 的旧 onSessionChange(turn_complete) 和侧边栏 completedUnread 来自 UI
 
 展示条件为 `document.visibilityState !== 'visible' || !document.hasFocus()`。前台聚焦时消费终态但不展示，后来失焦不补弹。首版不增加时长阈值、声音选择或自定义正文。
 
-标题固定 Qwen Code，正文仅上述通用文案，不含 prompt、答复、错误、会话标题、路径或 workspace 名。点击尝试 window.focus() 并关闭通知，不自动切换会话；操作系统可能拒绝聚焦，不能保证成功。展示失败不改变回合结果。
+标题固定 Tay Bellow，正文仅上述通用文案，不含 prompt、答复、错误、会话标题、路径或 workspace 名。点击尝试 window.focus() 并关闭通知，不自动切换会话；操作系统可能拒绝聚焦，不能保证成功。展示失败不改变回合结果。
 
 ## 内部架构
 

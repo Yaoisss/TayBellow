@@ -1,6 +1,6 @@
 # External Context extension
 
-This private Qwen Code integration connects one interactive CLI process to one
+This private Tay Bellow integration connects one interactive CLI process to one
 administrator-bound external context corpus without changing Qwen Core. It has
 three managed deployment variants:
 
@@ -102,7 +102,7 @@ confirmation; use the governed profile when that is required.
    `timeoutMs` defaults to 5000 and may be between 1 and 30000 milliseconds.
 3. Have the managed launcher set `QWEN_EXTERNAL_CONTEXT_CONFIG` to the absolute
    configuration path.
-4. From the Qwen Code checkout, install dependencies and build this workspace:
+4. From the Tay Bellow checkout, install dependencies and build this workspace:
 
    ```bash
    npm install

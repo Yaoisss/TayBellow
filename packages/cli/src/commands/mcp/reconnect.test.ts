@@ -371,7 +371,7 @@ describe('mcp reconnect command', () => {
       // exactly when the user's running session still has broken tools.
       expect(mockWriteStdoutLine).toHaveBeenCalledWith(
         expect.stringContaining(
-          'cannot refresh the MCP tools of an already-running Qwen Code session',
+          'cannot refresh the MCP tools of an already-running Tay Bellow session',
         ),
       );
     });
@@ -416,7 +416,7 @@ describe('mcp reconnect command', () => {
 
       expect(mockWriteStdoutLine).toHaveBeenCalledWith(
         expect.stringContaining(
-          'cannot refresh the MCP tools of an already-running Qwen Code session',
+          'cannot refresh the MCP tools of an already-running Tay Bellow session',
         ),
       );
     });
@@ -437,7 +437,7 @@ describe('mcp reconnect command', () => {
 
       expect(mockWriteStdoutLine).toHaveBeenCalledWith(
         expect.stringContaining(
-          'cannot refresh the MCP tools of an already-running Qwen Code session',
+          'cannot refresh the MCP tools of an already-running Tay Bellow session',
         ),
       );
     });
@@ -464,7 +464,7 @@ describe('mcp reconnect command', () => {
       expect(mockProcessExit).toHaveBeenCalledWith(1);
       expect(mockWriteStdoutLine).toHaveBeenCalledWith(
         expect.stringContaining(
-          'cannot refresh the MCP tools of an already-running Qwen Code session',
+          'cannot refresh the MCP tools of an already-running Tay Bellow session',
         ),
       );
     });
@@ -531,7 +531,7 @@ describe('mcp reconnect command', () => {
       expect(mockProcessExit).toHaveBeenCalledWith(1);
       expect(mockWriteStdoutLine).toHaveBeenCalledWith(
         expect.stringContaining(
-          'cannot refresh the MCP tools of an already-running Qwen Code session',
+          'cannot refresh the MCP tools of an already-running Tay Bellow session',
         ),
       );
     });

@@ -1,18 +1,18 @@
 # Commands
 
-This document details all commands supported by Qwen Code, helping you efficiently manage sessions, customize the interface, and control its behavior.
+This document details all commands supported by Tay Bellow, helping you efficiently manage sessions, customize the interface, and control its behavior.
 
-Qwen Code commands are triggered through specific prefixes and fall into three categories:
+Tay Bellow commands are triggered through specific prefixes and fall into three categories:
 
 | Prefix Type                | Function Description                                | Typical Use Case                                                 |
 | -------------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
-| Slash Commands (`/`)       | Meta-level control of Qwen Code itself              | Managing sessions, modifying settings, getting help              |
+| Slash Commands (`/`)       | Meta-level control of Tay Bellow itself             | Managing sessions, modifying settings, getting help              |
 | At Commands (`@`)          | Quickly inject local file content into conversation | Allowing AI to analyze specified files or code under directories |
 | Exclamation Commands (`!`) | Direct interaction with system Shell                | Executing system commands like `git status`, `ls`, etc.          |
 
 ## 1. Slash Commands (`/`)
 
-Slash commands are used to manage Qwen Code sessions, interface, and basic behavior.
+Slash commands are used to manage Tay Bellow sessions, interface, and basic behavior.
 
 ### 1.1 Session and Project Management
 
@@ -36,7 +36,7 @@ These commands help you save, restore, and summarize work progress.
 
 > [!note]
 >
-> Opening an HTML export loads the renderer and stylesheet for that exact Qwen Code version from `unpkg.com`. If the version has not been published or either asset cannot be reached, the file shows a load error. Markdown, JSON, and JSONL exports remain self-contained.
+> Opening an HTML export loads the renderer and stylesheet for that exact Tay Bellow version from `unpkg.com`. If the version has not been published or either asset cannot be reached, the file shows a load error. Markdown, JSON, and JSONL exports remain self-contained.
 
 > [!note]
 >
@@ -58,7 +58,7 @@ Commands for adjusting interface appearance and work environment.
 | `/history`           | Control history display preferences and visibility                                                                                                                                | `/history collapse-on-resume`, `/history expand-on-resume`, `/history expand-now` |
 | `/diff`              | Open an interactive diff viewer showing uncommitted changes and per-turn diffs. Use ←/→ to switch between current git diff and individual conversation turns, ↑/↓ to browse files | `/diff`                                                                           |
 | `/log`               | Open a commit history viewer for the workspace (Web Shell only)                                                                                                                   | `/log`                                                                            |
-| `/theme`             | Change Qwen Code visual theme                                                                                                                                                     | `/theme`                                                                          |
+| `/theme`             | Change Tay Bellow visual theme                                                                                                                                                    | `/theme`                                                                          |
 | `/vim`               | Turn input area Vim editing mode on/off                                                                                                                                           | `/vim`                                                                            |
 | `/voice`             | Toggle voice dictation input                                                                                                                                                      | `/voice`, `/voice hold`, `/voice tap`, `/voice off`, `/voice status`              |
 | `/directory`         | Manage multi-directory support workspace                                                                                                                                          | `/dir add ./src,./tests`, `/dir show`                                             |
@@ -118,7 +118,7 @@ Commands for managing AI tools and models.
 | `/remember`           | Save a durable memory                                                                            | `/remember Prefer terse responses`                                                                        |
 | `/forget`             | Remove matching entries from auto-memory                                                         | `/forget <query>`                                                                                         |
 | `/dream`              | Manually run auto-memory consolidation                                                           | `/dream`                                                                                                  |
-| `/hooks`              | Manage Qwen Code hooks                                                                           | `/hooks`, `/hooks list`                                                                                   |
+| `/hooks`              | Manage Tay Bellow hooks                                                                          | `/hooks`, `/hooks list`                                                                                   |
 | `/reload-plugins`     | Reload extension changes (commands, skills, agents, workflows, hooks, MCP/LSP servers) from disk | `/reload-plugins`                                                                                         |
 | `/permissions`        | Manage permission rules                                                                          | `/permissions`                                                                                            |
 | `/agents`             | Manage subagents                                                                                 | `/agents manage`, `/agents create`                                                                        |
@@ -131,7 +131,7 @@ Commands for managing AI tools and models.
 
 > [!warning]
 >
-> Only install extensions (`/extensions install`) from sources you trust. Extensions can bundle MCP servers, skills, and commands that run with the same permissions as Qwen Code itself — they can access your files, API keys, and conversation data. They can also ship workflow scripts, which run in the workflow sandbox without direct file or shell access, act through the subagents they start, and go through the Workflow tool's approval. `/extensions install` does not prompt for confirmation.
+> Only install extensions (`/extensions install`) from sources you trust. Extensions can bundle MCP servers, skills, and commands that run with the same permissions as Tay Bellow itself — they can access your files, API keys, and conversation data. They can also ship workflow scripts, which run in the workflow sandbox without direct file or shell access, act through the subagents they start, and go through the Workflow tool's approval. `/extensions install` does not prompt for confirmation.
 
 > [!warning]
 >
@@ -156,7 +156,7 @@ These commands invoke bundled skills that provide specialized workflows.
 | `/loop`       | Run a prompt on a recurring schedule                          | `/loop 5m check the build`                                                |
 | `/goal-draft` | Turn a fuzzy intention into a verifiable `/goal` objective    | `/goal-draft make the auth tests pass`                                    |
 | `/simplify`   | Review recent changes and apply safe cleanup edits directly   | `/simplify`, `/simplify focus on duplication`                             |
-| `/qc-helper`  | Answer questions about Qwen Code usage and configuration      | `/qc-helper how do I configure MCP?`                                      |
+| `/qc-helper`  | Answer questions about Tay Bellow usage and configuration     | `/qc-helper how do I configure MCP?`                                      |
 
 See [Code Review](./code-review.md) for full `/review` documentation.
 
@@ -470,13 +470,13 @@ Commands for obtaining information and performing system settings.
 | → `memory`       | Show current process memory diagnostics                                                                                        | `/doctor memory [--json] [--sample] [--snapshot]`                                   |
 | → `cpu-profile`  | Record a CPU profile for Chrome DevTools analysis                                                                              | `/doctor cpu-profile [--duration <seconds>]`                                        |
 | → `rollback`     | Roll back the standalone CLI binary to the previous version (standalone installs only; for conversation history use `/rewind`) | `/doctor rollback`                                                                  |
-| `/docs`          | Open full Qwen Code documentation in browser                                                                                   | `/docs`                                                                             |
+| `/docs`          | Open full Tay Bellow documentation in browser                                                                                  | `/docs`                                                                             |
 | `/ide`           | Manage IDE integration                                                                                                         | `/ide status`, `/ide install`, `/ide enable`, `/ide disable`                        |
 | `/insight`       | Generate programming insights from chat history                                                                                | `/insight`                                                                          |
 | `/setup-github`  | Set up GitHub Actions                                                                                                          | `/setup-github`                                                                     |
-| `/bug`           | Submit issue about Qwen Code                                                                                                   | `/bug Button click unresponsive`                                                    |
+| `/bug`           | Submit issue about Tay Bellow                                                                                                  | `/bug Button click unresponsive`                                                    |
 | `/copy`          | Copy to clipboard: reply (Nth-last), code (by lang), LaTeX, or Mermaid                                                         | `/copy`, `/copy 2`, `/copy python`, `/copy latex`, `/copy mermaid`                  |
-| `/quit`          | Exit Qwen Code immediately                                                                                                     | `/quit` or `/exit`                                                                  |
+| `/quit`          | Exit Tay Bellow immediately                                                                                                    | `/quit` or `/exit`                                                                  |
 
 > [!warning]
 >
@@ -498,7 +498,7 @@ Commands for obtaining information and performing system settings.
 
 ### 1.12 Authentication Commands
 
-Use `/auth` inside a Qwen Code session to configure authentication. Use `/doctor` to inspect the current authentication and environment status.
+Use `/auth` inside a Tay Bellow session to configure authentication. Use `/doctor` to inspect the current authentication and environment status.
 
 | Command   | Description                                                            |
 | --------- | ---------------------------------------------------------------------- |
@@ -523,7 +523,7 @@ Note: Spaces in paths need to be escaped with backslash (e.g., `@My\ Documents/f
 
 ## 3. Exclamation Commands (`!`) - Shell Command Execution
 
-Exclamation commands allow you to execute system commands directly within Qwen Code.
+Exclamation commands allow you to execute system commands directly within Tay Bellow.
 
 | Command Format     | Description                                                        | Examples                               |
 | ------------------ | ------------------------------------------------------------------ | -------------------------------------- |
@@ -723,7 +723,7 @@ These commands are run from the shell as `qwen <subcommand>` before starting an 
 
 #### `qwen sessions list`
 
-Lists your recent Qwen Code sessions with metadata.
+Lists your recent Tay Bellow sessions with metadata.
 
 **Flags:**
 
@@ -761,7 +761,7 @@ qwen sessions list --json | jq .
 
 #### `qwen sessions ps`
 
-Lists the Qwen Code sessions registered on this machine right now.
+Lists the Tay Bellow sessions registered on this machine right now.
 `sessions list` walks saved transcripts ("what have I worked on"); this
 walks the live-process registry ("what is running at this moment").
 Records left behind by a killed session are swept as they are found. A
@@ -778,7 +778,7 @@ one-shot `qwen -p` run never registers, so it is never shown.
 A table with columns: NAME, KIND, PID, AGE, DIRECTORY.
 
 KIND says what registered the session — `tui` for someone at a terminal,
-`external` for a program that is not a Qwen Code session at all (a voice
+`external` for a program that is not a Tay Bellow session at all (a voice
 front-end, a relay), and `headless` or `serve` for a session another
 program drives. Several `serve` or `headless` rows can share one PID: a
 `qwen --acp` child hosts all its sessions in one process — `serve` when
@@ -978,7 +978,7 @@ user.
 ### Trusted controllers
 
 The rule above holds a message from any sender that does not say which
-review class it is in, and a program that is not a Qwen Code session has
+review class it is in, and a program that is not a Tay Bellow session has
 none to say. That is the right default for a stranger, but not for a
 program you chose: a voice front-end, a dictation bridge, an automation
 daemon relaying your own instructions would have every message parked,
@@ -1047,7 +1047,7 @@ client is driving `qwen --acp` directly — and the session appears in
 `qwen sessions ps` and in another session's `list_agents` like any
 other. It can send: its model can call `send_message` to reach a terminal
 you have open. Several of them share one process and one inbox, so a
-sender has to name the session it means — every Qwen Code session does
+sender has to name the session it means — every Tay Bellow session does
 that automatically.
 
 Messages sent _to_ one are refused rather than held. Holding is a
@@ -1061,7 +1061,7 @@ A session registers unless its own settings turn
 because the only reason to list a session nobody can message would be to
 advertise an address that never answers.
 
-### Programs that are not Qwen Code sessions
+### Programs that are not Tay Bellow sessions
 
 Everything above works between sessions, but nothing in it is specific to
 one. A program that writes a registry record for itself and binds an

@@ -28045,7 +28045,7 @@ describe('Session', () => {
                 kind: 'cleared',
                 condition: 'ship the thing',
                 lastReason: expect.stringContaining(
-                  'recorded by an earlier version of Qwen Code',
+                  'recorded by an earlier version of Tay Bellow',
                 ),
               }),
             },

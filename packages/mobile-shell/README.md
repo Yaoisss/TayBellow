@@ -1,4 +1,4 @@
-# Qwen Code Mobile Shell (Android)
+# Tay Bellow Mobile Shell (Android)
 
 A development WebView shell around the daemon-served Web Shell. Native connection profiles use a Keystore-encrypted vault and isolated browser profiles. Per-device daemon credential revocation, background SSE and native notifications remain future work. See the [connection-profile design and reviewer test plan](../../docs/design/mobile-connection-profiles.md).
 

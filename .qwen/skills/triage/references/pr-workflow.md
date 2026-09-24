@@ -74,7 +74,7 @@ NOW=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json headRefOid --jq '.headRefOid
 Every staged comment (Stage 1 gate-pass, Stage 2, Stage 3) ends with the signature line, then a footer recording the commit this pass reflects. Because comments are updated in place on re-run, the SHA lets a maintainer tell at a glance whether new commits landed since the last review:
 
 ```
-— _Qwen Code · qwen3.7-max_
+— _Tay Bellow · qwen3.7-max_
 
 <sub>Reviewed at `<HEAD_SHA>` · re-run with `@qwen-code /triage`</sub>
 ```
@@ -329,7 +329,7 @@ something here is NOT covered by #M, say so and this can be reopened.
 
 </details>
 
-— _Qwen Code · qwen3.7-max_
+— _Tay Bellow · qwen3.7-max_
 EOF
 gh pr comment "$PR_NUMBER" --repo "$REPO" --body-file /tmp/stage-1pre-duplicate.md
 gh pr close "$PR_NUMBER" --repo "$REPO"
@@ -372,7 +372,7 @@ If the author cannot provide one on re-run, escalate to the maintainer and stop.
 
 </details>
 
-— _Qwen Code · qwen3.7-max_
+— _Tay Bellow · qwen3.7-max_
 EOF
 gh pr review "$PR_NUMBER" --repo "$REPO" --request-changes --body-file /tmp/stage-1b-reproduction.md
 ```
@@ -482,7 +482,7 @@ Risk: <if Stage 1e matched, list the high-risk paths and recommended review dept
 
 </details>
 
-— _Qwen Code · qwen3.7-max_
+— _Tay Bellow · qwen3.7-max_
 
 <sub>Reviewed at `<HEAD_SHA>` · re-run with `@qwen-code /triage`</sub>
 ```
@@ -806,7 +806,7 @@ Post a single Stage 2 comment (must include `<!-- qwen-triage stage=2 -->` at th
 Close with the signature then the footer, and save this comment's ID — on an empty `HEAD_SHA`, follow the fail-closed rule above (leave an existing comment and its footer untouched; never blank it):
 
 ```markdown
-— _Qwen Code · qwen3.7-max_
+— _Tay Bellow · qwen3.7-max_
 
 <sub>Reviewed at `<HEAD_SHA>` · re-run with `@qwen-code /triage`</sub>
 ```
@@ -844,7 +844,7 @@ Open it with a one-line confidence score — `**Confidence: N/5** — <one hones
 
 A fork `refactor` that hits the approval guardrail below, **or a PR that Stage 0 escalated for maintainer awareness**, caps at 3/5 no matter how clean every stage looked — the guardrail drives the action, not the score. At 3/5 the action is always the **defer path** (a comment, never `--request-changes`): name any concerns in the defer comment for the maintainer's attention without approving, and @mention the maintainer for an unresolvable question or when the cap is pure policy. When the cap is pure policy on an otherwise-clean PR, say so in the one-line score so 3/5 doesn't read as real doubt — e.g. `Confidence: 3/5 — clean review, but the fork-refactor guardrail needs a maintainer's sign-off`. Never post a 4–5/5 alongside a `--request-changes`, or a 1–2/5 alongside an `--approve`: the score and the verdict tell the same story.
 
-Then write what you're actually thinking. "Looks good, ships the feature cleanly, the before/after shows it works" — not a five-bullet summary of the stages. If you have reservations, say them plainly. If you're approving with mild concerns, name them. Sign with `— _Qwen Code · qwen3.7-max_`, add the reviewed-commit footer (empty `HEAD_SHA` → fail closed, as above — don't blank a prior footer), and save this comment's ID.
+Then write what you're actually thinking. "Looks good, ships the feature cleanly, the before/after shows it works" — not a five-bullet summary of the stages. If you have reservations, say them plainly. If you're approving with mild concerns, name them. Sign with `— _Tay Bellow · qwen3.7-max_`, add the reviewed-commit footer (empty `HEAD_SHA` → fail closed, as above — don't blank a prior footer), and save this comment's ID.
 
 **Approve verdict while CI is still running → say so in this comment, before posting it.** Count pending **workflow runs with `event == "pull_request"`** — the PR's own CI — not check-runs. Check-runs on the head SHA also include bot orchestration jobs (`pull_request_target` / `issue_comment` runs like triage itself and review-pr) that can stay in flight long after CI finishes; counting those would defer an approval that nothing will ever un-defer, because the finalize workflow only fires on PR CI workflow completions. One extra cheap API call, still **no polling**; staleness is safe in this direction only (a run that completed after the fetch is merely treated as pending → defers, never mis-approves):
 

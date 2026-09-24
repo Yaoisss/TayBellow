@@ -1,6 +1,6 @@
 # Computer Use
 
-Qwen Code includes a `computer-use` skill that teaches the model how to
+Tay Bellow includes a `computer-use` skill that teaches the model how to
 operate desktop applications through two separately installed packages:
 
 ```text
@@ -10,7 +10,7 @@ bundled computer-use skill
   -> native cua-driver accessibility backend
 ```
 
-Qwen Code does not bundle the MCP server, SDK, or native driver. The skill
+Tay Bellow does not bundle the MCP server, SDK, or native driver. The skill
 installs the external packages automatically when they are missing.
 
 > [!warning]
@@ -29,7 +29,7 @@ qwen mcp add --scope user node-repl npx -y @qwen-code/node-repl-mcp@0.1.6
 npm install --no-save --package-lock=false @qwen-code/cua-sdk@0.20.9
 ```
 
-Restart Qwen Code after the MCP server is first added. The skill then resumes
+Restart Tay Bellow after the MCP server is first added. The skill then resumes
 the desktop task through `node_repl`.
 
 The SDK installation leaves `package.json` and the lockfile unchanged, but it
@@ -41,7 +41,7 @@ execution path; there is no legacy fallback.
 
 ## Use
 
-Ask Qwen Code to use `$computer-use` for the desktop task. After bootstrap, it
+Ask Tay Bellow to use `$computer-use` for the desktop task. After bootstrap, it
 uses the app workflow on macOS:
 
 1. binds the application with `computer.getApp(nameOrIdentifierOrPath)`;
@@ -77,20 +77,20 @@ return keeps it hidden; request it explicitly with
 ## Permissions
 
 The Node REPL is an MCP server that executes model-authored JavaScript with
-ordinary Node.js authority. Its calls follow Qwen Code's normal
+ordinary Node.js authority. Its calls follow Tay Bellow's normal
 [MCP approval flow](./approval-mode.md). The SDK also enforces native
 authorization.
 
 On macOS, accessibility observation and input require Accessibility permission.
 Screenshots additionally require Screen Recording permission. macOS may
-attribute the grant to the terminal or IDE that launched Qwen Code. Windows and
+attribute the grant to the terminal or IDE that launched Tay Bellow. Windows and
 Linux use their platform accessibility and input facilities.
 
 ## Troubleshooting
 
-- If `node_repl` is still unavailable after automatic setup, restart Qwen Code
+- If `node_repl` is still unavailable after automatic setup, restart Tay Bellow
   and verify the server with `qwen mcp list`.
-- If the SDK import still fails after automatic setup, confirm Qwen Code is
+- If the SDK import still fails after automatic setup, confirm Tay Bellow is
   running from the workspace where the package was installed.
 - After a timeout, cancellation, reset, or kernel crash, bootstrap the SDK
   client again and request fresh state.

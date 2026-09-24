@@ -97,7 +97,7 @@ export async function getEnvironmentContext(config: Config): Promise<Part[]> {
   const directoryContext = await getDirectoryContextString(config);
 
   const context = `
-This is the Qwen Code. We are setting up the context for our chat.
+This is the Tay Bellow. We are setting up the context for our chat.
 Today's date is ${today}.
 ${platform}${directoryContext}
         `.trim();

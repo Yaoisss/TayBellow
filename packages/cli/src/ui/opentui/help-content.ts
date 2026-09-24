@@ -297,12 +297,12 @@ export function formatHelpText(
   const tabLabels = HELP_TABS.map(({ tab, label }) =>
     tab === 'general' ? `[${t(label)}]` : ` ${t(label)} `,
   );
-  out.push(`Qwen Code ${tabLabels.join('')}`);
+  out.push(`Tay Bellow ${tabLabels.join('')}`);
 
   out.push('');
   out.push(
     t(
-      'Qwen Code understands your codebase, makes edits with your permission, and executes commands right from your terminal.',
+      'Tay Bellow understands your codebase, makes edits with your permission, and executes commands right from your terminal.',
     ),
   );
   out.push('');

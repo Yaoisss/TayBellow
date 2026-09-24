@@ -28,7 +28,7 @@ function run(overrides = {}) {
   return {
     databaseId: 11,
     name: 'E2E Tests',
-    workflowName: 'Qwen Code CI',
+    workflowName: 'Tay Bellow CI',
     status: 'COMPLETED',
     conclusion: 'FAILURE',
     startedAt: '2026-07-12T07:10:00.000Z',
@@ -121,7 +121,7 @@ function client(overrides = {}) {
 }
 
 describe('ci flaky rerun patrol', () => {
-  it('selects only recent stale current Qwen Code CI failures', () => {
+  it('selects only recent stale current Tay Bellow CI failures', () => {
     const selected = selectCandidateTargets(
       [
         pr({

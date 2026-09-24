@@ -52,7 +52,7 @@ describe('WebViewContent', () => {
     const html = WebViewContent.generate(webview as never, fakeExtensionUri);
 
     expect(html).toContain('<!DOCTYPE html>');
-    expect(html).toContain('Qwen Code');
+    expect(html).toContain('Tay Bellow');
     expect(html).toContain(webview.cspSource);
     expect(webview.asWebviewUri).toHaveBeenCalled();
   });

@@ -72,8 +72,8 @@ describe('bugCommand', () => {
 
     const qwenCodeLine =
       GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-        ? `Qwen Code: 0.1.0 (${GIT_COMMIT_INFO})`
-        : 'Qwen Code: 0.1.0';
+        ? `Tay Bellow: 0.1.0 (${GIT_COMMIT_INFO})`
+        : 'Tay Bellow: 0.1.0';
     const expectedInfo = `${qwenCodeLine}
 Runtime: Node.js v20.0.0 / npm 10.0.0
 IDE Client: VSCode
@@ -117,8 +117,8 @@ Memory Usage: 100 MB`;
 
     const qwenCodeLine =
       GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-        ? `Qwen Code: 0.1.0 (${GIT_COMMIT_INFO})`
-        : 'Qwen Code: 0.1.0';
+        ? `Tay Bellow: 0.1.0 (${GIT_COMMIT_INFO})`
+        : 'Tay Bellow: 0.1.0';
     const expectedInfo = `${qwenCodeLine}
 Runtime: Node.js v20.0.0 / npm 10.0.0
 IDE Client: VSCode
@@ -179,8 +179,8 @@ Memory Usage: 100 MB`;
 
     const qwenCodeLine =
       GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-        ? `Qwen Code: 0.1.0 (${GIT_COMMIT_INFO})`
-        : 'Qwen Code: 0.1.0';
+        ? `Tay Bellow: 0.1.0 (${GIT_COMMIT_INFO})`
+        : 'Tay Bellow: 0.1.0';
     const expectedInfo = `${qwenCodeLine}
 Runtime: Node.js v20.0.0 / npm 10.0.0
 IDE Client: VSCode

@@ -1419,7 +1419,7 @@ export function OpenTuiMcpApprovalDialog(props: OpenTuiMcpApprovalProps) {
             </text>
             <text fg={C.text}>
               {t(
-                'This workspace declares an MCP server. Approving lets Qwen Code start it and run its tools. Approval is bound to this exact configuration — if {{source}} changes, you will be asked again.',
+                'This workspace declares an MCP server. Approving lets Tay Bellow start it and run its tools. Approval is bound to this exact configuration — if {{source}} changes, you will be asked again.',
                 { source: server.source },
               )}
             </text>

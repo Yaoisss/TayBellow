@@ -4825,7 +4825,7 @@ describe('CoreToolScheduler', () => {
         ToolErrorType.EXECUTION_DENIED,
       );
       expect(completedCall.response.error?.message).toBe(
-        'Qwen Code requires permission to use edit, but that permission was declined.',
+        'Tay Bellow requires permission to use edit, but that permission was declined.',
       );
     }
     expect(execute).not.toHaveBeenCalled();
@@ -4888,7 +4888,7 @@ describe('CoreToolScheduler', () => {
       );
       const message = completedCall.response.error?.message ?? '';
       expect(message).toBe(
-        `Qwen Code requires permission to use "${ToolNames.SEND_MESSAGE}", but that permission was declined. Matching deny rule: "${ToolNames.SEND_MESSAGE}".`,
+        `Tay Bellow requires permission to use "${ToolNames.SEND_MESSAGE}", but that permission was declined. Matching deny rule: "${ToolNames.SEND_MESSAGE}".`,
       );
       expect(message).not.toContain('permissions.allow');
     }
@@ -4944,7 +4944,7 @@ describe('CoreToolScheduler', () => {
       );
       const message = completedCall.response.error?.message ?? '';
       expect(message).toBe(
-        `Qwen Code requires permission to use "${ToolNames.SEND_MESSAGE}", but that permission was declined. Matching deny rule: "${ToolNames.SEND_MESSAGE}".`,
+        `Tay Bellow requires permission to use "${ToolNames.SEND_MESSAGE}", but that permission was declined. Matching deny rule: "${ToolNames.SEND_MESSAGE}".`,
       );
       expect(message).toContain('Matching deny rule');
     }
@@ -4999,7 +4999,7 @@ describe('CoreToolScheduler', () => {
         ToolErrorType.EXECUTION_DENIED,
       );
       expect(completedCall.response.error?.message).toBe(
-        'Qwen Code requires permission to use "edit", but that permission was declined.',
+        'Tay Bellow requires permission to use "edit", but that permission was declined.',
       );
       const message = completedCall.response.error?.message ?? '';
       expect(message).not.toContain('permissions.allow');
@@ -5102,7 +5102,7 @@ describe('CoreToolScheduler', () => {
     expect(completedCall.status).toBe('error');
     if (completedCall.status === 'error') {
       expect(completedCall.response.error?.message).toBe(
-        'Qwen Code requires permission to use "send_message", but that permission was declined.',
+        'Tay Bellow requires permission to use "send_message", but that permission was declined.',
       );
     }
     expect(execute).not.toHaveBeenCalled();
@@ -5178,7 +5178,7 @@ describe('CoreToolScheduler', () => {
       );
       const message = completedCall.response.error?.message ?? '';
       expect(message).toBe(
-        'Qwen Code requires permission to use "send_message", but that permission was declined.',
+        'Tay Bellow requires permission to use "send_message", but that permission was declined.',
       );
       expect(message).not.toContain('permissions.allow');
       expect(message).not.toContain('UNHANDLED_EXCEPTION');
@@ -8659,7 +8659,7 @@ describe('CoreToolScheduler', () => {
           await (scheduler as any).getToolNotFoundMessage(name);
         expect(message).toContain('disabled by default');
         expect(message).toContain('tools.todoWrite.enabled');
-        expect(message).toMatch(/restart Qwen Code/i);
+        expect(message).toMatch(/restart Tay Bellow/i);
         expect(message).not.toContain('Did you mean');
       }
     });
@@ -8692,7 +8692,7 @@ describe('CoreToolScheduler', () => {
           await (scheduler as any).getToolNotFoundMessage(name);
         expect(message).toContain('disabled for this workspace');
         expect(message).toContain('tools.todoWrite.enabled');
-        expect(message).toMatch(/restart Qwen Code/i);
+        expect(message).toMatch(/restart Tay Bellow/i);
         expect(message).not.toContain('only controls');
       }
     });
@@ -8918,7 +8918,7 @@ describe('CoreToolScheduler', () => {
       if (completedCall.status === 'error') {
         const errorMessage = completedCall.response.error?.message;
         expect(errorMessage).toBe(
-          'Qwen Code requires permission to use write_file, but that permission was declined.',
+          'Tay Bellow requires permission to use write_file, but that permission was declined.',
         );
         // Should NOT contain "not found in registry"
         expect(errorMessage).not.toContain('not found in registry');
@@ -13536,7 +13536,7 @@ describe('CoreToolScheduler telemetry spans', () => {
     });
     expect(mockAcquireSleepInhibitor).toHaveBeenCalledWith(
       expect.any(Object),
-      'Qwen Code is executing tool mockTool',
+      'Tay Bellow is executing tool mockTool',
     );
     expect(mockSleepInhibitorRelease).toHaveBeenCalledTimes(1);
   });

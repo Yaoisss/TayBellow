@@ -4543,7 +4543,7 @@ export const AppContainer = (props: AppContainerProps) => {
       const name = entry.meta?.name ?? entry.runId;
       const verb = entry.status === 'failed' ? 'failed' : 'completed';
       sendNotification(
-        { message: `Workflow '${name}' ${verb}`, title: 'Qwen Code' },
+        { message: `Workflow '${name}' ${verb}`, title: 'Tay Bellow' },
         terminal,
         workflowBellEnabled,
       );

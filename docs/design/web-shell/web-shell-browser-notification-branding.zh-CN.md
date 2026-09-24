@@ -4,7 +4,7 @@
 
 ## 问题与范围
 
-本 PR 之前，#11398 使用固定的 `Qwen Code` 标题，不向 Notification 传入图标。本 PR 引入随包 PNG 和用户指定的 QwenCode 拼写，并支持品牌配置。
+本 PR 之前，#11398 使用固定的 `Tay Bellow` 标题，不向 Notification 传入图标。本 PR 引入随包 PNG 和用户指定的 QwenCode 拼写，并支持品牌配置。
 
 [内容与导航设计](web-shell-browser-notification-details.zh-CN.md)默认使用 QwenCode 名称和随包图标。QwenCode 是用户指定的通知品牌拼写，与侧栏品牌独立。嵌入 Web Shell 的宿主需要传入自己的应用名称和图片 URL，包括 HTTPS CDN 地址。本次只调整通知品牌，不修改侧边栏品牌或浏览器控制的站点来源。
 

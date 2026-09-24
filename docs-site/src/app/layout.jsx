@@ -9,11 +9,11 @@ export const metadata = {
 };
 
 const banner = (
-  <Banner storageKey="some-key">Qwen Code 0.5.0 is released 🎉</Banner>
+  <Banner storageKey="some-key">Tay Bellow 0.5.0 is released 🎉</Banner>
 );
 const navbar = (
   <Navbar
-    logo={<b>Qwen Code</b>}
+    logo={<b>Tay Bellow</b>}
     // ... Your additional navbar options
   />
 );

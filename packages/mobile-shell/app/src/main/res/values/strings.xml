@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Qwen Code</string>
+    <string name="app_name">Tay Bellow</string>
     <string name="retry">Retry</string>
     <string name="connections">Connections</string>
     <string name="development_notice">Development client. Per-device credential revocation is not yet available.</string>
@@ -26,7 +26,7 @@
     <string name="preparing_browser_hint">Wait for the WebView provider to finish clearing this connection’s previous browser data. No page or credential is loaded before completion. You can return to Connections and retry later.</string>
     <string name="browser_preparation_failed">Could not prepare browser storage</string>
     <string name="connection_controls">Connections · %1$s</string>
-    <string name="connection_failed">Cannot reach Qwen Code</string>
+    <string name="connection_failed">Cannot reach Tay Bellow</string>
     <string name="connection_failed_hint">Check the daemon address, connection and certificate, then retry.</string>
     <string name="renderer_stopped">WebView stopped</string>
     <string name="retry_connection">Reconnect to open a new browser session.</string>

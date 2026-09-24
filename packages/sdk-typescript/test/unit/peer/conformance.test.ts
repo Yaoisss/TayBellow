@@ -5,10 +5,10 @@
  */
 
 /**
- * The peer endpoint against Qwen Code's own implementation of the same
+ * The peer endpoint against Tay Bellow's own implementation of the same
  * protocol, in both directions.
  *
- * `@qwen-code/sdk/peer` shares no code with a Qwen Code session: it was
+ * `@qwen-code/sdk/peer` shares no code with a Tay Bellow session: it was
  * written from the cross-session protocol page. So every place the two
  * could disagree — what a record looks like, when it counts as live, how a
  * frame parses, which token a connection presents, what a receipt says — is
@@ -44,7 +44,7 @@ interface CoreArrival {
   controller?: { id: string; label: string };
 }
 
-describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
+describe.skipIf(noUnixSockets)('peer endpoint ↔ Tay Bellow session', () => {
   let root: string;
   let home: string;
   let savedHome: string | undefined;
@@ -81,7 +81,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     return endpoint;
   }
 
-  /** A session registered and listening the way a hosted Qwen Code session is. */
+  /** A session registered and listening the way a hosted Tay Bellow session is. */
   async function startCoreSession(
     options: Pick<coreInbox.PeerInboxOptions, 'resolveController'> = {},
   ) {
@@ -116,7 +116,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     return { inbox: inbox!, token, arrivals, slot: registration.slot };
   }
 
-  it('is listed and reached by a Qwen Code session', async () => {
+  it('is listed and reached by a Tay Bellow session', async () => {
     const endpoint = await startEndpoint();
 
     expect(await coreRegistry.listLiveSessions()).toEqual([
@@ -138,7 +138,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     ]);
   });
 
-  it('lists and reaches a Qwen Code session, which reads its frame and answers', async () => {
+  it('lists and reaches a Tay Bellow session, which reads its frame and answers', async () => {
     const core = await startCoreSession();
     const endpoint = await startEndpoint();
 
@@ -179,7 +179,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     });
   });
 
-  it('settles a burst from one folded drop receipt written by a Qwen Code session', async () => {
+  it('settles a burst from one folded drop receipt written by a Tay Bellow session', async () => {
     const core = await startCoreSession();
     const receipts: sdk.PeerReceipt[] = [];
     const endpoint = await startEndpoint({
@@ -215,7 +215,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     );
   });
 
-  it('receives what a Qwen Code session sends, and its receipt reads back there', async () => {
+  it('receives what a Tay Bellow session sends, and its receipt reads back there', async () => {
     const core = await startCoreSession();
     const messages: sdk.PeerInboundMessage[] = [];
     const endpoint = await startEndpoint({
@@ -285,7 +285,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     expect(core.arrivals).toHaveLength(2);
   });
 
-  it('parses every line the way a Qwen Code session does', () => {
+  it('parses every line the way a Tay Bellow session does', () => {
     const user = (overrides: Record<string, unknown> = {}) =>
       JSON.stringify({
         msgV: 1,
@@ -379,7 +379,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     expect(sdk.buildAuthLine('tok')).toBe(coreFrames.buildAuthLine('tok'));
   });
 
-  it('builds frames a Qwen Code session builds, up to the fresh id and the prose', () => {
+  it('builds frames a Tay Bellow session builds, up to the fresh id and the prose', () => {
     const fields = {
       content: 'hello',
       from: '/tmp/me.sock',
@@ -411,7 +411,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     );
   });
 
-  it('judges the registry directory the way a Qwen Code session does', async () => {
+  it('judges the registry directory the way a Tay Bellow session does', async () => {
     const endpoint = await startEndpoint();
     const dir = path.join(home, 'sessions');
     const base = {
@@ -475,7 +475,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     const bySession = (a: { sessionId: string }, b: { sessionId: string }) =>
       a.sessionId.localeCompare(b.sessionId);
     const fromSdk = (await sdk.readLiveSessionRecords(dir)).sort(bySession);
-    // Read second: a Qwen Code session also clears away the dead record.
+    // Read second: a Tay Bellow session also clears away the dead record.
     const fromCore = (await coreRegistry.listLiveSessions()).sort(bySession);
 
     expect(fromSdk).toEqual(fromCore);
@@ -484,7 +484,7 @@ describe.skipIf(noUnixSockets)('peer endpoint ↔ Qwen Code session', () => {
     );
   });
 
-  it('derives identity, names and refs the way a Qwen Code session does', async () => {
+  it('derives identity, names and refs the way a Tay Bellow session does', async () => {
     expect(readProcStartToken(process.pid)).toBe(
       coreLiveness.readProcStartToken(process.pid),
     );

@@ -1347,7 +1347,7 @@ describe('DwsChannel', () => {
     await client.emit(
       0,
       message('user_im_message_receive_at', 'message-1', 'please help', {
-        referencedText: 'Qwen Code is slow after connecting over SSH.',
+        referencedText: 'Tay Bellow is slow after connecting over SSH.',
       }),
     );
     await channel.sendMessage('cid-1', 'done');
@@ -1361,7 +1361,7 @@ describe('DwsChannel', () => {
         isGroup: true,
         isMentioned: true,
         isReplyToBot: false,
-        referencedText: 'Qwen Code is slow after connecting over SSH.',
+        referencedText: 'Tay Bellow is slow after connecting over SSH.',
       }),
     ]);
     expect(client.sendImMessage).toHaveBeenCalledWith(
@@ -1378,14 +1378,14 @@ describe('DwsChannel', () => {
     await client.emit(
       0,
       message('user_im_message_receive_at', 'quoted-message', 'please help', {
-        referencedText: 'Qwen Code is slow after connecting over SSH.',
+        referencedText: 'Tay Bellow is slow after connecting over SSH.',
       }),
     );
 
     expect(bridge.prompt).toHaveBeenCalledWith(
       'session-1',
       expect.stringContaining(
-        '[Replying to: "Qwen Code is slow after connecting over SSH."]',
+        '[Replying to: "Tay Bellow is slow after connecting over SSH."]',
       ),
       expect.any(Object),
     );
@@ -3872,7 +3872,7 @@ describe('DwsChannel', () => {
       message('user_im_message_receive_at', 'history-mention', '@QwenBot hi', {
         conversationId: 'external-group',
         eventTime: Date.now(),
-        referencedText: 'Qwen Code is slow after connecting over SSH.',
+        referencedText: 'Tay Bellow is slow after connecting over SSH.',
       }),
     ];
 
@@ -3885,7 +3885,7 @@ describe('DwsChannel', () => {
         text: '@QwenBot hi',
         isGroup: true,
         isMentioned: true,
-        referencedText: 'Qwen Code is slow after connecting over SSH.',
+        referencedText: 'Tay Bellow is slow after connecting over SSH.',
       }),
     ]);
   });

@@ -388,7 +388,7 @@ export function OpenTuiHooksDialog({
     <box flexDirection="column">
       <text fg={C.dim}>
         {t(
-          'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Qwen Code.',
+          'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Tay Bellow.',
         )}
       </text>
       <box marginTop={1} flexDirection="column">

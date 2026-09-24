@@ -44,7 +44,7 @@ describe.skipIf(!zipAvailable())('packageExtension', () => {
     const root = mkdtempSync(path.join(os.tmpdir(), 'qwen-extension-store-'));
     const source = path.join(root, 'extension');
     const archive = path.join(root, 'extension.zip');
-    const manifest = { name: 'Qwen Code', version: '1.2.3.4', key: 'PUBKEY' };
+    const manifest = { name: 'Tay Bellow', version: '1.2.3.4', key: 'PUBKEY' };
     try {
       mkdirSync(source, { recursive: true });
       writeFileSync(
@@ -64,7 +64,7 @@ describe.skipIf(!zipAvailable())('packageExtension', () => {
       );
       // The store rejects an upload carrying a key, and everything else about
       // the build has to survive the staging copy.
-      expect(storeManifest).toEqual({ name: 'Qwen Code', version: '1.2.3.4' });
+      expect(storeManifest).toEqual({ name: 'Tay Bellow', version: '1.2.3.4' });
 
       await packageExtension({ source, archive });
       const unpacked = await readZipEntries(archive);

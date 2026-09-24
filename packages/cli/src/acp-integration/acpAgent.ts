@@ -5253,7 +5253,7 @@ class QwenAgent implements Agent {
       protocolVersion: PROTOCOL_VERSION,
       agentInfo: {
         name: 'qwen-code',
-        title: 'Qwen Code',
+        title: 'Tay Bellow',
         version,
       },
       authMethods,
@@ -15223,7 +15223,7 @@ class QwenAgent implements Agent {
     if (!selectedType) {
       throw RequestError.authRequired(
         { authMethods: pickAuthMethodsForAuthRequired() },
-        'Use Qwen Code CLI to authenticate first.',
+        'Use Tay Bellow CLI to authenticate first.',
       );
     }
 

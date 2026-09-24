@@ -4,13 +4,13 @@
 
 ## 问题与范围
 
-OpenAI Chat Completions 与 Responses 共用凭据配置，但目前 Qwen Code 将它们作为
+OpenAI Chat Completions 与 Responses 共用凭据配置，但目前 Tay Bellow 将它们作为
 不同认证选项和提供商配置组。用户必须将 `openai` 改为 `openai-responses` 才能选择
 请求格式。
 
 在每个 OpenAI-compatible 模型中增加 `wireApi: "chat-completions" | "responses"`，
 与 `id`、`baseUrl`、`envKey` 同级。界面统一为 OpenAI-compatible 入口，再选择 API。
-保留内部协议身份和已记录会话的精确路由。这是 Qwen Code 自身功能，并非从其他代码库
+保留内部协议身份和已记录会话的精确路由。这是 Tay Bellow 自身功能，并非从其他代码库
 移植。原生 computer-use 行为、reasoning 默认值、传输实现、协议自动探测以及凭据
 自动迁移不在本次范围内。
 

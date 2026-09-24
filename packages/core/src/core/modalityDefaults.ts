@@ -60,7 +60,7 @@ const MODALITY_PATTERNS: Array<[RegExp, InputModalities]> = [
   [/^qwen-vl-/, { image: true, video: true }],
   [/^qwen3-vl-/, { image: true, video: true }],
 
-  // Qwen coder / text models: text-only
+  // Tay Bellowr / text models: text-only
   [/^qwen3-coder-/, {}],
   // Qwen3.6-35B-A3B (local quant variants) — image + video
   [/^qwen3\.6-35b/, { image: true, video: true }],

@@ -1,5 +1,5 @@
 /**
- * WeChat channel adapter for Qwen Code.
+ * WeChat channel adapter for Tay Bellow.
  * Extends ChannelBase with WeChat iLink Bot API integration.
  */
 

@@ -1,6 +1,6 @@
 ---
 name: desktop-brand-builder
-description: Generate a branded Qwen Code desktop package from the Tauri desktop shell using a minimal brandId and logo. Use when the user wants a custom, white-label, or rebranded desktop client, installer, DMG/EXE/AppImage/deb, or one-click brand build on top of packages/desktop-shell.
+description: Generate a branded Tay Bellow desktop package from the Tauri desktop shell using a minimal brandId and logo. Use when the user wants a custom, white-label, or rebranded desktop client, installer, DMG/EXE/AppImage/deb, or one-click brand build on top of packages/desktop-shell.
 ---
 
 # Desktop Brand Builder (Tauri shell)
@@ -67,7 +67,7 @@ Infer missing values deterministically:
   `.desktop`; `https://acme.ai` becomes `ai.acme.desktop`
 - fallback `appId`: `app.<brandId>.desktop`
 - `updaterEndpoints`: empty by default. A branded build must never poll the
-  official Qwen Code updater feed, and the official feed must never update a
+  official Tay Bellow updater feed, and the official feed must never update a
   branded build. Only set endpoints when the user supplies their own feed.
 
 ## Workflow
@@ -177,7 +177,7 @@ for the host target, or `src-tauri/target/<triple>/release/bundle/` when
 
 Branded builds are unsigned by default. The upstream release pipeline's
 signing secrets (Apple, Windows) and updater private key belong to the
-official Qwen Code releases only. For a brand that needs signed releases or
+official Tay Bellow releases only. For a brand that needs signed releases or
 in-app updates, set up separate credentials and a separate updater feed; do
 not reuse the upstream ones.
 
@@ -210,7 +210,7 @@ After packaging:
   `packages/desktop-shell/.agents/skills/desktop-brand-builder/scripts/brand-create.mjs`
   is missing, and include the expected command.
 - Already-branded shell-root: the script refuses to run when
-  `productName` is no longer the default (`Qwen Code Desktop`). Start from
+  `productName` is no longer the default (`Tay Bellow Desktop`). Start from
   a fresh clone — do not re-run the script in an already-patched tree.
 - Build failure: preserve the build directory, return the last useful error
   lines, and include the full log path or command that produced the failure.

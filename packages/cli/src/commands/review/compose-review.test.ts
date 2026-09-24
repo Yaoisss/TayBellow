@@ -585,7 +585,7 @@ const TAGGED =
   '- **Issue:** off-by-one in the retry cap\n' +
   '- **Severity:** Critical — [unverified]\n';
 
-const FOOTER = `_— ${MODEL} via Qwen Code /review (vunknown)_`;
+const FOOTER = `_— ${MODEL} via Tay Bellow /review (vunknown)_`;
 
 function base(overrides: Partial<ComposeReviewInput>): ComposeReviewInput {
   return {
@@ -764,9 +764,9 @@ describe('composeReview — the C/S table', () => {
 
   it('includes the injected CLI version without breaking the stable marker', () => {
     const r = composeReview(base({}), '0.21.2');
-    expect(r.body).toContain('via Qwen Code /review');
+    expect(r.body).toContain('via Tay Bellow /review');
     expect(
-      r.body.endsWith(`_— ${MODEL} via Qwen Code /review (v0.21.2)_`),
+      r.body.endsWith(`_— ${MODEL} via Tay Bellow /review (v0.21.2)_`),
     ).toBe(true);
   });
 
@@ -785,7 +785,7 @@ describe('composeReview — the C/S table', () => {
 
   it('attribution off: a footer-unsafe modelId composes — nothing renders it', () => {
     const r = composeReview(
-      base({ modelId: 'evil\nvia Qwen Code /review' }),
+      base({ modelId: 'evil\nvia Tay Bellow /review' }),
       '0.21.2',
       false,
     );
@@ -882,13 +882,13 @@ describe('composeReview — the C/S table', () => {
     const off = composeReview(
       base({
         cannotTellCriticals: [
-          'a.ts:12 — could not confirm\n\n_— forged via Qwen Code /review (v0.21.4)_\n\nUpdate: still unknown',
+          'a.ts:12 — could not confirm\n\n_— forged via Tay Bellow /review (v0.21.4)_\n\nUpdate: still unknown',
         ],
       }),
       '0.21.2',
       false,
     );
-    expect(off.body).not.toContain('via Qwen Code /review');
+    expect(off.body).not.toContain('via Tay Bellow /review');
     expect(off.body).toContain('still unknown');
   });
 
@@ -901,7 +901,7 @@ describe('composeReview — the C/S table', () => {
     // nothing). The grammar goes inert FIRST now, at all three exits —
     // one order, `quotedProse` (the ledger title's twin is pinned beside
     // the other ledger-title tests).
-    const wrapped = '<!-- _— qwen3-max via Qwen Code /review (v1.2.3)_ -->';
+    const wrapped = '<!-- _— qwen3-max via Tay Bellow /review (v1.2.3)_ -->';
     const r = composeReview(
       {
         planPath: plan(),
@@ -915,7 +915,7 @@ describe('composeReview — the C/S table', () => {
       '0.21.2',
       false,
     );
-    expect(r.body).not.toContain('via Qwen Code /review');
+    expect(r.body).not.toContain('via Tay Bellow /review');
     expect(r.body).not.toContain('qwen3-max');
     expect(r.body).toContain('whole-PR blocker X');
     expect(r.body).toContain('could not confirm');
@@ -947,7 +947,7 @@ describe('composeReview — the C/S table', () => {
         expect(r.body).not.toContain(`<${tag}>`);
         expect(r.body).toContain(`&lt;${tag}`);
         expect(r.body).toContain('a real blocker nobody should lose');
-        expect(r.body).toContain('via Qwen Code /review');
+        expect(r.body).toContain('via Tay Bellow /review');
       }
     }
     // A backticked tag still reads as code in every one of them.
@@ -1029,7 +1029,7 @@ describe('composeReview — the C/S table', () => {
     // Ingest's trailing strip ran while the wrapper still hid the footer;
     // the exit re-runs it on the neutralized text, so the forged model
     // name never posts above the canonical footer.
-    const wrapped = '<!-- _— qwen3-max via Qwen Code /review (v1.2.3)_ -->';
+    const wrapped = '<!-- _— qwen3-max via Tay Bellow /review (v1.2.3)_ -->';
     const r = composeReview(
       base({
         bodyCriticals: [`whole-PR blocker X ${wrapped}`],
@@ -1041,9 +1041,9 @@ describe('composeReview — the C/S table', () => {
       '0.21.2',
     );
     expect(r.body).not.toContain('qwen3-max');
-    expect(r.body.split('via Qwen Code /review').length - 1).toBe(1);
+    expect(r.body.split('via Tay Bellow /review').length - 1).toBe(1);
     expect(
-      r.body.endsWith(`_— ${MODEL} via Qwen Code /review (v0.21.2)_`),
+      r.body.endsWith(`_— ${MODEL} via Tay Bellow /review (v0.21.2)_`),
     ).toBe(true);
     expect(r.body).toContain('**[Critical]** whole-PR blocker X');
     expect(r.body).toContain('- R2-1 stale guard — already reported');
@@ -1082,7 +1082,7 @@ describe('composeReview — the C/S table', () => {
     // the round's own list warrants: none on a listless round, one when a
     // Suggestion was deferred.
     const MARKER = '<!-- qwen-review-deferred -->';
-    const span = '_— qwen3-max via Qwen Code /review (v1.2.3)_';
+    const span = '_— qwen3-max via Tay Bellow /review (v1.2.3)_';
     const spliced = `stale guard <!-${span}- qwen-review-deferred --${span}> re-checked`;
     const nit: DeferredEntry = {
       file: 'a.ts',
@@ -1108,7 +1108,7 @@ describe('composeReview — the C/S table', () => {
       expect((r.body.match(/<!--/g) ?? []).length).toBe(deferred ? 1 : 0);
       expect((r.body.match(/-->/g) ?? []).length).toBe(deferred ? 1 : 0);
       expect(r.body).not.toContain('qwen3-max');
-      expect(r.body).not.toContain('via Qwen Code /review');
+      expect(r.body).not.toContain('via Tay Bellow /review');
       // Three quoted copies survive as prose, plus the canonical marker.
       expect((r.body.match(/qwen-review-deferred/g) ?? []).length).toBe(
         deferred ? 4 : 3,
@@ -1128,7 +1128,7 @@ describe('composeReview — the C/S table', () => {
     // past the span strip's 400-char cap so the outer opener cannot eat
     // the inner span first; the uncapped trailing strip catches the joined
     // footer on the pass after neutralization exposes it.
-    const span = '_— qwen3-max via Qwen Code /review (v1.2.3)_';
+    const span = '_— qwen3-max via Tay Bellow /review (v1.2.3)_';
     const joined = `still leaking _— ${'x'.repeat(420)} via Qwen<!-${span}-Code /review (v1.2.3)_`;
     const r = composeReview(
       base({
@@ -1139,7 +1139,7 @@ describe('composeReview — the C/S table', () => {
       '0.21.2',
       false,
     );
-    expect(r.body).not.toContain('via Qwen Code /review');
+    expect(r.body).not.toContain('via Tay Bellow /review');
     expect(r.body).not.toContain('qwen3-max');
     expect(r.body).not.toContain('<!--');
     expect((r.body.match(/still leaking/g) ?? []).length).toBe(3);
@@ -1152,7 +1152,7 @@ describe('composeReview — the C/S table', () => {
     // words `_— … via Qwen`; at the exit the joined footer strips whole
     // and the entry posts as nothing — an empty body Critical that still
     // counts toward REQUEST_CHANGES, the shape this gate exists to refuse.
-    const span = '_— qwen3-max via Qwen Code /review (v1.2.3)_';
+    const span = '_— qwen3-max via Tay Bellow /review (v1.2.3)_';
     const joined = `_— ${'x'.repeat(420)} via Qwen<!-${span}-Code /review (v1.2.3)_`;
     for (const attribution of [true, false]) {
       expect(() =>
@@ -1190,7 +1190,7 @@ describe('composeReview — the C/S table', () => {
     // submit's gate. A forged footer past the capped strips' 400-char
     // middle once passed as ballast; the render legs then stripped it
     // entirely and a bare **[Critical]** line posted and counted.
-    const forged = `**[Critical]** _— ${'x'.repeat(450)} via Qwen Code /review (v0.21.2)_`;
+    const forged = `**[Critical]** _— ${'x'.repeat(450)} via Tay Bellow /review (v0.21.2)_`;
     expect(() => composeReview(base({ bodyCriticals: [forged] }))).toThrow(
       /renders as nothing/,
     );
@@ -1200,7 +1200,7 @@ describe('composeReview — the C/S table', () => {
     // The twin leg must fail the draft, not silently drop the entry:
     // dropping it lifts the `cannot-tell-existing-critical` cap, and the
     // composed verdict flips.
-    const forged = `_— ${'x'.repeat(450)} via Qwen Code /review (v0.21.2)_`;
+    const forged = `_— ${'x'.repeat(450)} via Tay Bellow /review (v0.21.2)_`;
     expect(() =>
       composeReview(base({ cannotTellCriticals: [forged] })),
     ).toThrow(/renders as nothing/);
@@ -1214,16 +1214,16 @@ describe('composeReview — the C/S table', () => {
     const off = composeReview(
       base({
         bodyCriticals: [
-          'whole-PR blocker — reproduced on 45f836d _— qwen3.7-max via\nQwen Code /review (v0.21.3)_ and it still stands',
+          'whole-PR blocker — reproduced on 45f836d _— qwen3.7-max via\nTay Bellow /review (v0.21.3)_ and it still stands',
         ],
         cannotTellCriticals: [
-          'a.ts:12 — reproduced on 45f836d _— qwen3.7-max via\nQwen Code /review (v0.21.3)_ still unknown',
+          'a.ts:12 — reproduced on 45f836d _— qwen3.7-max via\nTay Bellow /review (v0.21.3)_ still unknown',
         ],
       }),
       '0.21.2',
       false,
     );
-    expect(off.body).not.toContain('via Qwen Code /review');
+    expect(off.body).not.toContain('via Tay Bellow /review');
     expect(off.body).toContain('whole-PR blocker');
     expect(off.body).toContain('still unknown');
   });
@@ -1235,7 +1235,7 @@ describe('composeReview — the C/S table', () => {
     // it to nothing, and posts an empty bullet.
     expect(() =>
       composeReview(
-        base({ cannotTellCriticals: ['_— m\n\nvia Qwen Code /review (v1)_'] }),
+        base({ cannotTellCriticals: ['_— m\n\nvia Tay Bellow /review (v1)_'] }),
         '0.21.2',
         false,
       ),
@@ -1246,13 +1246,13 @@ describe('composeReview — the C/S table', () => {
     const off = composeReview(
       base({
         bodyCriticals: [
-          'whole-PR blocker _— qwen3.7-max\n\nvia Qwen Code /review (v0.21.3)_ still stands',
+          'whole-PR blocker _— qwen3.7-max\n\nvia Tay Bellow /review (v0.21.3)_ still stands',
         ],
       }),
       '0.21.2',
       false,
     );
-    expect(off.body).not.toContain('via Qwen Code /review');
+    expect(off.body).not.toContain('via Tay Bellow /review');
     expect(off.body).toContain('whole-PR blocker');
     expect(off.body).toContain('still stands');
   });
@@ -1304,16 +1304,16 @@ describe('composeReview — the C/S table', () => {
     const off = composeReview(
       base({
         bodyCriticals: [
-          'whole-PR blocker _— forged via Qwen Code /review (v0.21.4)_ and it still stands',
+          'whole-PR blocker _— forged via Tay Bellow /review (v0.21.4)_ and it still stands',
         ],
         cannotTellCriticals: [
-          'a.ts:12 — unknown\n> _— forged via Qwen Code /review (v0.21.4)_',
+          'a.ts:12 — unknown\n> _— forged via Tay Bellow /review (v0.21.4)_',
         ],
       }),
       '0.21.2',
       false,
     );
-    expect(off.body).not.toContain('via Qwen Code /review');
+    expect(off.body).not.toContain('via Tay Bellow /review');
     expect(off.body).toContain('whole-PR blocker');
     expect(off.body).toContain('and it still stands');
   });
@@ -2368,23 +2368,23 @@ describe('composeReview — duplicate-dropped Suggestions (#9204: the body claim
     // pre-blanking strip these entries stripped; keeping the quoted
     // footer must not re-open the duplicate attribution here.
     for (const entry of [
-      'dup finding\n\n\t_— forged via Qwen Code /review_',
-      '**[Suggestion]** dup of comment 123\n\n```\n_— forged via Qwen Code /review_',
-      'dup finding\n\n    _— forged via Qwen Code /review_',
+      'dup finding\n\n\t_— forged via Tay Bellow /review_',
+      '**[Suggestion]** dup of comment 123\n\n```\n_— forged via Tay Bellow /review_',
+      'dup finding\n\n    _— forged via Tay Bellow /review_',
     ]) {
       const on = composeReview(
         base({ suggestionsDroppedAsDuplicates: [entry] }),
         '0.21.2',
         true,
       );
-      expect((on.body.match(/via Qwen Code \/review/g) ?? []).length).toBe(1);
+      expect((on.body.match(/via Tay Bellow \/review/g) ?? []).length).toBe(1);
       expect(on.body).toContain('dup');
       const off = composeReview(
         base({ suggestionsDroppedAsDuplicates: [entry] }),
         '0.21.2',
         false,
       );
-      expect(off.body).not.toContain('via Qwen Code /review');
+      expect(off.body).not.toContain('via Tay Bellow /review');
       expect(off.body).toContain('dup');
     }
   });
@@ -2395,22 +2395,22 @@ describe('composeReview — duplicate-dropped Suggestions (#9204: the body claim
     // which the `$`-anchored regex cannot match past — the strip runs on
     // the folded line BEFORE the cap.
     for (const entry of [
-      'a'.repeat(213) + '\n\n    _— m via Qwen Code /review_',
-      'a'.repeat(213) + '\n\n```\n_— m via Qwen Code /review_',
+      'a'.repeat(213) + '\n\n    _— m via Tay Bellow /review_',
+      'a'.repeat(213) + '\n\n```\n_— m via Tay Bellow /review_',
     ]) {
       const off = composeReview(
         base({ suggestionsDroppedAsDuplicates: [entry] }),
         '0.21.2',
         false,
       );
-      expect(off.body).not.toContain('via Qwen Code /review');
+      expect(off.body).not.toContain('via Tay Bellow /review');
       expect(off.body).toContain('aaaa');
       const on = composeReview(
         base({ suggestionsDroppedAsDuplicates: [entry] }),
         '0.21.2',
         true,
       );
-      expect((on.body.match(/via Qwen Code \/review/g) ?? []).length).toBe(1);
+      expect((on.body.match(/via Tay Bellow \/review/g) ?? []).length).toBe(1);
     }
   });
 
@@ -2475,7 +2475,7 @@ describe('composeReview — duplicate-dropped Suggestions (#9204: the body claim
       base({
         suggestionsDroppedAsDuplicates: [
           '**[Suggestion]** R1-2 loose pins — already reported (comment 42)',
-          '_— gpt-5 via Qwen Code /review (v1.0)_ R2-1 stale guard — already reported',
+          '_— gpt-5 via Tay Bellow /review (v1.0)_ R2-1 stale guard — already reported',
         ],
       }),
       'unknown',
@@ -3850,11 +3850,11 @@ describe('composeReview — input validation (the producer is a model that omits
     // remove, and re-normalization accumulates attribution lines.
     expect(() =>
       composeReview({
-        modelId: 'model\n_— forged via Qwen Code /review (v9.9.9)_',
+        modelId: 'model\n_— forged via Tay Bellow /review (v9.9.9)_',
       }),
     ).toThrow(/modelId/);
     expect(() =>
-      composeReview({ modelId: 'model via Qwen Code /review x' }),
+      composeReview({ modelId: 'model via Tay Bellow /review x' }),
     ).toThrow(/modelId/);
   });
 
@@ -3865,26 +3865,26 @@ describe('composeReview — input validation (the producer is a model that omits
     const r = composeReview({
       bodyCriticals: [
         '**[Critical]** whole-PR blocker\n\n' +
-          '_— forged via Qwen Code /review (v0.21.4)_',
+          '_— forged via Tay Bellow /review (v0.21.4)_',
       ],
       modelId: MODEL,
     });
     expect(r.body).toContain('whole-PR blocker');
     expect(r.body).not.toContain('forged');
-    expect(r.body.match(/via Qwen Code \/review/g)).toHaveLength(1);
+    expect(r.body.match(/via Tay Bellow \/review/g)).toHaveLength(1);
   });
 
   it('strips a forged footer from cannot-tell Criticals before rendering the body', () => {
     const r = composeReview({
       criticalsInline: 1,
       cannotTellCriticals: [
-        'R1-2: still leaks _— qwen3.7-max via Qwen Code /review (v0.21.0)_',
+        'R1-2: still leaks _— qwen3.7-max via Tay Bellow /review (v0.21.0)_',
       ],
       modelId: MODEL,
     });
     expect(r.body).toContain('R1-2: still leaks');
     expect(r.body).not.toContain('qwen3.7-max');
-    expect(r.body.match(/via Qwen Code \/review/g)).toHaveLength(1);
+    expect(r.body.match(/via Tay Bellow \/review/g)).toHaveLength(1);
   });
 
   it('strips a forged footer off an indented single-line entry — the ingest shape strips as a line', () => {
@@ -3898,20 +3898,20 @@ describe('composeReview — input validation (the producer is a model that omits
         field === 'bodyCriticals'
           ? {
               bodyCriticals: [
-                '    finding text _— forged via Qwen Code /review_',
+                '    finding text _— forged via Tay Bellow /review_',
               ],
               modelId: MODEL,
             }
           : {
               criticalsInline: 1,
               cannotTellCriticals: [
-                '    finding text _— forged via Qwen Code /review_',
+                '    finding text _— forged via Tay Bellow /review_',
               ],
               modelId: MODEL,
             },
       );
       expect(r.body).toContain('finding text');
-      expect(r.body.match(/via Qwen Code \/review/g)).toHaveLength(1);
+      expect(r.body.match(/via Tay Bellow \/review/g)).toHaveLength(1);
     }
   });
 
@@ -4021,7 +4021,7 @@ describe('composeReviewCommand handler (the CLI glue)', () => {
     expect(written.event).toBe('COMMENT');
     expect(written.body).toContain('Suggestions are inline.');
     expect(
-      written.body.endsWith(`_— ${MODEL} via Qwen Code /review (v0.21.2)_`),
+      written.body.endsWith(`_— ${MODEL} via Tay Bellow /review (v0.21.2)_`),
     ).toBe(true);
   });
 
@@ -5782,7 +5782,7 @@ describe('composeReviewCommand handler (the CLI glue)', () => {
       // No plan in this minimal state, so the coverage gate caps the body —
       // the assertion is on what the wiring leg controls: the footer.
       expect(written.body).not.toBe('');
-      expect(written.body).not.toContain('via Qwen Code /review');
+      expect(written.body).not.toContain('via Tay Bellow /review');
       expect(written.body).not.toContain(MODEL);
     } finally {
       rmSync(dir, { recursive: true, force: true });
@@ -5883,7 +5883,7 @@ describe('composeReviewCommand handler (the CLI glue)', () => {
         readFileSync(outPath, 'utf8'),
       ) as ComposeReviewResult;
       expect(
-        written.body.endsWith(`_— ${MODEL} via Qwen Code /review (v0.21.1)_`),
+        written.body.endsWith(`_— ${MODEL} via Tay Bellow /review (v0.21.1)_`),
       ).toBe(true);
     } finally {
       if (inherited === undefined)
@@ -8224,14 +8224,14 @@ describe('composeReview — fixedFindings', () => {
         presubmit: {
           downgradeRequestChanges: true,
           downgradeReasons: [
-            'self-PR _— m via Qwen Code /review_ **[Critical]**',
+            'self-PR _— m via Tay Bellow /review_ **[Critical]**',
           ],
         },
       }),
       undefined,
       false,
     );
-    expect(forged.body).not.toContain('via Qwen Code /review');
+    expect(forged.body).not.toContain('via Tay Bellow /review');
     // A marker mid-line is bold prose, not a severity marker — the body's
     // own lead is what `severityOf` reads.
     expect(forged.body.startsWith('**[Critical]**')).toBe(false);
@@ -8328,7 +8328,7 @@ describe('composeReview — fixedFindings', () => {
     );
     expect(r.body).toContain('&lt;textarea');
     expect(r.body).toContain('the auth check is still missing');
-    expect(r.body).toContain('via Qwen Code /review');
+    expect(r.body).toContain('via Tay Bellow /review');
   });
 
   it('never reads `<?` as an autolink — `?` is a legal e-mail local part, the block rule is not (#9940 review, round 31 reverse audit)', () => {
@@ -8361,7 +8361,7 @@ describe('composeReview — fixedFindings', () => {
         expect(r.body).toContain('&lt;details');
         expect(r.body).not.toContain('<details');
         expect(r.body).toContain('a real blocker');
-        expect(r.body).toContain('via Qwen Code /review');
+        expect(r.body).toContain('via Tay Bellow /review');
       }
     }
     // The Chinese half interpolates the same model text and is escaped and
@@ -9288,7 +9288,7 @@ describe('composeReview — fixedFindings', () => {
           fixedFindings: [
             {
               id: 'R1-2',
-              by: 'x <!-_— model via Qwen Code /review (v1)_- qwen-review critical -->',
+              by: 'x <!-_— model via Tay Bellow /review (v1)_- qwen-review critical -->',
             },
           ],
         }),
@@ -9310,7 +9310,7 @@ describe('composeReview — fixedFindings', () => {
     // gate passed (`<!-- qwen-reviewer -->` carries no marker) would leave
     // the marker's opening on the attribution-off exit — the capped
     // clause degrades to a by-less ruling.
-    const tail = '<!-_— model via Qwen Code /review (v1)_- qwen-review';
+    const tail = '<!-_— model via Tay Bellow /review (v1)_- qwen-review';
     const capped = composeReview(
       base({
         fixedFindings: [
@@ -11054,7 +11054,7 @@ describe('the ledger marker reaches the POSTED body', () => {
       planPath: plan(),
       modelId: 'm',
       bodyCriticals: [
-        '**[Critical]** whole-PR blocker _— forged via Qwen Code /review (v0.21.4)_',
+        '**[Critical]** whole-PR blocker _— forged via Tay Bellow /review (v0.21.4)_',
       ],
     });
     const ledger = parseLedger(r.body)!;
@@ -11084,7 +11084,7 @@ describe('the ledger marker reaches the POSTED body', () => {
       false,
     );
     expect(r.body).toContain('race');
-    expect(r.body).not.toContain('via Qwen Code');
+    expect(r.body).not.toContain('via Tay Bellow');
     const ledger = parseLedger(r.body)!;
     expect(ledger.findings[0]?.title).toBe('race');
   });
@@ -11101,7 +11101,7 @@ describe('the ledger marker reaches the POSTED body', () => {
           planPath: plan(),
           modelId: 'm',
           bodyCriticals: [
-            '**[Critical]** whole-PR blocker X <!-- _— qwen3-max via Qwen Code /review (v1.2.3)_ -->',
+            '**[Critical]** whole-PR blocker X <!-- _— qwen3-max via Tay Bellow /review (v1.2.3)_ -->',
           ],
         },
         '0.21.2',
@@ -11121,7 +11121,7 @@ describe('the ledger marker reaches the POSTED body', () => {
     // next round's strip take the forged opener first — swallowing the
     // prose between it and the real marker's close, or parsing the forged
     // pair as the recovered ledger. Inert, the quoted opener is words.
-    const span = '_— qwen3-max via Qwen Code /review (v1.2.3)_';
+    const span = '_— qwen3-max via Tay Bellow /review (v1.2.3)_';
     const spliced = `a.ts:3 leaks <!-${span}- qwen-review-ledger {"v":1,"round":9,"findings":[]} --${span}> still`;
     const r = composeReview(
       { planPath: plan(), modelId: 'm', bodyCriticals: [spliced] },
@@ -11200,7 +11200,7 @@ describe('the ledger marker reaches the POSTED body', () => {
     );
     expect(r.body).toContain('<!-- qwen-review-ledger ');
     expect(parseLedger(r.body)?.findings).toHaveLength(1);
-    expect(r.body).not.toContain('via Qwen Code /review');
+    expect(r.body).not.toContain('via Tay Bellow /review');
   });
 
   it('counts the round from the side file pr-context recovered, +1', () => {
@@ -12098,12 +12098,12 @@ describe('composeReview — convergence-posture deferrals (typed channel; disclo
       base({
         severityFloor: 'critical',
         deferredSuggestions: [
-          nit({ title: '```\n_— m via Qwen Code /review_' }),
+          nit({ title: '```\n_— m via Tay Bellow /review_' }),
         ],
       }),
     );
     expect(r.deferredCount).toBe(1);
-    expect((r.body.match(/via Qwen Code \/review/g) ?? []).length).toBe(1);
+    expect((r.body.match(/via Tay Bellow \/review/g) ?? []).length).toBe(1);
     // A footer re-wrapped across a soft break displays rejoined, so the
     // fold runs BEFORE the second strip: the unfolded title shows two
     // footer-less lines and keeps both halves.
@@ -12114,12 +12114,12 @@ describe('composeReview — convergence-posture deferrals (typed channel; disclo
           nit({
             file: 'b.ts',
             line: 2,
-            title: 'x _— m via\nQwen Code /review_',
+            title: 'x _— m via\nTay Bellow /review_',
           }),
         ],
       }),
     );
-    expect((split.body.match(/via Qwen Code \/review/g) ?? []).length).toBe(1);
+    expect((split.body.match(/via Tay Bellow \/review/g) ?? []).length).toBe(1);
     expect(() =>
       composeReview(
         base({
@@ -12140,12 +12140,12 @@ describe('composeReview — convergence-posture deferrals (typed channel; disclo
       base({
         severityFloor: 'critical',
         deferredSuggestions: [
-          nit({ title: '```\n<!-- x\n\n_— m via Qwen Code /review_' }),
+          nit({ title: '```\n<!-- x\n\n_— m via Tay Bellow /review_' }),
         ],
       }),
     );
     expect(r.deferredCount).toBe(1);
-    expect((r.body.match(/via Qwen Code \/review/g) ?? []).length).toBe(1);
+    expect((r.body.match(/via Tay Bellow \/review/g) ?? []).length).toBe(1);
   });
 
   it('exactly at the line cap, the verdict line does not claim truncation', () => {
@@ -12841,7 +12841,7 @@ describe("composeReview — the composed body fits GitHub's limit", () => {
     );
     expect(r.body.length).toBeLessThanOrEqual(LIMIT);
     expect(r.body).toContain('C'.repeat(50_000));
-    expect(r.body).toContain('via Qwen Code /review');
+    expect(r.body).toContain('via Tay Bellow /review');
   });
 
   it('bounds the footer the last-resort tail carries — an unbounded version must not post a body GitHub rejects', () => {
@@ -12862,7 +12862,7 @@ describe("composeReview — the composed body fits GitHub's limit", () => {
     expect(r.body.length).toBeLessThanOrEqual(LIMIT);
     expect(r.body).toContain('was TRUNCATED to fit');
     expect(r.body).toContain('C'.repeat(50_000));
-    expect(r.body).toContain('via Qwen Code /review');
+    expect(r.body).toContain('via Tay Bellow /review');
     // A silently truncated stamp names a release that is not the one that
     // ran, so the clamp is disclosed on the operator's channel like the
     // modelId clamp beside it.
@@ -14286,7 +14286,7 @@ describe('composeReview — a resumed run is continuity, not a coverage gap', ()
         'Resumed run (not a gap): 1 agent result(s) from the interrupted ' +
         'earlier attempt were re-certified from the harness records and ' +
         'counted as reviewed.\n\n' +
-        '_— test-model via Qwen Code /review (vunknown)_',
+        '_— test-model via Tay Bellow /review (vunknown)_',
     );
     expect(r.body).not.toContain('Not reviewed: review continuity');
     expect(r.body).not.toContain('Partially reviewed');
@@ -15217,7 +15217,7 @@ describe('floor enforcement — the posture, as code', () => {
         {
           path: 'c.ts',
           line: 9,
-          body: '**[Suggestion]** rename the flag\n\n_— qwen3.7-max [test] via Qwen Code /review (v0.21.2)_',
+          body: '**[Suggestion]** rename the flag\n\n_— qwen3.7-max [test] via Tay Bellow /review (v0.21.2)_',
         },
       ],
     });
@@ -20831,19 +20831,19 @@ describe('floor enforcement — the Critical arm (#10291)', () => {
       {
         path: 'a.ts',
         line: 12,
-        body: '**[Suggestion]** tidy\n\n```\n_— m via Qwen Code /review_',
+        body: '**[Suggestion]** tidy\n\n```\n_— m via Tay Bellow /review_',
       },
       {
         path: 'b.ts',
         line: 13,
-        body: '**[Suggestion]** tidy\n\n_— m via\nQwen Code /review_',
+        body: '**[Suggestion]** tidy\n\n_— m via\nTay Bellow /review_',
       },
     ]);
     expect(entries).toHaveLength(2);
     expect(entries[0].title).toBe('tidy ```');
     expect(entries[1].title).toBe('tidy');
     for (const e of entries) {
-      expect(e.title).not.toContain('via Qwen Code /review');
+      expect(e.title).not.toContain('via Tay Bellow /review');
     }
   });
 

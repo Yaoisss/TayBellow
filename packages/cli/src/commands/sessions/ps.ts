@@ -5,14 +5,14 @@
  */
 
 /**
- * `qwen sessions ps` — list the Qwen Code sessions running right now.
+ * `qwen sessions ps` — list the Tay Bellow sessions running right now.
  *
  * The sibling `qwen sessions list` walks saved transcripts; this walks the
  * live-process registry, so the two answer different questions: "what have
  * I worked on" versus "what is running on this machine at this moment".
  *
  * KIND says what registered each one — an interactive terminal, a
- * daemon-managed session, a program that is not Qwen Code at all. It is a
+ * daemon-managed session, a program that is not Tay Bellow at all. It is a
  * self-report, like NAME and DIRECTORY: everything here was written by
  * the process it describes. What does not appear at all is a one-shot
  * `qwen -p` run, which never registers.
@@ -131,7 +131,7 @@ async function handlePs(argv: PsArgs): Promise<void> {
   }
 
   if (records.length === 0) {
-    writeStdoutLine('No Qwen Code sessions are registered right now.');
+    writeStdoutLine('No Tay Bellow sessions are registered right now.');
     return;
   }
 
@@ -140,7 +140,7 @@ async function handlePs(argv: PsArgs): Promise<void> {
 
 export const psCommand: CommandModule<unknown, PsArgs> = {
   command: 'ps',
-  describe: 'List Qwen Code sessions running right now',
+  describe: 'List Tay Bellow sessions running right now',
   builder: (yargs: Argv) =>
     yargs.option('json', {
       type: 'boolean',

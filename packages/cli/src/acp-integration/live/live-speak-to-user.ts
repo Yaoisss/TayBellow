@@ -61,7 +61,7 @@ export class SpeakToUserTool extends BaseDeclarativeTool<
       SPEAK_TO_USER_TOOL_NAME,
       'SpeakToUser',
       'Speak an important voice chat update to the user. Use this sparingly ' +
-        'and only during an active voice chat. Automatic backend Qwen Code ' +
+        'and only during an active voice chat. Automatic backend Tay Bellow ' +
         'text is silent context and is not automatically spoken. The message ' +
         'is spoken verbatim by the voice model, so write it for speech. Final ' +
         'assistant text is not automatically spoken; call this tool if the ' +

@@ -7,7 +7,7 @@
 /**
  * Daemon React bindings owned by `@qwen-code/web-shell`.
  *
- * React bindings for the Qwen Code daemon process.
+ * React bindings for the Tay Bellow daemon process.
  * Provides context Providers, hooks, types, and constants
  * for building UIs that connect to and interact with the daemon.
  *

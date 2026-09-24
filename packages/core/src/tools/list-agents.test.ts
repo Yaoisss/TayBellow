@@ -207,7 +207,7 @@ describe('ListAgentsTool — peer sessions', () => {
 
   it('says so when messaging is on but no other session is reachable', async () => {
     const result = await run();
-    expect(result.llmContent).toContain('no other Qwen Code session');
+    expect(result.llmContent).toContain('no other Tay Bellow session');
     expect(result.llmContent).toContain('Named Agent Team teammates');
     // The description promises the session's own name; the empty case
     // must keep that promise too.
@@ -394,7 +394,7 @@ describe('ListAgentsTool — peer sessions', () => {
     ]);
     // No peers left: the roster falls back to the plain-text empty case.
     const result = await run();
-    expect(result.llmContent).toContain('no other Qwen Code session');
+    expect(result.llmContent).toContain('no other Tay Bellow session');
   });
 
   it('excludes a differently named twin of this session', async () => {

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Core System Prompt (prompts.ts) > describes the bwrap filesystem boundary and distinguishes ordinary permissions 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -188,7 +188,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Core System Prompt (prompts.ts) > should append userMemory with separator when provided 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -379,7 +379,7 @@ Be extra polite."
 `;
 
 exports[`Core System Prompt (prompts.ts) > should include git instructions when in a git repo 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -586,7 +586,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Core System Prompt (prompts.ts) > should include non-sandbox instructions when SANDBOX env var is not set 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -772,7 +772,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Core System Prompt (prompts.ts) > should include sandbox-specific instructions when SANDBOX env var is set 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -958,7 +958,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Core System Prompt (prompts.ts) > should include seatbelt-specific instructions when SANDBOX env var is "sandbox-exec" 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -1144,7 +1144,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Core System Prompt (prompts.ts) > should not include git instructions when not in a git repo 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -1330,7 +1330,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Core System Prompt (prompts.ts) > should return the base prompt when no userMemory is provided 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -1516,7 +1516,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Core System Prompt (prompts.ts) > should return the base prompt when userMemory is empty string 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -1702,7 +1702,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Core System Prompt (prompts.ts) > should return the base prompt when userMemory is whitespace only 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -1888,7 +1888,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Model-specific tool call formats > should preserve model-specific formats with sandbox environment 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -2099,7 +2099,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Model-specific tool call formats > should preserve model-specific formats with user memory 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -2380,7 +2380,7 @@ User prefers concise responses."
 `;
 
 exports[`Model-specific tool call formats > should use JSON format for qwen-vl model 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -2591,7 +2591,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Model-specific tool call formats > should use XML format for qwen3-coder model 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -2868,7 +2868,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Model-specific tool call formats > should use bracket format for generic models 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -3054,7 +3054,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Model-specific tool call formats > should use bracket format when no model is specified 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 
@@ -3240,7 +3240,7 @@ Interaction mode reminder: Use 'ask_user_question' when you need clarification o
 `;
 
 exports[`Model-specific tool call formats > should use native Gemma 4 format for gemma4 models 1`] = `
-"You are Qwen Code, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
+"You are Tay Bellow, an interactive CLI agent developed by Alibaba Group, specializing in software engineering tasks. Your primary goal is to help users safely and efficiently, adhering strictly to the following instructions and utilizing your available tools.
 
 # Core Mandates
 

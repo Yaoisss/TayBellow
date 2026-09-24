@@ -250,7 +250,7 @@ describe('OpenTuiFolderTrustGate (#56 startup gate)', () => {
         TrustLevel.DO_NOT_TRUST,
       );
       expect(
-        screen.getByText(/Qwen Code is restarting to apply the trust changes/),
+        screen.getByText(/Tay Bellow is restarting to apply the trust changes/),
       ).toBeTruthy();
       await act(async () => {
         await vi.advanceTimersByTimeAsync(300);

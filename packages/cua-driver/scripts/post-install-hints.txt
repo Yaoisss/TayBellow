@@ -40,7 +40,7 @@ Next steps:
      • Codex (OpenAI):
          codex mcp add cua-driver -- {{BINARY}} mcp
 
-     • Qwen Code:
+     • Tay Bellow:
          qwen mcp add cua-driver {{BINARY}} mcp
 
      • Factory Droid:

@@ -1844,7 +1844,7 @@ export class CronScheduler {
 export function buildMissedCronNotification(missed: DurableCronTask[]): string {
   const plural = missed.length > 1;
   const header =
-    `The following one-shot scheduled task${plural ? 's were' : ' was'} missed while Qwen Code was not running. ` +
+    `The following one-shot scheduled task${plural ? 's were' : ' was'} missed while Tay Bellow was not running. ` +
     `${plural ? 'They have' : 'It has'} been removed from ${CRON_TASKS_DISPLAY_PATH} and will not fire again.\n\n` +
     `Do NOT execute ${plural ? 'these prompts' : 'this prompt'} yet. ` +
     `First ask the user whether to run ${plural ? 'each one' : 'it'} now ` +

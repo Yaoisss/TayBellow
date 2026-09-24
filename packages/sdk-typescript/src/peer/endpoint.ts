@@ -5,7 +5,7 @@
  */
 
 /**
- * A program's place among the Qwen Code sessions running as this user.
+ * A program's place among the Tay Bellow sessions running as this user.
  *
  * Starting an endpoint binds an inbox and publishes a session record, so
  * the program shows up in `qwen sessions ps`, and in the `list_agents` of
@@ -111,7 +111,7 @@ export interface PeerEndpointOptions {
    *
    * A controller send is delivered without review unless the receiving
    * session's own `agents.crossSessionInbound` setting says `hold` or
-   * `refuse` — that outranks the grant. It is for Qwen Code sessions:
+   * `refuse` — that outranks the grant. It is for Tay Bellow sessions:
    * another peer endpoint's inbox accepts only its own token, so a
    * controller send to one is dropped unread.
    */
@@ -130,7 +130,7 @@ export interface PeerEndpointOptions {
   /**
    * Remove the record and the socket when the process exits through
    * `process.exit` or an empty event loop. Default true. A process killed
-   * by a signal it does not handle leaves both behind; the next Qwen Code
+   * by a signal it does not handle leaves both behind; the next Tay Bellow
    * session that lists the directory clears the record once the start
    * token proves this process is gone.
    */

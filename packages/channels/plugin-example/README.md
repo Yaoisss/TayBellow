@@ -1,6 +1,6 @@
 # @qwen-code/channel-plugin-example
 
-A reference channel plugin for Qwen Code. It connects to a WebSocket server and routes messages through the full channel pipeline (access control, session routing, agent bridge).
+A reference channel plugin for Tay Bellow. It connects to a WebSocket server and routes messages through the full channel pipeline (access control, session routing, agent bridge).
 
 Use this package to:
 
@@ -15,7 +15,7 @@ Use this package to:
 npm install @qwen-code/channel-plugin-example
 ```
 
-### 2. Link it as a Qwen Code extension
+### 2. Link it as a Tay Bellow extension
 
 The package ships a `qwen-extension.json` manifest, so it works as an extension out of the box:
 

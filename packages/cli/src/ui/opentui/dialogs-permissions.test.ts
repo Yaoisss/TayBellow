@@ -42,7 +42,7 @@ describe('getPermissionsTabs', () => {
     expect(tabs[0]).toEqual({
       id: 'allow',
       label: 'Allow',
-      description: "Qwen Code won't ask before using allowed tools.",
+      description: "Tay Bellow won't ask before using allowed tools.",
     });
     expect(tabs[3]).toEqual({
       id: 'workspace',

@@ -825,12 +825,12 @@ describe('runCliEntry', () => {
     // points users at the positional prompt form, so it has to be listed.
     expect(helpText).toContain('\nPositionals:');
     expect(helpText).toContain('qwen [query..]');
-    expect(helpText).toContain('Launch Qwen Code CLI');
+    expect(helpText).toContain('Launch Tay Bellow CLI');
     expect(helpText).toContain('[default]');
     expect(helpText).toContain('Positional prompt.');
-    expect(helpText).toContain('Manage Qwen Code hooks');
+    expect(helpText).toContain('Manage Tay Bellow hooks');
     expect(helpText).toContain('Manage MCP servers');
-    expect(helpText).toContain('Run Qwen Code as a local HTTP daemon');
+    expect(helpText).toContain('Run Tay Bellow as a local HTTP daemon');
     expect(helpText).toContain('--model');
     expect(helpText).toContain('-p, --prompt');
     expect(helpText).toContain('--safe-mode');

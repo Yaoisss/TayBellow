@@ -749,7 +749,7 @@ describe('handleAutoUpdate — Homebrew installs (#9493)', () => {
         type: 'patch',
         name: '@qwen-code/qwen-code',
       },
-      message: 'Qwen Code update available! 0.21.13 → 0.21.14',
+      message: 'Tay Bellow update available! 0.21.13 → 0.21.14',
     };
     mockGetInstallationInfo.mockReturnValue({
       packageManager: PackageManager.HOMEBREW,
@@ -789,7 +789,7 @@ describe('handleAutoUpdate — Homebrew installs (#9493)', () => {
 
     expect(emitSpy).toHaveBeenCalledWith('update-received', {
       message:
-        'Qwen Code update available! 0.21.13 → 0.21.14\n' +
+        'Tay Bellow update available! 0.21.13 → 0.21.14\n' +
         'translated Homebrew guidance',
     });
   });
@@ -801,7 +801,7 @@ describe('handleAutoUpdate — Homebrew installs (#9493)', () => {
 
     expect(emitSpy).toHaveBeenCalledWith('update-received', {
       message:
-        'Qwen Code update available! 0.21.13 → 0.21.14\n' +
+        'Tay Bellow update available! 0.21.13 → 0.21.14\n' +
         'Installed via Homebrew. Please update with "brew upgrade".',
     });
   });

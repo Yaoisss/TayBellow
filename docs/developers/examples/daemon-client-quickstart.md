@@ -4,7 +4,7 @@ A minimal end-to-end example: start an API-only `qwen serve` daemon in another t
 
 ## Setup
 
-This walkthrough targets Qwen Code `v0.24.0` and
+This walkthrough targets Tay Bellow `v0.24.0` and
 `@qwen-code/sdk@0.1.12`.
 
 In one terminal:

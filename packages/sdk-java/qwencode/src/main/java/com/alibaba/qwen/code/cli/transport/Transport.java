@@ -6,7 +6,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 
 /**
- * Defines the contract for communication with the Qwen Code CLI.
+ * Defines the contract for communication with the Tay Bellow CLI.
  *
  * @author skyfire
  * @version $Id: 0.0.1

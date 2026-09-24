@@ -1,7 +1,7 @@
 {
   "name": "@qwen-code/channel-dws",
   "version": "0.24.3",
-  "description": "DingTalk Workspace channel adapter for Qwen Code",
+  "description": "DingTalk Workspace channel adapter for Tay Bellow",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/QwenLM/qwen-code.git",

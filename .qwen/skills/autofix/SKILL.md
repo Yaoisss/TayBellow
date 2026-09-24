@@ -1,6 +1,6 @@
 ---
 name: autofix
-description: Review and repair current local changes until they converge, or run Qwen Code Autofix issue and review workflows from GitHub Actions.
+description: Review and repair current local changes until they converge, or run Tay Bellow Autofix issue and review workflows from GitHub Actions.
 disable-model-invocation: true
 ---
 

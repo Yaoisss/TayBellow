@@ -76,7 +76,7 @@ export function projectAbout(systemInfo: Record<string, unknown>): string {
   const cliVersion = String(systemInfo['cliVersion'] ?? '');
   const gitCommit = systemInfo['gitCommit'];
   addField(
-    'Qwen Code',
+    'Tay Bellow',
     cliVersion + (gitCommit ? ` (${String(gitCommit)})` : ''),
   );
   const nodeVersion = String(systemInfo['nodeVersion'] ?? '');
@@ -152,7 +152,7 @@ export function projectToolsList(
   }>,
   showDescriptions: boolean,
 ): string {
-  const lines = ['Available Qwen Code CLI tools:', ''];
+  const lines = ['Available Tay Bellow CLI tools:', ''];
   if (tools.length === 0) {
     lines.push(' No tools available');
     return lines.join('\n');

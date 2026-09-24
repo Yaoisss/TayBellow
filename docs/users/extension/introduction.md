@@ -1,8 +1,8 @@
-# Qwen Code Extensions
+# Tay Bellow Extensions
 
-Qwen Code extensions package prompts, MCP servers, subagents, skills and custom commands into a familiar and user-friendly format. With extensions, you can expand the capabilities of Qwen Code and share those capabilities with others. They are designed to be easily installable and shareable.
+Tay Bellow extensions package prompts, MCP servers, subagents, skills and custom commands into a familiar and user-friendly format. With extensions, you can expand the capabilities of Tay Bellow and share those capabilities with others. They are designed to be easily installable and shareable.
 
-Extensions and plugins from [Gemini CLI Extensions Gallery](https://geminicli.com/extensions/), [Claude Code Marketplace](https://claudemarketplaces.com/), Qoder, and the portable [Agent Plugins v1](./agent-plugins.md) format can be directly installed into Qwen Code. This cross-platform compatibility gives you access to a rich ecosystem of extensions and plugins, dramatically expanding Qwen Code's capabilities without requiring extension authors to maintain separate versions.
+Extensions and plugins from [Gemini CLI Extensions Gallery](https://geminicli.com/extensions/), [Claude Code Marketplace](https://claudemarketplaces.com/), Qoder, and the portable [Agent Plugins v1](./agent-plugins.md) format can be directly installed into Tay Bellow. This cross-platform compatibility gives you access to a rich ecosystem of extensions and plugins, dramatically expanding Tay Bellow's capabilities without requiring extension authors to maintain separate versions.
 
 ## Extension management
 
@@ -26,7 +26,7 @@ Running `/extensions` (or `/extensions manage`) opens an interactive manager wit
 - **Installed** — your installed extensions, grouped by scope (**User level**, **Project level**, and favorites). Use `↑`/`↓` to navigate, `Space` to enable/disable an extension, `f` to favorite it, and `Enter` to open its details. MCP servers bundled by an extension appear nested under their parent extension with live connection status; you can enable or disable each server individually from there.
 - **Sources** — manage the marketplace sources that feed the Discover tab. Use `↑`/`↓` to navigate, `Enter` to select a source, and `d` to remove one. These are the same sources managed by the `qwen extensions sources` CLI commands described below.
 
-Changes made here hot-reload immediately, without restarting Qwen Code.
+Changes made here hot-reload immediately, without restarting Tay Bellow.
 
 ### CLI Extension Management
 
@@ -38,7 +38,7 @@ You can install an extension using `qwen extensions install` from multiple sourc
 
 #### From Claude Code Marketplace
 
-Qwen Code also supports plugins from the [Claude Code Marketplace](https://claudemarketplaces.com/). Install from a marketplace and choose a plugin:
+Tay Bellow also supports plugins from the [Claude Code Marketplace](https://claudemarketplaces.com/). Install from a marketplace and choose a plugin:
 
 ```bash
 qwen extensions install <marketplace-name>
@@ -62,7 +62,7 @@ qwen extensions install f/awesome-chatgpt-prompts:prompts.chat
 qwen extensions install https://github.com/f/awesome-chatgpt-prompts:prompts.chat
 ```
 
-Claude plugins are automatically converted to Qwen Code format during installation:
+Claude plugins are automatically converted to Tay Bellow format during installation:
 
 - `claude-plugin.json` is converted to `qwen-extension.json`
 - Agent configurations are converted to Qwen subagent format
@@ -79,13 +79,13 @@ You can quickly browse available extensions from different marketplaces using th
 /extensions explore ClaudeCode
 ```
 
-This command opens the respective marketplace in your default browser, allowing you to discover new extensions to enhance your Qwen Code experience.
+This command opens the respective marketplace in your default browser, allowing you to discover new extensions to enhance your Tay Bellow experience.
 
-> **Cross-Platform Compatibility**: This allows you to leverage the rich extension ecosystems from both Gemini CLI and Claude Code, dramatically expanding the available functionality for Qwen Code users.
+> **Cross-Platform Compatibility**: This allows you to leverage the rich extension ecosystems from both Gemini CLI and Claude Code, dramatically expanding the available functionality for Tay Bellow users.
 
 #### From Gemini CLI Extensions
 
-Qwen Code fully supports extensions from the [Gemini CLI Extensions Gallery](https://geminicli.com/extensions/). Simply install them using the git URL:
+Tay Bellow fully supports extensions from the [Gemini CLI Extensions Gallery](https://geminicli.com/extensions/). Simply install them using the git URL:
 
 ```bash
 qwen extensions install <gemini-cli-extension-github-url>
@@ -93,7 +93,7 @@ qwen extensions install <gemini-cli-extension-github-url>
 qwen extensions install <owner>/<repo>
 ```
 
-Gemini extensions are automatically converted to Qwen Code format during installation:
+Gemini extensions are automatically converted to Tay Bellow format during installation:
 
 - `gemini-extension.json` is converted to `qwen-extension.json`
 - TOML command files are automatically migrated to Markdown format
@@ -101,7 +101,7 @@ Gemini extensions are automatically converted to Qwen Code format during install
 
 #### From Qoder Plugins
 
-Qwen Code supports [Qoder plugins](https://docs.qoder.com/en/cli/sdk/plugins) that contain a `.qoder-plugin/plugin.json` manifest. Install a local directory, archive, Git repository, archive URL, or scoped npm package with the existing `qwen extensions install` command:
+Tay Bellow supports [Qoder plugins](https://docs.qoder.com/en/cli/sdk/plugins) that contain a `.qoder-plugin/plugin.json` manifest. Install a local directory, archive, Git repository, archive URL, or scoped npm package with the existing `qwen extensions install` command:
 
 ```bash
 qwen extensions install ./sample-qoder-plugin
@@ -111,11 +111,11 @@ qwen extensions install owner/sample-qoder-plugin
 
 The installer converts the Qoder manifest to `qwen-extension.json` and preserves standard `commands/`, `agents/`, and `skills/` directories. MCP servers declared in a root `.mcp.json` file are included as extension MCP servers.
 
-When a Qoder plugin contains `system-prompt.md` at its root, Qwen Code loads it as extension context. If the plugin also contains `QWEN.md` or declares other context files, all context files are retained and deduplicated.
+When a Qoder plugin contains `system-prompt.md` at its root, Tay Bellow loads it as extension context. If the plugin also contains `QWEN.md` or declares other context files, all context files are retained and deduplicated.
 
 #### From Agent Plugins v1
 
-Qwen Code natively loads portable Agent Plugins v1 packages without converting or rewriting `plugin.json`, `mcp.json`, or `SKILL.md` files:
+Tay Bellow natively loads portable Agent Plugins v1 packages without converting or rewriting `plugin.json`, `mcp.json`, or `SKILL.md` files:
 
 ```bash
 qwen extensions install ./my-agent-plugin
@@ -127,7 +127,7 @@ The portable runtime supports Agent Skills plus stdio and Streamable HTTP MCP se
 
 #### From npm Registry
 
-Qwen Code supports installing extensions from npm registries using scoped package names. This is ideal for teams with private registries that already have auth, versioning, and publishing infrastructure in place.
+Tay Bellow supports installing extensions from npm registries using scoped package names. This is ideal for teams with private registries that already have auth, versioning, and publishing infrastructure in place.
 
 ```bash
 # Install the latest version
@@ -155,7 +155,7 @@ Only scoped packages (`@scope/package-name`) are supported to avoid ambiguity wi
 
 #### From Git Repository
 
-Git 2.37 or newer is required for credentialed, non-GitHub, nested marketplace, submodule, and Git LFS sources because Qwen Code uses `http.curloptResolve` to pin Git connections to validated DNS results. On older Git versions, Qwen Code supports only anonymous public `https://github.com/{owner}/{repo}[.git]` root repositories by resolving the requested ref to a commit and downloading GitHub's source archive with the same public-network and archive-safety checks.
+Git 2.37 or newer is required for credentialed, non-GitHub, nested marketplace, submodule, and Git LFS sources because Tay Bellow uses `http.curloptResolve` to pin Git connections to validated DNS results. On older Git versions, Tay Bellow supports only anonymous public `https://github.com/{owner}/{repo}[.git]` root repositories by resolving the requested ref to a commit and downloading GitHub's source archive with the same public-network and archive-safety checks.
 
 Because the older-Git fallback installs from a source archive rather than a clone, it cannot install repositories that rely on submodules or Git LFS, and it caps downloads at 100 MiB compressed and archives at 100,000 entries / 1 GiB expanded / 8 MiB path metadata, including files materialized from at most 100 symlinks. Symlinks directly targeting regular files in the repository are supported on systems that permit symlink creation; Windows may require Developer Mode or elevated privileges. The fallback rejects directory, chained, dangling, absolute, escaping, hard, and POSIX literal-backslash-target links. Other Agent Plugin install paths continue to omit symlinks. Release-based installs are still preferred when a repository publishes releases.
 
@@ -251,7 +251,7 @@ qwen extensions update --all
 
 ## How it works
 
-On startup, Qwen Code looks for extensions in `<home>/.qwen/extensions`
+On startup, Tay Bellow looks for extensions in `<home>/.qwen/extensions`
 
 Native Qwen extensions exist as a directory that contains a `qwen-extension.json` file. Agent Plugins v1 packages instead retain their root `plugin.json`; see [Agent Plugins v1](./agent-plugins.md).
 
@@ -334,7 +334,7 @@ Settings can be configured at two levels:
 
 Workspace settings take precedence over user settings. Sensitive settings are stored securely and never displayed in plain text.
 
-When Qwen Code starts, it loads all the extensions and merges their configurations. If there are any conflicts, the workspace configuration takes precedence.
+When Tay Bellow starts, it loads all the extensions and merges their configurations. If there are any conflicts, the workspace configuration takes precedence.
 
 ### Custom commands
 
@@ -460,7 +460,7 @@ For example, if both a user and the `gcp` extension define a `deploy` command:
 
 ## Variables
 
-Qwen Code extensions allow variable substitution in `qwen-extension.json`. This can be useful if e.g., you need the current directory to run an MCP server using `"cwd": "${extensionPath}${/}run.ts"`.
+Tay Bellow extensions allow variable substitution in `qwen-extension.json`. This can be useful if e.g., you need the current directory to run an MCP server using `"cwd": "${extensionPath}${/}run.ts"`.
 
 **Supported variables:**
 

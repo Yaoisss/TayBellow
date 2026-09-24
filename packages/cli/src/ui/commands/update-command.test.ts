@@ -33,7 +33,7 @@ const formatUpdateInstructions = vi.fn(
         `  ${resolveUpdateCommand(installationInfo.updateCommand, latestVersion)}`,
       ];
     }
-    return ['Manual update required. Please reinstall Qwen Code.'];
+    return ['Manual update required. Please reinstall Tay Bellow.'];
   },
 );
 vi.mock('../utils/updateCheck.js', async (importOriginal) => ({
@@ -148,7 +148,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nManual update required. Please reinstall Qwen Code.',
+        'Update available: 1.2.3\nManual update required. Please reinstall Tay Bellow.',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
     expect(performStandaloneUpdate).not.toHaveBeenCalled();
@@ -192,7 +192,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nManual update required. Please reinstall Qwen Code.',
+        'Update available: 1.2.3\nManual update required. Please reinstall Tay Bellow.',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
   });
@@ -219,7 +219,7 @@ describe('updateCommand', () => {
         type: 'message',
         messageType: 'info',
         content:
-          'Update available: 1.2.3\nThis session uses the custom sandbox image example.com/custom-qwen:1.0.0. Update that image and restart Qwen Code.',
+          'Update available: 1.2.3\nThis session uses the custom sandbox image example.com/custom-qwen:1.0.0. Update that image and restart Tay Bellow.',
       });
       expect(relaunchForUpdate).not.toHaveBeenCalled();
     } finally {
@@ -248,7 +248,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nUpdate Qwen Code on the host, then restart the sandbox.',
+        'Update available: 1.2.3\nUpdate Tay Bellow on the host, then restart the sandbox.',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
   });
@@ -262,7 +262,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nUpdate Qwen Code on the host, then restart the sandbox.',
+        'Update available: 1.2.3\nUpdate Tay Bellow on the host, then restart the sandbox.',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
   });
@@ -348,7 +348,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nManual update required. Please reinstall Qwen Code.',
+        'Update available: 1.2.3\nManual update required. Please reinstall Tay Bellow.',
     });
   });
 
@@ -363,7 +363,7 @@ describe('updateCommand', () => {
     expect(result).toEqual({
       type: 'message',
       messageType: 'info',
-      content: 'Qwen Code 1.0.0 is up to date!',
+      content: 'Tay Bellow 1.0.0 is up to date!',
     });
   });
 

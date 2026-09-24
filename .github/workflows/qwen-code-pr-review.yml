@@ -196,7 +196,7 @@ jobs:
           # A command-triggered run executes against the base branch, so its
           # `review-pr` check attaches to main's commit and never shows under
           # this PR's checks — the link here is the only way to watch it.
-          ACK_BODY="$(printf '<!-- qwen-review-ack -->\n\n_Qwen Code review request accepted. Review is queued for an available runner; follow the [workflow run](%s) for progress. A command-triggered review is not listed under the checks of this PR; the result is posted here as a review when it finishes._' "$RUN_URL")"
+          ACK_BODY="$(printf '<!-- qwen-review-ack -->\n\n_Tay Bellow review request accepted. Review is queued for an available runner; follow the [workflow run](%s) for progress. A command-triggered review is not listed under the checks of this PR; the result is posted here as a review when it finishes._' "$RUN_URL")"
           # One ack per PR, and it must sit right under the command that asked
           # for it. Editing the previous ack in place kept the count at one but
           # left the notice wherever the FIRST request landed — on a 15-comment
@@ -2764,7 +2764,7 @@ jobs:
           # producer rewording fails in the dangerous direction: a foreign
           # LGTM buys silence for a genuinely dead run. So the filter matches
           # positively on what only this pipeline's composed reviews carry:
-          # every composed body ends in the "via Qwen Code /review"
+          # every composed body ends in the "via Tay Bellow /review"
           # attribution footer or carries the invisible qwen-review-ledger
           # marker — at least one rides every body, a zero-findings APPROVE
           # included — and no foreign approval carries either. A marker that
@@ -2781,7 +2781,7 @@ jobs:
             echo "::warning::already-posted guard unavailable (no run creation time); posting the fallback comment"
             echo "Already-posted guard unavailable (run creation time missing); proceeding to post." >> "$GITHUB_STEP_SUMMARY"
           elif ! posted_reviews="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/reviews" --paginate \
-            --jq ".[] | select(.user.login == \"$bot_login\") | select(.submitted_at >= \"$run_created\") | select((.body // \"\") | contains(\"via Qwen Code /review\") or contains(\"qwen-review-ledger\")) | .id" 2>/dev/null)"; then
+            --jq ".[] | select(.user.login == \"$bot_login\") | select(.submitted_at >= \"$run_created\") | select((.body // \"\") | contains(\"via Tay Bellow /review\") or contains(\"qwen-review-ledger\")) | .id" 2>/dev/null)"; then
             echo "::warning::already-posted guard unavailable (reviews listing failed); posting the fallback comment"
             echo "Already-posted guard unavailable (reviews listing failed); proceeding to post." >> "$GITHUB_STEP_SUMMARY"
           elif [ -n "$posted_reviews" ]; then
@@ -2791,16 +2791,16 @@ jobs:
           MAX_TIMEOUT_MINUTES="${{ vars.QWEN_REVIEW_MAX_TIMEOUT_MINUTES }}"
           if [ "$FAILURE_KIND" = "timeout" ]; then
             if [ "$TIMEOUT_MINUTES" -lt "$MAX_TIMEOUT_MINUTES" ]; then
-              body="**Qwen Code review timed out.** ${FAILURE_REASON} For large PRs, retry with a longer timeout by commenting: \`@qwen-code /review --timeout=${MAX_TIMEOUT_MINUTES}\`. See [workflow logs](${RUN_URL})."
+              body="**Tay Bellow review timed out.** ${FAILURE_REASON} For large PRs, retry with a longer timeout by commenting: \`@qwen-code /review --timeout=${MAX_TIMEOUT_MINUTES}\`. See [workflow logs](${RUN_URL})."
             else
-              body="**Qwen Code review timed out.** ${FAILURE_REASON} This run already used the maximum ${MAX_TIMEOUT_MINUTES} minute timeout. See [workflow logs](${RUN_URL})."
+              body="**Tay Bellow review timed out.** ${FAILURE_REASON} This run already used the maximum ${MAX_TIMEOUT_MINUTES} minute timeout. See [workflow logs](${RUN_URL})."
             fi
           elif [ "$FAILURE_KIND" = "quota" ]; then
             # A quota reset is typically hours out, so an in-run retry can't
             # help — tell the reviewer exactly how to recover once it resets.
-            body="**Qwen Code review paused — model quota exhausted.** ${FAILURE_REASON} Transient errors auto-retry, but a quota reset is too far out to wait on a runner. Re-run once it resets by commenting \`@qwen-code /review\`. See [workflow logs](${RUN_URL})."
+            body="**Tay Bellow review paused — model quota exhausted.** ${FAILURE_REASON} Transient errors auto-retry, but a quota reset is too far out to wait on a runner. Re-run once it resets by commenting \`@qwen-code /review\`. See [workflow logs](${RUN_URL})."
           else
-            body="**Qwen Code review did not complete successfully.** ${FAILURE_REASON} A transient error is retried automatically; if you are seeing this, retry with \`@qwen-code /review\`. See [workflow logs](${RUN_URL})."
+            body="**Tay Bellow review did not complete successfully.** ${FAILURE_REASON} A transient error is retried automatically; if you are seeing this, retry with \`@qwen-code /review\`. See [workflow logs](${RUN_URL})."
           fi
           # Blank line after the marker or the prose renders as raw source —
           # same HTML-block quirk as the ack marker. The fallback-comment job
@@ -3301,7 +3301,7 @@ jobs:
           # producer rewording fails in the dangerous direction: a foreign
           # LGTM buys silence for a genuinely dead run. So the filter matches
           # positively on what only this pipeline's composed reviews carry:
-          # every composed body ends in the "via Qwen Code /review"
+          # every composed body ends in the "via Tay Bellow /review"
           # attribution footer or carries the invisible qwen-review-ledger
           # marker — at least one rides every body, a zero-findings APPROVE
           # included — and no foreign approval carries either. A marker that
@@ -3318,7 +3318,7 @@ jobs:
             echo "::warning::already-posted guard unavailable (no run creation time); posting the fallback comment"
             echo "Already-posted guard unavailable (run creation time missing); proceeding to post." >> "$GITHUB_STEP_SUMMARY"
           elif ! posted_reviews="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/reviews" --paginate \
-            --jq ".[] | select(.user.login == \"$bot_login\") | select(.submitted_at >= \"$run_created\") | select((.body // \"\") | contains(\"via Qwen Code /review\") or contains(\"qwen-review-ledger\")) | .id" 2>/dev/null)"; then
+            --jq ".[] | select(.user.login == \"$bot_login\") | select(.submitted_at >= \"$run_created\") | select((.body // \"\") | contains(\"via Tay Bellow /review\") or contains(\"qwen-review-ledger\")) | .id" 2>/dev/null)"; then
             echo "::warning::already-posted guard unavailable (reviews listing failed); posting the fallback comment"
             echo "Already-posted guard unavailable (reviews listing failed); proceeding to post." >> "$GITHUB_STEP_SUMMARY"
           elif [ -n "$posted_reviews" ]; then
@@ -3335,11 +3335,11 @@ jobs:
           # `[workflow logs](RUN_URL)` markdown link the cross-job dedup
           # anchors on, and the retry instruction the timeout flavor needs.
           if [ "$never_started" = "true" ]; then
-            body="**Qwen Code review never started.** The job ended before a runner picked it up, so no review ran for this head. This can happen when a queued run is cancelled or expires; this step cannot determine the cause. See [workflow logs](${RUN_URL}). Check the latest \`qwen-review-runner-schedule.yml\` run. If you still want a review, re-request with \`@qwen-code /review\` when the \`ecs-review\` pool is available."
+            body="**Tay Bellow review never started.** The job ended before a runner picked it up, so no review ran for this head. This can happen when a queued run is cancelled or expires; this step cannot determine the cause. See [workflow logs](${RUN_URL}). Check the latest \`qwen-review-runner-schedule.yml\` run. If you still want a review, re-request with \`@qwen-code /review\` when the \`ecs-review\` pool is available."
           elif [ "$REVIEW_PR_RESULT" = "cancelled" ]; then
-            body="**Qwen Code review was cancelled before a review could be posted.** Nothing failed and nothing is retried automatically: the run was cancelled — by an operator, an upstream event, or the job exceeding its execution time limit. If you still want a review of this PR, request one with \`@qwen-code /review\`. See [workflow logs](${RUN_URL})."
+            body="**Tay Bellow review was cancelled before a review could be posted.** Nothing failed and nothing is retried automatically: the run was cancelled — by an operator, an upstream event, or the job exceeding its execution time limit. If you still want a review of this PR, request one with \`@qwen-code /review\`. See [workflow logs](${RUN_URL})."
           else
-            body="**Qwen Code review did not complete successfully.** The review pipeline failed before a review could be posted. A transient error is retried automatically; if you are seeing this, retry with \`@qwen-code /review\`. See [workflow logs](${RUN_URL})."
+            body="**Tay Bellow review did not complete successfully.** The review pipeline failed before a review could be posted. A transient error is retried automatically; if you are seeing this, retry with \`@qwen-code /review\`. See [workflow logs](${RUN_URL})."
           fi
           body="$(printf '%s\n\n%s' "$FALLBACK_MARKER" "$body")"
           gh pr comment "$PR_NUMBER" \
@@ -3891,7 +3891,7 @@ jobs:
           set -euo pipefail
           {
             echo "<!-- qwen-resolve-result -->"
-            echo "Qwen Code did not run conflict resolution for this request."
+            echo "Tay Bellow did not run conflict resolution for this request."
             echo
             echo "${SKIP_REASON}"
           } > "${WORKDIR}/report.md"
@@ -4387,30 +4387,30 @@ jobs:
                 if [ "$push_failed" = "true" ]; then
                   case "$push_fail_reason" in
                     workflow_scope)
-                      echo "Qwen Code resolved the merge conflicts, but could not push to \`${HEAD_REPO}\`: resolving merges the base branch in, which includes its \`.github/workflows/**\` changes, and GitHub blocks a token without the **\`workflow\`** scope from updating workflow files. A maintainer needs to grant that scope to the push bot (classic PAT: check \`workflow\`; fine-grained PAT: Workflows → Read and write), then re-run /resolve. The resolved diff is attached as the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact on the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+                      echo "Tay Bellow resolved the merge conflicts, but could not push to \`${HEAD_REPO}\`: resolving merges the base branch in, which includes its \`.github/workflows/**\` changes, and GitHub blocks a token without the **\`workflow\`** scope from updating workflow files. A maintainer needs to grant that scope to the push bot (classic PAT: check \`workflow\`; fine-grained PAT: Workflows → Read and write), then re-run /resolve. The resolved diff is attached as the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact on the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
                       ;;
                     permission)
-                      echo "Qwen Code resolved the merge conflicts, but could not push to \`${HEAD_REPO}\`. For a fork PR this needs **Allow edits by maintainers** enabled, and GitHub blocks maintainer edits on forks owned by an organization. The resolved diff is attached as the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact on the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+                      echo "Tay Bellow resolved the merge conflicts, but could not push to \`${HEAD_REPO}\`. For a fork PR this needs **Allow edits by maintainers** enabled, and GitHub blocks maintainer edits on forks owned by an organization. The resolved diff is attached as the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact on the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
                       ;;
                     moved)
-                      echo "Qwen Code resolved the merge conflicts, but the head branch changed while resolving, so the update was not pushed. Re-run /resolve. The resolved diff is attached as the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact on the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+                      echo "Tay Bellow resolved the merge conflicts, but the head branch changed while resolving, so the update was not pushed. Re-run /resolve. The resolved diff is attached as the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact on the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
                       ;;
                     *)
-                      echo "Qwen Code resolved the merge conflicts, but pushing to \`${HEAD_REPO}\` failed. The resolved diff is attached as the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact on the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+                      echo "Tay Bellow resolved the merge conflicts, but pushing to \`${HEAD_REPO}\` failed. The resolved diff is attached as the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact on the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
                       ;;
                   esac
                 elif [ "$DRY_RUN" = "true" ]; then
-                  echo "Qwen Code resolved the merge conflicts in dry-run mode. No branch update was pushed."
+                  echo "Tay Bellow resolved the merge conflicts in dry-run mode. No branch update was pushed."
                 elif [ -n "$replayed_on" ]; then
-                  echo "Qwen Code resolved the merge conflicts and pushed the branch update. The head branch moved to \`${replayed_on}\` while the conflicts were being resolved; the resolution was replayed on top of it and re-checked before the push — where a file still conflicted and the new commits had not touched it, the replay took the agent's version. The pushed branch is that replay: its diff against \`${BASE_REF}\` is attached as the \`qwen-resolve-pr-${PR_NUMBER}-pushed\` artifact on the [workflow run](${RUN_URL}); the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact describes the original resolution it was replayed from."
+                  echo "Tay Bellow resolved the merge conflicts and pushed the branch update. The head branch moved to \`${replayed_on}\` while the conflicts were being resolved; the resolution was replayed on top of it and re-checked before the push — where a file still conflicted and the new commits had not touched it, the replay took the agent's version. The pushed branch is that replay: its diff against \`${BASE_REF}\` is attached as the \`qwen-resolve-pr-${PR_NUMBER}-pushed\` artifact on the [workflow run](${RUN_URL}); the \`qwen-resolve-pr-${PR_NUMBER}-attempt-${AGENT_RUN_ATTEMPT}\` artifact describes the original resolution it was replayed from."
                 else
-                  echo "Qwen Code resolved the merge conflicts and pushed the branch update."
+                  echo "Tay Bellow resolved the merge conflicts and pushed the branch update."
                 fi
                 echo
                 append_safe_file "${WORKDIR}/address-summary.md"
                 ;;
               noop)
-                echo "Qwen Code checked this PR and did not push changes."
+                echo "Tay Bellow checked this PR and did not push changes."
                 echo
                 append_safe_file "${WORKDIR}/no-action.md"
                 ;;
@@ -4420,7 +4420,7 @@ jobs:
                   # a run that did not fail, and a partial re-run cannot
                   # bring the artifact back. Say the agent finished, and
                   # point at the one recovery that re-produces the artifact.
-                  echo "Qwen Code's conflict-resolution agent finished successfully, but its run artifact never reached the publish job — the upload failed or the artifact expired — so the result could not be verified or published. This is not a verdict on the conflict. Use **Re-run all jobs** on the [workflow run](${RUN_URL}) to run the agent again and publish a fresh result; re-running only the failed jobs cannot recover the missing artifact."
+                  echo "Tay Bellow's conflict-resolution agent finished successfully, but its run artifact never reached the publish job — the upload failed or the artifact expired — so the result could not be verified or published. This is not a verdict on the conflict. Use **Re-run all jobs** on the [workflow run](${RUN_URL}) to run the agent again and publish a fresh result; re-running only the failed jobs cannot recover the missing artifact."
                 elif [ "$FAILURE_KIND" = "infra" ]; then
                   # The agent never reached a verdict: outcome=failure (CLI
                   # install, model endpoint, crash) or outcome=cancelled (its
@@ -4428,9 +4428,9 @@ jobs:
                   # generic text below reads as "the model gave up", and 13
                   # days of re-runs against one broken install (#9898) is what
                   # this branch exists to stop.
-                  echo "Qwen Code could not run conflict resolution on this PR: the agent step ended with \`outcome=${RESOLVE_OUTCOME}\` before producing a result — a CLI install, model endpoint or infrastructure failure, or the step's ${AGENT_TIMEOUT_MINUTES}-minute timeout. This is not a verdict on the conflict. Requesting /resolve again will fail the same way until the cause shown in the [workflow run](${RUN_URL}) is fixed."
+                  echo "Tay Bellow could not run conflict resolution on this PR: the agent step ended with \`outcome=${RESOLVE_OUTCOME}\` before producing a result — a CLI install, model endpoint or infrastructure failure, or the step's ${AGENT_TIMEOUT_MINUTES}-minute timeout. This is not a verdict on the conflict. Requesting /resolve again will fail the same way until the cause shown in the [workflow run](${RUN_URL}) is fixed."
                 else
-                  echo "Qwen Code attempted to resolve merge conflicts but the run did not complete successfully."
+                  echo "Tay Bellow attempted to resolve merge conflicts but the run did not complete successfully."
                   echo
                   for file in failure.md address-summary.md no-action.md; do
                     if [ -s "${WORKDIR}/${file}" ]; then

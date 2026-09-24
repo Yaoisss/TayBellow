@@ -17,9 +17,9 @@ export default {
   'qwen-serve': 'Daemon mode (qwen serve)',
   'qwen-serve-deploy-local': 'Daemon mode — local launch templates',
   'conversations-recovery': 'Conversations writer locks and recovery',
-  'Code with Qwen Code': {
+  'Code with Tay Bellow': {
     type: 'separator',
-    title: 'Code with Qwen Code', // Title is optional
+    title: 'Code with Tay Bellow', // Title is optional
   },
   features: 'Features',
   configuration: 'Configuration',

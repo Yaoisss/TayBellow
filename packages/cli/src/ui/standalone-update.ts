@@ -899,9 +899,9 @@ export function ensurePathInShellRc(binDir: string): ShellPathUpdate {
     // Use begin/end block markers matching install-qwen-standalone.sh's
     // maybe_update_shell_path, so the update codepath is idempotent with the
     // install script and does not produce duplicate PATH entries.
-    const beginMarker = '# Qwen Code PATH block begin';
-    const endMarker = '# Qwen Code PATH block end';
-    const legacyMarker = '# Added by Qwen Code standalone installer';
+    const beginMarker = '# Tay Bellow PATH block begin';
+    const endMarker = '# Tay Bellow PATH block end';
+    const legacyMarker = '# Added by Tay Bellow standalone installer';
     if (content.includes(beginMarker) && content.includes(endMarker)) {
       return { rcFile, blockAdded: false };
     }
@@ -949,7 +949,7 @@ function cleanupShellPathBlock(rcFile: string): void {
     if (!fs.existsSync(rcFile)) return;
     const content = fs.readFileSync(rcFile, 'utf-8');
     const blockPattern =
-      /\n?# Qwen Code PATH block begin\n(?:.|\n)*?\n# Qwen Code PATH block end\n?/;
+      /\n?# Tay Bellow PATH block begin\n(?:.|\n)*?\n# Tay Bellow PATH block end\n?/;
     const nextContent = content.replace(blockPattern, '');
     if (nextContent !== content) {
       fs.writeFileSync(rcFile, nextContent);
@@ -1013,7 +1013,7 @@ export async function performStandaloneUpdate(
     // Directory exists but has no manifest — not a managed Qwen install.
     // Refuse to overwrite to avoid data loss.
     throw new Error(
-      `${standaloneDir} exists but is not a Qwen Code standalone install. Remove it manually to proceed.`,
+      `${standaloneDir} exists but is not a Tay Bellow standalone install. Remove it manually to proceed.`,
     );
   } else {
     // First-time migration from npm — directory will be created after lock

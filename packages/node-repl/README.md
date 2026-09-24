@@ -6,7 +6,7 @@ Node.js kernel in a dedicated child process; top-level bindings, closures, and
 module state persist across calls within a session.
 
 This package is **fully independent of `@qwen-code/qwen-code-core`** — any MCP
-client (Qwen Code via `mcpServers`, Claude, Codex, etc.) can run it.
+client (Tay Bellow via `mcpServers`, Claude, Codex, etc.) can run it.
 
 ## Tools
 
@@ -134,7 +134,7 @@ npm run smoke:lifecycle # proves the kernel child is reaped on stdin EOF / signa
 
 ## Provenance
 
-Ported from the Qwen Code PR #9499 Node REPL core (kernel, module loader, cell
+Ported from the Tay Bellow PR #9499 Node REPL core (kernel, module loader, cell
 transform, protocol, security policy, kernel manager). The qwen-coupled result
 converter was replaced by `output-adapter.ts`, which emits MCP content blocks.
 The empty-in-production trusted-package / sha256-pinning layer was removed

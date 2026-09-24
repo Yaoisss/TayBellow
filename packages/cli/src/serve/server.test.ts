@@ -4151,7 +4151,7 @@ describe('createServeApp', () => {
   describe('Web Shell static serving', () => {
     let webShellDir: string;
     const INDEX_HTML =
-      '<!doctype html><html><head><title>Qwen Code Web terminal</title>' +
+      '<!doctype html><html><head><title>Tay Bellow Web terminal</title>' +
       '<script type="module" src="/assets/app.js"></script></head>' +
       '<body><div id="root"></div></body></html>';
     const host = `127.0.0.1:${baseOpts.port}`;
@@ -4782,7 +4782,7 @@ describe('createServeApp', () => {
     let previousSystemSettingsPath: string | undefined;
     let previousSystemDefaultsPath: string | undefined;
     const BRAND_INDEX_HTML =
-      '<!doctype html><html><head><title>Qwen Code Web terminal</title>' +
+      '<!doctype html><html><head><title>Tay Bellow Web terminal</title>' +
       '</head><body><div id="root"></div></body></html>';
 
     beforeEach(async () => {
@@ -42949,7 +42949,7 @@ describe('Live conversation runtime lifecycle', () => {
     const realHome = path.join(tmp, 'real-home');
     const linkedHome = path.join(tmp, 'linked-home');
     const alternateRootAlias = path.join(tmp, 'alternate-root-alias');
-    const relativeRoot = path.join('Documents', 'Qwen Code', 'Conversations');
+    const relativeRoot = path.join('Documents', 'Tay Bellow', 'Conversations');
     const realRoot = path.join(realHome, relativeRoot);
     const realChild = path.join(realRoot, 'conversation-probe');
     await fsp.mkdir(realChild, { recursive: true });

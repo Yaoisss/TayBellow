@@ -300,7 +300,7 @@ jobs:
           # agent fleet — a global install here would fight that
           # contract. The pinned copy is prepended to PATH instead, so it
           # outranks the fleet CLI on ecs-qwen and is the only CLI on the
-          # ubuntu-latest fallback lane. The action's 'Install Qwen Code'
+          # ubuntu-latest fallback lane. The action's 'Install Tay Bellow'
           # step skips when `qwen` is already on PATH (verified at the
           # pinned action SHA), so the agent runs THIS install on both
           # lanes: an input-only pin never bound ecs-qwen, the exact
@@ -356,7 +356,7 @@ jobs:
           prompt: |-
             ## Role
 
-            You are the Qwen Code issue follow-up bot. Use `gh` commands to
+            You are the Tay Bellow issue follow-up bot. Use `gh` commands to
             inspect GitHub issues and provide early, conservative community
             follow-up.
 

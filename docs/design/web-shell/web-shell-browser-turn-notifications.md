@@ -85,7 +85,7 @@ The first version targets desktop browsers. The presence of a Notification objec
 
 The display condition is `document.visibilityState !== 'visible' || !document.hasFocus()`. Consume terminal events without displaying notifications while the page is in the foreground and focused; losing focus later does not replay them. The first version adds no duration threshold, sound selection, or custom body.
 
-The title is fixed to Qwen Code. The body uses only the generic copy above, with no prompt, response, error, session title, path, or workspace name. Clicking attempts window.focus() and closes the notification, without automatically switching sessions. The operating system may refuse to focus the window, so success cannot be guaranteed. A display failure does not change the turn result.
+The title is fixed to Tay Bellow. The body uses only the generic copy above, with no prompt, response, error, session title, path, or workspace name. Clicking attempts window.focus() and closes the notification, without automatically switching sessions. The operating system may refuse to focus the window, so success cannot be guaranteed. A display failure does not change the turn result.
 
 ## Internal architecture
 

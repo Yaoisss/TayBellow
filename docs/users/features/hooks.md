@@ -1,8 +1,8 @@
-# Qwen Code Hooks
+# Tay Bellow Hooks
 
 ## Overview
 
-Qwen Code hooks provide a powerful mechanism for extending and customizing the behavior of the Qwen Code application. Hooks allow users to execute custom scripts or programs at specific points in the application lifecycle, such as before tool execution, after tool execution, at session start/end, and during other key events.
+Tay Bellow hooks provide a powerful mechanism for extending and customizing the behavior of the Tay Bellow application. Hooks allow users to execute custom scripts or programs at specific points in the application lifecycle, such as before tool execution, after tool execution, at session start/end, and during other key events.
 
 Hooks are enabled by default. You can temporarily disable all hooks by setting `disableAllHooks` to `true` in your settings file (at the top level, alongside `hooks`):
 
@@ -19,7 +19,7 @@ This disables all hooks without deleting their configurations.
 
 ## What are Hooks?
 
-Hooks are user-defined scripts or programs that are automatically executed by Qwen Code at predefined points in the application flow. They allow users to:
+Hooks are user-defined scripts or programs that are automatically executed by Tay Bellow at predefined points in the application flow. They allow users to:
 
 - Monitor and audit tool usage
 - Enforce security policies
@@ -40,7 +40,7 @@ This reload covers hook definitions, not hook controls or HTTP security settings
 
 ## Hook Types
 
-Qwen Code supports four hook executor types:
+Tay Bellow supports four hook executor types:
 
 | Type       | Description                                                                                    |
 | :--------- | :--------------------------------------------------------------------------------------------- |
@@ -262,7 +262,7 @@ Prompt hooks use an LLM to evaluate hook input and return a decision. This is us
 1. The hook input JSON is injected into your prompt using the `$ARGUMENTS` placeholder
 2. The prompt is sent to an LLM (default: your current model)
 3. The LLM returns a JSON response with the decision
-4. Qwen Code processes the decision and continues or blocks execution accordingly
+4. Tay Bellow processes the decision and continues or blocks execution accordingly
 
 **Configuration:**
 
@@ -314,7 +314,7 @@ Prompt hooks can be used with most hook events, including:
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "You are evaluating whether Qwen Code should stop working. Context: $ARGUMENTS\n\nAnalyze the conversation and determine if:\n1. All user-requested tasks are complete\n2. Any errors need to be addressed\n3. Follow-up work is needed\n\nRespond with JSON: {\"ok\": true} to allow stopping, or {\"ok\": false, \"reason\": \"your explanation\"} to continue working.",
+            "prompt": "You are evaluating whether Tay Bellow should stop working. Context: $ARGUMENTS\n\nAnalyze the conversation and determine if:\n1. All user-requested tasks are complete\n2. Any errors need to be addressed\n3. Follow-up work is needed\n\nRespond with JSON: {\"ok\": true} to allow stopping, or {\"ok\": false, \"reason\": \"your explanation\"} to continue working.",
             "timeout": 30
           }
         ]
@@ -324,7 +324,7 @@ Prompt hooks can be used with most hook events, including:
 }
 ```
 
-When `ok` is `false`, Qwen Code will continue working and use the `reason` as context for the next response.
+When `ok` is `false`, Tay Bellow will continue working and use the `reason` as context for the next response.
 
 **Example: PreToolUse Hook**
 
@@ -351,7 +351,7 @@ When `ok` is `false`, Qwen Code will continue working and use the `reason` as co
 
 ## Hook Events
 
-Hooks fire at specific points during a Qwen Code session. Different events support different matchers to filter trigger conditions.
+Hooks fire at specific points during a Tay Bellow session. Different events support different matchers to filter trigger conditions.
 
 | Event                 | Triggered When                                                         | Matcher Target                                                   |
 | :-------------------- | :--------------------------------------------------------------------- | :--------------------------------------------------------------- |
@@ -490,7 +490,7 @@ Qwen does not control whether a hook process, endpoint, callback, or model provi
 
 Event-specific fields are added based on the hook type. `permission_mode` is the session's approval mode unless the event reports the mode that applied to it, as tool and subagent events do. `agent_id` is present only when the event fires inside a subagent; `agent_type` is reported on `SessionStart`, `SubagentStart` and `SubagentStop`. `source_type` and `source_id` appear only in ACP sessions whose client declared a session source when creating the session.
 
-Hook input is a forward-extensible JSON contract: new optional fields can be added to existing events. Consumers should ignore unknown fields. A strict decoder that rejects unknown properties must be updated to explicitly allow each new optional field before upgrading Qwen Code. For security-sensitive hooks, a decoder failure can change fail-open or fail-closed behavior, so administrators must validate the upgraded payload against the deployed hook before rollout.
+Hook input is a forward-extensible JSON contract: new optional fields can be added to existing events. Consumers should ignore unknown fields. A strict decoder that rejects unknown properties must be updated to explicitly allow each new optional field before upgrading Tay Bellow. For security-sensitive hooks, a decoder failure can change fail-open or fail-closed behavior, so administrators must validate the upgraded payload against the deployed hook before rollout.
 
 ### Hook Output Structure
 
@@ -952,7 +952,7 @@ The `context_usage`, `context_limit`, and `input_tokens` fields allow hook scrip
 ```json
 {
   "decision": "block",
-  "reason": "Must be provided when Qwen Code is blocked from stopping"
+  "reason": "Must be provided when Tay Bellow is blocked from stopping"
 }
 ```
 
@@ -1072,7 +1072,7 @@ A command hook is left to finish if Qwen exits after dispatch; its stdout and st
 ```json
 {
   "decision": "block",
-  "reason": "Must be provided when Qwen Code is blocked from stopping"
+  "reason": "Must be provided when Tay Bellow is blocked from stopping"
 }
 ```
 
@@ -1472,7 +1472,7 @@ It fires when the session starts, when context files are reloaded during the ses
 
 ## Hook Configuration
 
-Hooks are configured in Qwen Code settings, typically in `.qwen/settings.json` or user configuration files. Hooks in the system settings files (System and SystemDefaults) load with the source System and, like user hooks, regardless of folder trust. Within one event, sequential hooks from settings and extensions run in this order: Project, User, System, Extension.
+Hooks are configured in Tay Bellow settings, typically in `.qwen/settings.json` or user configuration files. Hooks in the system settings files (System and SystemDefaults) load with the source System and, like user hooks, regardless of folder trust. Within one event, sequential hooks from settings and extensions run in this order: Project, User, System, Extension.
 
 ```json
 {
@@ -1731,7 +1731,7 @@ sys.exit(0)
 2. **Matcher.** Tool events match the runtime tool id, such as `run_shell_command` or `write_file`, or an accepted alias such as Claude Code's `Bash` or `Write` (see [Matcher Patterns](#matcher-patterns)). On events without matcher support, `matcher` is ignored.
 3. **Folder trust.** Hooks in a project's `.qwen/settings.json` load only when the folder is trusted. User hooks load regardless of folder trust.
 4. **Hooks disabled.** `"disableAllHooks": true`, `--safe-mode` (or `QWEN_CODE_SAFE_MODE`) and `--bare` (or `QWEN_CODE_SIMPLE`) turn off all hooks, including user hooks.
-5. **Debug log.** Start Qwen Code with `--debug`, or set `QWEN_DEBUG_LOG_FILE=1`, then read the session log at `~/.qwen/debug/latest` (under `$QWEN_RUNTIME_DIR` when that is set). Each line is tagged with a namespace:
+5. **Debug log.** Start Tay Bellow with `--debug`, or set `QWEN_DEBUG_LOG_FILE=1`, then read the session log at `~/.qwen/debug/latest` (under `$QWEN_RUNTIME_DIR` when that is set). Each line is tagged with a namespace:
    - `[HOOK_REGISTRY]`: `Hook registry initialized with N hook entries`, and hook definitions discarded as invalid
    - `[TRUSTED_HOOKS]`: `Hook <name> started for event <event>` and the matching `ended` line for each run, async hook status, and hook system messages
    - `[HOOK_MATCHER]`: matchers that are not valid regular expressions
@@ -1740,7 +1740,7 @@ sys.exit(0)
 
    Prompt-hook inputs can be written to the session debug log, so apply appropriate access and retention controls.
 
-6. **Edited during the session.** Hooks are read when the session starts. After editing hook definitions, open the interactive `/hooks` menu once to reload them, or restart Qwen Code. Changes to hook controls and HTTP security settings require a restart.
+6. **Edited during the session.** Hooks are read when the session starts. After editing hook definitions, open the interactive `/hooks` menu once to reload them, or restart Tay Bellow. Changes to hook controls and HTTP security settings require a restart.
 
 ### Other checks
 

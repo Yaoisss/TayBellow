@@ -111,7 +111,7 @@ describe('OpenTuiBanner', () => {
       <OpenTuiBanner config={fakeConfig()} settings={fakeSettings()} />,
     );
     const text = container.textContent ?? '';
-    expect(text).toContain('>_ Qwen Code');
+    expect(text).toContain('>_ Tay Bellow');
     expect(text).toContain('qwen3-coder-plus');
     expect(text).toContain('qwen-code');
   });

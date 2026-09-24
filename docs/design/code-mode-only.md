@@ -10,7 +10,7 @@ The feature is opt-in and defaults off.
 Add a `tools.codeModeOnly` setting that replaces the ordinary model-facing
 tool surface with one `exec` JavaScript tool plus the small set of tools that
 must remain direct control-plane calls. `exec` code can call ordinary tools
-through `tools.<name>(args)` without bypassing Qwen Code's validation,
+through `tools.<name>(args)` without bypassing Tay Bellow's validation,
 permissions, approvals, hooks, telemetry, cancellation, concurrency, or output
 budgets.
 

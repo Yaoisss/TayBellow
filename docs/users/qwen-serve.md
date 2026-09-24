@@ -1,6 +1,6 @@
 # Daemon mode (`qwen serve`)
 
-Run Qwen Code as a local HTTP daemon so multiple clients (IDE plugins, web UIs, CI scripts, custom CLIs) share one agent session over HTTP + Server-Sent Events instead of each spawning their own subprocess.
+Run Tay Bellow as a local HTTP daemon so multiple clients (IDE plugins, web UIs, CI scripts, custom CLIs) share one agent session over HTTP + Server-Sent Events instead of each spawning their own subprocess.
 
 > **🚧 v0.16-alpha**: `qwen serve` first ships to npm in v0.16-alpha as **text-only chat / coding** with **local-only deployment**. Image / file attachments on the prompt path, containerized deployment (Docker / k8s / nginx reverse-proxy), and remote / multi-daemon hardening land in a follow-up patch when an enterprise pilot is committed. See [v0.16-alpha known limits](#v016-alpha-known-limits) for the full deferred list.
 
@@ -389,7 +389,7 @@ coalesced per task until the chain yields.
 The option defaults to `false`, requires restart, and is forced off in safe
 mode, bare mode, and Approval `plan` mode. It is in-memory only: loading Todo
 state from disk or restarting the daemon does not arm it. Set
-`tools.todoWrite.enabled` in settings.json and restart Qwen Code, then a new
+`tools.todoWrite.enabled` in settings.json and restart Tay Bellow, then a new
 ordinary prompt must successfully run its own top-level `todo_write`;
 retry/continue and live
 client reattach keep the current in-memory work chain. Successfully changing
@@ -470,7 +470,7 @@ Notes:
 
 On a supported browser, open the daemon's Web Shell and use the browser's
 **Install app** or **Add to Home screen** action. The installed app opens the
-same server in a standalone window with the Qwen Code name and icon. On iOS,
+same server in a standalone window with the Tay Bellow name and icon. On iOS,
 use the browser's Share menu and **Add to Home Screen**. Availability depends
 on the browser and device.
 
@@ -503,7 +503,7 @@ activate immediately with `skipWaiting()` and `clients.claim()`, replacing
 the previous worker for open tabs without forcing a page reload. Activation
 removes older Qwen shell caches and preserves unrelated caches.
 
-The installation metadata uses the built-in Qwen Code identity; runtime custom
+The installation metadata uses the built-in Tay Bellow identity; runtime custom
 branding still applies inside the Web Shell. Embedded library consumers do not
 register the worker. To remove the installation, use your browser or operating
 system's app management; to remove its service worker and stored site data,
@@ -661,7 +661,7 @@ units without control characters. A successful prepare response is:
 
 A denial uses `allowed:false` and may add a short `reason`. For each supported
 top-level tool invocation that passes existing permission and `PreToolUse`
-gates and reaches the final execution boundary, Qwen Code sends one prepare
+gates and reaches the final execution boundary, Tay Bellow sends one prepare
 request and never retries it. An earlier permission/hook denial sends no
 prepare request. Timeout, cancellation, transport failure, malformed or
 mismatched responses, and explicit denial prevent the executor from running.

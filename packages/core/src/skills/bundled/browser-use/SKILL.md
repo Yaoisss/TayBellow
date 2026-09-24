@@ -5,13 +5,13 @@ description: Control the user's Chrome through the existing persistent Node REPL
 
 # Browser Use
 
-Browser Use is bundled with Qwen Code and uses the generic Node REPL MCP tools
+Browser Use is bundled with Tay Bellow and uses the generic Node REPL MCP tools
 and the Qwen Chrome extension. Do not install a separate Qwen extension or
 start a separate Browser Use MCP server.
 
 ## Setup
 
-Install and enable the Qwen Code Chrome extension in the profile the user wants
+Install and enable the Tay Bellow Chrome extension in the profile the user wants
 to use. On macOS and Linux, first use of this SDK automatically registers the
 shared Native Messaging host in the user's installation directory. A browser
 task opts into this local setup, which can finish before the extension connects.
@@ -20,7 +20,7 @@ extension preferences.
 
 If the extension does not connect, ask the user to open Chrome and check the
 extension in the intended profile. There is no store listing yet: build the
-extension from `packages/chrome-extension` in the Qwen Code repository (its
+extension from `packages/chrome-extension` in the Tay Bellow repository (its
 README) and load `dist/extension` through `chrome://extensions` (Developer mode
 → Load unpacked). After installation or enabling it, retry the connection.
 
@@ -28,7 +28,7 @@ A usable Host of the same protocol is reused. A Host installed by a newer Qwen
 Code is never downgraded: if setup reports one, tell the user to update Qwen
 Code and stop. The Host files persist after Qwen exits. The user can inspect or
 remove them with `node <skill-base>/runtime/scripts/native-host-setup.js status`
-or `uninstall`; `install` explicitly switches the Host to this Qwen Code's copy
+or `uninstall`; `install` explicitly switches the Host to this Tay Bellow's copy
 from the next time Chrome starts it. A later Browser Use initialization can
 register the Host again. If required Host files cannot be read or written,
 report the failing action and path so the user can resolve access and retry.
@@ -48,7 +48,7 @@ If `node_repl` is unavailable, configure it with:
 qwen mcp add --scope user node-repl npx -y @qwen-code/node-repl-mcp@0.1.6
 ```
 
-Then tell the user to restart Qwen Code and stop. Do not start a separate
+Then tell the user to restart Tay Bellow and stop. Do not start a separate
 Browser Use MCP server. Screenshot metadata requires `@qwen-code/node-repl-mcp`
 0.1.6 or later, so keep this exact pin.
 
@@ -119,7 +119,7 @@ The metadata reaches the model only through `@qwen-code/node-repl-mcp` 0.1.6
 or later; an older server accepts the call and silently drops it. If
 `node_repl` was registered before this skill existed, check its command with
 `qwen mcp list`, and when it pins an older version, re-register it with the
-`qwen mcp add` command from Setup above and ask the user to restart Qwen Code.
+`qwen mcp add` command from Setup above and ask the user to restart Tay Bellow.
 
 Use `tab.dev.logs()` for bounded console diagnostics. Arm
 `tab.playwright.waitForEvent('download' | 'filechooser')` before the action that

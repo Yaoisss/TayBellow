@@ -1,4 +1,4 @@
-# Qwen Code standalone uninstaller.
+# Tay Bellow standalone uninstaller.
 # Removes files owned by install-qwen-standalone.bat/.ps1 and preserves user
 # config by default.
 #
@@ -6,7 +6,7 @@
 #   powershell -ExecutionPolicy Bypass -c "irm https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.ps1 | iex"
 #
 # Set $env:QWEN_UNINSTALL_PURGE = '1' (or pass -Purge) to also remove the
-# installer source marker at %USERPROFILE%\.qwen\source.json. Other Qwen Code
+# installer source marker at %USERPROFILE%\.qwen\source.json. Other Tay Bellow
 # config and auth files are preserved.
 
 param(
@@ -18,7 +18,7 @@ $ErrorActionPreference = 'Stop'
 
 if ($Help) {
     Write-Output @"
-Qwen Code standalone uninstaller.
+Tay Bellow standalone uninstaller.
 
 Usage:
   uninstall-qwen-standalone.ps1 [-Purge] [-Help]
@@ -247,7 +247,7 @@ function Remove-CurrentCmdPathShimFile {
     }
 
     $existingShim = Get-Content -LiteralPath $ShimPath -Raw -ErrorAction SilentlyContinue
-    if ($existingShim -notmatch 'Qwen Code current-session shim') {
+    if ($existingShim -notmatch 'Tay Bellow current-session shim') {
         return
     }
 
@@ -306,7 +306,7 @@ function Remove-InstallWrapper {
     $targetCommand = Join-Path (Join-Path $InstallDir 'bin') 'qwen.cmd'
     if (
         $wrapper -notmatch [regex]::Escape($targetCommand) -and
-        $wrapper -notmatch 'Qwen Code current-session shim'
+        $wrapper -notmatch 'Tay Bellow current-session shim'
     ) {
         Write-WarningMessage "$wrapperPath does not point at this standalone install; skipping."
         return
@@ -355,7 +355,7 @@ function Remove-SourceMarker {
     Remove-EmptyDirectory -Directory $qwenDir
 }
 
-Write-Output "Qwen Code Standalone Uninstaller"
+Write-Output "Tay Bellow Standalone Uninstaller"
 Write-Output ""
 
 $installBase = Get-QwenInstallBase
@@ -368,7 +368,7 @@ if ($installWasManaged) {
     Remove-Item -LiteralPath $installDir -Recurse -Force
     Write-Success "Removed $installDir"
 } elseif (Test-Path -LiteralPath $installDir) {
-    Write-WarningMessage "$installDir exists but is not a Qwen Code standalone install; skipping."
+    Write-WarningMessage "$installDir exists but is not a Tay Bellow standalone install; skipping."
 } else {
     Write-Info "No standalone runtime found at $installDir."
 }
@@ -388,4 +388,4 @@ if ([string]::IsNullOrEmpty($env:QWEN_INSTALL_ROOT)) {
     Remove-EmptyDirectory -Directory $installBase
 }
 
-Write-Success "Qwen Code standalone install removed."
+Write-Success "Tay Bellow standalone install removed."

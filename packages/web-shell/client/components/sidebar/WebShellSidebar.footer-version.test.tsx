@@ -125,7 +125,7 @@ if (!Element.prototype.scrollIntoView) {
 }
 
 const SIDEBAR_WIDTH_STORAGE_KEY = 'qwen-code-web-shell-sidebar-width';
-const VERSION_BADGE_TITLE = 'Qwen Code v1.2.3';
+const VERSION_BADGE_TITLE = 'Tay Bellow v1.2.3';
 const SETTINGS_LABEL = 'Settings';
 const COLLAPSE_LABEL = 'Collapse';
 const DAEMON_STATUS_LABEL = 'Daemon Status';

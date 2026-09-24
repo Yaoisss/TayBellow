@@ -161,7 +161,7 @@ function DocumentMetadata({
         <dl>
           <MetadataItem
             label="Session"
-            value={metadata.title ?? 'Qwen Code Chat Export'}
+            value={metadata.title ?? 'Tay Bellow Chat Export'}
           />
           <MetadataItem
             label="Started"
@@ -240,7 +240,7 @@ function DocumentApp({ value }: { value: ExportTranscriptDocument }) {
   }, []);
 
   useEffect(() => {
-    document.title = value.metadata.title || 'Qwen Code Chat Export';
+    document.title = value.metadata.title || 'Tay Bellow Chat Export';
     requestAnimationFrame(() => {
       document.body.dataset.renderComplete = 'true';
     });
@@ -250,7 +250,7 @@ function DocumentApp({ value }: { value: ExportTranscriptDocument }) {
     <main className="document-shell">
       <header className="document-header">
         <div>
-          <h1>{value.metadata.title || 'Qwen Code Chat Export'}</h1>
+          <h1>{value.metadata.title || 'Tay Bellow Chat Export'}</h1>
           <p>
             {value.metadata.startedAt
               ? `Started ${value.metadata.startedAt}`

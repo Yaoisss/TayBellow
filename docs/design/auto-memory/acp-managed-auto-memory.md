@@ -580,16 +580,16 @@ provider-send boundary is both later and shared by all ACP tool continuations.
 ### Hook or proxy implementation
 
 Rejected. It cannot preserve the existing fast/refined delivery, session dedup,
-abort propagation, and telemetry without rebuilding Qwen Code internals outside
+abort propagation, and telemetry without rebuilding Tay Bellow internals outside
 their owner.
 
 ## Downstream image and persistence work
 
-This upstream PR makes ACP memory behavior correct inside Qwen Code. It does not
+This upstream PR makes ACP memory behavior correct inside Tay Bellow. It does not
 make a container's filesystem durable. A `chrome-acp-v2` rollout still needs a
 separate, deployment-owned change:
 
-1. Build the image with the patched Qwen Code version.
+1. Build the image with the patched Tay Bellow version.
 2. Explicitly enable managed auto-memory and Dream in production settings if the
    image policy requires pinned defaults.
 3. Persist both project runtime state and the user-level `memories` directory.

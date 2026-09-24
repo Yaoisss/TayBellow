@@ -767,7 +767,7 @@ export class WebViewProvider {
           ).trim();
           const panelRef = this.panelManager.getPanel();
           if (panelRef) {
-            panelRef.title = title ? truncatePanelTitle(title) : 'Qwen Code';
+            panelRef.title = title ? truncatePanelTitle(title) : 'Tay Bellow';
           }
           return;
         }
@@ -1737,7 +1737,7 @@ export class WebViewProvider {
     const hostname = new URL(externalUrl).hostname;
     if (hostname.startsWith('[')) {
       throw new Error(
-        `Qwen Code cannot reach its daemon from this window: VS Code resolved it to "${externalUrl}", but the webview cannot connect to an IPv6 literal under its content security policy.`,
+        `Tay Bellow cannot reach its daemon from this window: VS Code resolved it to "${externalUrl}", but the webview cannot connect to an IPv6 literal under its content security policy.`,
       );
     }
     // This URL shares its payload with the daemon's bearer token. A
@@ -1746,7 +1746,7 @@ export class WebViewProvider {
     // that token away from a third-party host — so refuse here instead.
     if (!isLoopbackHostname(hostname)) {
       throw new Error(
-        `Qwen Code cannot reach its daemon from this window: VS Code resolved it to "${externalUrl}", which is not a forwarded loopback address.`,
+        `Tay Bellow cannot reach its daemon from this window: VS Code resolved it to "${externalUrl}", which is not a forwarded loopback address.`,
       );
     }
     return externalUrl;
@@ -1805,7 +1805,7 @@ export class WebViewProvider {
       if (!workspaceCwd) {
         await webview.postMessage({
           type: 'webShellBootstrapError',
-          data: { message: 'Open a folder to use Qwen Code.' },
+          data: { message: 'Open a folder to use Tay Bellow.' },
         });
         return true;
       }
@@ -1937,12 +1937,12 @@ export class WebViewProvider {
         this.daemonListenerHandles.push(
           this.daemonProcess.addExitListener(() =>
             postDaemonFailure(
-              'Qwen Code stopped unexpectedly. Reload the panel to restart it.',
+              'Tay Bellow stopped unexpectedly. Reload the panel to restart it.',
             ),
           ),
           this.daemonProcess.addSupersededListener(() =>
             postDaemonFailure(
-              'Qwen Code restarted against a different folder. Reload the panel to reconnect.',
+              'Tay Bellow restarted against a different folder. Reload the panel to reconnect.',
             ),
           ),
         );
@@ -2135,11 +2135,11 @@ export class WebViewProvider {
 
   /**
    * Show a VS Code notification with sound and a "Show" button that focuses
-   * the Qwen Code panel (or sidebar view) when clicked.
+   * the Tay Bellow panel (or sidebar view) when clicked.
    */
   private notifyUser(message: string): void {
     void vscode.window
-      .showInformationMessage(`Qwen Code: ${message}`, 'Show')
+      .showInformationMessage(`Tay Bellow: ${message}`, 'Show')
       .then((action) => {
         if (action === 'Show') {
           const panel = this.panelManager.getPanel();
@@ -2155,7 +2155,7 @@ export class WebViewProvider {
   }
 
   /**
-   * Whether the user can currently see the Qwen Code panel.
+   * Whether the user can currently see the Tay Bellow panel.
    * Only true when VS Code is the foreground app AND the panel tab is visible.
    * If either condition is false the user needs a notification.
    */
@@ -2343,7 +2343,7 @@ export class WebViewProvider {
     // Ensure restored tab starts from default label and icon
     this.dotState = null;
     try {
-      panel.title = 'Qwen Code';
+      panel.title = 'Tay Bellow';
       panel.iconPath = vscode.Uri.joinPath(
         this.extensionUri,
         'assets',
@@ -2373,7 +2373,7 @@ export class WebViewProvider {
           ).trim();
           const panelRef = this.panelManager.getPanel();
           if (panelRef) {
-            panelRef.title = title ? truncatePanelTitle(title) : 'Qwen Code';
+            panelRef.title = title ? truncatePanelTitle(title) : 'Tay Bellow';
           }
           return;
         }

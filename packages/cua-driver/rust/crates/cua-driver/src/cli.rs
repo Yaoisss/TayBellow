@@ -1752,7 +1752,7 @@ pub fn run_mcp_config(client: Option<&str>) {
             );
         }
         Some("qwen") | Some("qwen-code") => {
-            // Qwen Code (Alibaba's open-source coding CLI, a Gemini-CLI fork).
+            // Tay Bellow (Alibaba's open-source coding CLI, a Gemini-CLI fork).
             // Config: ~/.qwen/settings.json (user) or .qwen/settings.json
             // (project), top-level "mcpServers" keyed by name. It also ships a
             // CLI: `qwen mcp add <name> <command> [args...]`.

@@ -77,7 +77,7 @@ vi.mock('../../utils/stdioHelpers.js', () => ({
 const { presubmitCommand, classifyAoneChecks, aoneCommentToPresubmitComment } =
   await import('./presubmit.js');
 
-const FOOTER = '_— qwen-max via Qwen Code /review (v0.1.0)_';
+const FOOTER = '_— qwen-max via Tay Bellow /review (v0.1.0)_';
 
 async function run(args?: Record<string, unknown>) {
   const handler = presubmitCommand.handler;
@@ -244,7 +244,7 @@ describe('aoneCommentToPresubmitComment (a1 → GitHub-shaped input)', () => {
       'sha-reviewed',
     );
     expect(mapped.body).toContain('**[Critical]** null deref');
-    expect(mapped.body).toContain('via Qwen Code /review');
+    expect(mapped.body).toContain('via Tay Bellow /review');
   });
 
   it('an OUTDATED thread rides an empty commit_id (the stale bucket)', () => {
@@ -403,7 +403,7 @@ describe('presubmit handler (Aone backing)', () => {
     mocks.listMrComments.mockReturnValue([
       {
         id: 205,
-        note: '**[Critical]** prior\n\n_— qwen-max via Qwen Code /review_',
+        note: '**[Critical]** prior\n\n_— qwen-max via Tay Bellow /review_',
         path: 'a.ts',
         line: 42,
         author: { username: 'another-bot' },

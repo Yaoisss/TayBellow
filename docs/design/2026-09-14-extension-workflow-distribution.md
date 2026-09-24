@@ -6,7 +6,7 @@ Tracking issue: #11013, item 12 (distribution half); #8105 PR 15.
 
 ## Problem
 
-Saved workflows could only live in a project (`.qwen/workflows`) or in the user's home (`~/.qwen/workflows`), so there was no way to hand a reusable workflow to someone else. Claude Code plugins already ship workflows through a `workflows` manifest field and a default `workflows/` directory. Extensions are Qwen Code's distribution unit, but extension files are third-party code, so the feature has to widen distribution without widening what a workflow run can read.
+Saved workflows could only live in a project (`.qwen/workflows`) or in the user's home (`~/.qwen/workflows`), so there was no way to hand a reusable workflow to someone else. Claude Code plugins already ship workflows through a `workflows` manifest field and a default `workflows/` directory. Extensions are Tay Bellow's distribution unit, but extension files are third-party code, so the feature has to widen distribution without widening what a workflow run can read.
 
 ## Decisions
 

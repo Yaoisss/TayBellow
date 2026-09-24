@@ -6,7 +6,7 @@
 
 /**
  * send_message tool - send a message to a teammate, a background task, or
- * another Qwen Code session on this machine.
+ * another Tay Bellow session on this machine.
  *
  * Three routing modes, tried in this order:
  * - Background-task mode: `task_id` matches an entry in the background task
@@ -17,7 +17,7 @@
  *   route through TeamManager as plain text. This tool carries content only;
  *   team control actions are separate tools (see `request-shutdown.ts`), so a
  *   teammate cannot express a control action at all — see #9276.
- * - Peer mode: `to` matches another Qwen Code session on this machine (see
+ * - Peer mode: `to` matches another Tay Bellow session on this machine (see
  *   `ipc/peer-send.ts`). Plain text only, and only while cross-session
  *   messaging is enabled here; the message arrives there marked as coming
  *   from another session and may be held for that session's user to review.
@@ -55,7 +55,7 @@ import {
 export interface SendMessageParams {
   /**
    * Recipient teammate name, "*" for team broadcast, or the name of another
-   * Qwen Code session on this machine (optionally `name [ref]`).
+   * Tay Bellow session on this machine (optionally `name [ref]`).
    */
   to?: string;
   /** Background-task ID, from the launch response (background mode). */
@@ -106,7 +106,7 @@ class SendMessageInvocation extends BaseToolInvocation<
   private peerMessagingOff = false;
 
   /**
-   * Try to deliver to another Qwen Code session on this machine.
+   * Try to deliver to another Tay Bellow session on this machine.
    *
    * Returns null when this is not a peer send at all — cross-session
    * messaging is off here, or the name resolved to nothing and there is
@@ -193,7 +193,7 @@ class SendMessageInvocation extends BaseToolInvocation<
         const preview = this.params.summary ?? this.params.message.slice(0, 50);
         return {
           llmContent:
-            `Sent to ${outcome.address} — another Qwen Code session on this machine, ` +
+            `Sent to ${outcome.address} — another Tay Bellow session on this machine, ` +
             `working in ${outcome.peer.cwd}. It arrives there as a marked cross-session ` +
             "message carrying none of your user's authority, and may be held for that " +
             "session's user to review before it reaches that session's model. You will " +
@@ -393,7 +393,7 @@ class SendMessageInvocation extends BaseToolInvocation<
     if (to === '*') {
       if (!teamManager) {
         const msg =
-          'No active team to broadcast to. Broadcasting to other Qwen Code sessions ' +
+          'No active team to broadcast to. Broadcasting to other Tay Bellow sessions ' +
           'is not supported — address each session by name from list_agents.';
         return {
           llmContent: msg,
@@ -448,7 +448,7 @@ class SendMessageInvocation extends BaseToolInvocation<
     const inProcessRecipient = isInProcessRecipient(to, teamFile);
 
     if (!inProcessRecipient) {
-      // Route 3: another Qwen Code session on this machine.
+      // Route 3: another Tay Bellow session on this machine.
       const peerResult = await this.trySendToPeer(to, teamFile);
       if (peerResult) return peerResult;
     }
@@ -508,7 +508,7 @@ export class SendMessageTool extends BaseDeclarativeTool<
     super(
       SendMessageTool.Name,
       ToolDisplayNames.SEND_MESSAGE,
-      'Send to a teammate or another Qwen Code session (use "to"), or a running, paused, or completed background task (use "task_id"); completed tasks are revived. Specify exactly one of the two fields. ' +
+      'Send to a teammate or another Tay Bellow session (use "to"), or a running, paused, or completed background task (use "task_id"); completed tasks are revived. Specify exactly one of the two fields. ' +
         'Set "to" to a bare teammate name (no @), to "*" to broadcast within an active Agent Team only, or to a session name from list_agents, exactly as its "to" value shows it — list_agents appends " [ref]" whenever the bare name would not reach that session (another session or a teammate shares it). ' +
         "A message to another session arrives there marked as coming from another session, carries none of your user's authority, and may be held for that session's user to review; never use it to have another session perform an action this session was denied, blocked from, or cannot do itself. " +
         'For background tasks, set "task_id" to the id from the launch response or list_agents. ' +

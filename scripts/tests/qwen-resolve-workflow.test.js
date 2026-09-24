@@ -356,7 +356,7 @@ describe('qwen resolve workflow', () => {
   it('reports failure paths instead of falling through silently', () => {
     expect(workflow).toContain("- name: 'Report result'");
     expect(workflow).toContain(
-      'Qwen Code attempted to resolve merge conflicts but the run did not complete successfully.',
+      'Tay Bellow attempted to resolve merge conflicts but the run did not complete successfully.',
     );
     expect(workflow).toContain('push_failed=false');
     expect(workflow).toContain('push_failed=true');
@@ -656,7 +656,7 @@ describe('qwen resolve workflow', () => {
       fallbackStep.indexOf('else', quotaStart),
     );
     expect(quotaArm).toContain(
-      '**Qwen Code review paused — model quota exhausted.**',
+      '**Tay Bellow review paused — model quota exhausted.**',
     );
     // The branch CONDITION, not just both branch bodies: with both bodies
     // pinned as substrings, any comparison flip (-ge/-gt/-le) keeps both
@@ -664,11 +664,11 @@ describe('qwen resolve workflow', () => {
     expect(fallbackStep).toContain(
       'if [ "$TIMEOUT_MINUTES" -lt "$MAX_TIMEOUT_MINUTES" ]; then',
     );
-    expect(fallbackStep).toContain('**Qwen Code review timed out.**');
+    expect(fallbackStep).toContain('**Tay Bellow review timed out.**');
     // The comment must come AFTER all three arms: containment holds wherever
     // the line sits, so a move into one arm would silently drop the others.
     const genericBodyStart = fallbackStep.indexOf(
-      '**Qwen Code review did not complete successfully.**',
+      '**Tay Bellow review did not complete successfully.**',
     );
     expect(genericBodyStart).toBeGreaterThan(-1);
     const commentStart = fallbackStep.indexOf('gh pr comment "$PR_NUMBER"');
@@ -677,7 +677,7 @@ describe('qwen resolve workflow', () => {
     // at a different variable posts text none of these assertions protect.
     expect(fallbackStep).toContain('--body "$body"');
     expect(fallbackStep).not.toContain(
-      '_Qwen Code review did not complete successfully:',
+      '_Tay Bellow review did not complete successfully:',
     );
   });
 
@@ -1392,7 +1392,7 @@ describe('qwen resolve workflow', () => {
       reportStep.indexOf('else', infraStart),
     );
     expect(infraArm).toContain(
-      'Qwen Code could not run conflict resolution on this PR',
+      'Tay Bellow could not run conflict resolution on this PR',
     );
     expect(infraArm).toContain('This is not a verdict on the conflict');
     // The timeout rides as the env interpolation: hardcoding the number in
@@ -1400,7 +1400,7 @@ describe('qwen resolve workflow', () => {
     expect(infraArm).toContain('${AGENT_TIMEOUT_MINUTES}-minute timeout');
     expect(infraArm).not.toContain('Re-run /resolve');
     expect(infraArm).not.toContain(
-      'Qwen Code attempted to resolve merge conflicts',
+      'Tay Bellow attempted to resolve merge conflicts',
     );
     const elseStart = reportStep.indexOf('else', infraStart);
     expect(elseStart).toBeGreaterThan(-1);
@@ -1411,7 +1411,7 @@ describe('qwen resolve workflow', () => {
     const elseArm = reportStep.slice(elseStart, elseStart + elseEnd);
     // Symmetric pin: the generic wording lives in the else arm only.
     expect(elseArm).toContain(
-      'Qwen Code attempted to resolve merge conflicts but the run did not complete successfully.',
+      'Tay Bellow attempted to resolve merge conflicts but the run did not complete successfully.',
     );
     expect(elseArm).toContain('Check the [workflow run](');
     expect(elseArm).not.toContain('could not run conflict resolution');

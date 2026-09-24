@@ -140,11 +140,11 @@ class SkippedConnectionError extends Error {
 /**
  * The reconnect command runs in its own short-lived process: it can verify
  * (and refresh) its own connection, but it has no channel into a running
- * Qwen Code session. Say so plainly in the success output so it is not read
+ * Tay Bellow session. Say so plainly in the success output so it is not read
  * as "your running session's MCP tools are back" (issue #9944).
  */
 const SESSION_SCOPE_NOTE =
-  'Note: this command reconnects in a separate process; it cannot refresh the MCP tools of an already-running Qwen Code session. Restart that session if its tools remain unavailable.';
+  'Note: this command reconnects in a separate process; it cannot refresh the MCP tools of an already-running Tay Bellow session. Restart that session if its tools remain unavailable.';
 
 function createReconnectError(
   message: string,

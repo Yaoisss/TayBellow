@@ -146,9 +146,9 @@ function loadConfig(path) {
   // equals that default, the guard never fires on run 1, so run 2
   // proceeds and doubles brand strings in bootstrap files. Reject this
   // at load time so the error is clear and no files are mutated.
-  if (appName === 'Qwen Code Desktop') {
+  if (appName === 'Tay Bellow Desktop') {
     fail(
-      'appName must not be "Qwen Code Desktop" — that is the pristine ' +
+      'appName must not be "Tay Bellow Desktop" — that is the pristine ' +
         'shell default and would defeat the re-run guard. Choose a ' +
         'distinct name or use a different brandId.',
     );
@@ -173,7 +173,7 @@ function patchTauriConfig(shellRoot, brand) {
   config.productName = brand.appName;
   config.identifier = brand.appId;
   if (config.bundle) {
-    config.bundle.shortDescription = `${brand.appName} desktop shell for the Qwen Code Web Shell`;
+    config.bundle.shortDescription = `${brand.appName} desktop shell for the Tay Bellow Web Shell`;
   }
   // A brand that supplies its own updater feed (or pubkey) needs a
   // plugins.updater section to apply it to. The pristine in-repo shell
@@ -253,7 +253,7 @@ function generateIcons(shellRoot, brand) {
     copyFileSync(brand.logo, join(shellRoot, 'src-tauri', 'icons', 'icon.png'));
     console.warn(
       'brand-create: WARNING: `tauri icon` failed; only icons/icon.png was ' +
-        'replaced (other sizes still show the Qwen Code logo). Regenerate ' +
+        'replaced (other sizes still show the Tay Bellow logo). Regenerate ' +
         'with: npx --yes @tauri-apps/cli icon <logo>',
     );
     return 'fallback: icon.png only';
@@ -307,10 +307,10 @@ function patchBootstrap(shellRoot, brand) {
       // JS file: appName appears inside single-quoted string literals,
       // so it must be fully JS-literal-escaped (quotes, backslashes,
       // newlines); see appNameJsSafe above.
-      text = text.replaceAll('Qwen Code', () => appNameJsSafe);
+      text = text.replaceAll('Tay Bellow', () => appNameJsSafe);
     } else {
       // HTML file: splice the HTML-escaped form; see appNameHtmlSafe.
-      text = text.replaceAll('Qwen Code', () => appNameHtmlSafe);
+      text = text.replaceAll('Tay Bellow', () => appNameHtmlSafe);
     }
     if (file === 'index.html') {
       text = text.replaceAll('qwen-code-logo.svg', () => brandLogoName);
@@ -327,11 +327,11 @@ function detectAlreadyBranded(shellRoot) {
   const configPath = join(shellRoot, 'src-tauri', 'tauri.conf.json');
   try {
     const config = JSON.parse(readFileSync(configPath, 'utf8'));
-    // The pristine shell always ships productName === 'Qwen Code Desktop'.
+    // The pristine shell always ships productName === 'Tay Bellow Desktop'.
     // If it has already been changed, this tree was branded before and
     // re-running would produce stale results (bootstrap patches key on
     // the original literals, pubkey/endpoints mutations are not reversible).
-    return config.productName && config.productName !== 'Qwen Code Desktop';
+    return config.productName && config.productName !== 'Tay Bellow Desktop';
   } catch {
     return false;
   }
@@ -345,7 +345,7 @@ function main() {
   if (detectAlreadyBranded(shellRoot)) {
     fail(
       'this shell-root appears to be already branded (productName is no ' +
-        'longer "Qwen Code Desktop"). brand-create is not idempotent — ' +
+        'longer "Tay Bellow Desktop"). brand-create is not idempotent — ' +
         'start from a fresh clone for each brand.',
     );
   }

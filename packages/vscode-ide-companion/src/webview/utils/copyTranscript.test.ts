@@ -162,7 +162,7 @@ describe('formatBlocksForCopyAll', () => {
         '**Error:** Model stream interrupted',
         '**Debug:** retrying request',
         '**Thinking:** pondering',
-        '**Qwen Code:** answer',
+        '**Tay Bellow:** answer',
       ].join('\n\n---\n\n'),
     );
   });
@@ -185,7 +185,7 @@ describe('formatBlocksForCopyAll', () => {
       statusBlock('st-1', ''),
       textBlock('assistant', 'a-1', 'answer'),
     ];
-    expect(formatBlocksForCopyAll(blocks)).toBe('**Qwen Code:** answer');
+    expect(formatBlocksForCopyAll(blocks)).toBe('**Tay Bellow:** answer');
   });
 
   it('returns an empty string when there is nothing to copy', () => {

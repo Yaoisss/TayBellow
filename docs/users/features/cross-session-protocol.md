@@ -1,7 +1,7 @@
 # Cross-Session Protocol
 
 This page is the contract for a program that wants to take part in
-cross-session messaging without being a Qwen Code session: a voice
+cross-session messaging without being a Tay Bellow session: a voice
 front-end, a relay daemon, a script that watches a build. It describes
 what a session writes to the registry, what its inbox reads off a
 connection, and what it sends back. Everything here is what the code
@@ -10,7 +10,7 @@ says what may change and how you will know.
 
 For a Node program, `@qwen-code/sdk/peer` implements the joining side of
 this page — the record, the inbox, the auth line, frames and receipts — with
-nothing but Node, and its tests run it against Qwen Code's own implementation
+nothing but Node, and its tests run it against Tay Bellow's own implementation
 in both directions. It applies none of §6 to its own inbox: a program that
 needs rate limits, holds or a duplicate window applies them itself. Use it, or
 read on to write your own.
@@ -283,7 +283,7 @@ In order:
 4. **Hold.** Up to 50 messages wait. A message arriving at a full buffer is `dropped` with `queue-full` rather than evicting one already parked. A held message expires after `agents.crossSessionHeldExpiry` (`1m`, `5m`, `10m`, `never`; default `5m`). The user releases or denies from `/peers`; a mode change re-evaluates the backlog.
 5. **Queue.** An accepted message joins the session's input queue, which holds at most 50 from peers. A full queue is `dropped` with `queue-full` too.
 
-A sender does not have to discover the limits the hard way: a Qwen Code
+A sender does not have to discover the limits the hard way: a Tay Bellow
 session mirrors them per address and refuses its own send before writing
 it, telling its model to batch instead.
 

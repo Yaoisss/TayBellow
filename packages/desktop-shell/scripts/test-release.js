@@ -126,7 +126,7 @@ async function testBootstrapWorkspaceVisibility() {
     workspace: '/Users/example/Documents',
   });
   await new Promise((resolve) => setImmediate(resolve));
-  assert.equal(element('#title').textContent, 'Restarting Qwen Code');
+  assert.equal(element('#title').textContent, 'Restarting Tay Bellow');
   assert.equal(
     element('#workspace').hidden,
     true,
@@ -224,7 +224,7 @@ function testLegacyApplicationIdentity() {
       'utf8',
     ),
   );
-  assert.equal(config.productName, 'Qwen Code Desktop');
+  assert.equal(config.productName, 'Tay Bellow Desktop');
   assert.equal(config.identifier, 'com.alibaba.qwen-code');
   assert.equal(
     config.bundle.windows.nsis.installerHooks,
@@ -238,15 +238,15 @@ function testLegacyApplicationIdentity() {
   assert.match(migrationHook, /!macro NSIS_HOOK_PREINSTALL/);
   assert.match(
     migrationHook,
-    /StrCpy \$R1 \$R1 17\s*\n\s*\$\{If\} \$R0 != ""\s*\n\s*\$\{AndIf\} \$R1 == "Qwen Code Desktop"/,
+    /StrCpy \$R1 \$R1 17\s*\n\s*\$\{If\} \$R0 != ""\s*\n\s*\$\{AndIf\} \$R1 == "Tay Bellow Desktop"/,
   );
   assert.match(
     migrationHook,
-    /\$\{AndIf\} \$\{FileExists\} "\$R0\\Uninstall Qwen Code Desktop\.exe"/,
+    /\$\{AndIf\} \$\{FileExists\} "\$R0\\Uninstall Tay Bellow Desktop\.exe"/,
   );
   assert.match(
     migrationHook,
-    /ExecWait '"\$R0\\Uninstall Qwen Code Desktop\.exe" \/currentuser \/S --updated _\?=\$R0'/,
+    /ExecWait '"\$R0\\Uninstall Tay Bellow Desktop\.exe" \/currentuser \/S --updated _\?=\$R0'/,
   );
   assert.match(migrationHook, /\$\{If\} \$R2 != 0\s*\n\s*Abort/);
 }

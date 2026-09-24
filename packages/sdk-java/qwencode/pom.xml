@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
     <version>0.1.0-alpha</version>
     <name>qwencode-sdk</name>
-    <description>Java APIs for the Qwen Code daemon transport and legacy CLI process transport.</description>
+    <description>Java APIs for the Tay Bellow daemon transport and legacy CLI process transport.</description>
     <url>https://github.com/QwenLM/qwen-code/tree/main/packages/sdk-java/qwencode</url>
     <licenses>
         <license>

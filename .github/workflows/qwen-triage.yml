@@ -940,11 +940,11 @@ jobs:
             if [[ "${TRIAGE_OUTCOME}" != 'success' ]]; then
               # The action itself failed: no model call was ever made, so
               # nothing about this PR can explain it. Retry is the fix.
-              echo "::error title=Triage did not start::The Qwen Code action failed before producing any response, so no triage ran. The usual cause is the global CLI install, which runs under \`npm --silent\` and prints nothing on failure. This is infrastructure, not this PR — re-run the failed job."
+              echo "::error title=Triage did not start::The Tay Bellow action failed before producing any response, so no triage ran. The usual cause is the global CLI install, which runs under \`npm --silent\` and prints nothing on failure. This is infrastructure, not this PR — re-run the failed job."
             else
               # The action succeeded but returned nothing: the agent ran and
               # produced no summary. That IS worth reading the step output for.
-              echo "::error title=Triage silent failure::Qwen Code ran to completion but returned an empty response — a model or prompt problem, not an install one. Check the 'Run Qwen Triage' step output above."
+              echo "::error title=Triage silent failure::Tay Bellow ran to completion but returned an empty response — a model or prompt problem, not an install one. Check the 'Run Qwen Triage' step output above."
             fi
             exit 1
           fi
@@ -2035,7 +2035,7 @@ jobs:
               printf '%s\n\n' '<!-- qwen-triage:tmux -->'
               printf '**tmux real-user testing: cancelled** - [workflow run](%s)\n\n' "$RUN_URL"
               printf 'The testing job was cancelled before producing a verdict. See the workflow run for details.\n\n'
-              printf '%s\n' '— _Qwen Code · tmux real-user testing_'
+              printf '%s\n' '— _Tay Bellow · tmux real-user testing_'
             } > "$BODY_FILE"
           elif [ "${TMUX_RESULT:-}" != "success" ] || [ -z "${VERDICT:-}" ]; then
             # tmux-testing did not finish (infrastructure error): report it so the
@@ -2044,7 +2044,7 @@ jobs:
               printf '%s\n\n' '<!-- qwen-triage:tmux -->'
               printf '**tmux real-user testing: infrastructure failure** - [workflow run](%s)\n\n' "$RUN_URL"
               printf 'The testing job did not complete (checkout, runner, or setup error) and produced no verdict. See the workflow run for details.\n\n'
-              printf '%s\n' '— _Qwen Code · tmux real-user testing_'
+              printf '%s\n' '— _Tay Bellow · tmux real-user testing_'
             } > "$BODY_FILE"
           elif [ -n "${PREPARE_FAILURE_PHASE:-}" ]; then
             PREPARE_LOG="$(find tmux-results -name 'prepare.log' 2>/dev/null | head -1 || true)"
@@ -2080,7 +2080,7 @@ jobs:
                 printf '%s\n\n' "$PREPARE_LOG_NOTE"
               fi
               emit_block 'Install/build log' "$PREPARE_LOG" 20000
-              printf '%s\n' '— _Qwen Code · tmux real-user testing_'
+              printf '%s\n' '— _Tay Bellow · tmux real-user testing_'
             } > "$BODY_FILE"
           else
             REPORT="$(find tmux-results -mindepth 2 -type f -path '*-tmux-*/report.md' 2>/dev/null | sort | head -1 || true)"
@@ -2124,7 +2124,7 @@ jobs:
               fi
               emit_block 'E2E test report' "$REPORT" 20000
               emit_block 'Full tmux transcript' "$TRANSCRIPT" 30000
-              printf '%s\n' '— _Qwen Code · tmux real-user testing_'
+              printf '%s\n' '— _Tay Bellow · tmux real-user testing_'
             } > "$BODY_FILE"
           fi
 
@@ -5612,7 +5612,7 @@ jobs:
                 printf '验证作业在生成报告前被取消。\n\n'
                 printf '</details>\n\n'
               fi
-              printf '%s\n' '— _Qwen Code · sandboxed verification_'
+              printf '%s\n' '— _Tay Bellow · sandboxed verification_'
             } > "$BODY_FILE"
           elif [ "${VERIFY_RESULT:-}" != "success" ] || [ -z "${VERDICT:-}" ]; then
             WEAK_BODY=true
@@ -5633,7 +5633,7 @@ jobs:
                 printf '验证作业未完成（检出、runner 或初始化错误），未生成报告。详见工作流运行日志。\n\n'
                 printf '</details>\n\n'
               fi
-              printf '%s\n' '— _Qwen Code · sandboxed verification_'
+              printf '%s\n' '— _Tay Bellow · sandboxed verification_'
             } > "$BODY_FILE"
           elif [ "${VERDICT:-}" = "skipped" ] || [ "${VERDICT:-}" = "n/a" ]; then
             # These outcomes deliberately upload nothing, so their download
@@ -5655,7 +5655,7 @@ jobs:
                 printf '该 PR 仅改动文档/静态资源，没有可执行的代码，沙箱验证没有验证对象。\n\n'
                 printf '</details>\n\n'
               fi
-              printf '%s\n' '— _Qwen Code · sandboxed verification_'
+              printf '%s\n' '— _Tay Bellow · sandboxed verification_'
             } > "$BODY_FILE"
           elif [ "${DOWNLOAD_OUTCOME:-success}" != "success" ]; then
             # The verify job may have succeeded, but its artifact never
@@ -5686,7 +5686,7 @@ jobs:
                 printf '验证已执行，但结果产物未能取回用于发布，因此此处没有可报告的内容。运行日志中仍有 agent 输出；如需完整报告请重新运行 `@qwen-code /verify`。\n\n'
                 printf '</details>\n\n'
               fi
-              printf '%s\n' '— _Qwen Code · sandboxed verification_'
+              printf '%s\n' '— _Tay Bellow · sandboxed verification_'
             } > "$BODY_FILE"
           elif [ -n "${PREPARE_FAILURE_PHASE:-}" ]; then
             # An infra-classified prepare failure says nothing about the PR,
@@ -5744,7 +5744,7 @@ jobs:
                 printf '</details>\n\n'
               fi
               emit_block 'Install/build log' "$PREPARE_LOG" 20000
-              printf '%s\n' '— _Qwen Code · sandboxed verification_'
+              printf '%s\n' '— _Tay Bellow · sandboxed verification_'
             } > "$BODY_FILE"
           else
             collect_and_host_evidence
@@ -5965,7 +5965,7 @@ jobs:
                 printf '%s' "$EVIDENCE_SECTION"
               fi
               printf 'Harness scripts and raw logs are in the workflow run artifacts (7-day retention).\n\n'
-              printf '%s\n' '— _Qwen Code · sandboxed verification_'
+              printf '%s\n' '— _Tay Bellow · sandboxed verification_'
             } > "$BODY_FILE"
           fi
 

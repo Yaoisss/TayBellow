@@ -1,6 +1,6 @@
 # Goals
 
-A Goal keeps Qwen Code working across turns until a stated condition is met. Set one with `/goal <objective>`, and the session keeps going on its own. When the model proposes that the objective is complete or blocked, an independent verifier judges that proposal from the most recent part of the Goal's transcript. The session stops when the verifier accepts, or when the Goal is paused, cleared, or stopped by a limit.
+A Goal keeps Tay Bellow working across turns until a stated condition is met. Set one with `/goal <objective>`, and the session keeps going on its own. When the model proposes that the objective is complete or blocked, an independent verifier judges that proposal from the most recent part of the Goal's transcript. The session stops when the verifier accepts, or when the Goal is paused, cleared, or stopped by a limit.
 
 ## Commands
 
@@ -14,7 +14,7 @@ A Goal keeps Qwen Code working across turns until a stated condition is met. Set
 | `/goal clear`            | Remove the Goal.                                              |
 | `/goal-draft <intent>`   | Have the objective written for you before you set it (below). |
 
-Creating, editing, or resuming a Goal requires a trusted workspace (`/trust`). A session recorded before Goal state was journaled (Qwen Code releases before 2026-07-29) resumes with no Goal: the `/goal` cards in its history are shown as history, `/goal` reports that no Goal is set, and `/goal set` starts it again. In the Web Shell and other daemon clients, a trailing card after the replayed history says the old Goal is not being driven. Headless usage is covered in [Headless Mode](./headless.md#run-a-persistent-goal).
+Creating, editing, or resuming a Goal requires a trusted workspace (`/trust`). A session recorded before Goal state was journaled (Tay Bellow releases before 2026-07-29) resumes with no Goal: the `/goal` cards in its history are shown as history, `/goal` reports that no Goal is set, and `/goal set` starts it again. In the Web Shell and other daemon clients, a trailing card after the replayed history says the old Goal is not being driven. Headless usage is covered in [Headless Mode](./headless.md#run-a-persistent-goal).
 
 Once a Goal has billed a turn, the footer pill and every status card show what it has spent against the window it is allowed, as `1.2k/30.0m`. The figure counts the model calls in the Goal's own turns, its direct foreground subagents, and its verifier checks. Nested and background subagents, unrelated side queries, cron turns, and notification turns are excluded. A failed check that returns no usable result cannot be counted. Restoring already recorded usage does not count it again. The window is set by [`model.goalTokenBudget`](../configuration/settings.md); resuming a Goal that has spent its window grants another one on top of what it has already spent, so the figure reads `30.0m/60.0m` rather than starting over. A Goal with no budget shows only what it has spent. A Goal that has not billed a turn yet shows no figures at all.
 
@@ -91,7 +91,7 @@ The skill is instructed to be read-only, and only its non-mutating tools are aut
 
 ## Telemetry
 
-Goal transitions are reported through two independent settings: [telemetry](../../developers/development/telemetry.md) enables OpenTelemetry events and metrics, while `privacy.usageStatisticsEnabled` controls usage statistics and is on by default. The OpenTelemetry event is named `qwen-code.goal_state`; usage statistics report the same transition data without the Goal id.
+Goal transitions are reported through two independent settings: [telemetry](../../developers/development/telemetry.md) enables OpenTelemetry events and metrics, while `privacy.usageStatisticsEnabled` controls usage statistics and is off by default. The OpenTelemetry event is named `qwen-code.goal_state`; usage statistics report the same transition data without the Goal id.
 
 Reported transitions are set, replace, edit, pause, resume, clear, verifier rejection, completion, blocking, and usage limits. Events carry turn count, token spend, active time, and any configured budgets. A `clear` event identifies only the removed Goal and its revision, with no usage figures. A `replace` event describes the new Goal, not the removed Goal's final spend. User pauses and automatic no-progress pauses share the same `pause` cause; events include the raw no-progress streak when available. Only completion, blocking, and usage limits contribute to the outcome histograms. A resumed session does not re-report the transition its Goal was recovered from. A new stop committed during recovery is reported normally.
 

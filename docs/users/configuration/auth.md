@@ -1,6 +1,6 @@
 # Authentication
 
-Qwen Code's first-run `/auth` menu has three top-level options. Pick the one that matches how you want to run the CLI:
+Tay Bellow's first-run `/auth` menu has three top-level options. Pick the one that matches how you want to run the CLI:
 
 - **Alibaba ModelStudio**: official recommended setup. Opens a sub-menu with **Coding Plan** (for individual developers · weekly quota included), **Token Plan** (for teams and companies · usage-based billing with a dedicated endpoint), or **Standard API Key** (connect with an existing ModelStudio API key). Token Plan and Standard API Key also enable the built-in [`web_search` tool](../../developers/tools/web-search.md) with no extra setup.
 - **Third-party Providers**: choose a built-in provider and connect with an API key (DeepSeek, Grok, MiniMax, Z.AI, Kimi, Idealab, ModelScope, OpenRouter, Requesty).
@@ -16,7 +16,7 @@ Qwen Code's first-run `/auth` menu has three top-level options. Pick the one tha
 >
 > The Qwen OAuth free tier was discontinued on 2026-04-15. Existing cached tokens may continue working briefly, but new requests will be rejected. Please switch to Alibaba Cloud Coding Plan, [OpenRouter](https://openrouter.ai), [Fireworks AI](https://app.fireworks.ai), or another provider. Run `qwen` and use `/auth` to configure.
 
-- **How it works**: on first start, Qwen Code opens a browser login page. After you finish, credentials are cached locally so you usually won't need to log in again.
+- **How it works**: on first start, Tay Bellow opens a browser login page. After you finish, credentials are cached locally so you usually won't need to log in again.
 - **Requirements**: a `qwen.ai` account + internet access (at least for the first login).
 - **Benefits**: no API key management, automatic credential refresh.
 - **Cost & quota**: the free tier has been discontinued as of 2026-04-15.
@@ -38,7 +38,7 @@ Qwen OAuth is no longer offered as a selectable entry in the `/auth` dialog; run
 
 Use this if you want predictable costs with diverse model options and higher usage quotas.
 
-- **How it works**: Subscribe to the Coding Plan with a fixed monthly fee, then configure Qwen Code to use the dedicated endpoint and your subscription API key.
+- **How it works**: Subscribe to the Coding Plan with a fixed monthly fee, then configure Tay Bellow to use the dedicated endpoint and your subscription API key.
 - **Requirements**: Obtain an active Coding Plan subscription from [Alibaba Cloud ModelStudio(Beijing)](https://bailian.console.aliyun.com/cn-beijing?tab=coding-plan#/efm/coding-plan-index) or [Alibaba Cloud ModelStudio(intl)](https://modelstudio.console.alibabacloud.com/?tab=coding-plan#/efm/coding-plan-index), depending on the region of your account.
 - **Benefits**: Diverse model options, higher usage quotas, predictable monthly costs, access to a wide range of models (Qwen, GLM, Kimi, Minimax and more).
 - **Cost & quota**: View Aliyun ModelStudio Coding Plan documentation[Beijing](https://bailian.console.aliyun.com/cn-beijing/?tab=doc#/doc/?type=model&url=3005961)[intl](https://modelstudio.console.alibabacloud.com/?tab=doc#/doc/?type=model&url=2840914).
@@ -52,7 +52,7 @@ Alibaba Cloud Coding Plan is available in two regions:
 
 ### Interactive setup
 
-Enter `qwen` in the terminal to launch Qwen Code, then run the `/auth` command, select **Alibaba ModelStudio**, and choose **Coding Plan** from the sub-menu. Choose your region, then enter your `sk-sp-xxxxxxxxx` key.
+Enter `qwen` in the terminal to launch Tay Bellow, then run the `/auth` command, select **Alibaba ModelStudio**, and choose **Coding Plan** from the sub-menu. Choose your region, then enter your `sk-sp-xxxxxxxxx` key.
 
 After authentication, use the `/model` command to switch between all Alibaba Cloud Coding Plan supported models (including qwen3.5-plus, qwen3.6-plus, qwen3.7-plus, qwen3-coder-plus, qwen3-coder-next, qwen3-max-2026-01-23, glm-5, glm-4.7, kimi-k2.5, and MiniMax-M2.5).
 
@@ -107,7 +107,7 @@ If you prefer to skip the interactive `/auth` flow, add the following to `~/.qwe
 
 Use this if your team or company prefers usage-based billing on a dedicated ModelStudio endpoint.
 
-- **How it works**: Subscribe to the Token Plan in Alibaba Cloud ModelStudio, then configure Qwen Code to use the region-specific Token Plan endpoint and your API key. You are billed for actual token usage instead of a fixed monthly fee.
+- **How it works**: Subscribe to the Token Plan in Alibaba Cloud ModelStudio, then configure Tay Bellow to use the region-specific Token Plan endpoint and your API key. You are billed for actual token usage instead of a fixed monthly fee.
 - **Requirements**: Obtain a Token Plan API key from [Alibaba Cloud ModelStudio(Beijing)](https://bailian.console.aliyun.com/cn-beijing?tab=doc#/doc/?type=model&url=3028856) or [Alibaba Cloud ModelStudio(intl)](https://modelstudio.console.alibabacloud.com/ap-southeast-1?tab=doc#/doc/?type=model), depending on the region of your account.
 - **Benefits**: Usage-based billing for teams and companies, dedicated region-specific endpoints, access to a wide range of models (Qwen, DeepSeek, GLM, Kimi, Minimax and more).
 - **Cost & quota**: View Alibaba Cloud ModelStudio Token Plan documentation [Beijing](https://bailian.console.aliyun.com/cn-beijing?tab=doc#/doc/?type=model&url=3028856) [intl](https://modelstudio.console.alibabacloud.com/ap-southeast-1?tab=doc#/doc/?type=model).
@@ -121,7 +121,7 @@ Token Plan is available in two regions, each with its own dedicated endpoint:
 
 ### Interactive setup
 
-Enter `qwen` in the terminal to launch Qwen Code, then run the `/auth` command, select **Alibaba ModelStudio**, and choose **Token Plan** from the sub-menu. Choose your region (**China (Beijing)** or **Singapore (International)**), then enter your API key. The wizard then shows its final step (Step 3/3 · Model IDs), where you pick the model IDs to configure: the models served by your endpoint are offered there and are applied only when you explicitly select them. Token Plan API keys have no prefix requirement (unlike Coding Plan keys, which start with `sk-sp-`).
+Enter `qwen` in the terminal to launch Tay Bellow, then run the `/auth` command, select **Alibaba ModelStudio**, and choose **Token Plan** from the sub-menu. Choose your region (**China (Beijing)** or **Singapore (International)**), then enter your API key. The wizard then shows its final step (Step 3/3 · Model IDs), where you pick the model IDs to configure: the models served by your endpoint are offered there and are applied only when you explicitly select them. Token Plan API keys have no prefix requirement (unlike Coding Plan keys, which start with `sk-sp-`).
 
 After authentication, use the `/model` command to browse and switch between the models configured for your Token Plan. The model lineup evolves over time, so it is intentionally not listed here; model discovery from the endpoint happens during the `/auth` setup step above (the endpoint's own list is offered there and must be selected explicitly), and `/model` then shows the models configured for your plan.
 
@@ -211,12 +211,12 @@ The simplest way to get started with API Key authentication is to put everything
 
 What each field does:
 
-| Field                        | Description                                                                                                                                     |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `modelProviders`             | Declares which models are available and how to connect to them. Keys (`openai`, `anthropic`, `gemini`) represent the API protocol.              |
-| `env`                        | Stores API keys directly in `settings.json` as a fallback (lowest priority — shell `export` and `.env` files take precedence).                  |
-| `security.auth.selectedType` | Tells Qwen Code which protocol to use on startup (e.g. `openai`, `anthropic`, `gemini`). Without this, you'd need to run `/auth` interactively. |
-| `model.name`                 | The default model to activate when Qwen Code starts. Must match one of the `id` values in your `modelProviders`.                                |
+| Field                        | Description                                                                                                                                      |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `modelProviders`             | Declares which models are available and how to connect to them. Keys (`openai`, `anthropic`, `gemini`) represent the API protocol.               |
+| `env`                        | Stores API keys directly in `settings.json` as a fallback (lowest priority — shell `export` and `.env` files take precedence).                   |
+| `security.auth.selectedType` | Tells Tay Bellow which protocol to use on startup (e.g. `openai`, `anthropic`, `gemini`). Without this, you'd need to run `/auth` interactively. |
+| `model.name`                 | The default model to activate when Tay Bellow starts. Must match one of the `id` values in your `modelProviders`.                                |
 
 After saving the file, just run `qwen` — no interactive `/auth` setup needed.
 
@@ -224,7 +224,7 @@ After saving the file, just run `qwen` — no interactive `/auth` setup needed.
 >
 > The sections below explain each part in more detail. If the quick example above works for you, feel free to skip ahead to [Security notes](#security-notes).
 
-The key concept is **Model Providers** (`modelProviders`): Qwen Code supports multiple API protocols, not just OpenAI. You configure which providers and models are available by editing `~/.qwen/settings.json`, then switch between them at runtime with the `/model` command.
+The key concept is **Model Providers** (`modelProviders`): Tay Bellow supports multiple API protocols, not just OpenAI. You configure which providers and models are available by editing `~/.qwen/settings.json`, then switch between them at runtime with the `/model` command.
 
 #### Supported protocols
 
@@ -297,7 +297,7 @@ For the full `modelProviders` schema and advanced options like `generationConfig
 
 #### Step 2: Set environment variables
 
-Qwen Code reads API keys from environment variables (specified by `envKey` in your model config). There are multiple ways to provide them, listed below from **highest to lowest priority**:
+Tay Bellow reads API keys from environment variables (specified by `envKey` in your model config). There are multiple ways to provide them, listed below from **highest to lowest priority**:
 
 **1. Shell environment / `export` (highest priority)**
 
@@ -320,11 +320,11 @@ export GEMINI_API_KEY="AIza..."
 
 **2. `.env` files**
 
-Qwen Code auto-loads the **first** `.env` file it finds (variables are **not merged** across multiple files). Only variables not already present in `process.env` are loaded.
+Tay Bellow auto-loads the **first** `.env` file it finds (variables are **not merged** across multiple files). Only variables not already present in `process.env` are loaded.
 
 Search order (from the current directory, walking upward toward `/`):
 
-1. `.qwen/.env` (preferred — keeps Qwen Code variables isolated from other tools)
+1. `.qwen/.env` (preferred — keeps Tay Bellow variables isolated from other tools)
 2. `.env`
 
 If nothing is found, it falls back to your **home directory**:
@@ -334,7 +334,7 @@ If nothing is found, it falls back to your **home directory**:
 
 > [!tip]
 >
-> `.qwen/.env` is recommended over `.env` to avoid conflicts with other tools. Some variables (like `DEBUG` and `DEBUG_MODE`) are excluded from project-level `.env` files to avoid interfering with Qwen Code behavior.
+> `.qwen/.env` is recommended over `.env` to avoid conflicts with other tools. Some variables (like `DEBUG` and `DEBUG_MODE`) are excluded from project-level `.env` files to avoid interfering with Tay Bellow behavior.
 
 **3. `settings.json` → `env` field (lowest priority)**
 
@@ -363,7 +363,7 @@ This is the approach used in the [one-file setup example](#recommended-one-file-
 
 #### Step 3: Switch models with `/model`
 
-After launching Qwen Code, use the `/model` command to switch between all configured models. Models are grouped by protocol:
+After launching Tay Bellow, use the `/model` command to switch between all configured models. Models are grouped by protocol:
 
 ```
 /model
@@ -395,7 +395,7 @@ The standalone `qwen auth` CLI command has been removed. Use these replacements 
 | OpenRouter setup                 | Use `/auth`, or set `OPENROUTER_API_KEY` and `OPENAI_BASE_URL=https://openrouter.ai/api/v1`   |
 | Requesty setup                   | Use `/auth`, or set `REQUESTY_API_KEY` and `OPENAI_BASE_URL=https://router.requesty.ai/v1`    |
 | API-key or custom provider setup | Configure `~/.qwen/settings.json`, `.env`, or provider-specific environment variables         |
-| Check current authentication     | Run `/doctor` inside Qwen Code                                                                |
+| Check current authentication     | Run `/doctor` inside Tay Bellow                                                               |
 | OAuth browser flow               | Run `qwen` interactively and use `/auth`; OAuth cannot be configured with env vars alone      |
 
 Legacy invocations such as `qwen auth status` print a removal notice that summarizes these migration paths, including a Token Plan entry with the base URLs for both regions.

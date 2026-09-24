@@ -32,7 +32,7 @@ const formatUpdateInstructions = vi.fn(
         `  ${resolveUpdateCommand(installationInfo.updateCommand, latestVersion)}`,
       ];
     }
-    return ['Manual update required. Please reinstall Qwen Code.'];
+    return ['Manual update required. Please reinstall Tay Bellow.'];
   },
 );
 const performStandaloneUpdate = vi.fn();
@@ -176,7 +176,7 @@ describe('update command', () => {
       'Running via npx, update not applicable.',
     );
     expect(writeStdoutLine).not.toHaveBeenCalledWith(
-      'Manual update required. Please reinstall Qwen Code.',
+      'Manual update required. Please reinstall Tay Bellow.',
     );
   });
 
@@ -232,7 +232,7 @@ describe('update command', () => {
     await updateCommand.handler(updateArgs);
 
     expect(writeStdoutLine).toHaveBeenCalledWith(
-      'Qwen Code 1.0.0 is up to date!',
+      'Tay Bellow 1.0.0 is up to date!',
     );
     expect(getInstallationInfo).not.toHaveBeenCalled();
   });

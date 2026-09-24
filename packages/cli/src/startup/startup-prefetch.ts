@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 Qwen Code
+ * Copyright 2026 Tay Bellow
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -194,7 +194,7 @@ export function startPostRenderPrefetches(
           if (hostUpdateRelaunch === 'false') {
             updateEventEmitter.emit('update-info', {
               message: `${result.info.message}\n${t(
-                'Update Qwen Code on the host, then restart the sandbox.',
+                'Update Tay Bellow on the host, then restart the sandbox.',
               )}`,
             });
             return;

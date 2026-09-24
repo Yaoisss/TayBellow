@@ -447,8 +447,8 @@ function wrapProviderLoadError(error: unknown, authType: AuthType): unknown {
   }
 
   return new Error(
-    `Qwen Code was updated in the background and needs to be restarted.\n` +
-      `Please exit and restart Qwen Code to use the '${authType}' provider.`,
+    `Tay Bellow was updated in the background and needs to be restarted.\n` +
+      `Please exit and restart Tay Bellow to use the '${authType}' provider.`,
     { cause: moduleNotFoundError },
   );
 }

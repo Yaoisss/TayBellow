@@ -237,7 +237,7 @@ action: async (context) => {
 
   if (context.executionMode !== 'interactive') {
     const lines = [
-      `Qwen Code v${systemInfo.cliVersion}`,
+      `Tay Bellow v${systemInfo.cliVersion}`,
       `Model: ${systemInfo.modelVersion}`,
       `Fast Model: ${systemInfo.fastModel ?? 'not set'}`,
       `Auth: ${systemInfo.selectedAuthType}`,
@@ -368,7 +368,7 @@ action: async (context) => {
     return {
       type: 'message',
       messageType: 'info',
-      content: `Qwen Code documentation: ${docsUrl}`,
+      content: `Tay Bellow documentation: ${docsUrl}`,
     };
   }
 

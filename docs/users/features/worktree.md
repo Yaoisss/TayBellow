@@ -40,7 +40,7 @@ The `--worktree` flag cannot be combined with `--acp`/`--experimental-acp` — f
 
 ### Or ask mid-session
 
-Alternatively, ask Qwen Code in plain language to create a worktree from inside an existing session:
+Alternatively, ask Tay Bellow in plain language to create a worktree from inside an existing session:
 
 ```text
 > start a worktree called experiment-a
@@ -169,7 +169,7 @@ The model is **not** automatically `chdir`'d into the worktree — the reminder 
 
 ## Sub-Agent Isolation
 
-The `agent` tool accepts an optional `isolation: "worktree"` parameter. When set, Qwen Code creates an ephemeral worktree at `<repoRoot>/.qwen/worktrees/agent-<7hex>/` before the sub-agent starts, and:
+The `agent` tool accepts an optional `isolation: "worktree"` parameter. When set, Tay Bellow creates an ephemeral worktree at `<repoRoot>/.qwen/worktrees/agent-<7hex>/` before the sub-agent starts, and:
 
 - **No changes** → the worktree is automatically removed when the agent finishes.
 - **Has changes** → the worktree is preserved; its path and branch are appended to the agent's result, e.g.

@@ -1,6 +1,6 @@
 # DingTalk (Dingtalk)
 
-This guide covers setting up a Qwen Code channel on DingTalk (钉钉).
+This guide covers setting up a Tay Bellow channel on DingTalk (钉钉).
 
 ## Prerequisites
 
@@ -93,7 +93,7 @@ question cards time out after 270,000 milliseconds (270 seconds).
 Set `interactiveCards.enabled` to `false` to disable all interactive cards.
 Use `statusCard.enabled` or `questionCard.enabled` to disable one card type,
 and set `questionCard.timeoutMs` to a finite positive number to change how long
-Qwen Code waits for a question-card response. Values above 2,147,483,647
+Tay Bellow waits for a question-card response. Values above 2,147,483,647
 milliseconds (about 24.8 days) are capped at that maximum. Interactive cards
 are configured through `settings.json` or the management API; the Web Shell
 channel editor does not render them, and it preserves the stored object when
@@ -103,7 +103,7 @@ you edit other fields.
 
 `useConnectionManager` defaults to `true`. The connection manager monitors the Stream WebSocket and replaces the DingTalk SDK client when the connection stops responding. You should normally leave it enabled.
 
-Set `"useConnectionManager": false` to disable Qwen Code's connection manager and fall back to the SDK's keepalive and automatic reconnect behavior.
+Set `"useConnectionManager": false` to disable Tay Bellow's connection manager and fall back to the SDK's keepalive and automatic reconnect behavior.
 
 ### Turn Output Mode
 
@@ -201,7 +201,7 @@ By default, the bot requires an @mention in group chats (`requireMention: true`)
 
 Set `"atSender": true` to have the bot @mention the member whose group message triggered its response. It is off by default and only applies to agent replies with a DingTalk staff ID. Replies are sent as DingTalk markdown whether or not they carry a mention; the mention prefix is included in the first message chunk.
 
-Qwen Code preserves the text content supplied by DingTalk when constructing the canonical message; it does not remove a leading mention itself. When DingTalk omits the bot mention from a plain-text callback, a body such as `/clear` or `!command` still begins with that command marker and follows the normal local-command rules. When the callback retains a leading bot mention, as rich-text callbacks can, `@Bot /clear` and `@Bot !command` remain ordinary agent input because the canonical text does not begin with `/` or `!`. `isInAtList` continues to determine whether the group message addressed the bot.
+Tay Bellow preserves the text content supplied by DingTalk when constructing the canonical message; it does not remove a leading mention itself. When DingTalk omits the bot mention from a plain-text callback, a body such as `/clear` or `!command` still begins with that command marker and follows the normal local-command rules. When the callback retains a leading bot mention, as rich-text callbacks can, `@Bot /clear` and `@Bot !command` remain ordinary agent input because the canonical text does not begin with `/` or `!`. `isInAtList` continues to determine whether the group message addressed the bot.
 
 ### Finding a Group's Conversation ID
 

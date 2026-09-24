@@ -240,7 +240,7 @@ export const peersCommand: SlashCommand = {
   kind: CommandKind.BUILT_IN,
   get description() {
     return t(
-      'Review messages held from other Qwen Code sessions (accept | deny), and manage trusted controllers (controllers | revoke)',
+      'Review messages held from other Tay Bellow sessions (accept | deny), and manage trusted controllers (controllers | revoke)',
     );
   },
   action: async (context, args): Promise<SlashCommandActionReturn> => {

@@ -140,7 +140,7 @@ task-oriented guides — what a maintainer types and what happens next — see:
 - [34. review-scan · Scan for PRs with new feedback — A red check is a persistent STATE, not the instant it turned red.](#af-034)
 - [35. review-scan · Scan for PRs with new feedback — Stamp the dispatch-pending marker now, while this scan still owns the decision: an…](#af-035)
 - [36. review-scan · Scan for PRs with new feedback — Fan out: emit EVERY eligible PR up to the per-scan budget. The address matrix bounds…](#af-036)
-- [37. build-cli · Prepare Qwen Code CLI — The repo-root dist/ plus packages/core/dist are shipped:](#af-037)
+- [37. build-cli · Prepare Tay Bellow CLI — The repo-root dist/ plus packages/core/dist are shipped:](#af-037)
 - [38. review-address — Secret-bearing and executes PR code, but every target is live-gated to write+ (internal)…](#af-038)
 - [39. review-address — Simultaneity bound for the whole fleet — the ONLY place different PRs wait on each other…](#af-039)
 - [40. review-address — Serialises every writer of THIS PR's head branch, across workflows.](#af-040)
@@ -1325,9 +1325,9 @@ the remainder (their signals persist).
 
 <a id="af-037"></a>
 
-### 37. build-cli · Prepare Qwen Code CLI — The repo-root dist/ plus packages/core/dist are shipped:
+### 37. build-cli · Prepare Tay Bellow CLI — The repo-root dist/ plus packages/core/dist are shipped:
 
-In `build-cli` · `Prepare Qwen Code CLI`.
+In `build-cli` · `Prepare Tay Bellow CLI`.
 
 ```text
 The repo-root dist/ plus packages/core/dist are shipped:

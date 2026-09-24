@@ -1741,7 +1741,7 @@ export interface SubagentSpanMetadata {
  * Emits OTel GenAI agent name, description, and conversation attributes
  * alongside vendor `qwen-code.subagent.*` keys.
  * The GenAI spec is in Development status; vendor lifecycle and invocation
- * identity attributes remain available for existing Qwen Code queries.
+ * identity attributes remain available for existing Tay Bellow queries.
  */
 export function startSubagentSpan(opts: StartSubagentSpanOptions): Span {
   if (!isTelemetrySdkInitialized()) return NOOP_SPAN;

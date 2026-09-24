@@ -639,9 +639,9 @@ function activeGoalMessage(revision: number): string {
 
 function proposalPromptHeadline(current: GoalRecord | null): string {
   if (current) {
-    return `Replace the ${current.status} Goal and start working toward this objective? Approving sets it like /goal set: after each turn an independent verifier checks the transcript, and Qwen Code keeps working until it is met.`;
+    return `Replace the ${current.status} Goal and start working toward this objective? Approving sets it like /goal set: after each turn an independent verifier checks the transcript, and Tay Bellow keeps working until it is met.`;
   }
-  return 'Set this as the session Goal? Approving sets it like /goal set: after each turn an independent verifier checks the transcript, and Qwen Code keeps working until it is met.';
+  return 'Set this as the session Goal? Approving sets it like /goal set: after each turn an independent verifier checks the transcript, and Tay Bellow keeps working until it is met.';
 }
 
 class ProposeGoalInvocation extends BaseToolInvocation<

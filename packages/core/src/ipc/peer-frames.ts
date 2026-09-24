@@ -5,7 +5,7 @@
  */
 
 /**
- * The wire contract between two Qwen Code sessions on one machine.
+ * The wire contract between two Tay Bellow sessions on one machine.
  *
  * One frame per line of JSON (NDJSON) over a UNIX domain socket. Newline
  * framing is chosen over a length prefix because it stays debuggable: a
@@ -371,7 +371,7 @@ export function buildUserFrame(fields: BuildUserFrameFields): PeerUserFrame {
 export function describeDeliveryStatus(status: PeerDeliveryStatus): string {
   switch (status) {
     case 'held':
-      return 'Your message is held for the recipient user to review before it reaches their Qwen Code session.';
+      return 'Your message is held for the recipient user to review before it reaches their Tay Bellow session.';
     case 'denied':
       return 'The recipient declined your message; it was not delivered.';
     case 'refused':

@@ -201,7 +201,7 @@ describe('checkForUpdates', () => {
     expect(result).toEqual({
       status: 'update',
       info: {
-        message: 'Qwen Code update available! 1.0.0 → 1.1.0',
+        message: 'Tay Bellow update available! 1.0.0 → 1.1.0',
         update: {
           current: '1.0.0',
           latest: '1.1.0',

@@ -155,7 +155,7 @@ export const cdCommand: SlashCommand = {
           pendingTrustedPathConfirmations.set(rawInvocation, realTargetPath);
           return {
             type: 'confirm_action' as const,
-            prompt: `Move this session to ${realTargetPath}? Qwen Code will be able to read, edit, and execute files there. This folder will be trusted for future sessions.`,
+            prompt: `Move this session to ${realTargetPath}? Tay Bellow will be able to read, edit, and execute files there. This folder will be trusted for future sessions.`,
             originalInvocation: {
               raw: rawInvocation,
             },

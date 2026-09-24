@@ -4449,11 +4449,11 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
   ];
 
   // What the guard recognizes a review THIS pipeline composed by: every
-  // composed body carries the "via Qwen Code /review" attribution footer or
+  // composed body carries the "via Tay Bellow /review" attribution footer or
   // the invisible qwen-review-ledger marker — at least one, never neither —
   // and no foreign approval carries either. Matching on that evidence is how
   // the guard stays closed to a producer set no exclusion list can finish.
-  const REVIEW_FOOTER = '_— qwen3.8-max via Qwen Code /review (v0.21.14)_';
+  const REVIEW_FOOTER = '_— qwen3.8-max via Tay Bellow /review (v0.21.14)_';
   const REVIEW_LEDGER = '<!-- qwen-review-ledger {"v":1,"round":2} -->';
   const COMPOSED_REVIEW_BODIES = [
     // Attribution on: the footer and the ledger marker both ride the body.

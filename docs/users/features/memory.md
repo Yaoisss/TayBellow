@@ -1,6 +1,6 @@
 # Memory
 
-Every Qwen Code session starts with a fresh context window. Two mechanisms carry knowledge across sessions so you don't have to re-explain yourself every time:
+Every Tay Bellow session starts with a fresh context window. Two mechanisms carry knowledge across sessions so you don't have to re-explain yourself every time:
 
 - **QWEN.md** — instructions _you_ write once and Qwen reads every session
 - **Auto-memory** — notes Qwen writes itself based on what it learns from you

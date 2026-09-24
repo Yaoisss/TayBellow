@@ -2,7 +2,7 @@ name: 'Desktop Packaging Check'
 
 run-name: "Desktop packaging check (${{ inputs.qwen_code_ref || 'main' }})"
 
-# The desktop app bundles a Qwen Code runtime built from this repository's
+# The desktop app bundles a Tay Bellow runtime built from this repository's
 # `dist/`, so a change anywhere in the CLI can break desktop packaging. Until
 # this workflow existed, nothing exercised that path outside a manual release
 # dispatch: desktop release 0.2.3-preview.0 was the first run to see that a new
@@ -18,7 +18,7 @@ on:
   workflow_dispatch:
     inputs:
       qwen_code_ref:
-        description: 'Qwen Code branch, tag, or commit to bundle.'
+        description: 'Tay Bellow branch, tag, or commit to bundle.'
         required: true
         default: 'main'
         type: 'string'

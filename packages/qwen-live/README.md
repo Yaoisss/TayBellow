@@ -431,7 +431,7 @@ shows microphone/output mute states beneath the main call status.
 | Backend     | Kind        | ACP entry                                   | Notes                               |
 | ----------- | ----------- | ------------------------------------------- | ----------------------------------- |
 | Qoder CLI   | `acp`       | `qodercli --acp`                            | Hidden flag; uses Qoder's own login |
-| Qwen Code   | `acp`       | `qwen --acp`                                | Native ACP mode                     |
+| Tay Bellow  | `acp`       | `qwen --acp`                                | Native ACP mode                     |
 | Gemini CLI  | `acp`       | `gemini --experimental-acp`                 | Official ACP support                |
 | Claude Code | `acp`       | `npx @agentclientprotocol/claude-agent-acp` | Adapter-based                       |
 | Codex       | `acp`       | `npx @agentclientprotocol/codex-acp`        | Adapter-based                       |

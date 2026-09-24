@@ -4428,7 +4428,7 @@ export abstract class ChannelBase {
           (command.name === 'btw' && !this.bridge.btw),
       );
       if (agentCommands.length > 0) {
-        lines.push('', 'Agent commands (forwarded to Qwen Code):');
+        lines.push('', 'Agent commands (forwarded to Tay Bellow):');
         for (const cmd of agentCommands) {
           lines.push(`/${cmd.name} — ${cmd.description}`);
         }

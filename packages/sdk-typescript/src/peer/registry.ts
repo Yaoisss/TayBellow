@@ -12,7 +12,7 @@
  * believed only when the process it names is still the one that wrote it
  * (see `identity.ts`). This module writes and removes this process's own
  * record and reads everyone's — and never deletes anyone else's. Clearing
- * out the records of sessions that died is left to Qwen Code sessions
+ * out the records of sessions that died is left to Tay Bellow sessions
  * themselves: a program that joins the directory has no business removing
  * what other processes wrote.
  */
@@ -77,7 +77,7 @@ export function isValidSessionKind(kind: string): boolean {
 /**
  * The Qwen home this process should use: `explicit`, else `QWEN_HOME`, else
  * `~/.qwen`. A leading `~` is expanded and a relative path is resolved
- * against the working directory, the way Qwen Code itself reads the
+ * against the working directory, the way Tay Bellow itself reads the
  * variable — two programs that disagree on this never see each other.
  */
 export function resolveQwenHome(explicit?: string): string {

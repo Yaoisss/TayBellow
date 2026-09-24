@@ -120,7 +120,7 @@ if [[ -n "${BENCHMARK_INSTANCE_ID:-}" ]]; then
 fi
 "${python_bin}" "${script_root}/make-manifest.py" "${manifest_args[@]}"
 
-# Cache the exact published Qwen Code version and its Node/npm runtime before
+# Cache the exact published Tay Bellow version and its Node/npm runtime before
 # tasks become claimable. This normally takes seconds on a warm DSW cache and
 # does not wait for the benchmark itself.
 qwen_version="${QWEN_REF#v}"

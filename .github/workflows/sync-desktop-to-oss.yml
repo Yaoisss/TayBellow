@@ -1,4 +1,4 @@
-name: 'Sync Qwen Code Desktop to Aliyun OSS'
+name: 'Sync Tay Bellow Desktop to Aliyun OSS'
 
 on:
   workflow_call:
@@ -41,7 +41,7 @@ concurrency:
 
 jobs:
   sync:
-    name: 'Mirror Qwen Code Desktop to Aliyun OSS'
+    name: 'Mirror Tay Bellow Desktop to Aliyun OSS'
     if: "${{ github.repository == 'QwenLM/qwen-code' && (github.ref == 'refs/heads/main' || inputs.follows_release) }}"
     runs-on: 'ubuntu-latest'
     timeout-minutes: 90

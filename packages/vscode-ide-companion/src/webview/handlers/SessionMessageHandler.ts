@@ -737,7 +737,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
       }
       if (!this.agentManager.isConnected) {
         await this.promptAuth(
-          'You need to configure your provider to use Qwen Code.',
+          'You need to configure your provider to use Tay Bellow.',
         );
         return;
       }
@@ -874,7 +874,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
 
       // Show non-modal notification with Configure button
       await this.promptAuth(
-        'You need to configure your provider to use Qwen Code.',
+        'You need to configure your provider to use Tay Bellow.',
       );
       return;
     }
@@ -899,7 +899,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
         const errorMsg = this.getErrorMessage(createErr);
         if (this.shouldPromptAuth(createErr)) {
           await this.promptAuth(
-            'Your session has expired or is invalid. Please configure your provider to continue using Qwen Code.',
+            'Your session has expired or is invalid. Please configure your provider to continue using Tay Bellow.',
           );
           return;
         }
@@ -1067,7 +1067,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
       ) {
         // Show a more user-friendly error message for expired sessions
         await this.promptAuth(
-          'Your session has expired or is invalid. Please configure your provider to continue using Qwen Code.',
+          'Your session has expired or is invalid. Please configure your provider to continue using Tay Bellow.',
         );
 
         // Send a specific error to the webview for better UI handling

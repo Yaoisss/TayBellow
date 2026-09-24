@@ -43,7 +43,7 @@ the directory is moved or removed, the client can only report that the current
 working directory no longer exists.
 
 Live Voice already owns a secure projectless storage root at
-`~/Documents/Qwen Code/Conversations`, publishes one daemon-owned runtime for
+`~/Documents/Tay Bellow/Conversations`, publishes one daemon-owned runtime for
 that root, and relocates each Live session into a deterministic private child
 directory. Standalone sessions generalize that substrate into a normal text-chat
 product surface while preserving Live-specific behavior.
@@ -55,7 +55,7 @@ product surface while preserving Live-specific behavior.
 - Make top-level **New Chat** create a standalone session while keeping
   project-local **New Chat** project-bound.
 - Give every standalone session a durable private working directory with normal
-  Qwen Code tools and approvals.
+  Tay Bellow tools and approvals.
 - Support creation, listing, exact lookup, load, resume, rename, export, archive,
   unarchive, repair, and deletion across daemon restarts.
 - Keep standalone, workspace, and Live contexts explicit throughout the SDK and
@@ -285,7 +285,7 @@ The existing conversation workspace creates a deterministic direct child for
 each session:
 
 ```text
-~/Documents/Qwen Code/Conversations/conversation-<sha256(session-id)>
+~/Documents/Tay Bellow/Conversations/conversation-<sha256(session-id)>
 ```
 
 The root and child must be real directories owned by the daemon user. On POSIX,

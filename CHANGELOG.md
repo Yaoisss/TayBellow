@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to [Qwen Code](https://github.com/QwenLM/qwen-code) are
+All notable changes to [Tay Bellow](https://github.com/QwenLM/qwen-code) are
 documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
@@ -524,7 +524,7 @@ _See the complete change list below._
 #### Features
 
 - Lets approved Web Shell Goal proposals start automatically after their owning turn finishes, removing the need to copy a manual /goal set command. ([#11360](https://github.com/QwenLM/qwen-code/pull/11360)) by @qqqys
-- feat(sdk): add a peer endpoint so a program outside Qwen Code can join cross-session messaging ([#11560](https://github.com/QwenLM/qwen-code/pull/11560)) by @qqqys
+- feat(sdk): add a peer endpoint so a program outside Tay Bellow can join cross-session messaging ([#11560](https://github.com/QwenLM/qwen-code/pull/11560)) by @qqqys
 - Adds optional Goal limits via model.goalMaxTurns and model.goalMaxActiveMinutes, and rebases active Goal time on restore. ([#11457](https://github.com/QwenLM/qwen-code/pull/11457)) by @qqqys
 - Web Shell scheduled runs can now route to a configured model and session group when New session each run is selected. ([#11396](https://github.com/QwenLM/qwen-code/pull/11396)) by @qqqys
 - Browser notifications in Web Shell now identify the session, show prompt and reply excerpts, and open the target session when clicked. ([#11447](https://github.com/QwenLM/qwen-code/pull/11447)) by @doudouOUC
@@ -752,7 +752,7 @@ No known breaking changes.
 
 #### Documentation
 
-- docs: highlight Qwen Code interfaces in the README ([#11491](https://github.com/QwenLM/qwen-code/pull/11491)) by @pomelo-nwu
+- docs: highlight Tay Bellow interfaces in the README ([#11491](https://github.com/QwenLM/qwen-code/pull/11491)) by @pomelo-nwu
 - docs(daemon): add a REST integration entry point, guarded against the route surface ([#11477](https://github.com/QwenLM/qwen-code/pull/11477)) by @yiliang114
 
 #### Internal Changes
@@ -1600,7 +1600,7 @@ _See the complete change list below._
 - The CLI now gracefully handles unreadable prompt files by logging a warning and using the default rewrite prompt instead of crashing. ([#9753](https://github.com/QwenLM/qwen-code/pull/9753)) by @yiliang114
 - Goal ownership now hydrates independently from session metadata, allowing Slash commands to load faster without waiting for slower metadata requests. ([#9977](https://github.com/QwenLM/qwen-code/pull/9977)) by @ytahdn
 - The /goal resume command now correctly resumes evidence-limited Goals by resetting the evidence cursor while preserving objective and revision data. ([#9840](https://github.com/QwenLM/qwen-code/pull/9840)) by @qqqys
-- Restricts Git credential configuration to scoped operations initiated by Qwen Code, ensuring credentials remain isolated from URLs, logs, and environment variables. ([#9870](https://github.com/QwenLM/qwen-code/pull/9870)) by @callmeYe
+- Restricts Git credential configuration to scoped operations initiated by Tay Bellow, ensuring credentials remain isolated from URLs, logs, and environment variables. ([#9870](https://github.com/QwenLM/qwen-code/pull/9870)) by @callmeYe
 - Ensures branched sessions inherit the source session's display name with numeric suffixes instead of random UUIDs, improving session recognition and consistency. ([#9764](https://github.com/QwenLM/qwen-code/pull/9764)) by @water-in-stone
 - Fixes telemetry aggregation errors during failed session swaps by using explicit transactions to prevent inflated usage records from replayed history. ([#9844](https://github.com/QwenLM/qwen-code/pull/9844)) by @yiliang114
 - Corrects QQ Bot cron message handling by tracking active prompts in a dedicated set instead of relying on unreliable stream state indicators. ([#9971](https://github.com/QwenLM/qwen-code/pull/9971)) by @yiliang114
@@ -1995,7 +1995,7 @@ Addresses miscellaneous bugs including session recovery races, review body trimm
 - Results: 380 resolved, 113 unresolved, 5 execution errors, 2 infrastructure failures
 - Score: **77.08%**
 - Score denominator: valid grader results (380 + 113 = 493)
-- Qwen Code: `v0.22.0` (`1c3a385d9bc8`); model `qwen3.7-plus`
+- Tay Bellow: `v0.22.0` (`1c3a385d9bc8`); model `qwen3.7-plus`
 - Run: `pool-b3c14a381dad4f8f`; dispatch workflow: https://github.com/QwenLM/qwen-code/actions/runs/32580293448
 - Case trajectories: `swe-bench-verified-v0.22.0-trajectories.tar.gz` (498 cases)
 <!-- qwen-code-dsw-swe-verified:end -->
@@ -2008,7 +2008,7 @@ Addresses miscellaneous bugs including session recovery races, review body trimm
 - Results: 43 resolved, 29 unresolved, 15 execution errors, 2 infrastructure failures
 - Score: not published (non-scoreable or quarantined run)
 - Score denominator: valid grader results (43 + 29 = 72)
-- Qwen Code: `v0.22.0` (`1c3a385d9bc8`); model `qwen3.7-plus`
+- Tay Bellow: `v0.22.0` (`1c3a385d9bc8`); model `qwen3.7-plus`
 - Run: `pool-4564557c6b714d59`; dispatch workflow: https://github.com/QwenLM/qwen-code/actions/runs/32580293448
 - Case trajectories: `terminal-bench-2.0-v0.22.0-trajectories.tar.gz` (79 cases)
 <!-- qwen-code-dsw-terminal-bench-2.0:end -->
@@ -3557,7 +3557,7 @@ No known breaking changes.
 #### Documentation
 
 - docs: complete TUI keyboard shortcut reference ([#8327](https://github.com/QwenLM/qwen-code/pull/8327)) by @DragonnZhang
-- Updated the architecture overview to reflect Qwen Code as a multi-surface monorepo, detailing CLI, ACP, and daemon execution models. ([#8325](https://github.com/QwenLM/qwen-code/pull/8325)) by @DragonnZhang
+- Updated the architecture overview to reflect Tay Bellow as a multi-surface monorepo, detailing CLI, ACP, and daemon execution models. ([#8325](https://github.com/QwenLM/qwen-code/pull/8325)) by @DragonnZhang
 - Documentation now explains how to select models for chat compression and image generation, including defaults and provider requirements. ([#8348](https://github.com/QwenLM/qwen-code/pull/8348)) by @DragonnZhang
 - Update agent documentation to include the drive and mock-provider commands and clarify how verification tests should be structured. ([#8369](https://github.com/QwenLM/qwen-code/pull/8369)) by @wenshao
 
@@ -3622,7 +3622,7 @@ No known breaking changes.
 - The /review command now validates Test Plan assertions in PR descriptions against the actual code changes and workspace state. ([#8215](https://github.com/QwenLM/qwen-code/pull/8215)) by @wenshao
 - Updated verification rules to explicitly check acceptance criteria and distinguish between empty results and unmeasured states. ([#8295](https://github.com/QwenLM/qwen-code/pull/8295)) by @wenshao
 - Added the foundational runtime supervisor for Agent View, enabling local session management and terminal stream bridging. ([#7799](https://github.com/QwenLM/qwen-code/pull/7799)) by @ZijianZhang989
-- Review output footers now include the Qwen Code CLI version to help trace findings to specific releases. ([#8294](https://github.com/QwenLM/qwen-code/pull/8294)) by @wenshao
+- Review output footers now include the Tay Bellow CLI version to help trace findings to specific releases. ([#8294](https://github.com/QwenLM/qwen-code/pull/8294)) by @wenshao
 - Plain-text messages sent during an active turn now enter the running turn by default with visible queue management. ([#8229](https://github.com/QwenLM/qwen-code/pull/8229)) by @ytahdn
 - Added a Session Workflow view that visualizes plan execution, agent calls, and transcripts as a dependency graph. ([#7580](https://github.com/QwenLM/qwen-code/pull/7580)) by @yiliang114
 - Added the --compaction flag to the /model command to configure a dedicated model for chat compression. ([#7818](https://github.com/QwenLM/qwen-code/pull/7818)) by @Aleks-0
@@ -3836,7 +3836,7 @@ No known breaking changes.
 #### Internal Changes
 
 - The asyncGenerator canUseTool test now validates tool-call arguments instead of strict file content equality to stabilize assertions against model wording variations. ([#7939](https://github.com/QwenLM/qwen-code/pull/7939)) by @qwen-code-dev-bot
-- Adds an isolated CI pipeline to automatically run SWE-bench benchmarks on stable Qwen Code releases. ([#7656](https://github.com/QwenLM/qwen-code/pull/7656)) by @DennisYu07
+- Adds an isolated CI pipeline to automatically run SWE-bench benchmarks on stable Tay Bellow releases. ([#7656](https://github.com/QwenLM/qwen-code/pull/7656)) by @DennisYu07
 - Migrated flaky end-to-end tests to a deterministic fake server to eliminate failures caused by model output variance and latency. ([#7934](https://github.com/QwenLM/qwen-code/pull/7934)) by @yiliang114
 - Expanded regression tests now verify session history pagination behavior, including active record tracking and edge cases for page-size parsing. ([#7907](https://github.com/QwenLM/qwen-code/pull/7907)) by @PratikWayase
 - Opt-in daemon benchmarks now measure immediate prompt dispatch stages, including HTTP acceptance, message echo, and queue-wait durations. ([#7994](https://github.com/QwenLM/qwen-code/pull/7994)) by @doudouOUC
@@ -4466,7 +4466,7 @@ No known breaking changes.
 - feat(agents): support per-model sub-agent concurrency limits ([#6984](https://github.com/QwenLM/qwen-code/pull/6984)) by @qwen-code-dev-bot
 - feat(cli): add daemon Todo stop guard ([#6945](https://github.com/QwenLM/qwen-code/pull/6945)) by @doudouOUC
 - feat(cli): show active path in compact tool summaries ([#7043](https://github.com/QwenLM/qwen-code/pull/7043)) by @zjunothing
-- feat(vscode): route logs to the Qwen Code Companion output channel ([#7121](https://github.com/QwenLM/qwen-code/pull/7121)) by @yiliang114
+- feat(vscode): route logs to the Tay Bellow Companion output channel ([#7121](https://github.com/QwenLM/qwen-code/pull/7121)) by @yiliang114
 - feat(core): overhaul web_fetch — content fidelity, binary handling, security, and resilience ([#7146](https://github.com/QwenLM/qwen-code/pull/7146)) by @tanzhenxin
 - feat(channels): expose workspace-scoped observed contacts ([#7109](https://github.com/QwenLM/qwen-code/pull/7109)) by @BenGuanRan
 - feat(web-shell): persist the split view across refresh, per tab ([#7136](https://github.com/QwenLM/qwen-code/pull/7136)) by @wenshao
@@ -5935,7 +5935,7 @@ No known breaking changes.
 - fix stale defaults, CLI syntax, and tool naming drift ([#5158](https://github.com/QwenLM/qwen-code/pull/5158))
 - daemon: Refresh daemon docs in English ([#5144](https://github.com/QwenLM/qwen-code/pull/5144))
 - design: DaemonTransport abstraction — pluggable transport for SDK ([#5026](https://github.com/QwenLM/qwen-code/pull/5026))
-- add Qwen Code Desktop release link ([#5152](https://github.com/QwenLM/qwen-code/pull/5152))
+- add Tay Bellow Desktop release link ([#5152](https://github.com/QwenLM/qwen-code/pull/5152))
 - fix MCP token path, daemon UI event count, add Feishu channel ([#5172](https://github.com/QwenLM/qwen-code/pull/5172))
 - channels: add screenshots to Feishu setup guide ([#4983](https://github.com/QwenLM/qwen-code/pull/4983))
 - fix missing spaces before parentheses in README ([#4796](https://github.com/QwenLM/qwen-code/pull/4796))
@@ -6694,7 +6694,7 @@ No known breaking changes.
 - chore: remove legacy Gemini workflows ([#3725](https://github.com/QwenLM/qwen-code/pull/3725))
 - Add background agent resume and continuation ([#3739](https://github.com/QwenLM/qwen-code/pull/3739))
 - Feat/stats model cost estimation rebase ([#3780](https://github.com/QwenLM/qwen-code/pull/3780))
-- ci: add Qwen Code issue follow-up bot workflow ([#3854](https://github.com/QwenLM/qwen-code/pull/3854))
+- ci: add Tay Bellow issue follow-up bot workflow ([#3854](https://github.com/QwenLM/qwen-code/pull/3854))
 
 ## [0.15.6](https://github.com/QwenLM/qwen-code/releases/tag/v0.15.6) - 2026-04-30
 
@@ -7227,7 +7227,7 @@ No known breaking changes.
 ### Added
 
 - hooks: Add comprehensive hook execution telemetry ([#2421](https://github.com/QwenLM/qwen-code/pull/2421))
-- hooks ui: refactor ui for Qwen Code hooks ([#2602](https://github.com/QwenLM/qwen-code/pull/2602))
+- hooks ui: refactor ui for Tay Bellow hooks ([#2602](https://github.com/QwenLM/qwen-code/pull/2602))
 - human-readable permission labels, deny rule feedback, and multi-dir search improvements ([#2637](https://github.com/QwenLM/qwen-code/pull/2637))
 - auth: implement Alibaba Cloud Standard API Key support ([#2668](https://github.com/QwenLM/qwen-code/pull/2668))
 
@@ -7269,7 +7269,7 @@ No known breaking changes.
 - vscode-ide-companion: add Tab key fill-only behavior for completions ([#2431](https://github.com/QwenLM/qwen-code/pull/2431))
 - add /context command to display context window token usage breakdown ([#1835](https://github.com/QwenLM/qwen-code/pull/1835))
 - support skills in .agents directory and other provider directories ([#2202](https://github.com/QwenLM/qwen-code/pull/2202))
-- add `auth` CLI command and Qwen Code Claw skill ([#2440](https://github.com/QwenLM/qwen-code/pull/2440))
+- add `auth` CLI command and Tay Bellow Claw skill ([#2440](https://github.com/QwenLM/qwen-code/pull/2440))
 - export: add metadata and statistics tracking ([#2328](https://github.com/QwenLM/qwen-code/pull/2328))
 - hooks: Implement 10 core event hooks for session lifecycle and tool execution ([#2203](https://github.com/QwenLM/qwen-code/pull/2203))
 - support permission ([#2283](https://github.com/QwenLM/qwen-code/pull/2283))
@@ -7751,7 +7751,7 @@ No known breaking changes.
 - Add parentToolCallId and subagentType for ACP subagent tracking ([#1620](https://github.com/QwenLM/qwen-code/pull/1620))
 - Fix Claude plugin resource collection to respect marketplace config ([#1639](https://github.com/QwenLM/qwen-code/pull/1639))
 - Support model selection through ACP in vscode ide companion ([#1582](https://github.com/QwenLM/qwen-code/pull/1582))
-- Add Zed extension for Qwen Code agent server ([#1630](https://github.com/QwenLM/qwen-code/pull/1630))
+- Add Zed extension for Tay Bellow agent server ([#1630](https://github.com/QwenLM/qwen-code/pull/1630))
 - Add experimental LSP support for code intelligence ([#1401](https://github.com/QwenLM/qwen-code/pull/1401))
 - chore: bump version to 0.9.0 ([#1661](https://github.com/QwenLM/qwen-code/pull/1661))
 - Add contextWindowSize Configuration Support ([#1539](https://github.com/QwenLM/qwen-code/pull/1539))
@@ -7946,7 +7946,7 @@ _See [GitHub release](https://github.com/QwenLM/qwen-code/releases/tag/v0.6.2) f
 
 ### Added
 
-- add a link to Gemini CLI Desktop for Qwen Code users who prefer desktop UIs ([#286](https://github.com/QwenLM/qwen-code/pull/286))
+- add a link to Gemini CLI Desktop for Tay Bellow users who prefer desktop UIs ([#286](https://github.com/QwenLM/qwen-code/pull/286))
 - add Anthropic provider, normalize auth/env config, and centralize logging ([#1331](https://github.com/QwenLM/qwen-code/pull/1331))
 - vscode-ide-companion: in/output part in the bash toolcall can be clicked to open a temporary file ([#1345](https://github.com/QwenLM/qwen-code/pull/1345))
 - support /compress and /summary commands for non-interactive & ACP ([#1322](https://github.com/QwenLM/qwen-code/pull/1322))
@@ -8237,7 +8237,7 @@ _See [GitHub release](https://github.com/QwenLM/qwen-code/releases/tag/v0.6.2) f
 ### Fixed
 
 - Use runtime session ID in /bug command ([#927](https://github.com/QwenLM/qwen-code/pull/927))
-- update tool name from Gemini to Qwen Code in ToolsList component… ([#933](https://github.com/QwenLM/qwen-code/pull/933))
+- update tool name from Gemini to Tay Bellow in ToolsList component… ([#933](https://github.com/QwenLM/qwen-code/pull/933))
 - settings: add version field to prevent partial migration corruption ([#937](https://github.com/QwenLM/qwen-code/pull/937))
 
 ### Other
@@ -8245,7 +8245,7 @@ _See [GitHub release](https://github.com/QwenLM/qwen-code/releases/tag/v0.6.2) f
 - chore: pump version to v0.1.2 ([#907](https://github.com/QwenLM/qwen-code/pull/907))
 - fixbug: fix qwen help des ([#915](https://github.com/QwenLM/qwen-code/pull/915))
 - 🔍 Refactor and Enhance Ripgrep Tool ([#930](https://github.com/QwenLM/qwen-code/pull/930))
-- change Launch Gemini CLI to Qwen Code CLI in help information ([#929](https://github.com/QwenLM/qwen-code/pull/929))
+- change Launch Gemini CLI to Tay Bellow CLI in help information ([#929](https://github.com/QwenLM/qwen-code/pull/929))
 - Fix Chat Compression System Instruction and Empty Summary Edge Case ([#935](https://github.com/QwenLM/qwen-code/pull/935))
 
 ## [0.1.1](https://github.com/QwenLM/qwen-code/releases/tag/v0.1.1) - 2025-10-29
@@ -8350,7 +8350,7 @@ _See [GitHub release](https://github.com/QwenLM/qwen-code/releases/tag/v0.6.2) f
 
 - Update the multilingual documentation links in the README ([#536](https://github.com/QwenLM/qwen-code/pull/536))
 - Add Welcome Back Dialog, Project Summary, and Enhanced Quit Options ([#553](https://github.com/QwenLM/qwen-code/pull/553))
-- Replace all Gemini CLI brand references with Qwen Code. ([#588](https://github.com/QwenLM/qwen-code/pull/588))
+- Replace all Gemini CLI brand references with Tay Bellow. ([#588](https://github.com/QwenLM/qwen-code/pull/588))
 
 ### Changed
 
@@ -8435,7 +8435,7 @@ _See [GitHub release](https://github.com/QwenLM/qwen-code/releases/tag/v0.6.2) f
 - doc: Add links to translated README versions ([#171](https://github.com/QwenLM/qwen-code/pull/171))
 - Sync upstream gemini-cli v0.1.19 ([#364](https://github.com/QwenLM/qwen-code/pull/364))
 - 🚀 Enhance Release Notes Generation with Previous Tag Detection ([#394](https://github.com/QwenLM/qwen-code/pull/394))
-- Update Documentation Branding from Gemini CLI to Qwen Code ([#391](https://github.com/QwenLM/qwen-code/pull/391))
+- Update Documentation Branding from Gemini CLI to Tay Bellow ([#391](https://github.com/QwenLM/qwen-code/pull/391))
 - Fix prompt re-submission ([#392](https://github.com/QwenLM/qwen-code/pull/392))
 - Fix GitHub Workflows for Issue Triage ([#396](https://github.com/QwenLM/qwen-code/pull/396))
 - Limit grep result ([#407](https://github.com/QwenLM/qwen-code/pull/407))

@@ -195,7 +195,7 @@ function buildBanner(config: Config, settings: LoadedSettings, width: number) {
     >
       <box flexDirection="row">
         <text fg={C.accent} attributes={1}>
-          {custom.title ?? '>_ Qwen Code'}
+          {custom.title ?? '>_ Tay Bellow'}
         </text>
         <text fg={C.dim}>{` (${versionLabel})`}</text>
       </box>

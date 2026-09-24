@@ -34,7 +34,7 @@ describe('original built-in registry', () => {
   it('help output matches the original dialog content', async () => {
     const commands = await loadInteractiveCommands(null);
     const text = formatHelpText(commands);
-    expect(text).toContain('Qwen Code');
+    expect(text).toContain('Tay Bellow');
     expect(text).toContain('Shortcuts');
     expect(text).toContain('↑/↓');
     expect(text).toContain('Browse built-in commands:');

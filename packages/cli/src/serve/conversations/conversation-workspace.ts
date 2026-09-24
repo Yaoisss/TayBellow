@@ -119,7 +119,7 @@ function liveIdentityError(
 }
 
 export function getConversationRootPath(homeDir: string = homedir()): string {
-  return resolve(homeDir, 'Documents', 'Qwen Code', 'Conversations');
+  return resolve(homeDir, 'Documents', 'Tay Bellow', 'Conversations');
 }
 
 export async function revalidateConversationRoot(

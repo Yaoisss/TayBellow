@@ -63,7 +63,7 @@ impl DesktopRuntime {
             .env("QWEN_SERVER_TOKEN", &token);
 
         let mut child = spawn_runtime_group(&mut command)
-            .map_err(|error| format!("Failed to start bundled Qwen Code runtime: {error}"))?;
+            .map_err(|error| format!("Failed to start bundled Tay Bellow runtime: {error}"))?;
         let Some(stdout) = child.inner().stdout.take() else {
             stop_runtime_child(&mut child);
             return Err("Bundled runtime stdout was not captured.".to_string());
@@ -176,7 +176,7 @@ impl RuntimeLayout {
         };
         let (node, entry) = layout_from_root(root);
         require_file(&node, "Node.js runtime")?;
-        require_file(&entry, "Qwen Code runtime entry")?;
+        require_file(&entry, "Tay Bellow runtime entry")?;
         Ok(Self { node, entry })
     }
 }
@@ -647,7 +647,7 @@ mod tests {
     #[cfg(windows)]
     #[test]
     fn runtime_layout_strips_windows_verbatim_prefix() {
-        let root = PathBuf::from(r"\\?\C:\Users\user\AppData\Local\Qwen Code Desktop")
+        let root = PathBuf::from(r"\\?\C:\Users\user\AppData\Local\Tay Bellow Desktop")
             .join("runtime")
             .join("qwen-code");
         let (node, entry) = layout_from_root(root);

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 Qwen Code
+ * Copyright 2026 Tay Bellow
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -55,7 +55,7 @@ export async function updateBeforeRelaunch(
       if (!installationInfo.updateCommand) {
         writeStderrLine(
           installationInfo.updateMessage ??
-            t('Manual update required. Please reinstall Qwen Code.'),
+            t('Manual update required. Please reinstall Tay Bellow.'),
         );
         return relaunchOnFailure;
       }

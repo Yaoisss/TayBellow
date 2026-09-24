@@ -51,7 +51,7 @@ Bearer token 仍保存在当前标签页的 `sessionStorage` 中，但存储键�
 - 认证、Origin、Host 和网络失败继续在现有连接页中明确展示；一个有效的远程目标失败时，不会回退到本地 runtime。
 - 即使 URL 指向攻击者控制的 daemon，也不会把其他 daemon 的 token 发送给它。
 - 通过 `?daemon=` 选择的 loopback URL 可能是 SSH 隧道，不能据此认为 daemon host 与浏览器 host 是同一台机器。
-- 接受 HTTP 和 HTTPS 目标；可信网络之外推荐 HTTPS。如需 SSH 传输，由用户在 Qwen Code 之外建立 loopback 隧道。
+- 接受 HTTP 和 HTTPS 目标；可信网络之外推荐 HTTPS。如需 SSH 传输，由用户在 Tay Bellow 之外建立 loopback 隧道。
 
 ## 验证
 

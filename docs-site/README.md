@@ -1,6 +1,6 @@
-# Qwen Code Docs Site
+# Tay Bellow Docs Site
 
-A documentation website for Qwen Code built with [Next.js](https://nextjs.org/) and [Nextra](https://nextra.site/).
+A documentation website for Tay Bellow built with [Next.js](https://nextjs.org/) and [Nextra](https://nextra.site/).
 
 ## Getting Started
 

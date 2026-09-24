@@ -178,7 +178,7 @@ fn main() {
     let app = match builder.build(tauri::generate_context!()) {
         Ok(app) => app,
         Err(error) => {
-            eprintln!("Failed to initialize Qwen Code desktop: {error}");
+            eprintln!("Failed to initialize Tay Bellow desktop: {error}");
             return;
         }
     };
@@ -275,7 +275,7 @@ fn setup_app(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         }
         stop_runtime(&runtime_exit_handle);
         *lock(&state.origin) = None;
-        let message = format!("Qwen Code stopped: {}", stopped.status);
+        let message = format!("Tay Bellow stopped: {}", stopped.status);
         *lock(&state.last_error) = Some(message.clone());
         let _ = navigate_to_bootstrap(&runtime_exit_handle);
         let _ = runtime_exit_handle.emit("runtime-failed", message);
@@ -287,7 +287,7 @@ fn setup_app(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         "main",
         WebviewUrl::App("index.html".into()),
     )
-        .title("Qwen Code")
+        .title("Tay Bellow")
         .inner_size(width, height)
         .min_inner_size(900.0, 600.0)
         .initialization_script(ZOOM_HOTKEY_SCRIPT)
@@ -430,7 +430,7 @@ async fn choose_workspace(
         move || {
             app.dialog()
                 .file()
-                .set_title("Choose a Qwen Code workspace")
+                .set_title("Choose a Tay Bellow workspace")
                 .blocking_pick_folder()
         }
     })
@@ -488,9 +488,9 @@ async fn install_update(webview: WebviewWindow, app: AppHandle) -> Result<(), St
         move || {
             app.dialog()
                 .message(format!(
-                    "Install Qwen Code Desktop {version} and restart now?"
+                    "Install Tay Bellow Desktop {version} and restart now?"
                 ))
-                .title("Qwen Code update")
+                .title("Tay Bellow update")
                 .kind(MessageDialogKind::Info)
                 .buttons(MessageDialogButtons::OkCancelCustom(
                     "Install and restart".to_string(),
@@ -839,9 +839,9 @@ fn check_updates_silently(app: AppHandle) {
             move || {
                 app.dialog()
                     .message(format!(
-                        "Qwen Code Desktop {version} is available. Install and restart now?"
+                        "Tay Bellow Desktop {version} is available. Install and restart now?"
                     ))
-                    .title("Qwen Code update")
+                    .title("Tay Bellow update")
                     .kind(MessageDialogKind::Info)
                     .buttons(MessageDialogButtons::OkCancelCustom(
                         "Install and restart".to_string(),
@@ -861,9 +861,9 @@ fn check_updates_silently(app: AppHandle) {
                 move || {
                     app.dialog()
                         .message(format!(
-                            "Qwen Code Desktop {version} could not be installed.\n\n{error}\n\nSave your work before quitting. Reinstall Qwen Code if it does not reopen."
+                            "Tay Bellow Desktop {version} could not be installed.\n\n{error}\n\nSave your work before quitting. Reinstall Tay Bellow if it does not reopen."
                         ))
-                        .title("Qwen Code update failed")
+                        .title("Tay Bellow update failed")
                         .kind(MessageDialogKind::Error)
                         .blocking_show()
                 }

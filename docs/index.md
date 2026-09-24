@@ -1,12 +1,12 @@
-# Qwen Code Documentation
+# Tay Bellow Documentation
 
-Welcome to the Qwen Code documentation. Qwen Code is an agentic coding tool that lives in your terminal and helps you turn ideas into code faster than ever before.
+Welcome to the Tay Bellow documentation. Tay Bellow is an agentic coding tool that lives in your terminal and helps you turn ideas into code faster than ever before.
 
 ## Documentation Sections
 
 ### [User Guide](./users/overview)
 
-Learn how to use Qwen Code as an end user. This section covers:
+Learn how to use Tay Bellow as an end user. This section covers:
 
 - Basic installation and setup
 - Common usage patterns
@@ -16,7 +16,7 @@ Learn how to use Qwen Code as an end user. This section covers:
 
 ### [Developer Guide](./developers/architecture)
 
-Learn how to contribute to and develop Qwen Code. This section covers:
+Learn how to contribute to and develop Tay Bellow. This section covers:
 
 - Architecture overview
 - Contributing guidelines

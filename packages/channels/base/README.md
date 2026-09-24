@@ -1,6 +1,6 @@
 # @qwen-code/channel-base
 
-Base infrastructure for building Qwen Code channel adapters. Provides the abstract base class, access control, session routing, and the adapter-facing bridge interface used to communicate with the agent.
+Base infrastructure for building Tay Bellow channel adapters. Provides the abstract base class, access control, session routing, and the adapter-facing bridge interface used to communicate with the agent.
 
 If you're building a channel plugin, this is your only dependency.
 

@@ -1,6 +1,6 @@
 # @qwen-code/web-shell
 
-Qwen Code Web Shell 是面向浏览器的 daemon 会话终端 UI，可以作为 React
+Tay Bellow Web Shell 是面向浏览器的 daemon 会话终端 UI，可以作为 React
 组件嵌入到其他项目中。
 
 ## 开发网页预览
@@ -51,7 +51,7 @@ daemon 自身。页面的防嵌入策略可能要求使用外部打开。远程�
 - React：`^18.0.0 || ^19.0.0`
 - React DOM：`^18.0.0 || ^19.0.0`
 - `@qwen-code/sdk`：`>=0.1.8`
-- 浏览器环境需要能访问 Qwen Code daemon serve 的 HTTP 接口。
+- 浏览器环境需要能访问 Tay Bellow daemon serve 的 HTTP 接口。
 
 组件包会自动注入自身的 CSS（包括 Tailwind 编译产物），接入方不需要配置
 Tailwind 或额外引入全局 CSS。
@@ -80,7 +80,7 @@ Tailwind 或额外引入全局 CSS。
 
 页面在后台或窗口失焦时，当前聊天及 Split View 中仍挂载的聊天在回合结束或失败后
 可以发送系统通知。取消回合、初次加载历史和前台已处理的回合保持静默。通知显示会话标题（最多 60 个 Unicode 码点）、回合状态，以及带“提问 / 回复”标签的本轮提问（最多 80 个码点）和回复（最多 120 个码点）纯文本摘录。
-标题显示 QwenCode · 会话名，尚未生成时使用本轮问题首行，两者均缺失时显示 QwenCode；业务文案不额外添加地址。通知携带 Qwen Code 图标，实际显示位置由浏览器和操作系统决定，不能替换 macOS 上 Chrome 自身的标志。摘要直接截取文本，不额外调用模型；提问或回复缺失时省略对应行，两者均缺失时只显示状态。失败时可显示本轮提问，不展示错误详情或部分回复。系统可能进一步截短通知正文。
+标题显示 QwenCode · 会话名，尚未生成时使用本轮问题首行，两者均缺失时显示 QwenCode；业务文案不额外添加地址。通知携带 Tay Bellow 图标，实际显示位置由浏览器和操作系统决定，不能替换 macOS 上 Chrome 自身的标志。摘要直接截取文本，不额外调用模型；提问或回复缺失时省略对应行，两者均缺失时只显示状态。失败时可显示本轮提问，不展示错误详情或部分回复。系统可能进一步截短通知正文。
 通知内容可能显示在系统通知中心或锁屏上，遵循系统的预览设置；点击通知尝试聚焦原窗口并在主聊天中打开对应会话，退出设置页或分屏；已在目标会话时不会重新加载。
 
 需要支持 Notifications API 的桌面浏览器以及 HTTPS 或可信的 localhost 环境。
@@ -506,7 +506,7 @@ daemon 不净化它读到的文件。该配置只从 User / System / SystemDefau
 
 品牌名会替换 Sidebar 品牌行、Sidebar 底部版本 tooltip、欢迎页标题、About 面板的版本行
 标签，以及独立部署下的 `document.title`；Logo 会替换 Sidebar 标记与 favicon。它不会替换
-正文文案：本地化字符串里仍有若干处提到 Qwen Code，auth provider 标签也仍是 `Qwen OAuth`
+正文文案：本地化字符串里仍有若干处提到 Tay Bellow，auth provider 标签也仍是 `Qwen OAuth`
 （那是身份提供方的名字，不是产品名）。
 
 嵌入宿主传 `brand` 时整体接管名称与 Logo。`logo` 可以是任意 React 节点，因为宿主拥有自己
@@ -522,7 +522,7 @@ daemon 不净化它读到的文件。该配置只从 User / System / SystemDefau
 <WebShellWithProviders
   brand={{ name: 'QiuQiu Code', logo: <MyLogo /> }}
   onBrandResolved={(brand) => {
-    document.title = `${brand.name || 'Qwen Code'} — My Host`;
+    document.title = `${brand.name || 'Tay Bellow'} — My Host`;
   }}
 />
 ```
@@ -595,7 +595,7 @@ daemon 不净化它读到的文件。该配置只从 User / System / SystemDefau
 
 `WebShell` 已内置 `markdown-chart` renderer 和 ECharts 运行时。宿主只需将
 [`markdown-chart` skill](https://github.com/datafe/markdown-chart/tree/main/skills/markdown-chart)
-安装到 Qwen Code 的项目级或用户级 skills 目录；例如项目级安装结果为：
+安装到 Tay Bellow 的项目级或用户级 skills 目录；例如项目级安装结果为：
 
 ```text
 .qwen/skills/markdown-chart/SKILL.md
@@ -685,7 +685,7 @@ Chart/Data 控件、无数据提示和错误提示默认跟随 WebShell 语言�
 | `/compress`      | ACP 透传            | 通过摘要替换来压缩上下文。                                                                                              |
 | `/context`       | ACP 透传            | 显示上下文窗口使用情况，包含 `detail` 子命令。                                                                          |
 | `/diff`          | ACP 透传            | 显示工作区相对 `HEAD` 的变更统计。                                                                                      |
-| `/docs`          | ACP 透传            | 打开 Qwen Code 文档。                                                                                                   |
+| `/docs`          | ACP 透传            | 打开 Tay Bellow 文档。                                                                                                  |
 | `/doctor`        | ACP 透传            | 执行安装与环境诊断，包含 `memory` 子命令。                                                                              |
 | `/export`        | ACP 透传            | 导出当前会话记录，包含 `html`、`md`、`json`、`jsonl` 子命令。                                                           |
 | `/goal`          | ACP 透传            | 设置目标，并持续工作直到条件满足。                                                                                      |

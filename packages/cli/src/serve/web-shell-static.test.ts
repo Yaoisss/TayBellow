@@ -209,7 +209,7 @@ describe('public PWA HTTP routes', () => {
     await mkdir(path.join(directory, 'assets'));
     await writeFile(
       path.join(directory, 'manifest.webmanifest'),
-      '{"name":"Qwen Code"}',
+      '{"name":"Tay Bellow"}',
     );
     await writeFile(
       path.join(directory, 'sw.js'),
@@ -252,7 +252,7 @@ describe('public PWA HTTP routes', () => {
       expect(response.headers['content-type']).toContain(
         'application/manifest+json',
       );
-      expect(JSON.parse(response.text)).toEqual({ name: 'Qwen Code' });
+      expect(JSON.parse(response.text)).toEqual({ name: 'Tay Bellow' });
       expect(response.headers['cache-control']).toBe('no-cache');
       expect(response.headers['x-content-type-options']).toBe('nosniff');
       await request(app).head(url).expect(200);

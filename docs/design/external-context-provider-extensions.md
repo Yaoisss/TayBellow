@@ -14,12 +14,12 @@
 
 ## Decision
 
-External context integrations owned by other teams use Qwen Code Extensions
+External context integrations owned by other teams use Tay Bellow Extensions
 and MCP rather than adding provider adapters to Qwen Core or dynamically
 loading third-party modules into the existing External Context process.
 
 Each provider owner develops, releases, operates, and versions its own
-extension. Qwen Code maintains a small `context_search` interoperability
+extension. Tay Bellow maintains a small `context_search` interoperability
 profile, contract schemas, test vectors, and reference examples. The existing
 Generic HTTP Search V1 adapter remains a private compatibility implementation
 and reference; it is not a central registry into which every provider is
@@ -27,7 +27,7 @@ added.
 
 ```mermaid
 flowchart LR
-    Q["Qwen Code"] --> M["External Context MCP Profile v1"]
+    Q["Tay Bellow"] --> M["External Context MCP Profile v1"]
     M --> R["Provider-owned Remote MCP extension"]
     R --> S["Provider-operated MCP service"]
     M --> L["Provider-owned local adapter extension"]

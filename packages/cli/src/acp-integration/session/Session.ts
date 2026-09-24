@@ -14160,7 +14160,7 @@ export class Session implements SessionContext {
               if (hooksEnabled && messageBus) {
                 this.fireNotificationHookWithTerminalSequence(
                   messageBus,
-                  `Qwen Code needs your permission to use ${toolName}`,
+                  `Tay Bellow needs your permission to use ${toolName}`,
                   NotificationType.PermissionPrompt,
                   'Permission needed',
                 );
@@ -14716,7 +14716,7 @@ export class Session implements SessionContext {
           let settledPersistedOutputFiles: string[] | undefined;
           const sleepInhibitorHandle = acquireSleepInhibitor(
             this.config,
-            `Qwen Code is executing tool ${toolName}`,
+            `Tay Bellow is executing tool ${toolName}`,
           );
           try {
             try {
