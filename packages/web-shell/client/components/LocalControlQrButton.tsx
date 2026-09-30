@@ -28,6 +28,20 @@ interface LocalControlQrButtonProps {
   className?: string;
 }
 
+// A long pairing URL raises the QR version, so the text grid outgrows the
+// fixed 7px cell and the <pre> overruns the w-80 popover; shrink the cell to
+// fit the grid instead of clipping or overflowing the card.
+const QR_MAX_CELL_PX = 7;
+const QR_CHAR_AREA_PX = 276; // w-80 minus PopoverContent p-2.5, minus the pre's p-3
+const QR_CHAR_ASPECT = 0.62;
+
+function qrCellPx(qrText: string): number {
+  const newline = qrText.indexOf('\n');
+  const cols = (newline === -1 ? qrText.length : newline) || 1;
+  const cell = QR_CHAR_AREA_PX / (cols * QR_CHAR_ASPECT);
+  return Math.floor(Math.min(QR_MAX_CELL_PX, cell) * 10) / 10;
+}
+
 export function LocalControlQrButton({
   onOpenSettings,
   className,
@@ -132,6 +146,7 @@ export function LocalControlQrButton({
     status?.expiresAt === undefined
       ? undefined
       : Math.max(0, Math.ceil((status.expiresAt - now) / 1000));
+  const qrCell = status?.qrText ? qrCellPx(status.qrText) : QR_MAX_CELL_PX;
 
   return (
     <Popover
@@ -170,7 +185,11 @@ export function LocalControlQrButton({
                 // CJK font fallback gives block glyphs a different width than spaces.
                 lang="en"
                 aria-label={t('settings.localControl.qr')}
-                className="w-fit overflow-hidden rounded-lg bg-white p-3 font-mono text-[7px] leading-[7px] tracking-normal text-black select-none"
+                className="w-fit overflow-hidden rounded-lg bg-white p-3 font-mono tracking-normal text-black select-none"
+                style={{
+                  fontSize: `${qrCell}px`,
+                  lineHeight: `${qrCell}px`,
+                }}
               >
                 {status.qrText}
               </pre>

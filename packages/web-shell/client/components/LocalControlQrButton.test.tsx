@@ -153,6 +153,26 @@ describe('LocalControlQrButton', () => {
     expect(container.querySelector('pre')?.lang).toBe('en');
   });
 
+  it('shrinks the QR cell so a wide grid fits the popover content box', async () => {
+    const line = 'X'.repeat(96);
+    vi.mocked(fetch).mockResolvedValue(
+      localControlResponse({
+        active: true,
+        url: 'http://qwen.test/#pairing=one-time',
+        qrText: Array.from({ length: 48 }, () => line).join('\n'),
+      }),
+    );
+    mount();
+    await openPopover();
+    const pre = container.querySelector('pre');
+    expect(pre?.style.fontSize).toBeDefined();
+    const cellPx = Number.parseFloat(pre?.style.fontSize ?? '0');
+    expect(cellPx).toBeLessThan(7);
+    // 300px popover content box minus the pre's 24px padding must hold the grid.
+    expect(96 * cellPx * 0.62 + 24).toBeLessThanOrEqual(300);
+    expect(pre?.style.lineHeight).toBe(pre?.style.fontSize);
+  });
+
   it.each([-120_000, 120_000])(
     'rotates with a %i ms browser clock offset and stops requesting on close',
     async (offset) => {
