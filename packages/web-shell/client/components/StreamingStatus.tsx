@@ -21,6 +21,12 @@ interface StreamingStatusProps {
    */
   showPhrase?: boolean;
   /**
+   * When true, append the live output rate (tokens/second over the elapsed
+   * turn) to the status line. The parent reads the response-speed setting and
+   * passes it down so this component stays free of daemon dependencies.
+   */
+  showTokensPerSecond?: boolean;
+  /**
    * When true, the daemon reports the session has an in-flight prompt. The
    * indicator stays visible even while streamingState is idle, so long tool
    * calls that produce >3s silent gaps do not hide the loading state mid-turn
@@ -35,6 +41,7 @@ export function StreamingStatus({
   startedAt,
   backgroundLabel,
   showPhrase = true,
+  showTokensPerSecond = false,
   hasActivePrompt,
 }: StreamingStatusProps) {
   const streamingState = useStreamingState();
@@ -140,6 +147,15 @@ export function StreamingStatus({
     estimatedOutputTokens > 0
       ? ` · ${arrow} ${t('stream.tokens', { count: formatTokenCount(estimatedOutputTokens) })}`
       : '';
+  // Averaged over the elapsed turn rather than a trailing window: the status
+  // line already reports the turn's elapsed time, so the two read together as
+  // "this many tokens in this many seconds".
+  const rateStr =
+    showTokensPerSecond && estimatedOutputTokens > 0 && elapsed > 0
+      ? ` · ${t('turnStats.rate', {
+          rate: String(Math.round(estimatedOutputTokens / elapsed)),
+        })}`
+      : '';
 
   return (
     <div className={styles.status}>
@@ -153,7 +169,8 @@ export function StreamingStatus({
       )}
       <span className={styles.meta}>
         ({timeStr}
-        {tokenStr} · {t('stream.cancel')})
+        {tokenStr}
+        {rateStr} · {t('stream.cancel')})
       </span>
     </div>
   );

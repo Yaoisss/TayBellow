@@ -135,6 +135,10 @@ export interface DaemonConnectionState {
   titleSource?: 'manual' | 'auto';
   /** Latest main-conversation model usage event. */
   tokenUsage?: DaemonTokenUsage;
+  /** Running totals for the turn in flight, or undefined between turns. */
+  turnStats?: DaemonTurnStats;
+  /** Totals frozen when the last turn completed, kept until the next one ends. */
+  lastTurnStats?: DaemonTurnStats;
   /** Authoritative Goal v2 state for the current session. */
   goalState?: GoalSnapshotV2;
   backgroundTurn?: DaemonBackgroundTurn;
@@ -178,6 +182,21 @@ export interface DaemonTokenUsage {
   totalTokens?: number;
   thoughtTokens?: number;
   cachedReadTokens?: number;
+}
+
+/**
+ * Token and timing totals for one prompt turn, summed from the main
+ * conversation's usage frames. `modelDurationMs` is the sum of the per-request
+ * model durations the daemon stamps on live frames; it stays 0 when the frames
+ * carry none (replayed history), which is what the rate reads as "unavailable".
+ */
+export interface DaemonTurnStats {
+  inputTokens: number;
+  outputTokens: number;
+  thoughtTokens: number;
+  cachedTokens: number;
+  modelDurationMs: number;
+  requestCount: number;
 }
 
 export interface DaemonSessionProviderProps {

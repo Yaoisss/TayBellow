@@ -3238,6 +3238,14 @@ const EN: Messages = {
     const n = v?.count ?? 0;
     return `${n} thought${n === 1 ? '' : 's'}`;
   },
+  'turnStats.label': 'Last turn',
+  'turnStats.thinking': (v) => `thinking ${v?.count ?? ''}`,
+  'turnStats.duration': (v) => `took ${v?.duration ?? ''}`,
+  'turnStats.rate': (v) => `${v?.rate ?? ''} tok/s`,
+  'turnStats.requests': (v) => {
+    const n = v?.count ?? 0;
+    return `${n} request${n === 1 ? '' : 's'}`;
+  },
   'turn.stopped': 'You cancelled this request',
   'turn.stoppedAfter': (v) => {
     const seconds = v?.seconds ?? 0;
@@ -7026,6 +7034,11 @@ const ZH: Messages = {
   'turn.executionSteps': (v) => `${v?.count ?? 0} 步`,
   'turn.toolCalls': (v) => `工具 ${v?.count ?? 0} 次`,
   'turn.thinkingCount': (v) => `思考 ${v?.count ?? 0} 次`,
+  'turnStats.label': '上一轮',
+  'turnStats.thinking': (v) => `思考 ${v?.count ?? ''}`,
+  'turnStats.duration': (v) => `耗时 ${v?.duration ?? ''}`,
+  'turnStats.rate': (v) => `${v?.rate ?? ''} tok/s`,
+  'turnStats.requests': (v) => `${v?.count ?? 0} 次请求`,
   'turn.stopped': '你已取消请求',
   'turn.stoppedAfter': (v) => `你在 ${v?.seconds ?? 0} 秒后取消了请求`,
   'message.renderError': '此消息无法显示。',
@@ -7741,6 +7754,40 @@ const ZH: Messages = {
   'settings.label.general.preventSystemSleep': '运行时防止系统睡眠',
   'settings.description.general.preventSystemSleep':
     '当 Tay Bellow 正在流式生成模型回复或执行工具时防止系统睡眠。空闲输入状态和权限确认状态不会阻止睡眠。',
+  'settings.label.review.attribution': '署名：review',
+  'settings.description.review.attribution':
+    '在发布到 GitHub 的 review 正文与行内评论末尾追加署名脚注，注明模型与 CLI 版本（例如 "_— qwen3-coder via Tay Bellow /review (v0.21.2)_"）。关闭后，发布的 review 不再带可见的 AI 署名：没有脚注，发布评论与正文列表上也没有 "**[Critical]**"/"**[Suggestion]**" 严重级别标记。未署名的发布在原始源码中仍可识别：每条评论携带不可见的严重级别标记（"<!-- qwen-review critical -->"），review 正文携带 ledger 标记（"<!-- qwen-review-ledger ... -->"）——凡读取评论正文的程序（GitHub API 自动化、与本设置耦合的 workflow）仍能识别 /review 产物，预提交的重复检测也能凭该严重级别标记认出审阅账号此前的发布，但其他账号的未署名发布逃过识别。另一个后果：qwen-autofix 的 Critical-only 模式（第 5 轮后启用，或计数窗口的 diff 增长预算触发时更早启用）不再把已发布的问题当作 Critical，并将其延后。仅在 User、System、SystemDefaults 设置作用域生效；Workspace 中的取值被忽略，因此仓库无法为其审阅者设定 review 策略。',
+  'settings.label.review.sandbox': '沙箱运行被审代码：review',
+  'settings.description.review.sandbox':
+    '以容器方式运行被审阅仓库自身的命令——带安装脚本的 `npm ci`、构建、测试套件以及每个变异探测——而不是直接以你本人的身份运行。review 会执行它正在审阅的代码，而这些命令目前会继承 review 进程的完整环境（在 CI 上包括模型与 GitHub 凭据）。"auto" 在 docker 或 podman 可用时使用容器，两者都不可用时直接运行；"required" 拒绝在无沙箱的情况下运行，这会让该次运行中依赖执行的证据（构建/测试结论、变异判定、`Source: [probe]`）不可用，而不是中止 review；"off" 是当前行为且仍为默认，因为突然把构建容器化会改变原生模块的编译目标。仅在 User、System、SystemDefaults 设置作用域生效；Workspace 中的取值被忽略，因此仓库无法关闭这套本用于约束它的隔离。',
+  'settings.label.review.effort': '默认力度：review',
+  'settings.description.review.effort':
+    '当既未给出 --effort、也没有项目记忆的显式级别时，/review 使用的默认力度。"auto" 保持内建规则（PR 为 high，本地改动为 medium）。显式或记忆的级别优先；生效的 --comment 仍强制 high，--fix 仍以 medium 为下限。仅在 User、System、SystemDefaults 设置作用域生效；Workspace 中的取值被忽略，因此仓库无法为其审阅者设定 review 策略。',
+  'settings.label.review.comment': '默认发表评论：review',
+  'settings.description.review.comment':
+    '把每次 PR 的 /review 都当作已传入 --comment：无需该 flag 也会把问题发布到 PR。发布仍绑定调用时指定的 PR。只有在你希望 review 总是公开时才启用。仅在 User、System、SystemDefaults 设置作用域生效；Workspace 中的取值被忽略，因此仓库无法为其审阅者设定 review 策略。',
+  'settings.label.review.severityFloor': '发布下限：review',
+  'settings.description.review.severityFloor':
+    '未给出 --severity-floor 时，PR 的 /review 发布的最低严重级别。"auto" 保持随轮次自适应的默认值：Suggestions 发布到第 5 轮，从第 6 轮起只发布 Criticals，而本可发布的高置信度 Suggestions 会被记录并延后（低置信度与 Nice-to-have 一如此前仅保留在终端）；在 "auto" 下，第 2-5 轮还会延后针对上一轮以来未改动代码的新 Suggestions——正是这套纪律防止 review 轮次把 PR 越滚越大。"critical" 从第 1 轮起就采用该姿态；"suggestion" 则每轮都继续发布 Suggestions。非 PR 目标没有轮次概念，忽略此项。仅在 User、System、SystemDefaults 设置作用域生效；Workspace 中的取值被忽略，因此仓库无法为其审阅者设定 review 策略。',
+  'settings.label.review.reverseAuditRounds': '反向审计轮次上限：review',
+  'settings.description.review.reverseAuditRounds':
+    '为每次高力度 review 下调反向审计循环的轮次上限。上限通常按 diff 规模选定（小型 10 轮 / 分块 5 轮；超大 diff 在本次运行设有 review 截止时间时为 3 轮、没有则为 5 轮，因为该下调是为应对 CI 上限，且只在存在上限时适用），因为一轮在小 diff 上花费一个 agent、在超大 diff 上约 90 分钟；本设置只能下调所适用的档位，绝不能上调——不是大于零的整数、或超出范围（低于 3，或高于该计划自身的档位）的取值会被忽略并保持原档位不变——这里的 JSON Schema 没有整数类型，因此小数能在编辑器里通过校验，运行时会被丢弃。启用前请先理解它的代价：循环以连续两个空转轮次结束，所以砍掉上限不会让 review 更快收敛，只会让它更常在收敛前停下——而每次这样的停止都会被披露为未审阅范围，并把结论上限压到 Comment，因此更省钱的 review 也变成了无法再 Approve 的那一种。总体上想少花钱应优先调 "effort"。这里没有任何东西会让循环跑得更久：review 截止时间只会限制而不会延长运行，在超大 diff 上设置它也只是把上限从 5 降到 3 而非提高。仅在 User、System、SystemDefaults 设置作用域生效；Workspace 中的取值被忽略，因此仓库无法为其审阅者设定 review 策略。',
+  'settings.label.review.approachRounds': '方案信号轮次阈值：review',
+  'settings.description.review.approachRounds':
+    '一个 PR 需要达到多少轮之后，review 才可以追加一段提示性文字，说明成为未决问题的似乎是改动的形态而非当前补丁。它只在 diff 自 review 首次测量以来又增长数倍时才出现，且绝不会出现在 Approve 上。它仅作披露：不新增问题、不改变结论、不阻塞任何东西——它存在的原因是每个问题都锚定在当前 diff 的某一行，所以 review 能报告方案在哪里泄漏，却无法说明换一种方案能一次性消除全部泄漏。保持 0 使用内建阈值 5 轮；调高可让该段文字更晚出现，设得很高则可让它不再出现。不是大于零的整数会被忽略。仅在 User、System、SystemDefaults 设置作用域生效；Workspace 中的取值被忽略，因此仓库无法为其审阅者设定 review 策略。',
+  'settings.option.review.sandbox.off': 'off（直接运行被审代码）',
+  'settings.option.review.sandbox.auto': 'auto（有容器时使用容器）',
+  'settings.option.review.sandbox.required': 'required（绝不在无沙箱下运行）',
+  'settings.option.review.effort.auto': 'auto（PR 为 high，本地为 medium）',
+  'settings.option.review.effort.low': 'low',
+  'settings.option.review.effort.medium': 'medium',
+  'settings.option.review.effort.high': 'high',
+  'settings.option.review.severityFloor.auto': 'auto（第 6 轮起仅 Critical）',
+  'settings.option.review.severityFloor.critical': '仅 Critical（每一轮）',
+  'settings.option.review.severityFloor.suggestion': 'Suggestions 与 Criticals',
+  'settings.label.output.showTimestamps': '显示时间戳',
+  'settings.description.output.showTimestamps':
+    '在每条助手回复前显示 [HH:MM:SS] 时间戳。',
   'settings.label.ui.theme': '主题',
   'settings.description.ui.theme': '界面的颜色主题。',
   'settings.label.ui.hideTips': '隐藏提示',
@@ -7757,6 +7804,21 @@ const ZH: Messages = {
   'settings.label.ui.shellOutputMaxLines': 'Shell 输出最大行数',
   'settings.description.ui.shellOutputMaxLines':
     '内联显示的 shell 输出最大行数。设为 0 可取消限制并显示完整输出；隐藏行数仍会通过 +N lines 指示器展示。',
+  'settings.label.ui.showToolCallDetails': '显示工具调用详情',
+  'settings.description.ui.showToolCallDetails':
+    '内联显示工具参数与结果。关闭后会普通工具调用渲染为单行摘要；在虚拟化历史中点击摘要或按 Ctrl+O 展开详情。审批提示、用户主动发起的 shell 命令，以及处于焦点的交互式 shell 始终保持展开。',
+  'settings.label.ui.disableWorkflowKeywordTrigger': '禁用 Workflow 关键词触发',
+  'settings.description.ui.disableWorkflowKeywordTrigger':
+    '为 true 时，在提示中提到 `workflow` 一词不再把该轮轻微导向 Workflow 工具（页脚的 `workflow active` 指示也会被隐藏）。仅在 workflows 启用时生效。',
+  'settings.label.ui.showStatusInTitle': '在标题中显示状态',
+  'settings.description.ui.showStatusInTitle':
+    '在终端窗口标题中显示 Tay Bellow 会话名称与状态。',
+  'settings.label.ui.showResponseTokensPerSecond': '显示每秒响应 token 数',
+  'settings.description.ui.showResponseTokensPerSecond':
+    '模型流式输出期间，在响应 token 计数旁显示实时的 tokens/秒 估算。下次会话生效。',
+  'settings.label.ui.compactMode': '紧凑模式',
+  'settings.description.ui.compactMode':
+    '已废弃：紧凑视图在 TUI 与 web shell 中始终开启。保留该键只是为了让既有设置文件不产生警告。',
   'settings.label.privacy.usageStatisticsEnabled': '启用使用统计',
   'settings.description.privacy.usageStatisticsEnabled': '启用使用统计收集。',
   'settings.label.fastModel': '快速模型',
@@ -7765,6 +7827,17 @@ const ZH: Messages = {
   'settings.label.visionModel': '视觉模型',
   'settings.description.visionModel':
     '用于视觉桥接的图像能力模型。留空则自动选择。',
+  'settings.label.modelFallbacks': '模型回退列表',
+  'settings.description.modelFallbacks':
+    '主模型遇到容量错误（429/503/529）时依次尝试的回退模型 ID 列表（逗号分隔，最多 3 个）。例如 "qwen-plus,qwen-turbo"。可通过 CLI 的 --fallback-model 设置。',
+  'settings.label.model.reasoningEffort': '推理力度',
+  'settings.description.model.reasoningEffort':
+    '具备推理能力的模型思考的强度，跨所有 provider 生效。用 /effort 设置。各 provider 会把它映射并裁剪到当前模型支持的范围内（例如 Gemini 上限为 "high"；Anthropic 会裁剪模型不具备的档位）。留空则使用模型/provider 默认值。',
+  'settings.option.model.reasoningEffort.low': '低',
+  'settings.option.model.reasoningEffort.medium': '中',
+  'settings.option.model.reasoningEffort.high': '高',
+  'settings.option.model.reasoningEffort.xhigh': '极高',
+  'settings.option.model.reasoningEffort.max': '最高',
   'settings.label.context.fileFiltering.respectGitIgnore': '遵守 .gitignore',
   'settings.description.context.fileFiltering.respectGitIgnore':
     '搜索时遵守 .gitignore 文件。',
@@ -7780,6 +7853,48 @@ const ZH: Messages = {
   'settings.label.tools.shell.enableInteractiveShell': '交互式 Shell（PTY）',
   'settings.description.tools.shell.enableInteractiveShell':
     '使用 node-pty 提供交互式 shell 体验。未设置时，明确的单次 prompt 默认使用 child_process；交互式和输入驱动模式默认使用 PTY。',
+  'settings.label.tools.codeModeOnly': '仅 Code Mode（实验性）',
+  'settings.description.tools.codeModeOnly':
+    '仅通过隔离的 exec JavaScript 工具向模型暴露普通工具。直接控制类工具仍然可用。在 safe 与 bare 模式下忽略。',
+  'settings.label.tools.webSearch.enabled': '启用 WebSearch',
+  'settings.description.tools.webSearch.enabled':
+    '设为 false 可禁用内建 web_search 工具。自动启动激活要求 enabled、model 与仅环境变量的后端都保持未设置。设为 true 时，只有在仅环境变量的后端也未设置时才允许自动推导；否则必须提供 model。环境变量覆盖：ENABLE_WEB_SEARCH。',
+  'settings.label.tools.webSearch.model': '搜索模型',
+  'settings.description.tools.webSearch.model':
+    '显式搜索路径的模型选择器（"modelId" 或 "authType:modelId"）。配合 WEB_SEARCH_BASE_URL 时，它就是该端点的普通模型 id；否则必须匹配某个带 envKey 的 DashScope 兼容 modelProviders 条目。自动路径使用 qwen3.8-flash。环境变量覆盖：WEB_SEARCH_MODEL。',
+  'settings.label.tools.webSearch.webExtractor': '打开结果页面',
+  'settings.description.tools.webSearch.webExtractor':
+    '允许搜索 agent 打开并阅读结果页面（DashScope web_extractor），以获得更有依据的回答。由 DashScope 单独计费。环境变量覆盖：WEB_SEARCH_EXTRACTOR。',
+  'settings.label.tools.webSearch.timeoutMs': '搜索超时（毫秒）',
+  'settings.description.tools.webSearch.timeoutMs':
+    '单次 web_search 调用的总时间预算，单位为毫秒（默认 120000，最大 600000；其他值回退到默认值）。搜索 agent 会发起多次查询并可能打开结果页面；超出预算的搜索会在至少一次搜索调用已完成时返回已到达的部分结果——如果预算在首次搜索调用完成前就耗尽，工具会改为报告超时错误，因为没有实际执行搜索的叙述不构成可审计的证据。低于该预算的每工具执行上限（QWEN_CODE_TOOL_EXECUTION_TIMEOUT_MS）会先触发并丢弃部分结果；请让它高于 timeoutMs。环境变量覆盖：WEB_SEARCH_TIMEOUT_MS。',
+  'settings.label.tools.webSearch.maxPerSession': '每会话最大搜索次数',
+  'settings.description.tools.webSearch.maxPerSession':
+    '单个会话中 web_search 调用的上限（默认 200，最大 10000；其他值回退到默认值）。该计数与子代理共享，并在会话切换（/clear、/resume、分支）时重置。达到上限后，后续搜索会被跳过，并告知模型用它已收集到的信息继续。环境变量覆盖：WEB_SEARCH_MAX_PER_SESSION。',
+  'settings.label.tools.toolSearch.threshold': '延迟工具预载阈值（%）',
+  'settings.description.tools.toolSearch.threshold':
+    '用作会话启动时预载普通延迟工具（内建打包工具与 MCP 一并适用）预算的上下文窗口百分比。默认 0，即不做任何基于阈值的预载；普通延迟工具通常留在稳定的 ToolSearch + ToolCall 桥接之后，代价是首次使用前有一次 tool_search 往返。将其提高到 N 后，当所有符合条件的延迟 schema 都能装进上下文窗口的 N% 以内时，它们会全部被预先声明以支持直接调用、无需桥接往返；否则它们继续留在桥接之后，同时两个桥接工具都被注册。被 tools.eager 降级的工具不参与此预载，在桥接注册期间仍可按需通过它触达；当任一桥接工具被注销时（tools.toolSearch.enabled 为 false 会同时拒绝两者；tool_search 或 tool_call 的 deny 规则会移除其一），仍隐藏的降级工具不会提供给模型，该会话也无法通过桥接触达，并会记录一条警告；这些桥接与警告规则适用于直接工具模式。CodeModeOnly 会隐藏两个桥接工具，在 exec 中为可调用的延迟工具保留完整的嵌套 schema，并跳过延迟提醒与本警告；tools.eager 不会让它们不可达，也不节省其 schema token。在直接模式下它们保持注册，因此按自身名称的直接调用仍会被正常评估与批准。另有几条独立路径仍可在阈值为 0 时声明延迟工具：tools.visible；每次工具集刷新（包括恢复、MCP 发现、首次进入计划模式与子代理定义变更）时的实时历史兼容扫描；桥接不完整时的 eager 回退；以及 daemon ACP 的延迟注册——它会显式揭示并固定 create_sub_session。',
+  'settings.label.tools.listDirectory.enabled': '启用 ListDirectory',
+  'settings.description.tools.listDirectory.enabled':
+    '启用内建 list_directory 工具。默认禁用；当它被显式列入 coreTools 允许清单（--core-tools / tools.core）时会自动重新启用。',
+  'settings.label.tools.todoWrite.enabled': '启用 Todo Write',
+  'settings.description.tools.todoWrite.enabled':
+    '启用内建 todo_write 工具及其系统提示引导。',
+  'settings.label.tools.workflowsEnabled': '动态 Workflow',
+  'settings.description.tools.workflowsEnabled':
+    '启用 Workflow 工具，让模型编写并运行一个编排并行子代理的脚本。默认关闭；一次运行可能派发大量子代理并相应消耗 token。QWEN_CODE_ENABLE_WORKFLOWS=1 与 QWEN_CODE_DISABLE_WORKFLOWS=1 环境变量会覆盖此设置（disable 优先）。与 Session Workflow 的计划并审阅视图无关；若要阻止 "workflow" 关键词导向该轮，见「禁用 Workflow 关键词触发」。',
+  'settings.label.tools.workflowSizeGuideline': '动态 Workflow 规模',
+  'settings.description.tools.workflowSizeGuideline':
+    '模型编写的动态 workflow 的规模建议："small" 目标少于 5 个 agent，"medium"（默认）少于 15 个，"large" 少于 50 个，"unrestricted" 不给出建议。它只是建议而并非强制上限。它还决定运行中的 workflow 在多少个 agent 时被标记为大型（QWEN_CODE_WORKFLOW_SIZE_WARNING_AGENTS 会覆盖该阈值）。修改从你的下一条消息起生效。',
+  'settings.option.tools.workflowSizeGuideline.small': '小（少于 5 个 agent）',
+  'settings.option.tools.workflowSizeGuideline.medium':
+    '中（少于 15 个 agent）',
+  'settings.option.tools.workflowSizeGuideline.large': '大（少于 50 个 agent）',
+  'settings.option.tools.workflowSizeGuideline.unrestricted':
+    '不限（不给建议）',
+  'settings.label.tools.workflowNameOnly': '仅命名 Workflow',
+  'settings.description.tools.workflowNameOnly':
+    '限制模型只能运行命名的 workflow：已保存的 workflow，以及 workflows 扩展自带的、按名称调用的那些。模型不能运行内联脚本或脚本路径，运行中的脚本也不能按路径嵌套另一个，因此模型发起的每次运行都能被 Workflow(name:...) 权限规则匹配。它不替代审批策略：模型仍可保存新的 workflow 文件并按名称运行，而针对特定名称或脚本摘要的审批规则会就此询问。宿主机通过 ACP 发起的运行（run-saved、run-script、retry、rerun）不受限制。QWEN_CODE_WORKFLOW_NAME_ONLY=1 也会开启它。工作区只能把它设为 true。',
   'settings.label.policy.permissionStrategy': '权限协调策略',
   'settings.description.policy.permissionStrategy':
     '多个客户端连接时权限请求的决策方式。first-responder 表示任意客户端先响应者生效；designated 表示仅提示发起方决策；consensus 表示需要 N-of-M 投票同意；local-only 表示只有 loopback 客户端可决策。需要重启 daemon 后生效。',
@@ -7796,6 +7911,34 @@ const ZH: Messages = {
   'settings.label.experimental.emitToolUseSummaries': '工具使用摘要',
   'settings.description.experimental.emitToolUseSummaries':
     '每个工具批次完成后生成一个简短的 LLM 标签。已完成工具组的标签会替代通用的 Tool × N 标题；强制展开的工具组下方显示弱化的 ● <label> 行。需要配置快速模型。',
+  'settings.label.goals.modelProposed': '模型提议的 Goal',
+  'settings.description.goals.modelProposed':
+    '控制 propose_goal 工具，它让模型提议一个供你批准的会话 Goal。"alwaysAsk"（默认）会在批准对话框中显示每个提议，在你接受前不会设置任何内容；"disabled" 会移除该工具。手动输入的 /goal 不受影响。该设置影响授权，因此仅在 User、System 或 SystemDefaults 作用域生效；工作区的取值被忽略。',
+  'settings.option.goals.modelProposed.alwaysAsk': '总是询问',
+  'settings.option.goals.modelProposed.disabled': '禁用',
+  'settings.label.mcpServers': 'MCP 服务器',
+  'settings.description.mcpServers': 'MCP 服务器的配置。',
+  'settings.label.experimental.cron': '启用 Cron/Loop 工具',
+  'settings.description.experimental.cron':
+    '启用会话内 cron/loop 工具。启用后，模型可以用 cron_create、cron_list 和 cron_delete 工具创建周期性提示。可通过 QWEN_CODE_DISABLE_CRON=1 环境变量禁用。',
+  'settings.label.experimental.sessionWriterLease': '启用 ACP 会话写入租约',
+  'settings.description.experimental.sessionWriterLease':
+    '为持久化的 ACP 与会话启用跨进程写入隔离。有效值在 ACP 或 daemon 进程启动时冻结。所有并发的 ACP 或 daemon 写入方都必须启用该设置；交互式与 headless 写入方不在此协议范围内。',
+  'settings.label.experimental.agentTeam': '启用 Agent Team',
+  'settings.description.experimental.agentTeam':
+    '启用 agent 团队协作工具（实验性）。启用后，模型可以创建 agent 团队并用 team_create、team_delete、send_message、task_create、task_update、task_list 工具协调工作。也可通过 QWEN_CODE_ENABLE_AGENT_TEAM=1 环境变量启用。',
+  'settings.label.experimental.artifact': '启用 Artifacts',
+  'settings.description.experimental.artifact':
+    '启用 artifact 工具。默认启用。在交互式、非 SDK 会话中，模型可以把自包含的 HTML 页面发布为交互式 Artifact 并在浏览器中打开。非 SDK 的 daemon 会话可使用仅元数据的 record_artifact 工具。将此设置为 false 或使用 QWEN_CODE_DISABLE_ARTIFACT=1 可同时禁用两者。',
+  'settings.label.omni.enabled': '启用 Omni 媒体投递',
+  'settings.description.omni.enabled':
+    '启用 omni 媒体管线。以 @ 引用的媒体文件（视频、图像、音频）——以及从 @https:// URL 提供的媒体——会被识别（ffprobe），以内容寻址方式存储在 .qwen/omni/objects/ 下，通过 DashScope 临时上传通道上传，并以 oss:// URL 而非内联 base64 投递。仅对 DashScope 兼容端点生效。也可通过 QWEN_CODE_ENABLE_OMNI=1 启用。',
+  'settings.label.experimental.liveVoice.enabled': 'Live 语音',
+  'settings.description.experimental.liveVoice.enabled':
+    '在 macOS WebShell 上启用实验性实时语音对话。',
+  'settings.label.experimental.liveVoice.shortcut': 'Live 语音全局快捷键',
+  'settings.description.experimental.liveVoice.shortcut':
+    '由 Qwen Live Host 全局注册的 Electron 快捷键。',
   'settings.label.agents.arena.preserveArtifacts': '保留 Arena 产物',
   'settings.description.agents.arena.preserveArtifacts':
     '启用后，Arena worktree 和会话状态文件会在会话结束或主智能体退出后保留。',

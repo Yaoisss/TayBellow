@@ -56,6 +56,7 @@ function usageEvent(
   id: number,
   usage: Record<string, unknown>,
   text = '',
+  durationMs?: number,
 ): DaemonEvent {
   return {
     id,
@@ -65,7 +66,10 @@ function usageEvent(
       update: {
         sessionUpdate: 'agent_message_chunk',
         content: { type: 'text', text },
-        _meta: { usage },
+        _meta: {
+          usage,
+          ...(durationMs !== undefined ? { durationMs } : {}),
+        },
       },
     },
   };
@@ -575,6 +579,125 @@ describe('mapWorkspaceSkills', () => {
         },
       },
     ]);
+  });
+});
+
+describe('turn stats accumulation', () => {
+  it('sums the turn usage and the per-request model durations', () => {
+    let state = applyEvent(
+      { status: 'connected' },
+      usageEvent(
+        1,
+        { inputTokens: 1_000, outputTokens: 100, cachedReadTokens: 400 },
+        '',
+        2_500,
+      ),
+    );
+    state = applyEvent(
+      state,
+      usageEvent(
+        2,
+        { inputTokens: 2_000, outputTokens: 250, thoughtTokens: 50 },
+        '',
+        1_500,
+      ),
+    );
+
+    expect(state.turnStats).toEqual({
+      inputTokens: 3_000,
+      outputTokens: 350,
+      thoughtTokens: 50,
+      cachedTokens: 400,
+      modelDurationMs: 4_000,
+      requestCount: 2,
+    });
+  });
+
+  it('keeps a frame without a duration counted but not timed', () => {
+    const state = applyEvent(
+      { status: 'connected' },
+      usageEvent(1, { inputTokens: 900, outputTokens: 30 }),
+    );
+
+    expect(state.turnStats).toMatchObject({
+      inputTokens: 900,
+      outputTokens: 30,
+      modelDurationMs: 0,
+      requestCount: 1,
+    });
+  });
+
+  it('freezes the turn totals when the turn completes', () => {
+    let state = applyEvent(
+      { status: 'connected' },
+      usageEvent(1, { inputTokens: 1_000, outputTokens: 100 }, '', 2_000),
+    );
+    state = applyEvent(state, turnComplete);
+
+    expect(state.turnStats).toBeUndefined();
+    expect(state.lastTurnStats).toEqual({
+      inputTokens: 1_000,
+      outputTokens: 100,
+      thoughtTokens: 0,
+      cachedTokens: 0,
+      modelDurationMs: 2_000,
+      requestCount: 1,
+    });
+  });
+
+  it('freezes on turn_error too, so a failed turn still reports its spend', () => {
+    let state = applyEvent(
+      { status: 'connected' },
+      usageEvent(1, { inputTokens: 500, outputTokens: 20 }, '', 800),
+    );
+    state = applyEvent(state, {
+      id: 100,
+      v: 1,
+      type: 'turn_error',
+      data: { message: 'boom' },
+    } as DaemonEvent);
+
+    expect(state.turnStats).toBeUndefined();
+    expect(state.lastTurnStats?.inputTokens).toBe(500);
+  });
+
+  it('leaves the running totals alone while no turn is open', () => {
+    const state = applyEvent({ status: 'connected' }, turnComplete);
+
+    expect(state.turnStats).toBeUndefined();
+    expect(state.lastTurnStats).toBeUndefined();
+  });
+
+  it('ignores subagent frames so only the main conversation is summed', () => {
+    const subagentFrame: DaemonEvent = {
+      id: 5,
+      v: 1,
+      type: 'session_update',
+      data: {
+        sessionUpdate: 'agent_message_chunk',
+        content: { type: 'text', text: '' },
+        _meta: {
+          parentToolCallId: 'agent-1',
+          usage: { inputTokens: 7_000, outputTokens: 900 },
+        },
+      },
+    };
+    const state = applyEvent(
+      applyEvent(
+        { status: 'connected' },
+        usageEvent(1, { inputTokens: 1_000, outputTokens: 100 }, '', 1_000),
+      ),
+      subagentFrame,
+    );
+
+    expect(state.turnStats).toEqual({
+      inputTokens: 1_000,
+      outputTokens: 100,
+      thoughtTokens: 0,
+      cachedTokens: 0,
+      modelDurationMs: 1_000,
+      requestCount: 1,
+    });
   });
 });
 

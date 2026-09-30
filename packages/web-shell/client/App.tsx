@@ -158,6 +158,8 @@ import { SessionRecoveryBanner } from './components/SessionRecoveryBanner';
 import composerStatusStyles from './components/ComposerStatusStack.module.css';
 import { GoalEditDialog } from './components/dialogs/GoalEditDialog';
 import { StreamingStatus } from './components/StreamingStatus';
+import { TurnStatsRow } from './components/TurnStatsRow';
+import { useShowTurnStatsEnabled } from './hooks/useShowTurnStatsEnabled';
 import {
   ToastHost,
   TOAST_REQUEST_EVENT,
@@ -3568,6 +3570,7 @@ export function App({
   );
   const sessionHasActivePrompt =
     daemonHasActivePrompt || !!connection.backgroundTurn;
+  const showTurnStats = useShowTurnStatsEnabled();
   const sessionHasActivePromptRef = useRef(sessionHasActivePrompt);
   sessionHasActivePromptRef.current = sessionHasActivePrompt;
   const trustedPrimaryWorkspaceCwd = useMemo(
@@ -20566,6 +20569,7 @@ export function App({
                                 failedPromptRetry?.startedAt ??
                                 activeTurnStartedAt
                               }
+                              showTokensPerSecond={showTurnStats}
                               hasActivePrompt={sessionHasActivePrompt}
                               backgroundLabel={
                                 connection.backgroundTurn?.label ??
@@ -20621,6 +20625,14 @@ export function App({
                             {t('editor.escClearHint')}
                           </div>
                         ) : null}
+                        {showTurnStats && (
+                          <TurnStatsRow
+                            active={
+                              streamingState !== 'idle' ||
+                              sessionHasActivePrompt
+                            }
+                          />
+                        )}
                         {unknownPromptAdmission &&
                           unknownPromptAdmission.sessionId ===
                             connection.sessionId && (
@@ -20840,12 +20852,12 @@ export function App({
                           showChatWidthToggle={!isChatEmptyState}
                           chatWidthToggleMin={chatWidthToggleMin}
                           visibleToolbarActions={visibleComposerToolbarActions}
-                          // Before the session exists the workspace and git
-                          // chips sit under the composer, next to the prompt
-                          // they describe; once it does, the header owns the
-                          // workspace and the composer keeps only git.
+                          // The workspace and git chips always share the
+                          // toolbar row with the mode/model controls; once a
+                          // session exists the header additionally owns the
+                          // workspace display.
                           contextChipPlacement={
-                            isChatEmptyState ? 'below' : 'header'
+                            isChatEmptyState ? 'toolbar' : 'header'
                           }
                           tokenCount={
                             contextUsageAvailable ? (connection.tokenCount ?? 0) : 0

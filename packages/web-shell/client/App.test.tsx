@@ -15019,7 +15019,9 @@ describe('App session callbacks', () => {
     testState.messages = [];
     const { container, rerender } = renderApp();
     await flush();
-    expect(testState.latestChatEditorProps?.contextChipPlacement).toBe('below');
+    expect(testState.latestChatEditorProps?.contextChipPlacement).toBe(
+      'toolbar',
+    );
     expect(
       container.querySelector('[data-testid="chat-header-workspace"]'),
     ).toBeNull();

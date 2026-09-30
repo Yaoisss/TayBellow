@@ -26,6 +26,7 @@ import type {
   DaemonModelInfo,
   DaemonReasoningControls,
   DaemonTokenUsage,
+  DaemonTurnStats,
 } from './types.js';
 
 const REASONING_SELECTIONS: readonly ReasoningSelection[] = [
@@ -348,6 +349,11 @@ export function updateConnectionFromDaemonEvent(
         ...current,
         tokenUsage,
         tokenCount: getTokenCountFromUsage(tokenUsage),
+        turnStats: accumulateTurnStats(
+          current.turnStats,
+          tokenUsage,
+          getUsageDurationMs(update),
+        ),
       }));
     }
     const goalState = getGoalState(update);
@@ -378,16 +384,26 @@ export function updateConnectionFromDaemonEvent(
     case 'turn_error': {
       const promptId =
         getString(getRecord(event.data), 'promptId') ?? event.promptId;
-      setConnection((current) =>
-        current.backgroundTurn?.turnId === promptId
+      setConnection((current) => {
+        const next =
+          current.backgroundTurn?.turnId === promptId
+            ? {
+                ...current,
+                backgroundTurn: undefined,
+                finishedBackgroundTurnId: promptId,
+                backgroundTurnObservedAt: performance.now(),
+              }
+            : current;
+        // The turn's accumulated totals become the row the composer shows
+        // until the next turn ends; the running totals restart next turn.
+        return current.turnStats
           ? {
-              ...current,
-              backgroundTurn: undefined,
-              finishedBackgroundTurnId: promptId,
-              backgroundTurnObservedAt: performance.now(),
+              ...next,
+              turnStats: undefined,
+              lastTurnStats: current.turnStats,
             }
-          : current,
-      );
+          : next;
+      });
       break;
     }
     case 'git_branch_changed': {
@@ -860,6 +876,33 @@ function mapTokenUsageNumber(
 ): Partial<DaemonTokenUsage> {
   const value = getNumber(usage, key);
   return value !== undefined && value >= 0 ? { [key]: value } : {};
+}
+
+// Live frames stamp the model request's duration next to its usage; replayed
+// frames carry usage without it, so an absent value means "unknown", and the
+// turn's summed duration then under-counts rather than fabricating zero-cost
+// requests.
+function getUsageDurationMs(
+  update: Record<string, unknown> | undefined,
+): number | undefined {
+  const meta = getRecord(update?.['_meta']);
+  const durationMs = getNumber(meta, 'durationMs');
+  return durationMs !== undefined && durationMs >= 0 ? durationMs : undefined;
+}
+
+function accumulateTurnStats(
+  previous: DaemonTurnStats | undefined,
+  usage: DaemonTokenUsage,
+  durationMs: number | undefined,
+): DaemonTurnStats {
+  return {
+    inputTokens: (previous?.inputTokens ?? 0) + (usage.inputTokens ?? 0),
+    outputTokens: (previous?.outputTokens ?? 0) + (usage.outputTokens ?? 0),
+    thoughtTokens: (previous?.thoughtTokens ?? 0) + (usage.thoughtTokens ?? 0),
+    cachedTokens: (previous?.cachedTokens ?? 0) + (usage.cachedReadTokens ?? 0),
+    modelDurationMs: (previous?.modelDurationMs ?? 0) + (durationMs ?? 0),
+    requestCount: (previous?.requestCount ?? 0) + 1,
+  };
 }
 
 function mapAvailableCommandsUpdate(

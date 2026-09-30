@@ -141,6 +141,7 @@ vi.mock('@qwen-code/web-shell/daemon-react-sdk', () => ({
   }),
   usePromptStatus: () => 'idle',
   useOptionalWorkspace: () => undefined,
+  useSettings: () => ({ settings: [] }),
   useWorkspaceActions: () => ({}),
   useWorkspace: () => ({
     capabilities: connectionState.capabilities,

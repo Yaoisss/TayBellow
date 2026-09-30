@@ -23,6 +23,15 @@ vi.mock('@qwen-code/web-shell/daemon-react-sdk', () => ({
   useTranscriptBlocks: () => [],
 }));
 
+// Pin the streamed-token estimate so the rate line has a stable numerator;
+// the estimate's own math is covered by useStreamingLoadingMetrics tests.
+vi.mock('../hooks/useStreamingLoadingMetrics', () => ({
+  useStreamingLoadingMetrics: () => ({
+    estimatedOutputTokens: 240,
+    isReceivingContent: true,
+  }),
+}));
+
 const { StreamingStatus } = await import('./StreamingStatus');
 
 const mounted: Array<{ root: Root; container: HTMLElement }> = [];
@@ -39,6 +48,7 @@ function render(
   customization: WebShellCustomization = {},
   props: {
     showPhrase?: boolean;
+    showTokensPerSecond?: boolean;
     hasActivePrompt?: boolean;
     startedAt?: number;
     backgroundLabel?: string;
@@ -72,6 +82,25 @@ function labelText(container: HTMLElement): string | undefined {
   const spans = status?.querySelectorAll('span') ?? [];
   return spans.length === 3 ? (spans[1]?.textContent ?? '') : undefined;
 }
+
+describe('StreamingStatus token rate', () => {
+  it('appends tokens per second when the host enables it', () => {
+    const container = render(
+      {},
+      { showTokensPerSecond: true, startedAt: Date.now() - 8_000 },
+    );
+
+    // The rate divides the estimate by the measured elapsed seconds, so assert
+    // the shape rather than a figure that drifts with test wall-clock time.
+    expect(container.textContent).toMatch(/\d+ tok\/s/);
+  });
+
+  it('keeps the rate out unless the host enables it', () => {
+    const container = render({}, { startedAt: Date.now() - 8_000 });
+
+    expect(container.textContent).not.toContain('tok/s');
+  });
+});
 
 describe('StreamingStatus loading phrases', () => {
   it('shows a built-in default phrase when no resolver is provided', () => {

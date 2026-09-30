@@ -66,6 +66,7 @@ export type {
   DaemonSessionOwnerSnapshot,
   DaemonSessionProviderProps,
   DaemonTokenUsage,
+  DaemonTurnStats,
   DaemonTodoItem,
   DaemonTodoList,
   DaemonTodoPriority,

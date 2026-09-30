@@ -57,6 +57,7 @@ import type {
   EditorHandle,
 } from '../hooks/useComposerCore';
 import { useQueuedPrompts } from '../hooks/useQueuedPrompts';
+import { useShowTurnStatsEnabled } from '../hooks/useShowTurnStatsEnabled';
 import { isAskUserPermission } from '../utils/askUserPermission';
 import { isDaemonApprovalMode } from '../utils/sessionPreparation';
 import { isVisibleComposerModel } from '../utils/composerModels';
@@ -105,6 +106,7 @@ import {
 import type { MessageListHandle } from './MessageList';
 import { TranscriptViewport } from './TranscriptViewport';
 import { StreamingStatus } from './StreamingStatus';
+import { TurnStatsRow } from './TurnStatsRow';
 import { ChatEditor, type ComposerToolbarAction } from './ChatEditor';
 import { SessionRecoveryBanner } from './SessionRecoveryBanner';
 import { QueuedPromptDisplay } from './QueuedPromptDisplay';
@@ -320,6 +322,7 @@ export function ChatPane({
   );
   const sessionHasActivePrompt =
     daemonHasActivePrompt || !!connection.backgroundTurn;
+  const showTurnStats = useShowTurnStatsEnabled();
   const sessionHasActivePromptRef = useRef(sessionHasActivePrompt);
   sessionHasActivePromptRef.current = sessionHasActivePrompt;
   const { blocks, blockChangeSummary } = useAnimationFrameTranscriptSnapshot();
@@ -1797,12 +1800,18 @@ export function ChatPane({
           <StreamingStatus
             startedAt={activeTurnStartedAt}
             showPhrase={false}
+            showTokensPerSecond={showTurnStats}
             hasActivePrompt={sessionHasActivePrompt}
             backgroundLabel={
               connection.backgroundTurn?.label ??
               connection.backgroundTurn?.kind
             }
           />
+          {showTurnStats && (
+            <TurnStatsRow
+              active={streamingState !== 'idle' || sessionHasActivePrompt}
+            />
+          )}
           {(queuedPrompts.length > 0 || liveGoalSnapshot?.goal) && (
             <div
               className={composerStatusStyles.root}

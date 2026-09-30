@@ -3123,6 +3123,16 @@ export function DaemonSessionProvider(props: DaemonSessionProviderProps) {
                 : current.sessionId === activeSession.sessionId
                   ? (current.tokenCount ?? 0)
                   : 0,
+            // Turn totals describe live frames only, so they follow the
+            // session identity rather than replay and reset with it.
+            turnStats:
+              current.sessionId === activeSession.sessionId
+                ? current.turnStats
+                : undefined,
+            lastTurnStats:
+              current.sessionId === activeSession.sessionId
+                ? current.lastTurnStats
+                : undefined,
             goalState:
               current.sessionId === activeSession.sessionId
                 ? current.goalState

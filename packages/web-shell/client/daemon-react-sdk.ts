@@ -201,6 +201,7 @@ export type {
   DaemonConnectionStatus,
   /** Latest main-conversation token usage reported by the daemon. */
   DaemonTokenUsage,
+  DaemonTurnStats,
   /** Model descriptor: id, display label, context window size. */
   DaemonModelInfo,
   /** Explicit workspace, standalone, or Live product session context. */

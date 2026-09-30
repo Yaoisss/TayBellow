@@ -72,6 +72,7 @@ export type {
   HistoricalTranscriptRange,
   TranscriptBoundary,
   DaemonTokenUsage,
+  DaemonTurnStats,
   DaemonTodoItem,
   DaemonTodoList,
   DaemonTodoPriority,
