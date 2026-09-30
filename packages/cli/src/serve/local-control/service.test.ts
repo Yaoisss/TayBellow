@@ -108,6 +108,32 @@ describe('LocalControlService', () => {
     await service.disable();
   });
 
+  it('pins the pairing secret when QWEN_LOCAL_CONTROL_TOKEN is set', async () => {
+    process.env['QWEN_LOCAL_CONTROL_TOKEN'] = 'pinned-secret';
+    try {
+      const port = await unusedPort();
+      const service = new LocalControlService({
+        app: express(),
+        credentials: new CredentialStore(),
+        originAllowlist: new MutableOriginAllowlist({
+          allowAny: false,
+          origins: new Set(),
+        }),
+        attachWebSocket: () => {},
+        detachWebSocket: () => {},
+        getPort: () => port,
+      });
+      const first = await service.enable();
+      expect(new URL(first.url!).hash).toBe('#token=pinned-secret');
+      await service.disable();
+      const second = await service.enable();
+      expect(second.url).toBe(first.url);
+      await service.disable();
+    } finally {
+      delete process.env['QWEN_LOCAL_CONTROL_TOKEN'];
+    }
+  });
+
   it('orders disable after an in-flight enable', async () => {
     const port = await unusedPort();
     const service = new LocalControlService({

@@ -290,7 +290,11 @@ export class LocalControlService {
 }
 
 function mintPairingToken(): PairingToken {
-  const secret = randomBytes(32).toString('base64url');
+  // QWEN_LOCAL_CONTROL_TOKEN pins the secret so the pairing URL is stable and
+  // typable; unset keeps the rotating one-scan secret.
+  const secret =
+    process.env['QWEN_LOCAL_CONTROL_TOKEN'] ||
+    randomBytes(32).toString('base64url');
   return { id: randomUUID(), secret };
 }
 
