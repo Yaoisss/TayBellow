@@ -2,60 +2,93 @@
 
 Tay Bellow 是面向终端、编辑器、桌面、浏览器与聊天的开源 AI 编程代理。本文档是本仓库的安装、部署与使用教程。
 
-## 1. 安装
+## 1. 安装（从源码编译）
 
-### 1.1 Linux / macOS（推荐，无需预装 Node.js）
+本仓库没有发布一键安装包，需要自己编译后安装。下面命令都在仓库根目录执行。
 
-```bash
-curl -fsSL https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.sh | bash
-```
+### 1.1 准备依赖
 
-### 1.2 Windows（PowerShell）
-
-```powershell
-irm https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.ps1 | iex
-```
-
-> 安装完成后请重启终端，确保环境变量生效。
-
-### 1.3 npm / Homebrew
+需要 Node.js 22 或更新（仓库用 corepack 锁定包管理器版本）：
 
 ```bash
-npm install -g @qwen-code/qwen-code@latest   # 需要 Node.js 22+
-brew install qwen-code                       # macOS / Linux
+git clone <本仓库地址> TayBellow
+cd TayBellow
+corepack pnpm install --frozen-lockfile
 ```
 
-安装脚本的更多选项（`--method`、`--source` 等）见 [安装指南](./scripts/installation/INSTALLATION_GUIDE.md)。
-
-### 1.4 用仓库脚本安装
-
-仓库自带的管理脚本一条命令即可装好，并顺带生成守护进程 token（详见第 2 节）：
+### 1.2 构建
 
 ```bash
-scripts/qwen-serve-ctl.sh install
+npm run build     # 构建全部包
+npm run bundle    # 打包成单文件 dist/cli.js
 ```
+
+### 1.3 直接运行（不装到系统）
+
+```bash
+node dist/cli.js --version
+node dist/cli.js          # 在当前目录进入交互会话
+```
+
+### 1.4 打包并安装到系统（得到全局 `qwen` 命令）
+
+standalone 包会把一份私有 Node 运行时一起打进去，然后装到 `~/.local`：
+
+```bash
+# 1) 取一份对应平台的 Node 运行时压缩包（版本可自选，示例是 Linux x64）
+curl -fsSLO https://nodejs.org/dist/v22.23.2/node-v22.23.2-linux-x64.tar.xz
+
+# 2) 打成 standalone 包；--target 取 linux-x64 / linux-arm64 / darwin-arm64 / darwin-x64 / win-x64
+npm run package:standalone -- --target linux-x64 --node-archive ./node-v22.23.2-linux-x64.tar.xz
+
+# 3) 从本地归档安装（运行时装到 ~/.local/lib/qwen-code，shim 落在 ~/.local/bin/qwen）
+bash scripts/installation/install-qwen-standalone.sh \
+  --archive dist/standalone/qwen-code-linux-x64.tar.gz --source local-build
+
+qwen --version            # 验证
+```
+
+> 打包脚本要求先跑过 `npm run bundle`；归档与 `SHA256SUMS` 默认输出到 `dist/standalone/`。
+
+### 1.5 卸载
+
+```bash
+bash scripts/installation/uninstall-qwen-standalone.sh
+```
+
+### 1.6 开发调试
+
+```bash
+npm run dev      # 用 tsx 直接跑源码，改 packages/core 与 packages/cli 即时生效
+```
+
+仓库结构见 [`AGENTS.md`](./AGENTS.md)；构建与发布的完整说明见
+[运行与部署](./docs/developers/development/deployment.md) 与
+[安装指南](./scripts/installation/INSTALLATION_GUIDE.md)。
 
 ## 2. 部署
 
 ### 2.1 服务器 / NAS：守护进程 + bash 脚本管理
 
-`qwen serve` 是一个常驻的守护进程，客户端通过 HTTP + SSE（ACP）接入。仓库自带的
+`qwen serve` 是常驻的守护进程，客户端通过 HTTP + SSE（ACP）接入。仓库自带的
 `scripts/qwen-serve-ctl.sh` 覆盖安装与整个管理回路：
 
-| 命令      | 作用                                                                                |
-| --------- | ----------------------------------------------------------------------------------- |
-| `install` | 安装 qwen CLI（已有则跳过）+ 按需生成 token 文件（`~/.qwen-serve-token`，600 权限） |
-| `start`   | 后台启动 `qwen serve`（nohup），等待 `/health` 最多 15 秒                           |
-| `stop`    | 停止（SIGTERM，10 秒不退再 SIGKILL）                                                |
-| `restart` | 重启                                                                                |
-| `status`  | 进程与健康状态（退出码 0 运行 / 1 不健康 / 3 停止）                                 |
-| `logs`    | 查看最近 200 行日志                                                                 |
-| `token`   | 轮换 token（`restart` 后生效）                                                      |
+| 命令      | 作用                                                                                                                                         |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `install` | 安装 qwen CLI（已有则跳过）。自编译部署时先 `export QWEN_INSTALL_ARCHIVE=dist/standalone/qwen-code-linux-x64.tar.gz`，否则它会去拉上游发行版 |
+| `start`   | 后台启动 `qwen serve`（nohup），等待 `/health` 最多 15 秒                                                                                    |
+| `stop`    | 停止（SIGTERM，10 秒不退再 SIGKILL）                                                                                                         |
+| `restart` | 重启                                                                                                                                         |
+| `status`  | 进程与健康状态（退出码 0 运行 / 1 不健康 / 3 停止）                                                                                          |
+| `logs`    | 查看最近 200 行日志                                                                                                                          |
+| `token`   | 轮换 token（`restart` 后生效）                                                                                                               |
+
+按 [1.4 节](#14-打包并安装到系统得到全局-qwen-命令)装好 CLI 后，日常就用：
 
 ```bash
-scripts/qwen-serve-ctl.sh install
 scripts/qwen-serve-ctl.sh start
 scripts/qwen-serve-ctl.sh status
+scripts/qwen-serve-ctl.sh logs
 ```
 
 守护进程的可调参数写在 `~/.qwen-serve-ctl.conf`（bash 语法，每次命令都会读取）：
@@ -87,15 +120,18 @@ QWEN_EXTRA_ARGS="--allow-origin http://example.com:4170" # 额外的 `qwen serve
 
 ### 2.3 Docker 容器部署
 
-守护进程是宿主机的 Node 进程，仓库自带的 `Dockerfile` 是**沙箱镜像**、不是守护进程镜像，
-所以这里自己搭一个最小容器：
+用 [1.4 节](#14-打包并安装到系统得到全局-qwen-命令)打好的归档做镜像 —— 归档里已带私有
+Node 运行时，镜像只需解压即可（仓库根目录的 `Dockerfile` 是**沙箱镜像**，不是这个用途）：
 
 ```dockerfile
-# Dockerfile
+# 先在仓库根目录执行：
+#   npm run build && npm run bundle
+#   npm run package:standalone -- --target linux-x64 --node-archive ./node-v22.23.2-linux-x64.tar.xz
 FROM node:22-slim
-RUN npm install -g @qwen-code/qwen-code
+COPY dist/standalone/qwen-code-linux-x64.tar.gz /tmp/qwen-code.tar.gz
+RUN tar -xzf /tmp/qwen-code.tar.gz -C /opt && rm /tmp/qwen-code.tar.gz
 WORKDIR /workspaces/project-a
-CMD ["qwen", "serve", "--hostname", "0.0.0.0", "--port", "4170", "--workspace", "/workspaces/project-a"]
+CMD ["/opt/qwen-code/bin/qwen", "serve", "--hostname", "0.0.0.0", "--port", "4170", "--workspace", "/workspaces/project-a"]
 ```
 
 ```yaml
@@ -128,20 +164,6 @@ docker compose logs -f qwen-serve
 - 需要用沙箱工具时，把宿主机的 `/var/run/docker.sock` 挂进容器（等于把宿主 docker 控制权
   交给容器，谨慎）。
 - 经代理访问时的 Host / `--allow-origin` 规则与 [3.7 节](#37-手机--远程访问)一致。
-
-### 2.4 从源码构建运行
-
-改代码后自测用仓库源码路径：
-
-```bash
-corepack pnpm install --frozen-lockfile   # 首次安装依赖（会触发一次构建）
-npm run build                             # 构建全部包
-npm run bundle                            # 打成单文件 dist/cli.js
-npm run dev                               # 用 tsx 直接跑源码，改 core / cli 即时生效
-```
-
-完整说明见 [运行与部署](./docs/developers/development/deployment.md)，仓库结构与二次开发
-指引见 [`AGENTS.md`](./AGENTS.md)。
 
 ## 3. 使用
 
@@ -241,9 +263,17 @@ qwen channel start          # 启动已启用的渠道
 
 ### 3.8 升级与卸载
 
+升级就是重新拉代码、重新编译、重装，再重启守护进程：
+
 ```bash
-scripts/qwen-serve-ctl.sh install   # 重新安装到最新版
+git pull
+corepack pnpm install --frozen-lockfile
+npm run build && npm run bundle
+npm run package:standalone -- --target linux-x64 --node-archive ./node-v22.23.2-linux-x64.tar.xz
+bash scripts/installation/install-qwen-standalone.sh \
+  --archive dist/standalone/qwen-code-linux-x64.tar.gz --source local-build
+scripts/qwen-serve-ctl.sh restart
 ```
 
-卸载 CLI 见 [卸载指南](./docs/users/support/Uninstall.md)，其他问题见
+卸载 CLI 见 [1.5 节](#15-卸载)，其他问题见
 [故障排查](./docs/users/support/troubleshooting.md)。
