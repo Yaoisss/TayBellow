@@ -83,6 +83,20 @@ You can run the most recently committed version of Tay Bellow directly from the 
 npx https://github.com/QwenLM/qwen-code
 ```
 
+---
+
+### 5. Install and manage with the repository script (bash)
+
+A checkout ships `scripts/qwen-serve-ctl.sh`, which installs the CLI (standalone archive with npm fallback), provisions the daemon bearer token, and manages a background `qwen serve` (start / stop / restart / status / logs / token):
+
+```bash
+scripts/qwen-serve-ctl.sh install
+scripts/qwen-serve-ctl.sh start
+scripts/qwen-serve-ctl.sh status
+```
+
+See [Local launch templates for `qwen serve`](../../users/qwen-serve-deploy-local.md) for configuration, file locations, and the full command reference.
+
 ## Deployment architecture
 
 The execution methods described above are made possible by the following architectural components and processes:

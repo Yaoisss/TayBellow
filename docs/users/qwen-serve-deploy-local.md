@@ -20,6 +20,35 @@ The daemon reads the bearer token from either `--token <value>` on the CLI or th
 
 One shell-level `export` covers both server boot and SDK client construction (just keep it scoped to the session, per the note above).
 
+## One-script install and management (`scripts/qwen-serve-ctl.sh`)
+
+If you would rather drive everything from one command than copy the templates below, the repo ships `scripts/qwen-serve-ctl.sh`. It installs the CLI, provisions the bearer token, and manages a background daemon:
+
+```bash
+scripts/qwen-serve-ctl.sh install   # qwen CLI (standalone archive, npm fallback) + token file if missing
+scripts/qwen-serve-ctl.sh start     # background start, waits for /health (15s), prints the log tail on failure
+scripts/qwen-serve-ctl.sh status    # process + /health state (exit 0 running, 1 unhealthy, 3 stopped)
+scripts/qwen-serve-ctl.sh logs      # tail the last 200 lines
+scripts/qwen-serve-ctl.sh restart
+scripts/qwen-serve-ctl.sh stop      # SIGTERM, SIGKILL after a 10s grace period
+scripts/qwen-serve-ctl.sh token     # rotate the token; restart to apply
+```
+
+It reuses the same `~/.qwen-serve-token` file as the templates below, so one token works whether the daemon was launched by this script or by the systemd unit. If you rotate with `token` while also running systemd, regenerate the unit's `~/.qwen-serve-token-env` wrapper too (see [Token rotation](#token-rotation)). The token is injected only into the daemon process's environment — never into your shell profile.
+
+State lives in `~/.qwen-serve.pid` and `~/.qwen-serve.log`. Configure the daemon through `~/.qwen-serve-ctl.conf`, a bash file sourced on every command (the conf file wins over the environment, which wins over the built-in defaults):
+
+```bash
+QWEN_HOST=127.0.0.1                 # 0.0.0.0 exposes beyond loopback; the token is always set, as that requires
+QWEN_PORT=4170
+QWEN_WORKSPACES=("$HOME/project-a" "$HOME/project-b")   # absolute paths; each becomes --workspace
+QWEN_EXTRA_ARGS="--allow-origin http://example.com:4170" # extra `qwen serve` args, space-separated
+```
+
+Without `QWEN_WORKSPACES`, the daemon's primary workspace is the directory `start` was invoked from. For remote browser access, a non-loopback bind plus the Host / `--allow-origin` rules in the [user guide](./qwen-serve.md) apply exactly as they do for the templates below.
+
+This path is plain `nohup`: it does not restart after a crash or a reboot. Use the systemd / launchd templates below when you need that.
+
 ## Workspace lifecycle and process boundaries
 
 One daemon can host several isolated workspace runtimes under the same listener.
