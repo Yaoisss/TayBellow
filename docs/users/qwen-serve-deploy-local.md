@@ -20,34 +20,41 @@ The daemon reads the bearer token from either `--token <value>` on the CLI or th
 
 One shell-level `export` covers both server boot and SDK client construction (just keep it scoped to the session, per the note above).
 
-## One-script install and management (`scripts/qwen-serve-ctl.sh`)
+## One-script deploy and management (`scripts/deploy-qwen-serve.sh`)
 
-If you would rather drive everything from one command than copy the templates below, the repo ships `scripts/qwen-serve-ctl.sh`. It installs the CLI, provisions the bearer token, and manages a background daemon:
-
-```bash
-scripts/qwen-serve-ctl.sh install   # qwen CLI (standalone archive, npm fallback) + token file if missing
-scripts/qwen-serve-ctl.sh start     # background start, waits for /health (15s), prints the log tail on failure
-scripts/qwen-serve-ctl.sh status    # process + /health state (exit 0 running, 1 unhealthy, 3 stopped)
-scripts/qwen-serve-ctl.sh logs      # tail the last 200 lines
-scripts/qwen-serve-ctl.sh restart
-scripts/qwen-serve-ctl.sh stop      # SIGTERM, SIGKILL after a 10s grace period
-scripts/qwen-serve-ctl.sh token     # rotate the token; restart to apply
-```
-
-It reuses the same `~/.qwen-serve-token` file as the templates below, so one token works whether the daemon was launched by this script or by the systemd unit. If you rotate with `token` while also running systemd, regenerate the unit's `~/.qwen-serve-token-env` wrapper too (see [Token rotation](#token-rotation)). The token is injected only into the daemon process's environment — never into your shell profile.
-
-State lives in `~/.qwen-serve.pid` and `~/.qwen-serve.log`. Configure the daemon through `~/.qwen-serve-ctl.conf`, a bash file sourced on every command (the conf file wins over the environment, which wins over the built-in defaults):
+If you would rather drive everything from one command than copy the templates below, the repo ships `scripts/deploy-qwen-serve.sh`. One `install` builds the CLI from this checkout, installs it (standalone layout with a private Node runtime), provisions the bearer token, writes the systemd user unit when `systemctl --user` is available, and starts the daemon — falling back to plain `nohup` otherwise:
 
 ```bash
-QWEN_HOST=127.0.0.1                 # 0.0.0.0 exposes beyond loopback; the token is always set, as that requires
-QWEN_PORT=4170
-QWEN_WORKSPACES=("$HOME/project-a" "$HOME/project-b")   # absolute paths; each becomes --workspace
-QWEN_EXTRA_ARGS="--allow-origin http://example.com:4170" # extra `qwen serve` args, space-separated
+scripts/deploy-qwen-serve.sh install ~/project-a ~/project-b  # build + install + token + unit + start
+scripts/deploy-qwen-serve.sh status                           # backend, listen address, workspaces, token, /health
+scripts/deploy-qwen-serve.sh logs                             # journalctl --user, or ~/.qwen-serve.log under nohup
+scripts/deploy-qwen-serve.sh restart
+scripts/deploy-qwen-serve.sh stop
+scripts/deploy-qwen-serve.sh token                            # rotate the token; restart to apply
+scripts/deploy-qwen-serve.sh uninstall
+scripts/deploy-qwen-serve.sh install --print-unit ~/project-a # print the unit instead of writing it
+scripts/deploy-qwen-serve.sh install --skip-build             # reuse dist/standalone/… instead of rebuilding
 ```
 
-Without `QWEN_WORKSPACES`, the daemon's primary workspace is the directory `start` was invoked from. For remote browser access, a non-loopback bind plus the Host / `--allow-origin` rules in the [user guide](./qwen-serve.md) apply exactly as they do for the templates below.
+It reuses the same `~/.qwen-serve-token` and `~/.qwen-serve-token-env` files the templates below reference, so a token provisioned here keeps those recipes working as-is. The token is injected only into the daemon process's environment — never into your shell profile.
 
-This path is plain `nohup`: it does not restart after a crash or a reboot. Use the systemd / launchd templates below when you need that.
+Configuration comes from environment variables, and `install` persists the values it used into `~/.qwen-serve.conf`, which later commands source:
+
+```bash
+QWEN_SERVE_HOST=0.0.0.0                                     # default 0.0.0.0; a non-loopback bind needs the token this script always provisions
+QWEN_SERVE_PORT=4170
+QWEN_SERVE_DIRS="/root/project-a /root/project-b"           # space-separated; each becomes --workspace
+QWEN_SERVE_ARGS="--allow-origin http://example.com:4170"    # extra `qwen serve` args, space-separated
+QWEN_SERVE_BACKEND=auto                                     # auto | systemd | nohup
+QWEN_SERVE_HOME=$HOME                                       # where token, conf, pid and log live
+QWEN_SERVE_UNIT_DIR=$HOME/.config/systemd/user
+QWEN_INSTALL_ROOT=$HOME/.local                              # CLI install location
+QWEN_SERVE_SKIP_SYSTEM_SETUP=1                              # skip the apt step that installs base tools, zh_CN locale and CJK fonts
+```
+
+Without a workspace argument the daemon's primary workspace is the current directory. For remote browser access, a non-loopback bind plus the Host / `--allow-origin` rules in the [user guide](./qwen-serve.md) apply exactly as they do for the templates below.
+
+The nohup fallback keeps its state in `~/.qwen-serve.pid` / `~/.qwen-serve.log` and does not restart after a crash or a reboot; the systemd path does (`Restart=on-failure` plus linger).
 
 ## Workspace lifecycle and process boundaries
 

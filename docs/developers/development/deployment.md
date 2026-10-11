@@ -87,12 +87,12 @@ npx https://github.com/QwenLM/qwen-code
 
 ### 5. Install and manage with the repository script (bash)
 
-A checkout ships `scripts/qwen-serve-ctl.sh`, which installs the CLI (standalone archive with npm fallback), provisions the daemon bearer token, and manages a background `qwen serve` (start / stop / restart / status / logs / token):
+A checkout ships `scripts/deploy-qwen-serve.sh`, which builds and installs the CLI from the local source (standalone layout with a private Node runtime), provisions the daemon bearer token, writes a systemd user unit when available — falling back to `nohup` — and manages it:
 
 ```bash
-scripts/qwen-serve-ctl.sh install
-scripts/qwen-serve-ctl.sh start
-scripts/qwen-serve-ctl.sh status
+scripts/deploy-qwen-serve.sh install ~/project-a
+scripts/deploy-qwen-serve.sh status
+scripts/deploy-qwen-serve.sh logs
 ```
 
 See [Local launch templates for `qwen serve`](../../users/qwen-serve-deploy-local.md) for configuration, file locations, and the full command reference.

@@ -104,53 +104,58 @@ npm run dev      # 用 tsx 直接跑源码，改 packages/core 与 packages/cli 
 
 ## 2. 部署
 
-### 2.1 服务器 / NAS：守护进程 + bash 脚本管理
+### 2.1 服务器 / NAS：一键部署（守护进程 + systemd/nohup）
 
-`qwen serve` 是常驻的守护进程，客户端通过 HTTP + SSE（ACP）接入。仓库自带的
-`scripts/qwen-serve-ctl.sh` 覆盖安装与整个管理回路：
-
-| 命令      | 作用                                                                                                                                         |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `install` | 安装 qwen CLI（已有则跳过）。自编译部署时先 `export QWEN_INSTALL_ARCHIVE=dist/standalone/qwen-code-linux-x64.tar.gz`，否则它会去拉上游发行版 |
-| `start`   | 后台启动 `qwen serve`（nohup），等待 `/health` 最多 15 秒                                                                                    |
-| `stop`    | 停止（SIGTERM，10 秒不退再 SIGKILL）                                                                                                         |
-| `restart` | 重启                                                                                                                                         |
-| `status`  | 进程与健康状态（退出码 0 运行 / 1 不健康 / 3 停止）                                                                                          |
-| `logs`    | 查看最近 200 行日志                                                                                                                          |
-| `token`   | 轮换 token（`restart` 后生效）                                                                                                               |
-
-按 [1.4 节](#14-打包并安装到系统得到全局-qwen-命令)装好 CLI 后，日常就用：
+`qwen serve` 是常驻的守护进程，客户端通过 HTTP + SSE（ACP）接入。仓库自带
+`scripts/deploy-qwen-serve.sh`，一条命令完成「构建并安装 CLI → 生成 token → 写服务 →
+启动 → 健康检查」：
 
 ```bash
-scripts/qwen-serve-ctl.sh start
-scripts/qwen-serve-ctl.sh status
-scripts/qwen-serve-ctl.sh logs
+scripts/deploy-qwen-serve.sh install ~/project-a ~/project-b
 ```
 
-守护进程的可调参数写在 `~/.qwen-serve-ctl.conf`（bash 语法，每次命令都会读取）：
+| 命令                         | 作用                                                                                                                                                                                          |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `install [目录...]`          | 从本地源码构建安装 CLI、生成 token、写入并启动服务（systemd 可用时写用户服务，否则回退 nohup）；`--skip-build` 复用 `dist/standalone` 里已有的归档，`--print-unit` 只打印将写入的 unit 不落地 |
+| `start` / `stop` / `restart` | 启停与重启（启动后做 `/health` 检查）                                                                                                                                                         |
+| `status`                     | 运行状态、后端、监听地址、工作区与 token                                                                                                                                                      |
+| `logs`                       | 跟踪日志（systemd 走 `journalctl --user`，nohup 走 `~/.qwen-serve.log`）                                                                                                                      |
+| `token`                      | 轮换 token（`restart` 后生效）                                                                                                                                                                |
+| `uninstall`                  | 停止并删除服务，可选择同时删除 token                                                                                                                                                          |
+
+常用可调项（环境变量，install 时也会写入 `~/.qwen-serve.conf` 供后续命令复用）：
 
 ```bash
-QWEN_HOST=127.0.0.1                 # 改成 0.0.0.0 才暴露到 loopback 之外（此时必须带 token）
-QWEN_PORT=4170
-QWEN_WORKSPACES=("$HOME/project-a" "$HOME/project-b")   # 每项变成一个 --workspace
-QWEN_EXTRA_ARGS="--allow-origin http://example.com:4170" # 额外的 `qwen serve` 参数，空格分隔
+QWEN_SERVE_HOST=0.0.0.0        # 默认 0.0.0.0；暴露到 loopback 之外必须带 token，脚本会自动生成
+QWEN_SERVE_PORT=4170
+QWEN_SERVE_DIRS="/root/project-a /root/project-b"          # 工作区，空格分隔
+QWEN_SERVE_ARGS="--allow-origin http://example.com:4170"    # 额外的 `qwen serve` 参数
 ```
 
-不设置 `QWEN_WORKSPACES` 时，主工作区就是执行 `start` 时所在的目录。token 只注入守护
-进程自己的环境，不会写进 shell 配置文件。这条路径是纯 `nohup`：**不会**在崩溃或重启后
-自动拉起，需要自愈就用下一节的服务管理器方案。
+一行式示例：
+
+```bash
+QWEN_SERVE_PORT=4587 QWEN_SERVE_DIRS="$HOME/project-a" scripts/deploy-qwen-serve.sh install
+```
+
+token 保存在 `~/.qwen-serve-token`（600 权限），systemd 通过 `~/.qwen-serve-token-env`
+注入，不写进 shell 配置文件。不指定工作区时默认用当前目录；不带参数运行且服务已安装时
+等价于 `status`。
 
 更多模板与等价的手工命令见 [本地部署模板](./docs/users/qwen-serve-deploy-local.md)。
 
 ### 2.2 开机自启（systemd / launchd）
 
-要让守护进程跨重启存活，用服务管理器：
+上面的一键脚本在 systemd 可用时会写 `~/.config/systemd/user/qwen-serve.service`、执行
+`enable --now`，并尽力开启 `loginctl enable-linger`，让服务在退出登录后继续运行。
+想先看将要写入的内容：
 
-- **Linux**：`~/.config/systemd/user/qwen-serve.service`，配合
-  `loginctl enable-linger "$(whoami)"` 让用户级服务在退出登录后继续运行。
-- **macOS**：`~/Library/LaunchAgents/com.qwenlm.qwen-serve.plist`。
+```bash
+scripts/deploy-qwen-serve.sh install --print-unit ~/project-a
+```
 
-完整 unit / plist 模板、token 的 `EnvironmentFile` 写法与轮换步骤见
+没有 systemd 时脚本自动回退 nohup（无自愈、不会跨重启存活）。要手工维护或看 macOS
+launchd 模板，见
 [本地部署模板 · Linux systemd 用户单元](./docs/users/qwen-serve-deploy-local.md#linux-systemd-user-unit)
 与 [macOS launchd 用户代理](./docs/users/qwen-serve-deploy-local.md#macos-launchd-user-agent)。
 
@@ -300,18 +305,20 @@ qwen channel start          # 启动已启用的渠道
 
 ### 3.8 升级与卸载
 
-升级就是重新拉代码、重新编译、重装，再重启守护进程：
+升级就是重新拉代码、重新构建安装，并让服务重启：
 
 ```bash
 git pull
-corepack pnpm install --frozen-lockfile
-npm run build && npm run bundle
-npm run prepare:package
-npm run package:standalone -- --target linux-x64 --node-archive ./node-v22.23.2-linux-x64.tar.xz
-bash scripts/installation/install-qwen-standalone.sh \
-  --archive dist/standalone/qwen-code-linux-x64.tar.gz --source local-build
-scripts/qwen-serve-ctl.sh restart
+scripts/deploy-qwen-serve.sh install        # 构建 + 安装 CLI + 重启服务（一条命令）
 ```
 
-卸载 CLI 见 [1.6 节](#16-卸载)，其他问题见
-[故障排查](./docs/users/support/troubleshooting.md)。
+已经手工打好归档时，加 `--skip-build` 直接复用 `dist/standalone` 里的归档。
+
+卸载：
+
+```bash
+scripts/deploy-qwen-serve.sh uninstall      # 停服务并删除服务定义（可选择保留 token）
+bash scripts/installation/uninstall-qwen-standalone.sh   # 再卸载 CLI 本体，见 1.6 节
+```
+
+其他问题见 [故障排查](./docs/users/support/troubleshooting.md)。
