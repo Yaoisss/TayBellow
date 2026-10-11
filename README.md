@@ -8,7 +8,7 @@ Tay Bellow 是面向终端、编辑器、桌面、浏览器与聊天的开源 AI
 
 ### 1.1 准备依赖
 
-需要 Node.js 22 或更新（仓库用 corepack 锁定包管理器版本）：
+需要 Node.js 22 或更新（仓库用 corepack 锁定 pnpm 11，pnpm 11 要求 Node ≥ 22.13）：
 
 ```bash
 git clone <本仓库地址> TayBellow
@@ -16,12 +16,20 @@ cd TayBellow
 corepack pnpm install --frozen-lockfile
 ```
 
+> 只有旧版 Node（例如 Node 18）时 `corepack` 起不来；另注意 standalone 安装包自带的
+> `~/.local/lib/qwen-code/node` 只含 `node` 本体，里面的 `npm`/`corepack` 是残缺包装
+> 脚本，不能当构建工具链用。装一个完整的 Node 22，或按 [1.4 第 1 步](#14-打包并安装到系统得到全局-qwen-命令)
+> 下载官方压缩包并把它的 `bin/` 放到 `PATH` 最前面再继续。
+
 ### 1.2 构建
 
 ```bash
 npm run build     # 构建全部包
 npm run bundle    # 打包成单文件 dist/cli.js
 ```
+
+> 只跑 `dev` / 直接运行到这一步就够；要打 standalone 包（1.4）还需要
+> `npm run prepare:package` 准备 `dist/` 的发布布局，见下。
 
 ### 1.3 直接运行（不装到系统）
 
@@ -38,10 +46,13 @@ standalone 包会把一份私有 Node 运行时一起打进去，然后装到 `~
 # 1) 取一份对应平台的 Node 运行时压缩包（版本可自选，示例是 Linux x64）
 curl -fsSLO https://nodejs.org/dist/v22.23.2/node-v22.23.2-linux-x64.tar.xz
 
-# 2) 打成 standalone 包；--target 取 linux-x64 / linux-arm64 / darwin-arm64 / darwin-x64 / win-x64
+# 2) 准备 dist/ 的发布布局（缺这步打包会报 "Required dist asset missing: dist/cli-entry.js"）
+npm run prepare:package
+
+# 3) 打成 standalone 包；--target 取 linux-x64 / linux-arm64 / darwin-arm64 / darwin-x64 / win-x64
 npm run package:standalone -- --target linux-x64 --node-archive ./node-v22.23.2-linux-x64.tar.xz
 
-# 3) 从本地归档安装（运行时装到 ~/.local/lib/qwen-code，shim 落在 ~/.local/bin/qwen）
+# 4) 从本地归档安装（运行时装到 ~/.local/lib/qwen-code，shim 落在 ~/.local/bin/qwen）
 bash scripts/installation/install-qwen-standalone.sh \
   --archive dist/standalone/qwen-code-linux-x64.tar.gz --source local-build
 
@@ -150,6 +161,7 @@ Node 运行时，镜像只需解压即可（仓库根目录的 `Dockerfile` 是*
 ```dockerfile
 # 先在仓库根目录执行：
 #   npm run build && npm run bundle
+#   npm run prepare:package
 #   npm run package:standalone -- --target linux-x64 --node-archive ./node-v22.23.2-linux-x64.tar.xz
 FROM node:22-slim
 COPY dist/standalone/qwen-code-linux-x64.tar.gz /tmp/qwen-code.tar.gz
@@ -293,6 +305,7 @@ qwen channel start          # 启动已启用的渠道
 git pull
 corepack pnpm install --frozen-lockfile
 npm run build && npm run bundle
+npm run prepare:package
 npm run package:standalone -- --target linux-x64 --node-archive ./node-v22.23.2-linux-x64.tar.xz
 bash scripts/installation/install-qwen-standalone.sh \
   --archive dist/standalone/qwen-code-linux-x64.tar.gz --source local-build
