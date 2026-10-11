@@ -18,7 +18,8 @@ corepack pnpm install --frozen-lockfile
 
 > 只有旧版 Node（例如 Node 18）时 `corepack` 起不来；另注意 standalone 安装包自带的
 > `~/.local/lib/qwen-code/node` 只含 `node` 本体，里面的 `npm`/`corepack` 是残缺包装
-> 脚本，不能当构建工具链用。装一个完整的 Node 22，或按 [1.4 第 1 步](#14-打包并安装到系统得到全局-qwen-命令)
+> 脚本，不能当构建工具链用 —— 仓库的 `scripts/build.js` 内部还会调用 `corepack pnpm`，
+> 被它抢占同样会失败。装一个完整的 Node 22，或按 [1.4 第 1 步](#14-打包并安装到系统得到全局-qwen-命令)
 > 下载官方压缩包并把它的 `bin/` 放到 `PATH` 最前面再继续。
 
 ### 1.2 构建
