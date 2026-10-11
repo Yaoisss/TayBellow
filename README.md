@@ -50,13 +50,37 @@ qwen --version            # 验证
 
 > 打包脚本要求先跑过 `npm run bundle`；归档与 `SHA256SUMS` 默认输出到 `dist/standalone/`。
 
-### 1.5 卸载
+### 1.5 用 shim 挂到 PATH（不打包，最省事）
+
+不想打包、机器上已有 Node.js 22+ 时，写一个 shim 指向仓库的生产入口即可（该入口内部
+会解析到 `dist/cli.js`，并负责 `--expose-gc` 与 `serve`/`mcp` 快路径）：
+
+```bash
+mkdir -p ~/.local/bin
+cat > ~/.local/bin/qwen <<'EOF'
+#!/usr/bin/env sh
+exec node "$HOME/TayBellow/scripts/cli-entry.js" "$@"
+EOF
+chmod +x ~/.local/bin/qwen
+
+export PATH="$HOME/.local/bin:$PATH"     # 需要持久化就写进 ~/.bashrc 或 ~/.zshrc
+qwen --version                           # 验证
+```
+
+把 `$HOME/TayBellow` 换成仓库的实际绝对路径（本机是 `/var/TayBellow`）。
+
+与 1.4 的差别：shim 依赖系统 Node，仓库目录被移动或删除后失效；1.4 的 standalone 包自带
+Node 运行时、可脱离仓库目录使用，适合没有 Node 的服务器。
+
+### 1.6 卸载
 
 ```bash
 bash scripts/installation/uninstall-qwen-standalone.sh
 ```
 
-### 1.6 开发调试
+> shim 方式（1.5）没有安装器，直接删除 `~/.local/bin/qwen` 并从 PATH 配置里去掉那一行即可。
+
+### 1.7 开发调试
 
 ```bash
 npm run dev      # 用 tsx 直接跑源码，改 packages/core 与 packages/cli 即时生效
@@ -275,5 +299,5 @@ bash scripts/installation/install-qwen-standalone.sh \
 scripts/qwen-serve-ctl.sh restart
 ```
 
-卸载 CLI 见 [1.5 节](#15-卸载)，其他问题见
+卸载 CLI 见 [1.6 节](#16-卸载)，其他问题见
 [故障排查](./docs/users/support/troubleshooting.md)。
