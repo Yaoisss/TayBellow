@@ -34,6 +34,19 @@ if [ -f "$CONF_FILE" ]; then
   . "$CONF_FILE"
 fi
 
+# ---- 镜像（默认官方源；网络受限时用 QWEN_MIRROR=cn）------------------------
+if [ "${QWEN_MIRROR:-}" = "cn" ]; then
+  QWEN_NODE_MIRROR="${QWEN_NODE_MIRROR:-https://npmmirror.com/mirrors/node}"
+  QWEN_NPM_REGISTRY="${QWEN_NPM_REGISTRY:-https://registry.npmmirror.com}"
+fi
+QWEN_NODE_MIRROR="${QWEN_NODE_MIRROR:-https://nodejs.org/dist}"
+if [ -n "${QWEN_NPM_REGISTRY:-}" ]; then
+  # 环境变量优先于仓库 .npmrc，corepack/pnpm/npm 都读得到
+  export COREPACK_NPM_REGISTRY="$QWEN_NPM_REGISTRY"
+  export npm_config_registry="$QWEN_NPM_REGISTRY"
+  export NPM_CONFIG_REGISTRY="$QWEN_NPM_REGISTRY"
+fi
+
 # ---- 输出 ----------------------------------------------------------------
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; RED='\033[0;31m'; NC='\033[0m'
 log_info() { printf '%b[INFO]%b %s\n' "$BLUE" "$NC" "$1"; }
@@ -119,7 +132,7 @@ ensure_toolchain() {
   if [ ! -x "$dir/bin/node" ]; then
     if [ ! -f "$archive" ]; then
       log_info "下载 Node v${QWEN_NODE_VERSION}（构建用运行时）"
-      curl -fsSL "https://nodejs.org/dist/v${QWEN_NODE_VERSION}/$(node_archive_name)" -o "$archive.part"
+      curl -fsSL "${QWEN_NODE_MIRROR}/v${QWEN_NODE_VERSION}/$(node_archive_name)" -o "$archive.part"
       mv "$archive.part" "$archive"
     fi
     log_info "解压到 $BUILD_CACHE"
@@ -132,7 +145,12 @@ ensure_toolchain() {
   export PATH="$dir/bin:$PATH"
   hash -r 2>/dev/null || true
   node_ok || die "Node 运行时不可用：$dir/bin"
-  corepack_ok || die "corepack 不可用（需要完整 Node 发行包）：$dir/bin"
+  if ! corepack_ok; then
+    log_err "corepack 跑不起来：$dir/bin/corepack"
+    log_err "常见原因：① 通过 proxychains 3.1 运行会把 node 打崩（Aborted），请改用 proxychains-ng 4.x 或不挂代理；"
+    log_err "          ② 网络受限需要国内镜像，用 QWEN_MIRROR=cn 重跑"
+    exit 1
+  fi
   log_ok "使用下载的 Node $(node --version)"
 }
 
@@ -317,6 +335,11 @@ cmd_install() {
   fi
 
   log_info "检查运行环境"
+  if [ -n "${QWEN_NPM_REGISTRY:-}" ]; then
+    log_info "镜像：node=$QWEN_NODE_MIRROR，registry=$QWEN_NPM_REGISTRY"
+  else
+    log_info "镜像：node=$QWEN_NODE_MIRROR，registry=官方默认（网络受限时加 QWEN_MIRROR=cn）"
+  fi
   if [ "${QWEN_SERVE_SKIP_SYSTEM_SETUP:-0}" = "1" ]; then
     log_info "按 QWEN_SERVE_SKIP_SYSTEM_SETUP=1 跳过系统包安装"
     check_base_tools
@@ -521,11 +544,15 @@ usage() {
   QWEN_SERVE_BACKEND(auto|systemd|nohup)、QWEN_SERVE_HOST、QWEN_SERVE_PORT、
   QWEN_SERVE_DIRS、QWEN_SERVE_ARGS、QWEN_NODE_VERSION、QWEN_INSTALL_ROOT、
   QWEN_SERVE_SKIP_SYSTEM_SETUP=1（跳过 apt 装基础工具/locale/字体）
+镜像：QWEN_MIRROR=cn（等价于把下面两项设成 npmmirror）、QWEN_NODE_MIRROR、
+  QWEN_NPM_REGISTRY（会导出给 corepack/pnpm/npm）
+注意：不要用 proxychains 3.1 运行（会把 node 打崩），需要代理请用 proxychains-ng 4.x
 
 示例：
   $(basename "$0") install ~/project-a ~/project-b
   $(basename "$0") install --skip-build
   QWEN_SERVE_PORT=4587 $(basename "$0") install
+  QWEN_MIRROR=cn $(basename "$0") install
   $(basename "$0") logs
 EOF
 }
