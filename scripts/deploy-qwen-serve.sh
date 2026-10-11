@@ -94,6 +94,7 @@ package_target() {
 }
 
 node_archive_name() { echo "node-v${QWEN_NODE_VERSION}-linux-$(host_arch).tar.xz"; }
+node_runtime_dir() { echo "$BUILD_CACHE/node-v${QWEN_NODE_VERSION}-linux-$(host_arch)"; }
 
 node_ok() {
   have node || return 1
@@ -110,22 +111,28 @@ ensure_toolchain() {
     log_ok "使用系统 Node $(node --version)"
     return 0
   fi
-  local dir="$BUILD_CACHE/node-${QWEN_NODE_VERSION}" archive
+  local dir archive
+  dir="$(node_runtime_dir)"
   archive="$BUILD_CACHE/$(node_archive_name)"
   mkdir -p "$BUILD_CACHE"
-  if [ ! -d "$dir" ]; then
+
+  if [ ! -x "$dir/bin/node" ]; then
     if [ ! -f "$archive" ]; then
       log_info "下载 Node v${QWEN_NODE_VERSION}（构建用运行时）"
       curl -fsSL "https://nodejs.org/dist/v${QWEN_NODE_VERSION}/$(node_archive_name)" -o "$archive.part"
       mv "$archive.part" "$archive"
     fi
-    log_info "解压到 $dir"
+    log_info "解压到 $BUILD_CACHE"
+    rm -rf "$dir"
     tar -xJf "$archive" -C "$BUILD_CACHE"
+    [ -x "$dir/bin/node" ] ||
+      die "解压后找不到 $dir/bin/node；归档 $(node_archive_name) 可能与 $(host_arch) 不匹配"
   fi
+
   export PATH="$dir/bin:$PATH"
   hash -r 2>/dev/null || true
-  node_ok || die "Node 运行时不可用：$PATH"
-  corepack_ok || die "corepack 不可用（需要完整 Node 发行包）：$PATH"
+  node_ok || die "Node 运行时不可用：$dir/bin"
+  corepack_ok || die "corepack 不可用（需要完整 Node 发行包）：$dir/bin"
   log_ok "使用下载的 Node $(node --version)"
 }
 
