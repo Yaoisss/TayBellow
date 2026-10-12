@@ -9,7 +9,22 @@ set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-# ---- 默认配置（环境变量优先，其次安装时写的 conf 文件）--------------------
+# ---- 默认配置 ------------------------------------------------------------
+# 优先级：环境变量 > ~/.qwen-serve.conf（持久化默认）> 内置默认值。
+# 先在默认值生效前把显式传入的环境变量记下来，读完 conf 再还原回去。
+_ENV_NAMES=()
+_ENV_VALUES=()
+for _v in QWEN_SERVE_HOME QWEN_SERVE_UNIT_DIR QWEN_SERVE_SERVICE_NAME QWEN_SERVE_BACKEND \
+  QWEN_SERVE_HOST QWEN_SERVE_PORT QWEN_SERVE_DIRS QWEN_SERVE_ARGS \
+  QWEN_SERVE_SKIP_SYSTEM_SETUP QWEN_NODE_VERSION QWEN_INSTALL_ROOT \
+  QWEN_MIRROR QWEN_NODE_MIRROR QWEN_NPM_REGISTRY; do
+  if [ -n "${!_v+x}" ]; then
+    _ENV_NAMES+=("$_v")
+    _ENV_VALUES+=("${!_v}")
+  fi
+done
+unset _v
+
 QWEN_SERVE_HOME="${QWEN_SERVE_HOME:-$HOME}"
 QWEN_SERVE_UNIT_DIR="${QWEN_SERVE_UNIT_DIR:-$HOME/.config/systemd/user}"
 QWEN_SERVE_SERVICE_NAME="${QWEN_SERVE_SERVICE_NAME:-qwen-serve.service}"
@@ -33,6 +48,11 @@ if [ -f "$CONF_FILE" ]; then
   # shellcheck source=/dev/null
   . "$CONF_FILE"
 fi
+
+for _i in "${!_ENV_NAMES[@]}"; do
+  printf -v "${_ENV_NAMES[$_i]}" '%s' "${_ENV_VALUES[$_i]}"
+done
+unset _i _ENV_NAMES _ENV_VALUES
 
 # ---- 镜像（默认官方源；网络受限时用 QWEN_MIRROR=cn）------------------------
 if [ "${QWEN_MIRROR:-}" = "cn" ]; then
@@ -254,17 +274,19 @@ resolve_backend() {
 }
 
 # ---- 工作区与 unit ------------------------------------------------------
+# WORKSPACE_ARGS 是不带前导空格的参数串（"--workspace a --workspace b"），
+# 调用方负责在它前面留出分隔空格。
 resolve_workspaces() {
   local args="" first="" dir
   for dir in $QWEN_SERVE_DIRS; do
     if [ -d "$dir" ]; then
-      args="$args --workspace $(cd "$dir" && pwd)"
+      args="${args:+$args }--workspace $(cd "$dir" && pwd)"
       [ -z "$first" ] && first="$(cd "$dir" && pwd)"
     else
       log_warn "目录不存在，跳过：$dir"
     fi
   done
-  if [ -z "$first" ]; then
+  if [ -z "$args" ]; then
     first="$(pwd)"
     args="--workspace $first"
   fi
@@ -285,7 +307,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=$FIRST_WORKSPACE
-ExecStart=$QWEN_BIN serve --hostname $QWEN_SERVE_HOST --port $QWEN_SERVE_PORT$WORKSPACE_ARGS${QWEN_SERVE_ARGS:+ $QWEN_SERVE_ARGS}
+ExecStart=$QWEN_BIN serve --hostname $QWEN_SERVE_HOST --port $QWEN_SERVE_PORT $WORKSPACE_ARGS${QWEN_SERVE_ARGS:+ $QWEN_SERVE_ARGS}
 Environment=PATH=$(dirname "$QWEN_BIN"):/usr/local/bin:/usr/bin:/bin
 EnvironmentFile=$ENV_FILE
 Restart=on-failure
@@ -417,7 +439,7 @@ cmd_start() {
       resolve_qwen_bin
       resolve_workspaces
       QWEN_SERVER_TOKEN="$(cat "$TOKEN_FILE")" nohup "$QWEN_BIN" serve \
-        --hostname "$QWEN_SERVE_HOST" --port "$QWEN_SERVE_PORT"$WORKSPACE_ARGS${QWEN_SERVE_ARGS:+ $QWEN_SERVE_ARGS} \
+        --hostname "$QWEN_SERVE_HOST" --port "$QWEN_SERVE_PORT" $WORKSPACE_ARGS${QWEN_SERVE_ARGS:+ $QWEN_SERVE_ARGS} \
         >>"$LOG_FILE" 2>&1 &
       echo $! >"$PID_FILE"
       log_info "已后台启动（pid $(cat "$PID_FILE")），日志：$LOG_FILE"
@@ -600,6 +622,7 @@ usage() {
   QWEN_SERVE_BACKEND(auto|systemd|nohup)、QWEN_SERVE_HOST、QWEN_SERVE_PORT、
   QWEN_SERVE_DIRS、QWEN_SERVE_ARGS、QWEN_NODE_VERSION、QWEN_INSTALL_ROOT、
   QWEN_SERVE_SKIP_SYSTEM_SETUP=1（跳过 apt 装基础工具/locale/字体）
+  优先级：环境变量 > ~/.qwen-serve.conf（install 写入的持久化默认）> 内置默认值
 镜像：QWEN_MIRROR=cn（等价于把下面两项设成 npmmirror）、QWEN_NODE_MIRROR、
   QWEN_NPM_REGISTRY（会导出给 corepack/pnpm/npm）
 注意：不要用 proxychains 3.1 运行（会把 node 打崩），需要代理请用 proxychains-ng 4.x
