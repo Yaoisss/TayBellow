@@ -222,6 +222,27 @@ systemd_available() {
   systemctl --user is-system-running >/dev/null 2>&1 || systemctl --user status >/dev/null 2>&1
 }
 
+# StandardOutput=append: 需要 systemd ≥240（Debian 11 / Ubuntu 22.04 起满足）；
+# 日志写到文件后，很多机器上不可用的 user journal 就不再是唯一线索。
+systemd_supports_append() {
+  local v
+  v="$(systemctl --version 2>/dev/null | head -1 | awk '{print $2}')"
+  [ "${v:-0}" -ge 240 ] 2>/dev/null
+}
+
+unit_log_lines() {
+  if systemd_supports_append; then
+    printf 'StandardOutput=append:%s\nStandardError=append:%s\n' "$LOG_FILE" "$LOG_FILE"
+  else
+    printf 'StandardOutput=journal\nStandardError=journal\n'
+  fi
+}
+
+port_in_use() {
+  have ss || return 1
+  ss -ltn 2>/dev/null | awk '{print $4}' | grep -qE "[:.]${QWEN_SERVE_PORT}\$"
+}
+
 resolve_backend() {
   if [ "$QWEN_SERVE_BACKEND" = auto ]; then
     if systemd_available; then QWEN_SERVE_BACKEND=systemd; else QWEN_SERVE_BACKEND=nohup; fi
@@ -254,6 +275,8 @@ resolve_workspaces() {
 unit_text() {
   resolve_qwen_bin
   resolve_workspaces
+  local log_lines
+  log_lines="$(unit_log_lines)"
   cat <<EOF
 [Unit]
 Description=Qwen Code 守护进程（HTTP + SSE）
@@ -267,8 +290,7 @@ Environment=PATH=$(dirname "$QWEN_BIN"):/usr/local/bin:/usr/bin:/bin
 EnvironmentFile=$ENV_FILE
 Restart=on-failure
 RestartSec=5
-StandardOutput=journal
-StandardError=journal
+$log_lines
 
 [Install]
 WantedBy=default.target
@@ -362,6 +384,9 @@ cmd_install() {
       log_info "服务已在运行，重启以应用新配置"
       systemctl --user restart "$QWEN_SERVE_SERVICE_NAME"
     else
+      if port_in_use && ! systemctl --user is-active --quiet "$QWEN_SERVE_SERVICE_NAME"; then
+        log_warn "端口 ${QWEN_SERVE_PORT} 已被占用，若启动后反复重启请用 'ss -ltnp | grep ${QWEN_SERVE_PORT}' 查占用者"
+      fi
       systemctl --user enable --now "$QWEN_SERVE_SERVICE_NAME"
       loginctl enable-linger "$(whoami)" 2>/dev/null ||
         log_warn "loginctl enable-linger 失败：退出登录后服务可能不会继续运行"
@@ -369,7 +394,8 @@ cmd_install() {
     if wait_health; then
       log_ok "安装完成，/health 正常"
     else
-      log_warn "服务已启动但 /health 未在 15 秒内就绪，查看日志：$0 logs"
+      log_warn "服务已启动但 /health 未在 15 秒内就绪；最近状态："
+      service_diagnose
     fi
     print_status
     return 0
@@ -443,10 +469,32 @@ cmd_restart() {
 
 cmd_logs() {
   if [ "$QWEN_SERVE_BACKEND" = systemd ]; then
-    journalctl --user -u "$QWEN_SERVE_SERVICE_NAME" -f
+    if systemd_supports_append; then
+      [ -f "$LOG_FILE" ] || die "没有日志文件：$LOG_FILE"
+      tail -n 200 -f "$LOG_FILE"
+    else
+      journalctl --user -u "$QWEN_SERVE_SERVICE_NAME" -f
+    fi
   else
     [ -f "$LOG_FILE" ] || die "没有日志：$LOG_FILE"
     tail -n 200 -f "$LOG_FILE"
+  fi
+}
+
+# 启动异常时的现场：状态、退出码、重启次数、最近日志
+service_diagnose() {
+  systemctl --user status "$QWEN_SERVE_SERVICE_NAME" --no-pager -l 2>/dev/null | head -12 || true
+  local restarts
+  restarts="$(systemctl --user show "$QWEN_SERVE_SERVICE_NAME" --property=NRestarts --value 2>/dev/null || true)"
+  if [ -n "$restarts" ] && [ "$restarts" -gt 0 ] 2>/dev/null; then
+    log_warn "服务已重启 $restarts 次（持续增长说明启动即崩）"
+  fi
+  if [ -f "$LOG_FILE" ]; then
+    echo "--- $LOG_FILE 末尾 ---"
+    tail -n 15 "$LOG_FILE" 2>/dev/null || true
+  elif have journalctl; then
+    echo "--- journalctl 末尾 ---"
+    journalctl --user -u "$QWEN_SERVE_SERVICE_NAME" -n 15 --no-pager 2>/dev/null || true
   fi
 }
 
@@ -491,7 +539,8 @@ print_status() {
       log_warn "服务尚未安装（$UNIT_FILE 不存在）"
       return 1
     }
-    active="$(systemctl --user is-active "$QWEN_SERVE_SERVICE_NAME" 2>/dev/null || echo inactive)"
+    active="$(systemctl --user is-active "$QWEN_SERVE_SERVICE_NAME" 2>/dev/null || true)"
+    [ -n "$active" ] || active=inactive
     pid="$(systemctl --user show "$QWEN_SERVE_SERVICE_NAME" --property=MainPID --value 2>/dev/null || echo 0)"
   elif nohup_running; then
     active=active
@@ -503,13 +552,20 @@ print_status() {
     echo -e "运行状态 : 🟢 ${GREEN}active${NC}（pid $pid）"
   else
     echo -e "运行状态 : 🔴 ${RED}${active}${NC}"
+    if [ "$QWEN_SERVE_BACKEND" = systemd ]; then
+      local sub restarts
+      sub="$(systemctl --user show "$QWEN_SERVE_SERVICE_NAME" --property=SubState --value 2>/dev/null || true)"
+      restarts="$(systemctl --user show "$QWEN_SERVE_SERVICE_NAME" --property=NRestarts --value 2>/dev/null || true)"
+      echo -e "子状态   : ${sub:-未知}${restarts:+（已重启 $restarts 次）}"
+      echo -e "提示     : 反复 activating 通常是启动即崩，看 '$(basename "$0")' logs 或 systemctl --user status $QWEN_SERVE_SERVICE_NAME"
+    fi
   fi
   echo -e "后端     : $QWEN_SERVE_BACKEND"
   echo -e "监听     : ${QWEN_SERVE_HOST}:${QWEN_SERVE_PORT}"
   if [ "$QWEN_SERVE_BACKEND" = systemd ] && [ -f "$UNIT_FILE" ]; then
-    local work; work="$(grep '^WorkingDirectory=' "$UNIT_FILE" | cut -d= -f2-)"
+    local work; work="$(grep '^WorkingDirectory=' "$UNIT_FILE" 2>/dev/null | cut -d= -f2- || true)"
     echo -e "工作目录 : ${work:-未设置}"
-    grep -oE '\-\-workspace [^ ]+' "$UNIT_FILE" | awk '{print "           - " $2}'
+    grep -oE '\-\-workspace [^ ]+' "$UNIT_FILE" 2>/dev/null | awk '{print "           - " $2}' || true
   elif [ -n "$QWEN_SERVE_DIRS" ]; then
     local d
     for d in $QWEN_SERVE_DIRS; do echo -e "工作区   : $d"; done
@@ -536,7 +592,7 @@ usage() {
   stop                停止服务
   restart             重启服务
   status              查看运行状态、工作区与 token
-  logs                跟踪日志（systemd 走 journalctl，nohup 走日志文件）
+  logs                跟踪日志（systemd 与 nohup 都写 ~/.qwen-serve.log，systemd <240 时用 journalctl）
   token               轮换 token（restart 生效）
   uninstall           停止并删除服务，可选择同时删除 token
 
